@@ -1,4 +1,4 @@
-package quotemeClient;
+package client;
 
 public class MainPanel {
 	public MainPanel(){
