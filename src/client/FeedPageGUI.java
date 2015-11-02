@@ -33,7 +33,7 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	public ArrayList<QuoteGUI> getQuotesToDisplay() {
-		
+		return null;
 	}
 	
 	public void refresh() {

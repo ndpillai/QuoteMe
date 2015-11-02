@@ -18,12 +18,12 @@ public class DataManager {
 	
 	public Vector<User> getExistingUsers()
 	{
-		
+		return null;
 	}
 	
 	public User getCurrentUser()
 	{
-		
+		return null;
 	}
 	
 	public void addQuote(Quote q)

@@ -25,7 +25,7 @@ public class WriteQuotePanel extends JPanel {
 		
 	}
 	
-	private void createGUI () {
+	private void createGUI() {
 		
 	}
 	
@@ -34,14 +34,14 @@ public class WriteQuotePanel extends JPanel {
 	}
 	
 	public String getQuoteText() {
-		
+		return "";
 	}
 	
 	public User getSpeaker() {
-		
+		return null;
 	}
 	
 	public String getCategory() {
-		
+		return null;
 	}
 }
