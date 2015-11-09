@@ -1,7 +1,5 @@
 package client;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +11,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -45,7 +42,7 @@ public class ApproveQuoteGUI extends JPanel {
 		categories = thisQuote.getCategories();
 		promptLabel = new JLabel(poster + " would like to quote you:");
 		Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-		quoteTA = new JTextArea("quoteText");
+		quoteTA = new JTextArea(quoteText);
 		quoteTA.setBorder(padding);
 		posterButton = new JButton(poster + ":");
 		posterButton.setBorderPainted(false);
