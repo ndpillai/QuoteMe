@@ -45,7 +45,8 @@ public class QuoteMeFrame extends JFrame {
 	}
 	
 	private void createGUI() {
-		setSize(500, 750);
+		setSize(450, 700);
+		setResizable(false);
 		pane.add(homePagePanel, "Home Page");
 		displayTab("Home Page");
 	}
