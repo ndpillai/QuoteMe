@@ -12,19 +12,14 @@ public class MainPanel extends JPanel {
 	public NotificationGUI notifications;
 	public User currentuser;
 	
-	public MainPanel()
-	{
-		
+	public MainPanel() {
+		initializeVariables();
+		createGUI();
+		addEvents();
 	}
 	
-	public void main(String[] args)
-	{
-		
-	}
-	
-	private void initializeVariables()
-	{
-		
+	private void initializeVariables() {
+
 	}
 	
 	private void createGUI()
@@ -33,6 +28,11 @@ public class MainPanel extends JPanel {
 	}
 	
 	private void addEvents()
+	{
+		
+	}
+	
+	public void main(String[] args)
 	{
 		
 	}
