@@ -67,6 +67,7 @@ public class QuoteMeFrame extends JFrame {
 	
 	private void createGUI() {
 		setSize(450, 700);
+		setLocation(400,100);
 		setResizable(false);
 		pane.add(homePagePanel, "Home Page");
 		pane.add(loginPanel, "Login Page");
