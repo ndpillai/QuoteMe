@@ -1,20 +1,35 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 public class ApproveQuoteGUI extends JPanel {
 	public Quote thisQuote;
 	private String poster, speaker, quoteText;
 	private Date datePosted;
 	private Vector<String> categories;
+	private JLabel promptLabel;
+	private JTextArea quoteTA;
 	private JButton posterButton, speakerButton, approveButton, denyButton;
 
-	public ApproveQuoteGUI() {
+	public ApproveQuoteGUI(Quote quote) {
+		thisQuote = quote;
 		initializeVariables();
 		createGUI();
 		addEvents();
@@ -22,28 +37,74 @@ public class ApproveQuoteGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		thisQuote = new Quote(); // TODO change constructor, update items
-		poster = new String();
-		speaker = new String();
-		quoteText = new String();
-		datePosted = new Date();
-		categories = new Vector<String>();
-		posterButton = new JButton();
-		speakerButton = new JButton();
-		approveButton = new JButton();
-		denyButton = new JButton();
+		// TODO change constructor, update items
+		poster = thisQuote.getPoster().getUserName();
+		speaker = thisQuote.getSpeaker().getUserName();
+		quoteText = thisQuote.getText();
+		datePosted = thisQuote.getDatePosted();
+		categories = thisQuote.getCategories();
+		promptLabel = new JLabel(poster + " would like to quote you:");
+		Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+		quoteTA = new JTextArea("quoteText");
+		quoteTA.setBorder(padding);
+		posterButton = new JButton(poster + ":");
+		posterButton.setBorderPainted(false);
+		speakerButton = new JButton(speaker);
+		speakerButton.setBorderPainted(false);
+		approveButton = new JButton("Approve");
+		denyButton = new JButton("Deny");
 	}
 	
 	private void createGUI() {
-		this.setLayout(new BorderLayout()); // TODO decide on which layouts to use
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // TODO decide on which layouts to use
 		// TODO finish styling elements
+		this.add(promptLabel);
+		this.add(posterButton);
+		this.add(quoteTA);
+		this.add(speakerButton);
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		buttonPanel.add(denyButton);
+		gbc.gridx = 1;
+		buttonPanel.add(approveButton);
+		
+		this.add(Box.createGlue());
+		this.add(buttonPanel);
 	}
 	
 	private void addEvents() {
 		// TODO add events for buttons
+		approveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				approveQuote();
+			}
+		});
+		denyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				denyQuote();
+			}
+		});
+		posterButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				goToUser(thisQuote.getPoster());
+			}
+		});
+		speakerButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				goToUser(thisQuote.getSpeaker());
+			}
+		});
 	}
 
-	private void goToUser() {
+	private void goToUser(User u) {
 		// TODO Implement go to user functionality
 	}
 	
