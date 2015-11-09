@@ -1,13 +1,19 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import resources.Images;
 
 
 public class HomePageGUI extends JPanel {
@@ -18,6 +24,18 @@ public class HomePageGUI extends JPanel {
 		initializeVariables();
 		createGUI();
 		addEvents();
+	}
+	
+	// Trying to paint background. Not working yet
+	@Override 
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		try {
+			Image panelBackground = ImageIO.read(new File(Images.plainHomePageBackground));
+			g.drawImage(panelBackground, 0, 0, getWidth(), getHeight(), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void initializeVariables() {
