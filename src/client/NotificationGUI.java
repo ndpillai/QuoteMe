@@ -10,8 +10,10 @@ public class NotificationGUI extends JPanel {
 	private Vector<Notification> notifications;
 	private JScrollPane scrollPane;
 	private JPanel innerNotificationsPanel;
+	private MainPanel mainPanel;
 
-	public NotificationGUI() {
+	public NotificationGUI(MainPanel mainPanel) {
+		this.mainPanel = mainPanel;
 		initializeVariables();
 		createGUI();
 		addEvents();

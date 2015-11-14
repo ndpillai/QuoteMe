@@ -55,10 +55,10 @@ public class ClientPanel extends JPanel {
 		ClientPanel.this.revalidate();
 	}
 	
-	public void moveToProfilePagePanel(User user) {
-		ProfilePageGUI ppg = new ProfilePageGUI(user);
+/*	public void moveToProfilePagePanel(User user) {
+		ProfilePageGUI ppg = new ProfilePageGUI(this,user);
 		ClientPanel.this.removeAll();
 		ClientPanel.this.add(ppg);
 		ClientPanel.this.revalidate();
-	}
+	} */
 }

@@ -8,9 +8,10 @@ import javax.swing.JPanel;
 public class PostQuoteGUI extends JPanel {
 	private Vector<WriteQuotePanel> quotes;
 	private JButton multiQuoteButton, quoteButton;
+	private MainPanel mainPanel;
 	
-	public PostQuoteGUI () {
-		
+	public PostQuoteGUI (MainPanel mainPanel) {
+		this.mainPanel = mainPanel;
 	}
 	
 	private void initializeVariables() {

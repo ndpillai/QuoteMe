@@ -15,8 +15,10 @@ public class ProfilePageGUI extends JPanel {
 	private JTabbedPane profileQuoteTabs;
 	private JPanel myQuotesPanel, postedQuotesPanel, favoriteQuotesPanel;
 	private ScrollPane myQuotesPane, postedQuotesPane, favoriteQuotesPane;
+	private MainPanel mainPanel;
 	
-	public ProfilePageGUI(User u) {
+	public ProfilePageGUI(MainPanel mainPanel, User u) {
+		this.mainPanel = mainPanel;
 		user = u;
 		initializeVariables();
 		createGUI();

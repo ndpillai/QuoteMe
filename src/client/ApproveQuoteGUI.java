@@ -24,8 +24,10 @@ public class ApproveQuoteGUI extends JPanel {
 	private JLabel promptLabel;
 	private JTextArea quoteTA;
 	private JButton posterButton, speakerButton, approveButton, denyButton;
+	private MainPanel mainPanel;
 
-	public ApproveQuoteGUI(Quote quote) {
+	public ApproveQuoteGUI(MainPanel mainPanel, Quote quote) {
+		this.mainPanel = mainPanel;
 		thisQuote = quote;
 		initializeVariables();
 		createGUI();

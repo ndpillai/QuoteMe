@@ -15,9 +15,10 @@ public class FeedPageGUI extends JPanel {
 	public JComboBox sortCB;
 	public JScrollPane scrollPane;
 	private ArrayList<QuoteGUI> quoteList;
+	private MainPanel mainPanel;
 	
-	public FeedPageGUI () {
-		
+	public FeedPageGUI (MainPanel mainPanel) {
+		this.mainPanel = mainPanel;
 	}
 	
 	private void initializeVariables() {

@@ -10,8 +10,10 @@ public class QuoteGUI extends JPanel {
 	private String poster, speaker, datePosted, quoteText;
 	private Vector<String> categories;
 	private JButton upQuoteButton, saveButton, posterButton, speakerButton;
+	private ClientPanel clientPanel;
 	
-	public QuoteGUI(Quote q) {
+	public QuoteGUI(ClientPanel clientPanel, Quote q) {
+		this.clientPanel = clientPanel;
 		thisQuote = q;
 		initializeVariables();
 		createGUI();
