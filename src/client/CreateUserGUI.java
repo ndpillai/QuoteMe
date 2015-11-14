@@ -15,7 +15,9 @@ removed: anything with facebook
  */
 
 public class CreateUserGUI extends JPanel {
-	public JTextField usernameTF, passwordTF, confirmPasswordTF;
+	
+	private static final long serialVersionUID = 1L;
+	public JTextField firstnameTF, lastnameTF, usernameTF, passwordTF, confirmPasswordTF;
 	public JButton createUserButton;
 	
 	public CreateUserGUI () {
@@ -25,7 +27,9 @@ public class CreateUserGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		usernameTF = new JTextField("Enter username");
+		firstnameTF = new JTextField("Enter first name");
+		lastnameTF = new JTextField("Enter last name");
+		usernameTF = new JTextField("Enter desired username");
 		passwordTF = new JTextField("Enter password");
 		confirmPasswordTF = new JTextField("Confirm password");
 		createUserButton = new JButton("Create User");
@@ -33,14 +37,18 @@ public class CreateUserGUI extends JPanel {
 	
 	private void createGUI() {
 		setLayout(null);
+		add(firstnameTF);
+		add(lastnameTF);
 		add(usernameTF);
 		add(passwordTF);
 		add(confirmPasswordTF);
 		add(createUserButton);
 		
-		usernameTF.setBounds(100,100,250,20);
-		passwordTF.setBounds(100,200,250,20);
-		confirmPasswordTF.setBounds(100,300,250,20);
+		firstnameTF.setBounds(100,100,250,20);
+		lastnameTF.setBounds(100,175,250,20);
+		usernameTF.setBounds(100,250,250,20);
+		passwordTF.setBounds(100,325,250,20);
+		confirmPasswordTF.setBounds(100,400,250,20);
 		createUserButton.setBounds(150,500,150,50);
 	}
 	
@@ -56,7 +64,7 @@ public class CreateUserGUI extends JPanel {
 				if (passwordTF.getText().equals(confirmPasswordTF.getText()))
 				{
 					System.out.println("valid"); //for testing
-					//add user to manager
+					//add user to manager, return to home page
 				}
 				else
 					System.out.println("invalid"); //for testing

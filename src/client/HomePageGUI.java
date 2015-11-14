@@ -21,7 +21,6 @@ public class HomePageGUI extends JPanel {
 	public JButton loginPageButton, newUserPageButton;
 	
 	private ClientPanel clientPanel;
-	private QuoteMeClient quoteMeClient;
 	
 	public HomePageGUI(ClientPanel clientPanel) {
 		initializeVariables();
@@ -52,9 +51,10 @@ public class HomePageGUI extends JPanel {
 	}
 	
 	private void createGUI() {
-		add(loginPageButton, BorderLayout.NORTH);
-		add(newUserPageButton, BorderLayout.SOUTH);
-		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(loginPageButton);
+		buttonPanel.add(newUserPageButton);
+		add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
 	private void addEvents() {

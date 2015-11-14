@@ -3,6 +3,8 @@ package client;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,8 +15,9 @@ public class LoginGUI extends JPanel {
 
 	private static final long serialVersionUID = 2335752822050869549L;
 	public DataManager dataManager;
-	public JTextField usernameTF, passwordTF;
-	public JButton loginButton, forgotPasswordButton;
+	private JTextField usernameTF, passwordTF;
+	private JButton loginButton;
+//	private JButton forgotUserButton;
 	
 	// 450 x 700
 	
@@ -25,10 +28,11 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		usernameTF = new JTextField();
-		passwordTF = new JTextField();
-		loginButton = new JButton();
-		forgotPasswordButton = new JButton();
+		usernameTF = new JTextField("Enter username");
+		passwordTF = new JTextField("Enter password");
+		loginButton = new JButton("Login");
+	//	confirmPasswordTF = new JTextField("Confirm password");
+	//	createUserButton = new JButton("Create User");
 	}
 	
 	private void createGUI() {
@@ -70,12 +74,12 @@ public class LoginGUI extends JPanel {
 			}
 		});
 		
-		forgotPasswordButton.addActionListener(new ActionListener() {
+	/*	forgotPasswordButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Forgot Password Button pressed!");
 				// go to new Forgot Password page
 			}
-		});
+		}); */
 	}
 	
 	private void goToFeed(User user) {
@@ -92,4 +96,22 @@ public class LoginGUI extends JPanel {
 		return false;
 	}
 	
+	class RemoveTextAdapter extends FocusAdapter{
+		String textToPlace;
+		JTextField jtf;
+		
+		public RemoveTextAdapter(JTextField jtf, String s) {
+			this.jtf = jtf;
+			textToPlace = s;
+		}
+		public void focusGained(FocusEvent e) {
+			if (jtf.getText().equals(textToPlace))
+				jtf.setText(""); 
+		}
+		
+		public void focusLost(FocusEvent e) {
+			if (jtf.getText().isEmpty())
+				jtf.setText(textToPlace);
+		}
+	}
 }
