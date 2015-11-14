@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,12 +36,12 @@ public class MainPanel extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		approveQuotePanel = new ApproveQuoteGUI(this);
+		//approveQuotePanel = new ApproveQuoteGUI(this, new Quote()); // need to add a new quote to this
 		feed = new FeedPageGUI(this);
 		postQuote = new PostQuoteGUI(this);
-		profilePage = new ProfilePageGUI(this);
+		profilePage = new ProfilePageGUI(this, new User());
 		notifications = new NotificationGUI(this);
-		quotePanel = new QuoteGUI(this);
+		quotePanel = new QuoteGUI(this, new Quote());
 		writeQuotePanel = new WriteQuotePanel(this);
 		
 		notificationButton = new JButton("Notifications");
@@ -56,13 +57,14 @@ public class MainPanel extends JPanel {
 		// will need an image for our logo, and a textfield for searching?
 		JLabel northLabel = new JLabel("We need to add a logo here");
 		searchField = new JTextField();
+		searchField.setPreferredSize(new Dimension(200, 30));
 		JPanel northPanel = new JPanel();
 		northPanel.add(northLabel);
 		northPanel.add(searchField);
 		add(northPanel, BorderLayout.NORTH);
 		
 		// SOUTH Panel
-		JPanel southPanel = new JPanel(new GridLayout(4,1));
+		JPanel southPanel = new JPanel(new GridLayout(1,4));
 		southPanel.add(feedPageButton);
 		southPanel.add(writeQuoteButton);
 		southPanel.add(notificationButton);
@@ -75,24 +77,28 @@ public class MainPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				displayFeedPage();
+				System.out.println("Clicked Feed Button");
 			}
 		});
 		writeQuoteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				displayWriteQuotePage();			
+				displayWriteQuotePage();		
+				System.out.println("Clicked Write Quote Button");
 			}
 		});
 		notificationButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				displayNotificationPage();
+				System.out.println("Clicked Notifications Button");
 			}
 		});
 		profilePageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				//displayProfilePage();
+				//displayProfilePage(new User());
+				System.out.println("Clicked Profile Page");
 			}
 		});
 	}
@@ -107,14 +113,14 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void displayWriteQuotePage() {
-		
+		add(writeQuotePanel, BorderLayout.CENTER);
 	}
 	
 	public void displayNotificationPage() {
-		
+		add(notifications, BorderLayout.CENTER);
 	}
 	
 	public void displayProfilePage(User user) {
-		
+		add(profilePage, BorderLayout.CENTER);
 	}
 }

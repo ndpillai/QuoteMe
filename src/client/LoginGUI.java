@@ -58,7 +58,9 @@ public class LoginGUI extends JPanel {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (userIsValid()) {
-					goToFeed(dataManager.nameMap.get(usernameTF.getText()));
+					// Commented out for testing purposes
+					//goToFeed(dataManager.nameMap.get(usernameTF.getText()));
+					goToFeed(new User());
 				}
 			}
 		});
@@ -76,13 +78,15 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private boolean userIsValid() {
+		/* COMMENTED OUT FOR TESTING
 		if (dataManager.nameMap.containsKey(usernameTF.getText())) {
 			if (dataManager.nameMap.get(usernameTF.getText()).getPassword().equals(passwordTF.getText())) {
 				return true;
 			}
 		}
 		
-		return false;
+		return false;*/
+		return true;
 	}
 	
 	class RemoveTextAdapter extends FocusAdapter{

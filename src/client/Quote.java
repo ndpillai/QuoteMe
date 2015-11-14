@@ -9,6 +9,11 @@ public class Quote {
 	private Date datePosted;
 	private Vector<String> categories;
 	
+	// Probs need to remove
+	public Quote() {
+		System.out.println("Adding an empty quote");
+	}
+	
 	public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
 		this.text = text;
 		this.speaker = speaker;

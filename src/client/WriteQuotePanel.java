@@ -1,5 +1,7 @@
 package client;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -17,8 +19,13 @@ public class WriteQuotePanel extends JPanel {
 	private JLabel characterCountLabel;
 	private JComboBox<String> categoryComboBox;
 	
-	public WriteQuotePanel() {
-		
+	private MainPanel mainPanel;
+	
+	public WriteQuotePanel(MainPanel mainPanel) {
+		this.mainPanel = mainPanel;
+		initializeVariables();
+		createGUI();
+		addEvents();
 	}
 	
 	private void initializeVariables() {
@@ -26,7 +33,8 @@ public class WriteQuotePanel extends JPanel {
 	}
 	
 	private void createGUI() {
-		
+		setLayout(new BorderLayout());
+		add(new JLabel("This is write quote panel"), BorderLayout.CENTER);
 	}
 	
 	private void addEvents() {

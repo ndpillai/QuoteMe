@@ -14,6 +14,11 @@ public class User {
 	private Vector<User> usersWeFollow, usersFollowingUs;
 	private Vector<Quote> feedQuotesBuffer;
 	
+	// Probs need to remove this
+	public User() {
+		System.out.println("Empty user");
+	}
+	
 	public User(String firstName, String lastName, String userName, String email, String password, Date memberSince) {
 		this.firstName = firstName;
 		this.lastName = lastName;
