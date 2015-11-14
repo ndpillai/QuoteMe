@@ -8,7 +8,7 @@ public class DataManager {
 	private Vector<User> existingUsers;
 	private User currentUser;
 	private int portNumber;
-	private HashMap<String, User> nameMap;
+	HashMap<String, User> nameMap;
 	private HashMap<String, Quote> quoteMap;
 	private QuoteMeFrame qmf;
 	
@@ -37,8 +37,4 @@ public class DataManager {
 		// TODO
 	}
 	
-	// To allow different GUI's to call data manager to switch pages
-	public void displayTab(String tabName) {
-		qmf.displayTab(tabName);
-	}
 }

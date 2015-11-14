@@ -20,8 +20,12 @@ public class HomePageGUI extends JPanel {
 	public ImageIcon logo;
 	public JButton loginPageButton, newUserPageButton;
 	
-	public HomePageGUI() {
+	private ClientPanel clientPanel;
+	private QuoteMeClient quoteMeClient;
+	
+	public HomePageGUI(ClientPanel clientPanel) {
 		initializeVariables();
+		this.clientPanel = clientPanel;
 		createGUI();
 		addEvents();
 	}
@@ -42,7 +46,6 @@ public class HomePageGUI extends JPanel {
 		setLayout(new BorderLayout());
 		setSize(200, 400);
 		setVisible(true);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		logo = new ImageIcon();
 		loginPageButton = new JButton("Login");
 		newUserPageButton = new JButton("New User");
@@ -71,10 +74,12 @@ public class HomePageGUI extends JPanel {
 	
 	private void goToLoginPage() {
 		System.out.println("Going to login page");
+		clientPanel.moveToLoginPanel();
 	}
 	
 	private void goToNewUserPage() {
 		System.out.println("Going to new user page");
+		clientPanel.moveToCreateUserPanel();
 	}
 	
 }

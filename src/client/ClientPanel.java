@@ -16,6 +16,7 @@ public class ClientPanel extends JPanel {
 	private FeedPageGUI feedPagePanel;
 	private HomePageGUI homePagePanel;
 	private LoginGUI loginPanel;
+	private MainPanel mainPanel;
 	private ExpandedQuoteGUI expandedQuotePanel;
 	private NotificationGUI notificationPanel;
 	private PostQuoteGUI postQuotePanel;
@@ -25,62 +26,55 @@ public class ClientPanel extends JPanel {
 	
 	// Takes in input from the collected info from the other panels
 	private DataManager dataManager;
+	public QuoteMeClient quoteMeClient;
+	private User currentUser;
 	
 	{
-		/*
 		// The home page
-		homePagePanel = new HomePageGUI(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				//Swap to the number of players menu
-				ClientPanel.this.removeAll();
-				ClientPanel.this.add(homePagePanel);
-				ClientPanel.this.revalidate();
-			}
-		});
-
+		homePagePanel = new HomePageGUI(this);
+		
 		//Set up the panel to display
 		setLayout(new BorderLayout());
-		add(mainMenu);
+		add(homePagePanel);
 		refreshComponents();
 	}
 
 	private void refreshComponents() {
-		numPlayerSelect = new NumPlayerSelector(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//Swap to the color select menu
-				ClientPanel.this.removeAll();
-				ClientPanel.this.add(colorSelect);
-				ClientPanel.this.revalidate();
-			}
-		});
-		colorSelect = new ColorSelector(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ClientPanel.this.removeAll();
-				//set up the game manager
-				gameManager.setUp(
-					colorSelect.getPlayerColor(), 
-					numPlayerSelect.getNumberOfPlayers()
-				);
-				//set the panel to the game
-				ClientPanel.this.add(gamePanel);
-				ClientPanel.this.revalidate();
-			}
-		});
-		/*
-		gameManager = new GameManager();
-		gamePanel = new GamePanel(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//go back to the main menu
-				ClientPanel.this.removeAll();
-				ClientPanel.this.add(mainMenu);
-				ClientPanel.this.revalidate();
-				ClientPanel.this.repaint();
-				refreshComponents();
-			}
-		}, gameManager);*/
+		approveQuotePanel = null;
+		createUserPanel = new CreateUserGUI();
+		feedPagePanel = new FeedPageGUI();
+		loginPanel = new LoginGUI();
+		mainPanel = new MainPanel();
+		expandedQuotePanel = null;
+		notificationPanel = new NotificationGUI();
+		postQuotePanel = new PostQuoteGUI();
+		profilePagePanel = null;
+		quotePanel = null;
+		writeQuotePanel = new WriteQuotePanel();
+	}
+	
+	public void moveToLoginPanel() {
+		ClientPanel.this.removeAll();
+		ClientPanel.this.add(loginPanel);
+		ClientPanel.this.revalidate();
+	}
+	
+	public void moveToCreateUserPanel() {
+		ClientPanel.this.removeAll();
+		ClientPanel.this.add(createUserPanel);
+		ClientPanel.this.revalidate();
+	}
+	
+	public void moveToMainPanel() {
+		ClientPanel.this.removeAll();
+		ClientPanel.this.add(mainPanel);
+		ClientPanel.this.revalidate();
+	}
+	
+	public void moveToProfilePagePanel(User user) {
+		ProfilePageGUI ppg = new ProfilePageGUI(user);
+		ClientPanel.this.removeAll();
+		ClientPanel.this.add(ppg);
+		ClientPanel.this.revalidate();
 	}
 }
