@@ -1,10 +1,10 @@
 package client;
 
 public class ExpandedQuoteGUI extends QuoteGUI {
-	private ClientPanel clientPanel;
-	public ExpandedQuoteGUI(ClientPanel clientPanel, Quote q) {
-		super(clientPanel, q);
-		this.clientPanel = clientPanel;
+	private MainPanel mainPanel;
+	public ExpandedQuoteGUI(MainPanel mainPanel, Quote q) {
+		super(mainPanel, q);
+		this.mainPanel = mainPanel;
 	}
 	
 	private void createGUI() {

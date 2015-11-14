@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class WriteQuotePanel extends JPanel {
+public class WriteQuoteGUI extends JPanel {
 	private JTextField userSearchField;
 	private User speaker;
 	private JButton searchButton;
@@ -21,7 +21,7 @@ public class WriteQuotePanel extends JPanel {
 	
 	private MainPanel mainPanel;
 	
-	public WriteQuotePanel(MainPanel mainPanel) {
+	public WriteQuoteGUI(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		initializeVariables();
 		createGUI();

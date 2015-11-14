@@ -19,7 +19,7 @@ public class MainPanel extends JPanel {
 	private ProfilePageGUI profilePage;
 	private NotificationGUI notifications;
 	private QuoteGUI quotePanel;
-	private WriteQuotePanel writeQuotePanel;
+	private WriteQuoteGUI writeQuotePanel;
 	
 	private JTextField searchField;
 	private JButton notificationButton, writeQuoteButton, profilePageButton, feedPageButton;
@@ -42,7 +42,7 @@ public class MainPanel extends JPanel {
 		profilePage = new ProfilePageGUI(this, new User());
 		notifications = new NotificationGUI(this);
 		quotePanel = new QuoteGUI(this, new Quote());
-		writeQuotePanel = new WriteQuotePanel(this);
+		writeQuotePanel = new WriteQuoteGUI(this);
 		
 		notificationButton = new JButton("Notifications");
 		writeQuoteButton = new JButton("Write Quote");

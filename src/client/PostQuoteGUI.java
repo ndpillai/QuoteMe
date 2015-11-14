@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class PostQuoteGUI extends JPanel {
-	private Vector<WriteQuotePanel> quotes;
+	private Vector<WriteQuoteGUI> quotes;
 	private JButton multiQuoteButton, quoteButton;
 	private MainPanel mainPanel;
 	
