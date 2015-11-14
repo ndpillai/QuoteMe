@@ -11,18 +11,10 @@ public class ClientPanel extends JPanel {
 	
 	// Elements of the client panel
 	// The panel will switch between these
-	private ApproveQuoteGUI approveQuotePanel;
 	private CreateUserGUI createUserPanel;
-	private FeedPageGUI feedPagePanel;
 	private HomePageGUI homePagePanel;
 	private LoginGUI loginPanel;
 	private MainPanel mainPanel;
-	private ExpandedQuoteGUI expandedQuotePanel;
-	private NotificationGUI notificationPanel;
-	private PostQuoteGUI postQuotePanel;
-	private ProfilePageGUI profilePagePanel;
-	private QuoteGUI quotePanel;
-	private WriteQuotePanel writeQuotePanel;
 	
 	// Takes in input from the collected info from the other panels
 	private DataManager dataManager;
@@ -40,17 +32,9 @@ public class ClientPanel extends JPanel {
 	}
 
 	private void refreshComponents() {
-		approveQuotePanel = null;
-		createUserPanel = new CreateUserGUI();
-		feedPagePanel = new FeedPageGUI();
-		loginPanel = new LoginGUI();
-		mainPanel = new MainPanel();
-		expandedQuotePanel = null;
-		notificationPanel = new NotificationGUI();
-		postQuotePanel = new PostQuoteGUI();
-		profilePagePanel = null;
-		quotePanel = null;
-		writeQuotePanel = new WriteQuotePanel();
+		createUserPanel = new CreateUserGUI(this);
+		loginPanel = new LoginGUI(this);
+		mainPanel = new MainPanel(this);
 	}
 	
 	public void moveToLoginPanel() {

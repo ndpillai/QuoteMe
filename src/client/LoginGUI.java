@@ -16,10 +16,13 @@ public class LoginGUI extends JPanel {
 	public JTextField usernameTF, passwordTF;
 	public JButton loginButton, forgotPasswordButton;
 	
+	private ClientPanel clientPanel;
+	
 	// 450 x 700
 	
-	public LoginGUI() {
+	public LoginGUI(ClientPanel clientPanel) {
 		initializeVariables();
+		this.clientPanel = clientPanel;
 		createGUI();
 		addEvents();
 	}
@@ -79,7 +82,7 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void goToFeed(User user) {
-		
+		clientPanel.moveToMainPanel();
 	}
 	
 	private boolean userIsValid() {
