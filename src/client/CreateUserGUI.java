@@ -56,7 +56,9 @@ public class CreateUserGUI extends JPanel {
 	}
 	
 	private void addEvents() {
-		usernameTF.addFocusListener(new RemoveTextAdapter(usernameTF,"Enter username"));
+		firstnameTF.addFocusListener(new RemoveTextAdapter(firstnameTF,"Enter first name"));
+		lastnameTF.addFocusListener(new RemoveTextAdapter(lastnameTF,"Enter last name"));
+		usernameTF.addFocusListener(new RemoveTextAdapter(usernameTF,"Enter desired username"));
 		passwordTF.addFocusListener(new RemoveTextAdapter(passwordTF,"Enter password"));
 		confirmPasswordTF.addFocusListener(new RemoveTextAdapter(confirmPasswordTF,"Confirm password"));
 	

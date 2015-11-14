@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import client.CreateUserGUI.RemoveTextAdapter;
+
 public class LoginGUI extends JPanel {
 
 	private static final long serialVersionUID = 2335752822050869549L;
@@ -40,35 +42,19 @@ public class LoginGUI extends JPanel {
 	
 	private void createGUI() {
 		setLayout(null);
-		
-		JLabel loginPageLabel = new JLabel("LOGIN");
-		loginPageLabel.setFont(new Font("Arial", Font.BOLD, 28));
-		loginPageLabel.setSize(500, 100);
-		loginPageLabel.setLocation(225, 25);
-		add(loginPageLabel);
-		
-		usernameTF.setLocation(100, 100);
-		usernameTF.setSize(300, 50);
 		add(usernameTF);
-		
-		passwordTF.setLocation(100, 300);
-		passwordTF.setSize(300, 50);
 		add(passwordTF);
+		add(loginButton);
 		
-		JLabel usernameLabel = new JLabel("Username");
-		usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		usernameLabel.setSize(200, 100);
-		usernameLabel.setLocation(10, 75);
-		add(usernameLabel);
-		
-		JLabel passwordLabel = new JLabel("Password");
-		passwordLabel.setFont(new Font("Arial", Font.BOLD, 14));
-		passwordLabel.setSize(200, 100);
-		passwordLabel.setLocation(10, 275);
-		add(passwordLabel);
+		usernameTF.setBounds(100,150,250,20);
+		passwordTF.setBounds(100,300,250,20);
+		loginButton.setBounds(150,500,150,50);
 	}
 	
 	private void addEvents() {
+		usernameTF.addFocusListener(new RemoveTextAdapter(usernameTF,"Enter username"));
+		passwordTF.addFocusListener(new RemoveTextAdapter(passwordTF,"Enter password"));
+		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (userIsValid()) {
