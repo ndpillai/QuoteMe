@@ -20,8 +20,11 @@ public class CreateUserGUI extends JPanel {
 	public JTextField firstnameTF, lastnameTF, usernameTF, passwordTF, confirmPasswordTF;
 	public JButton createUserButton;
 	
-	public CreateUserGUI () {
+	private ClientPanel clientPanel;
+	
+	public CreateUserGUI (ClientPanel clientPanel) {
 		initializeVariables();
+		this.clientPanel = clientPanel;
 		createGUI();
 		addEvents();
 	}
@@ -65,6 +68,7 @@ public class CreateUserGUI extends JPanel {
 				{
 					System.out.println("valid"); //for testing
 					//add user to manager, return to home page
+					clientPanel.moveToLoginPanel();
 				}
 				else
 					System.out.println("invalid"); //for testing
