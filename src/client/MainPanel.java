@@ -75,8 +75,9 @@ public class MainPanel extends JPanel {
 		southPanel.add(notificationButton);
 		southPanel.add(profilePageButton);
 		add(southPanel, BorderLayout.SOUTH);
+		add(writeQuotePanel, BorderLayout.CENTER);
+		writeQuotePanel.setVisible(false);
 		add(feed, BorderLayout.CENTER);
-
 	}
 	
 	private void addEvents() {
