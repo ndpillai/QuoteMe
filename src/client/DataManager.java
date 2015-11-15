@@ -19,34 +19,34 @@ public class DataManager {
 		posterToQuoteMap = new HashMap<User, Quote>();
 	}
 	
-	public void addQuote(Quote quote) {
+	public static void addQuote(Quote quote) {
 		speakerToQuoteMap.put(quote.getSpeaker(), quote);
 		posterToQuoteMap.put(quote.getPoster(), quote);
 	}
 	
-	public void addUser(User user) {
+	public static void addUser(User user) {
 		allUsers.add(user);
 		nameMap.put(user.getUserName(), user);
 	}
 	
-	public void refresh() {
+	public static void refresh() {
 		
 	}
 	
 	// Getters
-	public Vector<User> getAllUsers() {
+	public static Vector<User> getAllUsers() {
 		return allUsers;
 	}
 	
-	public HashMap<String, User> getNameMap() {
+	public static HashMap<String, User> getNameMap() {
 		return nameMap;
 	}
 	
-	public HashMap<User, Quote> getSpeakerToQuoteMap() {
+	public static HashMap<User, Quote> getSpeakerToQuoteMap() {
 		return speakerToQuoteMap;
 	}
 	
-	public HashMap<User, Quote> getPosterToQuoteMap() {
+	public static HashMap<User, Quote> getPosterToQuoteMap() {
 		return posterToQuoteMap;
 	}
 	

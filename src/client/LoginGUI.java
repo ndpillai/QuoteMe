@@ -1,22 +1,17 @@
 package client;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import client.CreateUserGUI.RemoveTextAdapter;
 
 public class LoginGUI extends JPanel {
 
 	private static final long serialVersionUID = 2335752822050869549L;
-	public DataManager dataManager;
 	private JTextField usernameTF, passwordTF;
 	private JButton loginButton;
 //	private JButton forgotUserButton;
@@ -36,8 +31,6 @@ public class LoginGUI extends JPanel {
 		usernameTF = new JTextField("Enter username");
 		passwordTF = new JTextField("Enter password");
 		loginButton = new JButton("Login");
-	//	confirmPasswordTF = new JTextField("Confirm password");
-	//	createUserButton = new JButton("Create User");
 	}
 	
 	private void createGUI() {
@@ -58,8 +51,7 @@ public class LoginGUI extends JPanel {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				if (userIsValid()) {
-					// Commented out for testing purposes
-					//goToFeed(dataManager.nameMap.get(usernameTF.getText()));
+//					goToFeed(DataManager.getNameMap().get(usernameTF.getText()));
 					goToFeed(new User());
 				}
 			}
@@ -78,15 +70,23 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private boolean userIsValid() {
-		/* COMMENTED OUT FOR TESTING
-		if (dataManager.nameMap.containsKey(usernameTF.getText())) {
-			if (dataManager.nameMap.get(usernameTF.getText()).getPassword().equals(passwordTF.getText())) {
+		
+		if (DataManager.getNameMap().containsKey(usernameTF.getText())) {
+			if (DataManager.getNameMap().get(usernameTF.getText()).getPassword().equals(passwordTF.getText())) {
+				System.out.println("Username and password are correct, congratulations. "
+						+ "Welcome to the most exclusive and innovative online experience of your life.");
 				return true;
 			}
+			else {
+				System.out.println("Sorry, the entered password does not match the username. Please try again.");
+				return false;
+			}
 		}
-		
-		return false;*/
-		return true;
+		else {
+			System.out.println("The entered username does not exist. And yet. I'm going to let you in. Have fun! But not too much fun.");
+			return true;
+//			return false;
+		}
 	}
 	
 	class RemoveTextAdapter extends FocusAdapter{
