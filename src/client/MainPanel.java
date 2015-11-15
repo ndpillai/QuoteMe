@@ -63,6 +63,14 @@ public class MainPanel extends JPanel {
 		northPanel.add(searchField);
 		add(northPanel, BorderLayout.NORTH);
 		
+		add(writeQuotePanel, BorderLayout.CENTER);
+		add(notifications, BorderLayout.CENTER);
+		add(profilePage, BorderLayout.CENTER);
+		add(feed, BorderLayout.CENTER);
+		feed.setVisible(true);
+
+		//add(new JLabel("Stuff goes here"), BorderLayout.CENTER);
+		
 		// SOUTH Panel
 		JPanel southPanel = new JPanel(new GridLayout(1,4));
 		southPanel.add(feedPageButton);
@@ -70,6 +78,8 @@ public class MainPanel extends JPanel {
 		southPanel.add(notificationButton);
 		southPanel.add(profilePageButton);
 		add(southPanel, BorderLayout.SOUTH);
+		add(feed, BorderLayout.CENTER);
+
 	}
 	
 	private void addEvents() {
@@ -107,20 +117,31 @@ public class MainPanel extends JPanel {
 		System.out.println("Refreshed components in main panel");
 	}
 	
+	private void hideAll() {
+		feed.setVisible(false);
+		writeQuotePanel.setVisible(false);
+		notifications.setVisible(false);
+		profilePage.setVisible(false);
+	}
+	
 	public void displayFeedPage() {
 		//refreshComponents();
-		add(feed, BorderLayout.CENTER);
+		hideAll();
+		feed.setVisible(true);
 	}
 	
 	public void displayWriteQuotePage() {
-		add(writeQuotePanel, BorderLayout.CENTER);
+		hideAll();
+		writeQuotePanel.setVisible(true);
 	}
 	
 	public void displayNotificationPage() {
-		add(notifications, BorderLayout.CENTER);
+		hideAll();
+		notifications.setVisible(true);
 	}
 	
 	public void displayProfilePage(User user) {
-		add(profilePage, BorderLayout.CENTER);
+		hideAll();
+		profilePage.setVisible(true);
 	}
 }
