@@ -5,36 +5,49 @@ import java.util.Vector;
 
 public class DataManager {
 
-	private Vector<User> existingUsers;
-	private User currentUser;
-	private int portNumber;
-	HashMap<String, User> nameMap;
-	private HashMap<String, Quote> quoteMap;
-	private QuoteMeFrame qmf;
+	private static Vector<User> allUsers;
+	private static HashMap<String, User> nameMap; // Usernames to their Users
+	private static HashMap<User, Quote> speakerToQuoteMap; // Speakers to their Quotes
+	private static HashMap<User, Quote> posterToQuoteMap; // Posters to their Quotes
+
+	//	public static QuoteMeFrame qmf;
 	
-	public DataManager(QuoteMeFrame qmf) {
-		existingUsers = new Vector<User>();
-		currentUser = null;
-		portNumber = 0;
+	static {
+		allUsers = new Vector<User>();
 		nameMap = new HashMap<String, User>();
-		quoteMap = new HashMap<String, Quote>();
-		this.qmf = qmf;
+		speakerToQuoteMap = new HashMap<User, Quote>();
+		posterToQuoteMap = new HashMap<User, Quote>();
 	}
 	
-	public Vector<User> getExistingUsers() {
-		return existingUsers;
+	public void addQuote(Quote quote) {
+		speakerToQuoteMap.put(quote.getSpeaker(), quote);
+		posterToQuoteMap.put(quote.getPoster(), quote);
 	}
 	
-	public User getCurrentUser() {
-		return currentUser;
-	}
-	
-	public void addQuote(Quote q) {
-		// TODO
+	public void addUser(User user) {
+		allUsers.add(user);
+		nameMap.put(user.getUserName(), user);
 	}
 	
 	public void refresh() {
-		// TODO
+		
+	}
+	
+	// Getters
+	public Vector<User> getAllUsers() {
+		return allUsers;
+	}
+	
+	public HashMap<String, User> getNameMap() {
+		return nameMap;
+	}
+	
+	public HashMap<User, Quote> getSpeakerToQuoteMap() {
+		return speakerToQuoteMap;
+	}
+	
+	public HashMap<User, Quote> getPosterToQuoteMap() {
+		return posterToQuoteMap;
 	}
 	
 }
