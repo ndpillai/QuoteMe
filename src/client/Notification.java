@@ -1,41 +1,56 @@
 package client;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.util.Date;
-import java.util.Vector;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Notification {
+public class Notification extends JPanel {
 	private User sender;
+	private String user;
 	private String message;
-	private Date notificationDate;
-	private JPanel linkedPanel, infoPanel;
+	private Date date;
 	private JLabel senderLabel, messageLabel, dateLabel;
 
-	public Notification(JPanel linkedPanel) {
-		this.linkedPanel = linkedPanel;
+	//eventually also want to add in an action listener
+	public Notification(User sender, String message, Date date) {
+		this.sender = sender;
+		this.message = message;
+		this.date = date;
+		
 		initializeVariables();
 		createGUI();
 		addEvents();
-		this.linkedPanel.setVisible(false);
-		infoPanel.setVisible(false);
+	}
+	
+	public Notification(String sender, String message, Date date) {
+		this.user = sender;
+		this.message = message;
+		this.date = date;
+		
+		initializeVariables();
+		createGUI();
+		addEvents();
 	}
 	
 	private void initializeVariables() {
-		//sender = new User(); // TODO user constructor
-		message = new String();
-		notificationDate = new Date();
-		linkedPanel = new JPanel();
-		infoPanel = new JPanel();
+		
+	//	senderLabel = new JLabel(sender.getFirstName()+" "+sender.getLastName());
+		senderLabel = new JLabel(user);
+		messageLabel = new JLabel(message);
+		dateLabel = new JLabel(date.toString());
 	}
 	
 	private void createGUI() {
-		linkedPanel.setLayout(new BorderLayout()); // TODO decide on which layouts to use
-		infoPanel.setLayout(new BorderLayout());
-		// TODO finish styling elements
+		setLayout(new GridLayout(3,1));
+		add(senderLabel);
+		add(dateLabel);
+		add(messageLabel);
+		
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
 	private void addEvents() {
@@ -51,6 +66,6 @@ public class Notification {
 	}
 	
 	private Date getDate() {
-		return notificationDate;
+		return date;
 	}
 }
