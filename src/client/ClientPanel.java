@@ -51,6 +51,10 @@ public class ClientPanel extends JPanel {
 		ClientPanel.this.revalidate();
 	}
 	
+	public void setCurrentUser(User user) {
+		this.currentUser = user;
+	}
+	
 /*	public void moveToProfilePagePanel(User user) {
 		ProfilePageGUI ppg = new ProfilePageGUI(this,user);
 		ClientPanel.this.removeAll();

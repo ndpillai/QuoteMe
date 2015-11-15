@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.Date;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -66,37 +64,29 @@ public class CreateUserGUI extends JPanel {
 		createUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 			
-//			Actual logic for User creation:
+//			*****Actual logic for User creation*****
 //			if (!DataManager.getNameMap().containsKey(usernameTF.getText())) {
 //				User newUser = new User(firstnameTF.getText(), lastnameTF.getText(), usernameTF.getText(), "email", 
 //						passwordTF.getText(), new Date());
 //				DataManager.addUser(newUser);
+//				clientPanel.moveToLoginPanel();
 //			}
 //			else {
 //				System.out.println("This username is already taken. Please try another!");
 //				usernameTF.setText("");
 //			}
-			
-			if (passwordTF.getText().equals(confirmPasswordTF.getText()))
-			{
-				System.out.println("valid"); //for testing
-				//add user to manager, return to home page
+
+//			*****For testing purposes only*****
+			if (passwordTF.getText().equals(confirmPasswordTF.getText())) {
+				System.out.println("valid");
 				clientPanel.moveToLoginPanel();
 			}
-			else
-				System.out.println("invalid"); //for testing
+			else {
+				System.out.println("invalid");
+			}
 			
 			}
 		});
-	}
-	
-	public void createNewUser() {
-		// TODO
-	}
-	
-	public void addNamesToMap(String username) {
-		// TODO what map are we talking about? Oh are we creating a new User and sending it to the DataManager?
-		// How many names? 
 	}
 	
 	class RemoveTextAdapter extends FocusAdapter{
