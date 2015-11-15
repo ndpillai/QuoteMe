@@ -1,11 +1,10 @@
 package client;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class QuoteMeFrame extends JFrame {
-	private static final long serialVersionUID = 1;
-	
+
+	private static final long serialVersionUID = 5757035426111506095L;
 	private QuoteMeClient quoteMeClient;
 	
 	public QuoteMeFrame(QuoteMeClient quoteMeClient) {

@@ -50,7 +50,7 @@ public class LoginGUI extends JPanel {
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				if (userIsValid()) {
+				if (loginIsValid()) {
 //					goToFeed(DataManager.getNameMap().get(usernameTF.getText()));
 					goToFeed(new User());
 				}
@@ -69,8 +69,7 @@ public class LoginGUI extends JPanel {
 		clientPanel.moveToMainPanel();
 	}
 	
-	private boolean userIsValid() {
-		
+	private boolean loginIsValid() {
 		if (DataManager.getNameMap().containsKey(usernameTF.getText())) {
 			if (DataManager.getNameMap().get(usernameTF.getText()).getPassword().equals(passwordTF.getText())) {
 				System.out.println("Username and password are correct, congratulations. "
@@ -79,11 +78,14 @@ public class LoginGUI extends JPanel {
 			}
 			else {
 				System.out.println("Sorry, the entered password does not match the username. Please try again.");
+				usernameTF.setText("");
+				passwordTF.setText("");
 				return false;
 			}
 		}
 		else {
 			System.out.println("The entered username does not exist. And yet. I'm going to let you in. Have fun! But not too much fun.");
+			usernameTF.setText("");
 			return true;
 //			return false;
 		}

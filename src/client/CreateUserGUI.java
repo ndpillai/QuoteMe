@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -62,18 +63,29 @@ public class CreateUserGUI extends JPanel {
 		passwordTF.addFocusListener(new RemoveTextAdapter(passwordTF,"Enter password"));
 		confirmPasswordTF.addFocusListener(new RemoveTextAdapter(confirmPasswordTF,"Confirm password"));
 	
-		createUserButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-			//Add in all the stuff to check if a username is in the database
-				//if (usernameTF.getText() is valid)
-				if (passwordTF.getText().equals(confirmPasswordTF.getText()))
-				{
-					System.out.println("valid"); //for testing
-					//add user to manager, return to home page
-					clientPanel.moveToLoginPanel();
-				}
-				else
-					System.out.println("invalid"); //for testing
+		createUserButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+			
+//			Actual logic for User creation:
+//			if (!DataManager.getNameMap().containsKey(usernameTF.getText())) {
+//				User newUser = new User(firstnameTF.getText(), lastnameTF.getText(), usernameTF.getText(), "email", 
+//						passwordTF.getText(), new Date());
+//				DataManager.addUser(newUser);
+//			}
+//			else {
+//				System.out.println("This username is already taken. Please try another!");
+//				usernameTF.setText("");
+//			}
+			
+			if (passwordTF.getText().equals(confirmPasswordTF.getText()))
+			{
+				System.out.println("valid"); //for testing
+				//add user to manager, return to home page
+				clientPanel.moveToLoginPanel();
+			}
+			else
+				System.out.println("invalid"); //for testing
+			
 			}
 		});
 	}

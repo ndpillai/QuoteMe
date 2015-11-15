@@ -17,6 +17,8 @@ import resources.Images;
 
 
 public class HomePageGUI extends JPanel {
+
+	private static final long serialVersionUID = -7248616684444196676L;
 	public ImageIcon logo;
 	public JButton loginPageButton, newUserPageButton;
 	

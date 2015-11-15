@@ -1,9 +1,6 @@
 package client;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
 
 public class ClientPanel extends JPanel {
@@ -17,7 +14,6 @@ public class ClientPanel extends JPanel {
 	private MainPanel mainPanel;
 	
 	// Takes in input from the collected info from the other panels
-	private DataManager dataManager;
 	public QuoteMeClient quoteMeClient;
 	private User currentUser;
 	
