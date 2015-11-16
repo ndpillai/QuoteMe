@@ -13,18 +13,20 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import resources.CustomListeners;
 import resources.Images;
 
+
 public class LoginGUI extends JPanel {
 
 	private static final long serialVersionUID = 2335752822050869549L;
 	private JTextField usernameTF, passwordTF;
 	private JButton loginButton;
-//	private JButton forgotUserButton;
+	private JButton forgotUserButton;
 	
 	private ClientPanel clientPanel;
 	
@@ -53,6 +55,7 @@ public class LoginGUI extends JPanel {
 		usernameTF = new JTextField("Enter username");
 		passwordTF = new JTextField("Enter password");
 		loginButton = new JButton("Login");
+		forgotUserButton = new JButton("Forgot Username / Password");
 	}
 	
 	private void createGUI() {
@@ -77,6 +80,7 @@ public class LoginGUI extends JPanel {
 		loginPanel.add(usernameTF);
 		loginPanel.add(passwordTF);
 		loginPanel.add(loginButton);
+		loginPanel.add(forgotUserButton);
 		add(loginPanel, BorderLayout.SOUTH);
 	}
 	
@@ -93,12 +97,19 @@ public class LoginGUI extends JPanel {
 			}
 		});
 		
-	/*	forgotPasswordButton.addActionListener(new ActionListener() {
+		forgotUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Forgot Password Button pressed!");
+				String emailAddress = JOptionPane.showInputDialog(LoginGUI.this, "Enter an email for username and password recovery:");
+				JOptionPane.showMessageDialog(LoginGUI.this, "Username/Password recovery email sent to: " + emailAddress,  "Email sent!", JOptionPane.PLAIN_MESSAGE);
+
+				// TODO email validation
+				// For now, sendEmail with hardcoded email
+				sendEmail("gouillon@usc.edu");
+				//sendEmail(emailAddress); 
 				// go to new Forgot Password page
 			}
-		}); */
+		}); 
 	}
 	
 	private void goToFeed(User user) {
@@ -125,5 +136,33 @@ public class LoginGUI extends JPanel {
 			return true;
 //			return false;
 		}
+	}
+	
+	
+	private void sendEmail(String emailAddress) {
+		/* Couldn't test because I couldn't download Java Mail API and one more thing at:
+		 * http://www.tutorialspoint.com/java/java_sending_email.htm
+		 * 
+	      String to = "abcd@gmail.com";		// Recipient's email ID needs to be mentioned.
+	      String from = "web@gmail.com";	// Sender's email ID needs to be mentioned
+	      String host = "localhost";		// Assuming you are sending email from localhost
+	      Properties properties = System.getProperties();	// Get system properties
+	      properties.setProperty("mail.smtp.host", host);	// Setup mail server
+	      Session session = Session.getDefaultInstance(properties);	      // Get the default Session object.
+
+	      try{
+	         MimeMessage message = new MimeMessage(session);	         // Create a default MimeMessage object.
+	         message.setFrom(new InternetAddress(from));	         // Set From: header field of the header.
+	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));	         // Set To: header field of the header.
+	         message.setSubject("This is the Subject Line!");	         // Set Subject: header field
+	         message.setText("This is actual message");	         // Now set the actual message
+	         Transport.send(message);	         // Send message
+
+	         System.out.println("Sent message successfully....");
+	      }catch (MessagingException mex) {
+	         mex.printStackTrace();
+	      }
+	   }*/
+		System.out.println("Sending an email (but not actually, not yet that is)");
 	}
 }

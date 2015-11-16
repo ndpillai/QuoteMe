@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -65,7 +66,7 @@ public class MainPanel extends JPanel {
 		// will need an image for our logo, and a textfield for searching?
 		JLabel northLabel = new JLabel("QuoteMe© ");
 		searchField = new JTextField("Search QuoteMe");
-		searchField.setPreferredSize(new Dimension(200, 30));
+		searchField.setPreferredSize(new Dimension(160, searchField.getPreferredSize().height));
 		JPanel northPanel = new JPanel();
 		northPanel.add(northLabel);
 		northPanel.add(searchField);
@@ -104,6 +105,23 @@ public class MainPanel extends JPanel {
 					System.out.println("Wrong search format");
 				}
 
+			}
+		});
+		logoutButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				int n = JOptionPane.showConfirmDialog(
+			            null,
+			            "Are you sure you want to logout?",
+			            "Confirm logout",
+			            JOptionPane.YES_NO_OPTION);
+				if(n == 0) {	// User wants to logout
+					System.out.println("User confirms logout.");
+					// TODO implement starting over of quoteme
+				}
+				else {
+					System.out.println("User does not confirm logout.");
+				}
 			}
 		});
 		feedPageButton.addActionListener(new ActionListener() {

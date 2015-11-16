@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -104,6 +105,7 @@ public class CreateUserGUI extends JPanel {
 //			*****For testing purposes only*****
 			if (passwordTF.getText().equals(confirmPasswordTF.getText())) {
 				System.out.println("valid");
+				JOptionPane.showMessageDialog(CreateUserGUI.this, "Login with your username and password to access QuoteMe universe.", "Profile successfully created! ",  JOptionPane.PLAIN_MESSAGE);
 				clientPanel.moveToLoginPanel();
 			}
 			else {
