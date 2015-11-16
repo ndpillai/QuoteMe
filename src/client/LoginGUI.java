@@ -2,12 +2,12 @@ package client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import resources.CustomListeners;
 
 public class LoginGUI extends JPanel {
 
@@ -45,8 +45,8 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void addEvents() {
-		usernameTF.addFocusListener(new RemoveTextAdapter(usernameTF,"Enter username"));
-		passwordTF.addFocusListener(new RemoveTextAdapter(passwordTF,"Enter password"));
+		usernameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(usernameTF,"Enter username"));
+		passwordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(passwordTF,"Enter password"));
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -88,25 +88,6 @@ public class LoginGUI extends JPanel {
 			usernameTF.setText("");
 			return true;
 //			return false;
-		}
-	}
-	
-	class RemoveTextAdapter extends FocusAdapter{
-		String textToPlace;
-		JTextField jtf;
-		
-		public RemoveTextAdapter(JTextField jtf, String s) {
-			this.jtf = jtf;
-			textToPlace = s;
-		}
-		public void focusGained(FocusEvent e) {
-			if (jtf.getText().equals(textToPlace))
-				jtf.setText(""); 
-		}
-		
-		public void focusLost(FocusEvent e) {
-			if (jtf.getText().isEmpty())
-				jtf.setText(textToPlace);
 		}
 	}
 }

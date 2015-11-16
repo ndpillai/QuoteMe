@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import resources.CustomListeners;
+
 public class MainPanel extends JPanel {
 	
 	private ApproveQuoteGUI approveQuotePanel;
@@ -23,6 +25,7 @@ public class MainPanel extends JPanel {
 	
 	private JTextField searchField;
 	private JButton notificationButton, writeQuoteButton, profilePageButton, feedPageButton;
+	private JButton searchButton, logoutButton;
 	
 	public ClientPanel clientPanel;
 
@@ -49,6 +52,9 @@ public class MainPanel extends JPanel {
 		writeQuoteButton = new JButton("Write Quote");
 		profilePageButton = new JButton("My Profile");
 		feedPageButton = new JButton("Feed");
+		
+		searchButton = new JButton("Search");
+		logoutButton = new JButton("Logout");
 	}
 	
 	private void createGUI() {
@@ -56,12 +62,14 @@ public class MainPanel extends JPanel {
 		
 		// NORTH Panel
 		// will need an image for our logo, and a textfield for searching?
-		JLabel northLabel = new JLabel("We need to add a logo here");
-		searchField = new JTextField();
+		JLabel northLabel = new JLabel("QuoteMe© ");
+		searchField = new JTextField("Search QuoteMe");
 		searchField.setPreferredSize(new Dimension(200, 30));
 		JPanel northPanel = new JPanel();
 		northPanel.add(northLabel);
 		northPanel.add(searchField);
+		northPanel.add(searchButton);
+		northPanel.add(logoutButton);
 		add(northPanel, BorderLayout.NORTH);
 
 		add(feed, BorderLayout.CENTER);
@@ -81,6 +89,20 @@ public class MainPanel extends JPanel {
 	}
 	
 	private void addEvents() {
+		searchField.addFocusListener(new CustomListeners.RemoveTextAdapter(searchField, "Search QuoteMe"));
+		searchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				if (!searchField.getText().equals("Search QuoteMe") && !searchField.getText().equals("")) {
+					displaySearchResultsPage(searchField.getText());
+					System.out.println("Clicked search button.");
+				}
+				else {
+					System.out.println("Wrong search format");
+				}
+
+			}
+		});
 		feedPageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -124,6 +146,15 @@ public class MainPanel extends JPanel {
 		currentPanelShown = jp;
 		this.repaint();
 		this.revalidate();
+	}
+	
+	public void displaySearchResultsPage(String text) {
+		JPanel jp = new JPanel();
+		jp.add(new JLabel("Search results page"));
+		jp.add(new JLabel(text));
+		jp.setVisible(true);
+		removeCurrentPanel();
+		addNewPanel(jp);
 	}
 	
 	public void displayFeedPage() {
