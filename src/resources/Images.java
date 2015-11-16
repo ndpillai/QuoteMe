@@ -2,13 +2,23 @@ package resources;
 
 public class Images {
 	
-	// BACKGROUND
-	public static final String plainHomePageBackground = "img/QuoteMeBackground1.jpg";
-	public static final String parrotHomePageBackground = "img/QuoteMeBackground2.jpg";
-	public static final String parrotHomePageBackgroundPixellated6 = "img/QuoteMeBackground-Pixellated6.jpg";
-	public static final String parrotHomePageBackgroundPixellated15 = "img/QuoteMeBackground-Pixellated15.jpg";
-	public static final String parrotHomePageBackgroundPixellated19 = "img/QuoteMeBackground-Pixellated19.jpg";
-	public static final String parrotHomePageBackgroundPixellated23 = "img/QuoteMeBackground-Pixellated23.jpg";
+	// BACKGROUNDS
+	public static final String plainHomePageBackground = "img/backgrounds/QuoteMeBackground1.jpg";
+	public static final String parrotHomePageBackground = "img/backgrounds/QuoteMeBackground2.jpg";
+	public static final String parrotHomePageBackgroundPixellated6 = "img/backgrounds/QuoteMeBackground-Pixellated6.jpg";
+	public static final String parrotHomePageBackgroundPixellated15 = "img/backgrounds/QuoteMeBackground-Pixellated15.jpg";
+	public static final String parrotHomePageBackgroundPixellated19 = "img/backgrounds/QuoteMeBackground-Pixellated19.jpg";
+	public static final String parrotHomePageBackgroundPixellated23 = "img/backgrounds/QuoteMeBackground-Pixellated23.jpg";
+	
+	// AVATARS
+	public static final String parrotAvatarBluePixellated = "img/avatars/QuoteMeAvatarBluePixellated.png";
+	public static final String parrotAvatarGrayPixellated = "img/avatars/QuoteMeAvatarGrayPixellated.png";
+	public static final String parrotAvatarGreenPixellated = "img/avatars/QuoteMeAvatarGreenPixellated.png";
+	public static final String parrotAvatarOrangePixellated = "img/avatars/QuoteMeAvatarOrangePixellated.png";
+	public static final String parrotAvatarPinkPixellated = "img/avatars/QuoteMeAvatarPinkPixellated.png";
+	public static final String parrotAvatarPurplePixellated = "img/avatars/QuoteMeAvatarPurplePixellated.png";
+	public static final String parrotAvatarRedPixellated = "img/avatars/QuoteMeAvatarRedPixellated.png";
+	public static final String parrotAvatarYellowPixellated = "img/avatars/QuoteMeAvatarYellowPixellated.png";
 	
 	// BUTTONS
 	

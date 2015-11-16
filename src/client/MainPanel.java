@@ -68,6 +68,7 @@ public class MainPanel extends JPanel {
 		searchField = new JTextField("Search QuoteMe");
 		searchField.setPreferredSize(new Dimension(160, searchField.getPreferredSize().height));
 		JPanel northPanel = new JPanel();
+        northPanel.setBackground(new Color(204, 0, 0, 123));
 		northPanel.add(northLabel);
 		northPanel.add(searchField);
 		northPanel.add(searchButton);
@@ -148,7 +149,7 @@ public class MainPanel extends JPanel {
 		profilePageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				//displayProfilePage(new User());
+				displayProfilePage(new User());
 				System.out.println("Clicked Profile Page");
 			}
 		});
@@ -197,8 +198,14 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void displayProfilePage(User user) {
+		profilePage = new ProfilePageGUI(this, user);
 		profilePage.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(profilePage);
+	}
+	
+	public void displayPage(JPanel page) {
+		removeCurrentPanel();
+		addNewPanel(page);
 	}
 }

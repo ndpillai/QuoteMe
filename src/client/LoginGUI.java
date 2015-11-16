@@ -101,13 +101,18 @@ public class LoginGUI extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Forgot Password Button pressed!");
 				String emailAddress = JOptionPane.showInputDialog(LoginGUI.this, "Enter an email for username and password recovery:");
-				JOptionPane.showMessageDialog(LoginGUI.this, "Username/Password recovery email sent to: " + emailAddress,  "Email sent!", JOptionPane.PLAIN_MESSAGE);
+				if (emailAddress == null) { // Probably chose cancel
+					System.out.println("Chose cancel?");
+				}
+				else {
+					JOptionPane.showMessageDialog(LoginGUI.this, "Username/Password recovery email sent to: " + emailAddress,  "Email sent!", JOptionPane.PLAIN_MESSAGE);
 
-				// TODO email validation
-				// For now, sendEmail with hardcoded email
-				sendEmail("gouillon@usc.edu");
-				//sendEmail(emailAddress); 
-				// go to new Forgot Password page
+					// TODO email validation
+					// For now, sendEmail with hardcoded email
+					sendEmail("gouillon@usc.edu");
+					//sendEmail(emailAddress); 
+					// go to new Forgot Password page
+				}
 			}
 		}); 
 	}

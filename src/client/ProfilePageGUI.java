@@ -1,11 +1,19 @@
 package client;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import resources.Images;
 
 public class ProfilePageGUI extends JPanel {
 	public long serialVersionUID;
@@ -15,11 +23,13 @@ public class ProfilePageGUI extends JPanel {
 	private JTabbedPane profileQuoteTabs;
 	private JPanel myQuotesPanel, postedQuotesPanel, favoriteQuotesPanel;
 	private ScrollPane myQuotesPane, postedQuotesPane, favoriteQuotesPane;
+	private JButton followButton;
+	
 	private MainPanel mainPanel;
 	
-	public ProfilePageGUI(MainPanel mainPanel, User u) {
+	public ProfilePageGUI(MainPanel mainPanel, User user) {
 		this.mainPanel = mainPanel;
-		user = u;
+		this.user = user;
 		initializeVariables();
 		createGUI();
 		addEvents();
@@ -28,9 +38,9 @@ public class ProfilePageGUI extends JPanel {
 	
 	private void initializeVariables() {
 		// TODO initialize stuff correctly
-		userImageIcon = new ImageIcon();
-		followersLabel = new JLabel();
-		followedLabel = new JLabel();
+		userImageIcon = user.getProfilePicture();
+		followersLabel = new JLabel("Followers: " + user.getUsersFollowingUs().size());
+		followedLabel = new JLabel("Following: " + user.getUsersWeFollow().size());
 		profileQuoteTabs = new JTabbedPane();
 		myQuotesPanel = new JPanel();
 		postedQuotesPanel = new JPanel();
@@ -38,17 +48,37 @@ public class ProfilePageGUI extends JPanel {
 		myQuotesPane = new ScrollPane();
 		postedQuotesPane = new ScrollPane();
 		favoriteQuotesPane = new ScrollPane();
+		followButton = new JButton("Follow");
 	}
 	
 	private void createGUI() {
 		// TODO set layouts
+		setLayout(new BorderLayout());
+		refresh();
 	}
 	
 	private void addEvents() {
 		// TODO
+		followButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Following this person");
+				// TODO we need to disable this follow buttn if we are viewing our own profile?
+				// TODO we also need to actually add this person as someone we follow, and vice versa
+			}
+		});
 	}
 	
 	private void refresh() {
 		// TODO
+		JPanel northPanel = new JPanel();
+		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+		northPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		northPanel.add(new JLabel(userImageIcon));
+		northPanel.add(new JLabel(user.getFirstName() + " " + user.getLastName()));
+		northPanel.add(new JLabel("Username: " + user.getUserName()));
+		northPanel.add(followersLabel);
+		northPanel.add(followedLabel);
+		add(northPanel, BorderLayout.CENTER);
 	}
 }

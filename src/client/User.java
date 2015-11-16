@@ -16,7 +16,20 @@ public class User {
 	
 	// Probs need to remove this
 	public User() {
-		System.out.println("Empty user");
+		System.out.println("Fake user with fake information. You know who it is.");
+		this.firstName = "Aaron";
+		this.lastName = "Cote";
+		this.userName = "ac";
+		this.email = "gouillon@usc.edu";
+		this.password = "1234";
+		this.memberSince = new Date();
+		myQuotes = new Vector<Quote>();
+		postedQuotes = new Vector<Quote>();
+		favoriteQuotes = new Vector<Quote>();
+		myNotifications = new Vector<Notification>();
+		usersWeFollow = new Vector<User>();
+		usersFollowingUs = new Vector<User>();
+		feedQuotesBuffer = new Vector<Quote>();	
 	}
 	
 	public User(String firstName, String lastName, String userName, String email, String password, Date memberSince) {
@@ -73,6 +86,14 @@ public class User {
 	
 	public Date getMemberSince() {
 		return memberSince;
+	}
+	
+	public void setProfilePicture(ImageIcon profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+	
+	public ImageIcon getProfilePicture() {
+		return this.profilePicture;
 	}
 	
 	public void addMyQuote(Quote q) {
