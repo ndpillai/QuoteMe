@@ -90,7 +90,7 @@ public class WriteQuoteGUI extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				if (!userSearchField.getText().equals("Search for a user") && !userSearchField.getText().equals("")) {
 					//displaySearchResultsPage(userSearchField.getText());
-					String [] relevantUsers = {"Select User", "Nav", "Ingrid", "Tony", "Simone"};
+					String [] relevantUsers = {"Select User", "Nav", "Ingrid", "Bitch", "Simone"};
 					searchUserComboBox.setModel(new DefaultComboBoxModel(relevantUsers));
 					System.out.println("Clicked search button.");
 				}
