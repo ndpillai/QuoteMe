@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -78,6 +79,8 @@ public class MainPanel extends JPanel {
 		
 		// SOUTH Panel
 		JPanel southPanel = new JPanel(new GridLayout(1,4));
+        southPanel.setBackground(new Color(204, 0, 0, 123));
+
 		southPanel.add(feedPageButton);
 		southPanel.add(writeQuoteButton);
 		southPanel.add(notificationButton);

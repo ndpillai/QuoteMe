@@ -1,12 +1,22 @@
 package client;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import resources.CustomListeners;
+import resources.Images;
 
 /*
 added: removeTextAdapter
@@ -38,6 +48,7 @@ public class CreateUserGUI extends JPanel {
 	}
 	
 	private void createGUI() {
+		/*
 		setLayout(null);
 		add(firstnameTF);
 		add(lastnameTF);
@@ -51,15 +62,29 @@ public class CreateUserGUI extends JPanel {
 		usernameTF.setBounds(100,250,250,20);
 		passwordTF.setBounds(100,325,250,20);
 		confirmPasswordTF.setBounds(100,400,250,20);
-		createUserButton.setBounds(150,500,150,50);
+		createUserButton.setBounds(150,500,150,50);*/
+		
+		setLayout(new BorderLayout());
+		JPanel createUserPanel = new JPanel();
+        createUserPanel.setBackground(new Color(204, 0, 0, 123));
+
+		createUserPanel.setLayout(new BoxLayout(createUserPanel, BoxLayout.Y_AXIS));
+		//usernameTF.setSize(new Dimension(20, usernameTF.getPreferredSize().height));
+		createUserPanel.add(firstnameTF);
+		createUserPanel.add(lastnameTF);
+		createUserPanel.add(usernameTF);
+		createUserPanel.add(passwordTF);
+		createUserPanel.add(confirmPasswordTF);
+		createUserPanel.add(createUserButton);
+		add(createUserPanel, BorderLayout.SOUTH);
 	}
 	
 	private void addEvents() {
-		firstnameTF.addFocusListener(new RemoveTextAdapter(firstnameTF,"Enter first name"));
-		lastnameTF.addFocusListener(new RemoveTextAdapter(lastnameTF,"Enter last name"));
-		usernameTF.addFocusListener(new RemoveTextAdapter(usernameTF,"Enter desired username"));
-		passwordTF.addFocusListener(new RemoveTextAdapter(passwordTF,"Enter password"));
-		confirmPasswordTF.addFocusListener(new RemoveTextAdapter(confirmPasswordTF,"Confirm password"));
+		firstnameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(firstnameTF,"Enter first name"));
+		lastnameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(lastnameTF,"Enter last name"));
+		usernameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(usernameTF,"Enter desired username"));
+		passwordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(passwordTF,"Enter password"));
+		confirmPasswordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(confirmPasswordTF,"Confirm password"));
 	
 		createUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
@@ -89,22 +114,15 @@ public class CreateUserGUI extends JPanel {
 		});
 	}
 	
-	class RemoveTextAdapter extends FocusAdapter{
-		String textToPlace;
-		JTextField jtf;
-		
-		public RemoveTextAdapter(JTextField jtf, String s) {
-			this.jtf = jtf;
-			textToPlace = s;
-		}
-		public void focusGained(FocusEvent e) {
-			if (jtf.getText().equals(textToPlace))
-				jtf.setText(""); 
-		}
-		
-		public void focusLost(FocusEvent e) {
-			if (jtf.getText().isEmpty())
-				jtf.setText(textToPlace);
+	@Override 
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		try {
+			//Image panelBackground = ImageIO.read(new File(Images.plainHomePageBackground));
+			Image panelBackground = ImageIO.read(new File(Images.parrotHomePageBackgroundPixellated19));
+			g.drawImage(panelBackground, 0, 0, getWidth(), getHeight(), null);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

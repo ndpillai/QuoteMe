@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -55,6 +56,7 @@ public class HomePageGUI extends JPanel {
 	
 	private void createGUI() {
 		JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(204, 0, 0, 123));
 		buttonPanel.add(loginPageButton);
 		buttonPanel.add(newUserPageButton);
 		add(buttonPanel, BorderLayout.SOUTH);
