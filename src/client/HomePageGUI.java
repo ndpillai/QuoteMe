@@ -36,7 +36,8 @@ public class HomePageGUI extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		try {
-			Image panelBackground = ImageIO.read(new File(Images.plainHomePageBackground));
+			//Image panelBackground = ImageIO.read(new File(Images.plainHomePageBackground));
+			Image panelBackground = ImageIO.read(new File(Images.parrotHomePageBackgroundPixellated19));
 			g.drawImage(panelBackground, 0, 0, getWidth(), getHeight(), null);
 		} catch (IOException e) {
 			e.printStackTrace();
