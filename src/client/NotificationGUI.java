@@ -28,8 +28,10 @@ public class NotificationGUI extends JPanel {
 		//for testing only
 		Notification not = new Notification("Nav", "Hello, this is my message. Tony is a bitch.", new Date(12, 5, 2004));
 		Notification not2 = new Notification("Tony", "I would like to concur that I am a bitch.", new Date(12, 6, 2004));
+		Notification not3 = new Notification("Matt Carey", "I would like to wish this bitch a happy birthday", new Date(1447726287));
 		notifications.add(not);
 		notifications.add(not2);
+		notifications.add(not3);
 		
 		innerPanel = new JPanel();
 		innerPanel.setSize(this.getMaximumSize());
