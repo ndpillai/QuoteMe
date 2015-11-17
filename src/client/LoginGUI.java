@@ -9,16 +9,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.imageio.ImageIO;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.mail.internet.MimeMessage;
+import javax.activation.*;
+import javax.mail.Message.RecipientType;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+import com.sun.xml.internal.ws.api.message.Message;
+
 import resources.CustomListeners;
 import resources.Images;
+import sun.rmi.transport.Transport;
 
 
 public class LoginGUI extends JPanel {
@@ -109,8 +121,8 @@ public class LoginGUI extends JPanel {
 
 					// TODO email validation
 					// For now, sendEmail with hardcoded email
-					sendEmail("gouillon@usc.edu");
-					//sendEmail(emailAddress); 
+					//sendEmail("gouillon@usc.edu");
+					sendEmail(emailAddress); 
 					// go to new Forgot Password page
 				}
 			}
@@ -143,31 +155,17 @@ public class LoginGUI extends JPanel {
 		}
 	}
 	
-	
 	private void sendEmail(String emailAddress) {
-		/* Couldn't test because I couldn't download Java Mail API and one more thing at:
-		 * http://www.tutorialspoint.com/java/java_sending_email.htm
-		 * 
-	      String to = "abcd@gmail.com";		// Recipient's email ID needs to be mentioned.
-	      String from = "web@gmail.com";	// Sender's email ID needs to be mentioned
-	      String host = "localhost";		// Assuming you are sending email from localhost
-	      Properties properties = System.getProperties();	// Get system properties
-	      properties.setProperty("mail.smtp.host", host);	// Setup mail server
-	      Session session = Session.getDefaultInstance(properties);	      // Get the default Session object.
-
-	      try{
-	         MimeMessage message = new MimeMessage(session);	         // Create a default MimeMessage object.
-	         message.setFrom(new InternetAddress(from));	         // Set From: header field of the header.
-	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));	         // Set To: header field of the header.
-	         message.setSubject("This is the Subject Line!");	         // Set Subject: header field
-	         message.setText("This is actual message");	         // Now set the actual message
-	         Transport.send(message);	         // Send message
-
-	         System.out.println("Sent message successfully....");
-	      }catch (MessagingException mex) {
-	         mex.printStackTrace();
-	      }
-	   }*/
+		System.out.println("Before sending email");
+		System.out.println("Email to send to: " + emailAddress);
+		String from = SendRecoveryEmail.USER_NAME;
+        String pass = SendRecoveryEmail.PASSWORD;
+        String[] to = { emailAddress }; // list of recipient email addresses
+        String subject = "QuoteMe Password Recovery.";
+        String body = "How could you not remember your password? Absurd. What a real Pillai."
+        		+ " Well, I'm not going to give it to you. You don't belong in the QuoteMe universe."
+        		+ " Carry on.";		
+		SendRecoveryEmail.sendFromGMail(from, pass, to, subject, body);
 		System.out.println("Sending an email (but not actually, not yet that is)");
 	}
 }
