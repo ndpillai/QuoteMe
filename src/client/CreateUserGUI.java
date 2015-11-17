@@ -27,7 +27,7 @@ removed: anything with facebook
 public class CreateUserGUI extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	public JTextField firstnameTF, lastnameTF, usernameTF, passwordTF, confirmPasswordTF;
+	public JTextField firstnameTF, lastnameTF, emailTF, usernameTF, passwordTF, confirmPasswordTF;
 	public JButton createUserButton;
 	
 	private ClientPanel clientPanel;
@@ -42,6 +42,7 @@ public class CreateUserGUI extends JPanel {
 	private void initializeVariables() {
 		firstnameTF = new JTextField("Enter first name");
 		lastnameTF = new JTextField("Enter last name");
+		emailTF = new JTextField("Enter email address");
 		usernameTF = new JTextField("Enter desired username");
 		passwordTF = new JTextField("Enter password");
 		confirmPasswordTF = new JTextField("Confirm password");
@@ -73,6 +74,7 @@ public class CreateUserGUI extends JPanel {
 		//usernameTF.setSize(new Dimension(20, usernameTF.getPreferredSize().height));
 		createUserPanel.add(firstnameTF);
 		createUserPanel.add(lastnameTF);
+		createUserPanel.add(emailTF);
 		createUserPanel.add(usernameTF);
 		createUserPanel.add(passwordTF);
 		createUserPanel.add(confirmPasswordTF);
@@ -83,6 +85,7 @@ public class CreateUserGUI extends JPanel {
 	private void addEvents() {
 		firstnameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(firstnameTF,"Enter first name"));
 		lastnameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(lastnameTF,"Enter last name"));
+		emailTF.addFocusListener(new CustomListeners.RemoveTextAdapter(emailTF,"Enter email address"));
 		usernameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(usernameTF,"Enter desired username"));
 		passwordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(passwordTF,"Enter password"));
 		confirmPasswordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(confirmPasswordTF,"Confirm password"));
@@ -90,7 +93,7 @@ public class CreateUserGUI extends JPanel {
 		createUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 			
-//			*****Actual logic for User creation*****
+//			*****Actual logic for User creation***** WILL ALSO NEED TO CHECK IF EMAIL ALREADY USED IN DATABASE
 //			if (!DataManager.getNameMap().containsKey(usernameTF.getText())) {
 //				User newUser = new User(firstnameTF.getText(), lastnameTF.getText(), usernameTF.getText(), "email", 
 //						passwordTF.getText(), new Date());
@@ -105,8 +108,13 @@ public class CreateUserGUI extends JPanel {
 //			*****For testing purposes only*****
 			if (passwordTF.getText().equals(confirmPasswordTF.getText())) {
 				System.out.println("valid");
-				JOptionPane.showMessageDialog(CreateUserGUI.this, "Login with your username and password to access QuoteMe universe.", "Profile successfully created! ",  JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(
+						CreateUserGUI.this, 
+						"Welcome to the QuoteMe Universe!\nLogin with your username and password to access QuoteMe universe.", 
+						"Account successfully created! ",  
+						JOptionPane.PLAIN_MESSAGE);
 				clientPanel.moveToLoginPanel();
+				SendEmail.sendWelcomeEmail(emailTF.getText(), firstnameTF.getText(), usernameTF.getText());
 			}
 			else {
 				System.out.println("invalid");

@@ -9,28 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
 
 import javax.imageio.ImageIO;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.mail.internet.MimeMessage;
-import javax.activation.*;
-import javax.mail.Message.RecipientType;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import com.sun.xml.internal.ws.api.message.Message;
-
 import resources.CustomListeners;
 import resources.Images;
-import sun.rmi.transport.Transport;
 
 
 public class LoginGUI extends JPanel {
@@ -117,12 +106,23 @@ public class LoginGUI extends JPanel {
 					System.out.println("Chose cancel?");
 				}
 				else {
-					JOptionPane.showMessageDialog(LoginGUI.this, "Username/Password recovery email sent to: " + emailAddress,  "Email sent!", JOptionPane.PLAIN_MESSAGE);
-
-					// TODO email validation
-					// For now, sendEmail with hardcoded email
-					//sendEmail("gouillon@usc.edu");
-					sendEmail(emailAddress); 
+					/*
+					JOptionPane.showConfirmDialog(LoginGUI.this,
+							"Your login details will be sent to: " + emailAddress,
+							"Username/Password Recover",
+							JOptionPane.PLAIN_MESSAGE, null,
+							new ImageIcon(Images.parrotAvatarRedPixellated));*/
+					
+					JOptionPane.showMessageDialog(
+							LoginGUI.this, 
+							"Your login details will be sent to: " + emailAddress,
+							"Username/Password Recover", 
+							JOptionPane.PLAIN_MESSAGE);
+					
+					//SendEmail.sendRecoveryEmail(emailAddress); 
+					
+					// HARDCODED, we need to retrieve username and first name and password from data manager
+					SendEmail.sendRecoveryEmail(emailAddress, "Simone", "lgduckie", "1234");
 					// go to new Forgot Password page
 				}
 			}
@@ -153,19 +153,5 @@ public class LoginGUI extends JPanel {
 			return true;
 //			return false;
 		}
-	}
-	
-	private void sendEmail(String emailAddress) {
-		System.out.println("Before sending email");
-		System.out.println("Email to send to: " + emailAddress);
-		String from = SendRecoveryEmail.USER_NAME;
-        String pass = SendRecoveryEmail.PASSWORD;
-        String[] to = { emailAddress }; // list of recipient email addresses
-        String subject = "QuoteMe Password Recovery.";
-        String body = "How could you not remember your password? Absurd. What a real Pillai."
-        		+ " Well, I'm not going to give it to you. You don't belong in the QuoteMe universe."
-        		+ " Carry on.";		
-		SendRecoveryEmail.sendFromGMail(from, pass, to, subject, body);
-		System.out.println("Sending an email (but not actually, not yet that is)");
 	}
 }
