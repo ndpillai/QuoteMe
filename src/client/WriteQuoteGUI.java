@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -26,6 +29,7 @@ public class WriteQuoteGUI extends JPanel {
 	
 	// Added this to display results of finding user
 	private String [] defaultResults = {"Results"};
+	private ArrayList<User> userResults; // to be an array or an arraylist?
 	private JComboBox searchUserComboBox;
 	private JLabel quoteLabel;
 	private JTextArea quoteTextArea;
@@ -34,7 +38,6 @@ public class WriteQuoteGUI extends JPanel {
 	private JComboBox<String> categoryComboBox;
 	
 	private MainPanel mainPanel;
-	
 	
 	public WriteQuoteGUI(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
@@ -49,6 +52,7 @@ public class WriteQuoteGUI extends JPanel {
 		userSearchField.setSize(new Dimension(10, userSearchField.getPreferredSize().height));
 		searchButton = new JButton("Search");
 		searchPanel = new JPanel();
+		userResults = null;
 		searchUserComboBox = new JComboBox(defaultResults);
 		searchUserComboBox.setSize(100, searchUserComboBox.getPreferredSize().height);
 		
@@ -101,6 +105,13 @@ public class WriteQuoteGUI extends JPanel {
 			}
 		});
 		
+		quoteTextArea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				characterCountLabel.setText("" + quoteTextArea.getText().length());
+			}
+		});
+		
 		quoteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -118,15 +129,17 @@ public class WriteQuoteGUI extends JPanel {
 	}
 	
 	public String getQuoteText() {
-		return "";
+		return quoteTextArea.getText();
 	}
 	
 	public User getSpeaker() {
 		return null;
+		// searchUserComboBox.getSelectedItem().toString()
+		// return userResults.get(searchUserComboBox.getSelectedIndex()); // THIS ONE SHOULD HOPEFULLY WORK
 	}
 	
 	public String getCategory() {
-		return null;
+		return categoryComboBox.getSelectedItem().toString();
 	}
 	
 	private void printComponents() {
