@@ -101,7 +101,7 @@ public class LoginGUI extends JPanel {
 		forgotUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Forgot Password Button pressed!");
-				String emailAddress = JOptionPane.showInputDialog(LoginGUI.this, "Enter an email for username and password recovery:");
+				String emailAddress = JOptionPane.showInputDialog(LoginGUI.this, "Enter an email for username and password recovery:", "Recover your username/password");
 				if (emailAddress == null) { // Probably chose cancel
 					System.out.println("Chose cancel?");
 				}
