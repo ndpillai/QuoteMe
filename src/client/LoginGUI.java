@@ -134,8 +134,11 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private boolean loginIsValid() {
-		if (DataManager.getNameMap().containsKey(usernameTF.getText())) {
-			if (DataManager.getNameMap().get(usernameTF.getText()).getPassword().equals(passwordTF.getText())) {
+		
+		DataManager dataManager = new DataManager(); // USING THIS FOR TEST PURPOSES. NON-STATIC VERSION HERE. TODO
+		
+		if (dataManager.getNameMap().containsKey(usernameTF.getText())) {
+			if (dataManager.getNameMap().get(usernameTF.getText()).getPassword().equals(passwordTF.getText())) {
 				System.out.println("Username and password are correct, congratulations. "
 						+ "Welcome to the most exclusive and innovative online experience of your life.");
 				return true;

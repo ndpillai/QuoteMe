@@ -39,7 +39,8 @@ public class ServerListener extends Thread {
 			while(true) {
 				Socket s = ss.accept();		
 				try {
-					ServerClientCommunicator scc = new ServerClientCommunicator(s, this);
+					DataManager dataManager = new DataManager(); // TODO FOR TEST PURPOSES. NON-STATIC VERSION HERE.
+					ServerClientCommunicator scc = new ServerClientCommunicator(s, this, dataManager);
 					scc.start();
 					sccVector.add(scc);
 					
