@@ -50,22 +50,6 @@ public class CreateUserGUI extends JPanel {
 	}
 	
 	private void createGUI() {
-		/*
-		setLayout(null);
-		add(firstnameTF);
-		add(lastnameTF);
-		add(usernameTF);
-		add(passwordTF);
-		add(confirmPasswordTF);
-		add(createUserButton);
-		
-		firstnameTF.setBounds(100,100,250,20);
-		lastnameTF.setBounds(100,175,250,20);
-		usernameTF.setBounds(100,250,250,20);
-		passwordTF.setBounds(100,325,250,20);
-		confirmPasswordTF.setBounds(100,400,250,20);
-		createUserButton.setBounds(150,500,150,50);*/
-		
 		setLayout(new BorderLayout());
 		JPanel createUserPanel = new JPanel();
         createUserPanel.setBackground(new Color(204, 0, 0, 123));
