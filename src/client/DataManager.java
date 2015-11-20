@@ -14,63 +14,63 @@ public class DataManager {
 
 	private static final long serialVersionUID = 5501158630513607312L;
 	
-	private Vector<User> allUsers;
-	private HashMap<String, User> nameMap; // Usernames to their Users
-	private HashMap<User, Quote> speakerToQuoteMap; // Speakers to their Quotes
-	private HashMap<User, Quote> posterToQuoteMap; // Posters to their Quotes
+	private static Vector<User> allUsers;
+	private static HashMap<String, User> nameMap; // Usernames to their Users
+	private static HashMap<User, Quote> speakerToQuoteMap; // Speakers to their Quotes
+	private static HashMap<User, Quote> posterToQuoteMap; // Posters to their Quotes
 
 	//	public QuoteMeFrame qmf;
 	
-	 {
+	static {
 		allUsers = new Vector<User>();
 		nameMap = new HashMap<String, User>();
 		speakerToQuoteMap = new HashMap<User, Quote>();
 		posterToQuoteMap = new HashMap<User, Quote>();
 	}
 	
-	public void addQuote(Quote quote) {
+	public static void addQuote(Quote quote) {
 		speakerToQuoteMap.put(quote.getSpeaker(), quote);
 		posterToQuoteMap.put(quote.getPoster(), quote);
 		
-		this.refreshTextFile();
+//		this.refreshTextFile();
 	}
 	
-	public void addUser(User user) {
+	public static void addUser(User user) {
 		allUsers.add(user);
 		nameMap.put(user.getUserName(), user);
 		
-		this.refreshTextFile();
+//		this.refreshTextFile();
 	}
 	
 	// Getters:
-	public Vector<User> getAllUsers() {
+	public static Vector<User> getAllUsers() {
 		return allUsers;
 	}
 	
-	public HashMap<String, User> getNameMap() {
+	public static HashMap<String, User> getNameMap() {
 		return nameMap;
 	}
 	
-	public HashMap<User, Quote> getSpeakerToQuoteMap() {
+	public static HashMap<User, Quote> getSpeakerToQuoteMap() {
 		return speakerToQuoteMap;
 	}
 	
-	public HashMap<User, Quote> getPosterToQuoteMap() {
+	public static HashMap<User, Quote> getPosterToQuoteMap() {
 		return posterToQuoteMap;
 	}
 	
 	// Text File Interaction:
 	
-	public void refreshTextFile() {		
+	public static void refreshTextFile() {		
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("DataManager.txt"));
-			oos.writeObject(this); // takes the current state of the DataManager and pushes it to the client's text file
+//			oos.writeObject(this); // takes the current state of the DataManager and pushes it to the client's text file
 			oos.flush();
 			oos.close();
 		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); }
 	}
 	
-	public DataManager readDataManagerFromTextFile() {
+	public static DataManager readDataManagerFromTextFile() {
 		DataManager dataManager = new DataManager();
 		
 		try {
