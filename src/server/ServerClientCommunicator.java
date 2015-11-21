@@ -21,7 +21,6 @@ public class ServerClientCommunicator extends Thread {
 	public ServerClientCommunicator(Socket socket, QuoteMeServer server, DataManager dataManager) throws IOException
 	{
 		this.socket = socket;
-	//	this.serverListener = serverListener;
 		this.server = server;
 		this.oos = new ObjectOutputStream(socket.getOutputStream());
 		this.ois = new ObjectInputStream(socket.getInputStream());
@@ -34,7 +33,7 @@ public class ServerClientCommunicator extends Thread {
 			oos.writeObject(dataManager);
 			oos.flush();
 		} catch (IOException ioe) {
-			System.out.println("IOE in ServerClientCommunicator:33 " + ioe.getMessage());
+			System.out.println("IOE in ServerClientCommunicator sendAppInstance() " + ioe.getMessage());
 		}
 	}
 	
@@ -52,8 +51,14 @@ public class ServerClientCommunicator extends Thread {
 	public void run() {
 		try {
 			while (true) {
-				Object info = ois.readObject();
+				Object info = null;
+				try {
+					info = ois.readObject();
+				} catch (ClassNotFoundException cnfe) {
+					System.out.println("ClassNotFoundException in ServerClientCommunicator run(): " +cnfe.getMessage());
+				}
 				
+			
 				if (info instanceof client.Quote) {
 					dataManager.addQuote((Quote)info);
 					server.sendAppInstanceToAllClients(dataManager);
@@ -61,18 +66,19 @@ public class ServerClientCommunicator extends Thread {
 				
 				else if (info instanceof String) {
 					
-				}
+				} 
+				
 			}
 		} catch (IOException ioe) {
+			System.out.println("IOE in ServerClientCommunicator run() " + ioe.getMessage());
+		
 			server.removeServerClientCommunicator(this);
 			// this means that the socket is closed since no more lines are being received
 			try {
 				socket.close();
 			} catch (IOException ioe1) {
-				System.out.println("IOE in ServerClientCommunicator:50 " + ioe.getMessage());
-			}
-		} catch (ClassNotFoundException e) {
-			System.out.println("ClassNotFoundException in ServerClientCommunicator.");
-		}
+				System.out.println("IOE in ServerClientCommunicator run() 2 " + ioe.getMessage());
+			} 
+		} 
 	}
 }

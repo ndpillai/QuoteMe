@@ -3,8 +3,8 @@ package client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 public class QuoteMeClient extends Thread{
@@ -12,7 +12,7 @@ public class QuoteMeClient extends Thread{
 	private QuoteMeFrame qmf;
 	private ClientPanel clientPanel;
 	private ObjectOutputStream oos;
-	private BufferedReader br;
+	private ObjectInputStream ois;
 	private Socket socket;
 	
 	private DataManager dataManager;
@@ -24,13 +24,13 @@ public class QuoteMeClient extends Thread{
 			qmf.setVisible(true);
 			
 			this.oos = new ObjectOutputStream(socket.getOutputStream());
-			this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			this.ois = new ObjectInputStream(socket.getInputStream());
 		
 			this.start();
 		} catch (IOException ioe) {
 			System.out.println("IOE in client: " + ioe.getMessage());
 		} finally {
-			try {
+		/*	try {
 				if (br != null) {
 					br.close();
 				}
@@ -42,7 +42,7 @@ public class QuoteMeClient extends Thread{
 				}
 			} catch (IOException ioe) {
 				System.out.println("IOE closing things in client constructor: " + ioe.getMessage());
-			}
+			} */
 		}
 	}
 	
@@ -59,18 +59,37 @@ public class QuoteMeClient extends Thread{
 	public void run() {
 		try {
 			while (true) {
-				Object data = br.readLine();
+				Object data = null;
+				try {
+					data = ois.readObject();
+				} catch (ClassNotFoundException cnfe) {
+					System.out.println("ClassNotFoundException in ServerClientCommunicator run(): " +cnfe.getMessage());
+				}
 
 				if (data == null) {
 					throw new IOException("Null dataManager received by QuoteMeClient.");
 				}
 				
-				else if (data instanceof client.DataManager) {
+				if (data instanceof client.DataManager) {
 					dataManager = (DataManager)data;
 				}
 			}
 		} catch (IOException ioe) {
 			System.out.println("IOE in client run(): " + ioe.getMessage());
+			
+			try {
+				if (ois != null) {
+					ois.close();
+				}
+				if (oos != null) {
+					oos.close();
+				}
+				if (socket != null) {
+					socket.close();
+				}
+			} catch (IOException ioe2) {
+				System.out.println("IOE closing things in client constructor: " + ioe2.getMessage());
+			} 
 		}
 	}
 	
