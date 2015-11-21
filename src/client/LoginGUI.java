@@ -91,48 +91,103 @@ public class LoginGUI extends JPanel {
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
+				checkIfLoginIsValid();
+				/*
 				if (loginIsValid()) {
 //					goToFeed(DataManager.getNameMap().get(usernameTF.getText()));
-					goToFeed(new User());
-				}
+					//goToFeed(new User());
+					clientPanel.moveToMainPanel();
+				}*/
 			}
 		});
 		
 		forgotUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Forgot Password Button pressed!");
-				String emailAddress = JOptionPane.showInputDialog(LoginGUI.this, "Enter an email for username and password recovery:", "Recover your username/password");
-				if (emailAddress == null) { // Probably chose cancel
-					System.out.println("Chose cancel?");
-				}
-				else {
-					/*
-					JOptionPane.showConfirmDialog(LoginGUI.this,
-							"Your login details will be sent to: " + emailAddress,
-							"Username/Password Recover",
-							JOptionPane.PLAIN_MESSAGE, null,
-							new ImageIcon(Images.parrotAvatarRedPixellated));*/
-					
-					JOptionPane.showMessageDialog(
-							LoginGUI.this, 
-							"Your login details will be sent to: " + emailAddress,
-							"Username/Password Recover", 
-							JOptionPane.PLAIN_MESSAGE);
-					
-					//SendEmail.sendRecoveryEmail(emailAddress); 
-					
-					// HARDCODED, we need to retrieve username and first name and password from data manager
-					SendEmail.sendRecoveryEmail(emailAddress, "Simone", "lgduckie", "1234");
-					// go to new Forgot Password page
-				}
+				String email = JOptionPane.showInputDialog(LoginGUI.this, "Enter an email for username and password recovery:", "Recover your username/password");
+				checkForgotPasswordEmail(email);
+				
 			}
 		}); 
 	}
 	
-	private void goToFeed(User user) {
-		clientPanel.moveToMainPanel();
+	private void checkForgotPasswordEmail(String email) {
+		if (email == null) { // Probably chose cancel
+			System.out.println("Chose cancel?");
+		}
+		
+		else { // Given an email string
+			User user = LoginGUI.this.clientPanel.quoteMeClient.dataManager.getUserFromEmail(email);
+			if (user != null) {	// Email exists in our dataManager
+				/* ATTEMPT TO INCLUDE A CUTE PICTURE IN THE JOPTIONPANE POPUP
+				JOptionPane.showConfirmDialog(LoginGUI.this,
+						"Your login details will be sent to: " + emailAddress,
+						"Username/Password Recover",
+						JOptionPane.PLAIN_MESSAGE, null,
+						new ImageIcon(Images.parrotAvatarRedPixellated));*/
+				
+				JOptionPane.showMessageDialog(
+						LoginGUI.this, 
+						"Your login details will be sent to: " + email,
+						"Username/Password Recovery", 
+						JOptionPane.PLAIN_MESSAGE);
+				
+				/* Hardcoded test email
+				SendEmail.sendRecoveryEmail(
+						email, 
+						"Simone", 
+						"lgduckie", 
+						"1234");*/
+				
+				SendEmail.sendRecoveryEmail(
+						email, 
+						user.getFirstName(), 
+						user.getUserName(), 
+						user.getPassword());
+			}
+			else {	// Email does not exist in our dataManager
+				JOptionPane.showMessageDialog(
+						LoginGUI.this, 
+						"I'm sorry, this email does not exist in our database.\nCheck your spelling to make sure you input an existing email address.", 
+						"Email Validation Error",  
+						JOptionPane.PLAIN_MESSAGE);
+			}
+		}
 	}
 	
+	private void checkIfLoginIsValid() {
+		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText());
+		if (user != null) {
+			if (passwordTF.getText().equals(user.getPassword())) {
+				clientPanel.moveToMainPanel();
+			}
+			else { // Wrong password, ERROR
+				JOptionPane.showMessageDialog(
+						LoginGUI.this, 
+						"I'm sorry, password and username do not match. Please try logging in again.\n", 
+						"Login Error",  
+						JOptionPane.PLAIN_MESSAGE);
+				clearFields();
+			}
+			
+		}
+		else { // User does not exist, ERROR
+			JOptionPane.showMessageDialog(
+					LoginGUI.this, 
+					"I'm sorry, the entered username/user does not exist.\n", 
+					"Login Error",  
+					JOptionPane.PLAIN_MESSAGE);
+			clearFields();
+		}
+	}
+	
+	private void clearFields() {
+		usernameTF.setText("");
+		passwordTF.setText("");
+	}
+	
+	
+	/*
 	private boolean loginIsValid() {
 		
 		DataManager dataManager = new DataManager(); // USING THIS FOR TEST PURPOSES. NON-STATIC VERSION HERE. TODO
@@ -156,5 +211,5 @@ public class LoginGUI extends JPanel {
 			return true;
 //			return false;
 		}
-	}
+	}*/
 }

@@ -64,4 +64,22 @@ public class DataManager implements Serializable {
 		return this.emailMap.containsKey(email);
 	}
 	
+	public User getUserFromEmail(String email) {	// For checking forgot password functionality
+		if (this.emailMap.containsKey(email)) {
+			return emailMap.get(email);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	public User getUserFromUserName(String username) {
+		if (this.nameMap.containsKey(username)) {
+			return nameMap.get(username);
+		}
+		else {
+			return null;
+		}
+	}
+	
 }
