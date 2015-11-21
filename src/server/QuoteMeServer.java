@@ -17,7 +17,7 @@ public class QuoteMeServer {
 	
 	private ServerSocket ss;
 //	private ServerListener serverListener;
-	private Vector<ServerClientCommunicator> sccVector;
+	private Vector<ServerClientCommunicator> sccVector = new Vector<ServerClientCommunicator>();
 	private DataManager dataManager;
 	
 	public QuoteMeServer()
