@@ -85,7 +85,6 @@ public class FeedPageGUI extends JPanel {
 		j6.addActionListener(new newProfileAL(Images.parrotAvatarPurplePixellated));
 		j7.addActionListener(new newProfileAL(Images.parrotAvatarRedPixellated));
 		j8.addActionListener(new newProfileAL(Images.parrotAvatarYellowPixellated));
-
 	}
 	
 	public class newProfileAL implements ActionListener {

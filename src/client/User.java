@@ -1,11 +1,15 @@
 package client;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = -3635855323004697057L;
+	
 	private String firstName, lastName, userName, email, password;
 	private Date memberSince;
 	private ImageIcon profilePicture;

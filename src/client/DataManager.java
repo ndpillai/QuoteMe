@@ -1,15 +1,16 @@
 package client;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class DataManager {
+public class DataManager implements Serializable {
 
 	private static final long serialVersionUID = 5501158630513607312L;
 	
 	private Vector<User> allUsers;
 	private HashMap<String, User> nameMap; // Usernames to their Users
-	private HashMap<User, Quote> speakerToQuoteMap; // Speakers to their Quotes
+	private HashMap<User, Quote> speakerToQuoteMap; // Speakers to their Quotes*
 	private HashMap<User, Quote> posterToQuoteMap; // Posters to their Quotes
 
 	//	public QuoteMeFrame qmf;

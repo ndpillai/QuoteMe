@@ -1,9 +1,13 @@
 package client;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Vector;
 
-public class Quote {
+public class Quote implements Serializable {
+
+	private static final long serialVersionUID = 8065199498082554965L;
+	
 	private String text;
 	private User speaker, poster;
 	private Date datePosted;
