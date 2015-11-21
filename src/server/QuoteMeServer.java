@@ -23,12 +23,14 @@ public class QuoteMeServer {
 	public QuoteMeServer()
 	{
 		loadQuoteMeUniverse(); // sets dataManager
+		
 		try {
 			ss = new ServerSocket(6789);
 			while (true) {
 				System.out.println("Waiting for client to connect...");
 				Socket s = ss.accept();
 				System.out.println("Client " + s.getInetAddress() + ":" + s.getPort() + " connected");
+				
 				ServerClientCommunicator scc = new ServerClientCommunicator(s, this, dataManager);
 				sccVector.add(scc);
 				scc.start();
@@ -39,6 +41,15 @@ public class QuoteMeServer {
 		} catch (IOException ioe) {
 			System.out.println("ioe: " + ioe.getMessage());
 		} finally {
+			
+			// Pushes the current state of the DataManager to the text file:
+			try {
+				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
+				oos.writeObject(dataManager);
+				oos.flush();
+				oos.close();
+			} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); }
+			
 			if (ss != null) {
 				try {
 					ss.close();
@@ -53,7 +64,8 @@ public class QuoteMeServer {
 		try {
 			File file = new File("QuoteMeUniverse.txt");
 			
-			if(!file.exists()) { // if file doesn't exist, create it and push an empty Data Manager to it
+			// if file doesn't exist, create it and push an empty Data Manager to it
+			if(!file.exists()) {
 				file.createNewFile();
 				DataManager newDataManager = new DataManager();
 				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
@@ -69,10 +81,10 @@ public class QuoteMeServer {
 		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); } catch (ClassNotFoundException cnfe) { System.out.println("ClassNotFoundException: " + cnfe.getMessage()); }
 	}
 	
-	public void sendAppInstance(DataManager dataManager) {
-		this.dataManager = dataManager;
+	public void sendAppInstanceToAllClients(DataManager updatedDataManager) {
+		this.dataManager = updatedDataManager;
 		for (ServerClientCommunicator scc : sccVector) {
-			scc.sendAppInstance(dataManager);
+			scc.sendAppInstance(updatedDataManager);
 		}
 	}
 	
@@ -91,9 +103,5 @@ public class QuoteMeServer {
 	
 	public static void main(String[] args) {
 		new QuoteMeServer();
-	}
-	
-	
+	}	
 }
-
-

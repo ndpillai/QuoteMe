@@ -1,8 +1,7 @@
 package server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
@@ -13,7 +12,7 @@ public class ServerClientCommunicator extends Thread {
 
 	private Socket socket;
 	private ObjectOutputStream oos;
-	private BufferedReader br;
+	private ObjectInputStream ois;
 	//private ServerListener serverListener;
 	private QuoteMeServer server;
 	
@@ -25,27 +24,17 @@ public class ServerClientCommunicator extends Thread {
 	//	this.serverListener = serverListener;
 		this.server = server;
 		this.oos = new ObjectOutputStream(socket.getOutputStream());
-		this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		this.ois = new ObjectInputStream(socket.getInputStream());
 		
 		this.dataManager = dataManager;
 	}
 	
-	public void sendAppInstance(DataManager dataManager)
-	{
+	public void sendAppInstance(DataManager dataManager) {
 		try {
 			oos.writeObject(dataManager);
 			oos.flush();
 		} catch (IOException ioe) {
 			System.out.println("IOE in ServerClientCommunicator:33 " + ioe.getMessage());
-		}
-	}
-	
-	public void sendQuote(Quote quote) {
-		try {
-			oos.writeObject(quote);
-			oos.flush();
-		} catch (IOException ioe) {
-			System.out.println("IOE in ServerClientCommunicator.sendQuote()" + ioe.getMessage());
 		}
 	}
 	
@@ -59,19 +48,19 @@ public class ServerClientCommunicator extends Thread {
 		}
 	}*/
 	
-	public void run()
-	{
+	// reading in:
+	public void run() {
 		try {
 			while (true) {
-				Object data = br.readLine();
+				Object info = ois.readObject();
 				
-//				String line = br.readLine();
+				if (info instanceof client.Quote) {
+					dataManager.addQuote((Quote)info);
+					server.sendAppInstanceToAllClients(dataManager);
+				}
 				
-				//do stuff with line here, like possibly sending it out
-				
-				if (data instanceof client.Quote) {
-					DataManager _dataManager = dataManager.readDataManagerFromTextFile();
-					_dataManager.addQuote((Quote)data);
+				else if (info instanceof String) {
+					
 				}
 			}
 		} catch (IOException ioe) {
@@ -82,6 +71,8 @@ public class ServerClientCommunicator extends Thread {
 			} catch (IOException ioe1) {
 				System.out.println("IOE in ServerClientCommunicator:50 " + ioe.getMessage());
 			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException in ServerClientCommunicator.");
 		}
 	}
 }

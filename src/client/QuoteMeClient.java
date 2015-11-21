@@ -11,9 +11,11 @@ public class QuoteMeClient extends Thread{
 	
 	private QuoteMeFrame qmf;
 	private ClientPanel clientPanel;
-	private PrintWriter pw;
+	private ObjectOutputStream oos;
 	private BufferedReader br;
 	private Socket socket;
+	
+	private DataManager dataManager;
 
 	public QuoteMeClient() {
 		try {
@@ -21,7 +23,7 @@ public class QuoteMeClient extends Thread{
 			qmf = new QuoteMeFrame(this);
 			qmf.setVisible(true);
 			
-			this.pw = new PrintWriter(socket.getOutputStream());
+			this.oos = new ObjectOutputStream(socket.getOutputStream());
 			this.br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		
 			this.start();
@@ -32,8 +34,8 @@ public class QuoteMeClient extends Thread{
 				if (br != null) {
 					br.close();
 				}
-				if (pw != null) {
-					pw.close();
+				if (oos != null) {
+					oos.close();
 				}
 				if (socket != null) {
 					socket.close();
@@ -44,18 +46,28 @@ public class QuoteMeClient extends Thread{
 		}
 	}
 	
-	//can be used to send Strings as well
-	public void sendMessage(String message) {
-		pw.println(message);
-		pw.flush();
+	//can be used to send Strings as well	
+	public void sendObject(Object object) {
+		try {
+			oos.writeObject(object);
+			oos.flush();
+		} catch (IOException ioe) {
+			System.out.println("IOE in QuoteMeClient:33 " + ioe.getMessage());
+		}
 	}
 	
 	public void run() {
 		try {
 			while (true) {
-				String line = br.readLine();
+				Object data = br.readLine();
 
-				//TODO: when they get the line
+				if (data == null) {
+					throw new IOException("Null dataManager received by QuoteMeClient.");
+				}
+				
+				else if (data instanceof client.DataManager) {
+					dataManager = (DataManager)data;
+				}
 			}
 		} catch (IOException ioe) {
 			System.out.println("IOE in client run(): " + ioe.getMessage());
