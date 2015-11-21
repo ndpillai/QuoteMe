@@ -15,7 +15,7 @@ public class QuoteMeClient extends Thread{
 	private ObjectInputStream ois;
 	private Socket socket;
 	
-	private DataManager dataManager;
+	public DataManager dataManager;
 
 	public QuoteMeClient() {
 		try {

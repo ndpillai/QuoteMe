@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -76,20 +77,55 @@ public class CreateUserGUI extends JPanel {
 	
 		createUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-			
-//			*****Actual logic for User creation***** WILL ALSO NEED TO CHECK IF EMAIL ALREADY USED IN DATABASE
-//			if (!DataManager.getNameMap().containsKey(usernameTF.getText())) {
-//				User newUser = new User(firstnameTF.getText(), lastnameTF.getText(), usernameTF.getText(), "email", 
-//						passwordTF.getText(), new Date());
-//				DataManager.addUser(newUser);
-//				clientPanel.moveToLoginPanel();
-//			}
-//			else {
-//				System.out.println("This username is already taken. Please try another!");
-//				usernameTF.setText("");
-//			}
 
-//			*****For testing purposes only*****
+			if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasName(usernameTF.getText())) { // Check name
+				if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasEmail(emailTF.getText())) { // Check email
+					if (passwordTF.getText().equals(confirmPasswordTF.getText())) {
+						User newUser = new User(	// Create new user
+								firstnameTF.getText(), 
+								lastnameTF.getText(), 
+								usernameTF.getText(), 
+								emailTF.getText(),
+								passwordTF.getText(), 
+								new Date());
+						CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.addUser(newUser);
+						JOptionPane.showMessageDialog(
+								CreateUserGUI.this, 
+								"Welcome to the QuoteMe Universe!\nLogin with your username and password to access QuoteMe universe.", 
+								"Account successfully created! ",  
+								JOptionPane.PLAIN_MESSAGE);
+						clientPanel.moveToLoginPanel();
+					}
+					else {
+						System.out.println("Passwords don't match!");
+						JOptionPane.showMessageDialog(
+								CreateUserGUI.this, 
+								"I'm sorry, passwords don't match.\nTry re-entering password to create your profile.", 
+								"Create User Error",  
+								JOptionPane.PLAIN_MESSAGE);
+					}
+				}
+				else {
+					System.out.println("This email is already taken. Please try another!");
+					JOptionPane.showMessageDialog(
+							CreateUserGUI.this, 
+							"I'm sorry, this email has already been registered!\nPick a new email to create your profile.", 
+							"Create User Error",  
+							JOptionPane.PLAIN_MESSAGE);
+					//emailTF.setText("");
+				}
+			}
+			else {
+				System.out.println("This username is already taken. Please try another!");
+				JOptionPane.showMessageDialog(
+						CreateUserGUI.this, 
+						"I'm sorry, this username is already taken!\nChoose a different username to create your profile.", 
+						"Create User Error",  
+						JOptionPane.PLAIN_MESSAGE);
+				//usernameTF.setText("");
+			}
+
+			/*****For testing purposes only*****
 			if (passwordTF.getText().equals(confirmPasswordTF.getText())) {
 				System.out.println("valid");
 				JOptionPane.showMessageDialog(
@@ -102,8 +138,7 @@ public class CreateUserGUI extends JPanel {
 			}
 			else {
 				System.out.println("invalid");
-			}
-			
+			}*/
 			}
 		});
 	}

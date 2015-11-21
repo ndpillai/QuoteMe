@@ -10,6 +10,7 @@ public class DataManager implements Serializable {
 	
 	private Vector<User> allUsers;
 	private HashMap<String, User> nameMap; // Usernames to their Users
+	private HashMap<String, User> emailMap; // Emails to their users
 	private HashMap<User, Quote> speakerToQuoteMap; // Speakers to their Quotes*
 	private HashMap<User, Quote> posterToQuoteMap; // Posters to their Quotes
 
@@ -18,6 +19,7 @@ public class DataManager implements Serializable {
 	{
 		allUsers = new Vector<User>();
 		nameMap = new HashMap<String, User>();
+		emailMap = new HashMap<String, User>();
 		speakerToQuoteMap = new HashMap<User, Quote>();
 		posterToQuoteMap = new HashMap<User, Quote>();
 	}
@@ -29,7 +31,8 @@ public class DataManager implements Serializable {
 	
 	public void addUser(User user) {
 		allUsers.add(user);
-		nameMap.put(user.getUserName(), user);		
+		nameMap.put(user.getUserName(), user);	
+		emailMap.put(user.getEmail(), user);
 	}
 	
 	// Getters:
@@ -41,12 +44,24 @@ public class DataManager implements Serializable {
 		return nameMap;
 	}
 	
+	public HashMap<String, User> getEmailMap() {
+		return emailMap;
+	}
+	
 	public HashMap<User, Quote> getSpeakerToQuoteMap() {
 		return speakerToQuoteMap;
 	}
 	
 	public HashMap<User, Quote> getPosterToQuoteMap() {
 		return posterToQuoteMap;
+	}
+	
+	public boolean hasName(String name) {
+		return this.nameMap.containsKey(name);
+	}
+	
+	public boolean hasEmail(String email) {
+		return this.emailMap.containsKey(email);
 	}
 	
 }

@@ -76,6 +76,14 @@ public class User implements Serializable {
 		return userName;
 	}
 	
+	private void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
 	private void setPassword(String password) {
 		this.password = password;
 	}
