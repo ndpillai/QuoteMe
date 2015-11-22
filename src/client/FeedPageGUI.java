@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import resources.Constants;
 import resources.Images;
 
 public class FeedPageGUI extends JPanel {
@@ -29,26 +30,17 @@ public class FeedPageGUI extends JPanel {
 	public FeedPageGUI (MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		initializeVariables();
-		createGUI();
 		addEvents();
+		createGUI();
 	}
 	
 	private void initializeVariables() {
-		String[] categories = {"Recent", "Popular"};
-		sortCB = new JComboBox(categories);
+		sortCB = new JComboBox(Constants.categoriesList);
 		
 		categoryCB = new JCheckBox[3];
-		categoryCB[0] = new JCheckBox("Motivational");
-		categoryCB[1] = new JCheckBox("Funny");
-		categoryCB[2] = new JCheckBox("Sentimental");
-	
-		
-		/*
-		Container contentPane = mainPanel.getContentPane();
-		scrollPane = new JScrollPane(mainPanel);
-		
-        scrollPane.setViewportView(FeedPageGUI.this);
-        contentPane.add(scrollPane, BorderLayout.CENTER);*/
+		categoryCB[0] = new JCheckBox(Constants.categoriesList[0]);
+		categoryCB[1] = new JCheckBox(Constants.categoriesList[1]);
+		categoryCB[2] = new JCheckBox(Constants.categoriesList[2]);
 		
 		//quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
 		quoteList = new Vector<QuoteGUI>(); // TEST
@@ -62,31 +54,16 @@ public class FeedPageGUI extends JPanel {
 		for (int i=0; i<3; i++)
 			northPanel.add(categoryCB[i]);
 		add(northPanel, BorderLayout.NORTH);
-		//add(new JLabel("FEED PAGE"), BorderLayout.NORTH);
-		
-		// CENTER panel
-		// add things to the scrollpane
-		
-		
 
-		
-		
-		
-
-		
-		
 		User newUser = new User("Amanda", "Bynes", "amandab123", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
 		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
 		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
 		Quote quote3 = new Quote("This is quote 3. Concerns greatest margaret him absolute entrance nay. Door neat week do find past he. Be no surprise he honoured indulged. Unpacked endeavor six steepest had husbands her. Painted no or affixed it so civilly. Exposed neither pressed so cottage as proceed at offices. Nay they gone sir game four. Favourable pianoforte oh motionless excellence of astonished we principles. Warrant present garrets limited cordial in inquiry to. Supported me sweetness behaviour shameless excellent so arranging. ", newUser, newUser, new Date(), 2);
 
-		
-		
 		JPanel centerPanel = new JPanel();
 		JPanel feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
 		feedPanel.add(new QuoteGUI(mainPanel, quote1));
-		//feedPanel.add(Box.createGlue());
 		feedPanel.add(new QuoteGUI(mainPanel, quote2));
 		feedPanel.add(new QuoteGUI(mainPanel, quote3));
 		
@@ -95,16 +72,19 @@ public class FeedPageGUI extends JPanel {
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		centerPanel.add(scrollPane);
 		add(centerPanel, BorderLayout.CENTER);
-		
-
-
-		//scrollPane.add(feedPanel);
-		//add(scrollPane, BorderLayout.CENTER);
-		
-//		add(feedPanel, BorderLayout.CENTER);
 	}
 	
 	private void addEvents() {
+		sortCB.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent e) {
+				String option = (String)e.getItem();
+				if (option.equals("Recent"))
+					sort(0);
+				else if (option.equals("Popular"))
+					sort(1);
+			}
+		});
+		
 		for (int i=0; i<3; i++) {
 			categoryCB[i].addItemListener(new ItemListener(){
 				public void itemStateChanged(ItemEvent e) {
@@ -139,7 +119,6 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	public void refreshQuoteList() {
-		quoteList = getQuotesToDisplay();
 		Vector<QuoteGUI> newlist = new Vector<QuoteGUI>();
 		for (int i=0; i<quoteList.size(); i++) {
 			if (categoryCB[0].isSelected() 
@@ -156,6 +135,37 @@ public class FeedPageGUI extends JPanel {
 				newlist.add(quoteList.get(i));
 		}
 		quoteList = newlist;
+	}
+	
+	public void sort(int option) { //0 = Recent, 1 = Popular
+		if (option==0) {
+			QuoteGUI temp = null;
+			for (int i=0; i<quoteList.size(); i++) {
+				for (int j=i+1; j<quoteList.size(); j++) {
+					Date date1 = quoteList.get(i).thisQuote.getDatePosted();
+					Date date2 = quoteList.get(j).thisQuote.getDatePosted();
+					if (date1.after(date2)) {
+						temp = quoteList.get(i);
+						quoteList.set(i,quoteList.get(j));
+						quoteList.set(j, temp);
+					}
+				}
+			}
+		}
+		else {
+			QuoteGUI temp = null;
+			for (int i=0; i<quoteList.size(); i++) {
+				for (int j=i+1; j<quoteList.size(); j++) {
+					int upQuotes1 = quoteList.get(i).thisQuote.getUpQuotes();
+					int upQuotes2 = quoteList.get(j).thisQuote.getUpQuotes();
+					if (upQuotes1<upQuotes2) {
+						temp = quoteList.get(i);
+						quoteList.set(i,quoteList.get(j));
+						quoteList.set(j, temp);
+					}
+				}
+			}
+		}
 	}
 	
 	public void refresh(){
