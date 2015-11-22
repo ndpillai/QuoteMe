@@ -56,7 +56,7 @@ public class MainPanel extends JPanel {
 		postQuote = new PostQuoteGUI(this);
 		profilePage = new ProfilePageGUI(this, currentuser);
 		notifications = new NotificationGUI(this);
-		quotePanel = new QuoteGUI(this, new Quote());
+//		quotePanel = new QuoteGUI(this, new Quote()); // TODO - ALL THIS TIME. THIS WAS THE SOURCE OF ALL OUR PAIN.
 		writeQuotePanel = new WriteQuoteGUI(this);
 		
 		notificationButton = new JButton("Notifications");
