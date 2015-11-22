@@ -12,6 +12,7 @@ public class Quote implements Serializable {
 	private User speaker, poster;
 	private Date datePosted;
 	private Vector<String> categories;
+	private Integer upQuotes;
 	
 	// Probs need to remove
 	public Quote() {
@@ -24,6 +25,7 @@ public class Quote implements Serializable {
 		this.poster = poster;
 		this.datePosted = datePosted;
 		this.categories = categories;
+		this.upQuotes = 0;
 	}
 	
 	public String getText() {
@@ -44,5 +46,13 @@ public class Quote implements Serializable {
 	
 	public Vector<String> getCategories() {
 		return categories;
+	}
+	
+	public Integer getUpQuotes() {
+		return upQuotes;
+	}
+	
+	public void incrementUpQuotes() {
+		upQuotes++;
 	}
 }
