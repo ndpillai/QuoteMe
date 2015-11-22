@@ -1,6 +1,8 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import library.FontLibrary;
 import resources.Constants;
 
 public class FeedPageGUI extends JPanel {
@@ -39,11 +42,15 @@ public class FeedPageGUI extends JPanel {
 	private void initializeVariables() {
 		String[] options = {"Recent","Popular"};
 		sortCB = new JComboBox(options);
+		sortCB.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		
 		categoryCB = new JCheckBox[3];
 		categoryCB[0] = new JCheckBox(Constants.categoriesList[0]);
+		categoryCB[0].setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		categoryCB[1] = new JCheckBox(Constants.categoriesList[1]);
+		categoryCB[1].setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		categoryCB[2] = new JCheckBox(Constants.categoriesList[2]);
+		categoryCB[2].setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		
 		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
 		//	quoteList = new Vector<QuoteGUI>(); // TEST

@@ -3,27 +3,33 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import custom.QuoteMeButton;
+import custom.QuoteMeLabel;
+import library.FontLibrary;
+import library.ImageLibrary;
 import resources.Constants;
+import resources.Images;
 
 public class QuoteGUI extends JPanel {
 	public Quote thisQuote;
 	private User poster, speaker;
 	private ImageIcon posterAvatar, speakerAvatar;
-	private JLabel posterNameLabel, speakerNameLabel, datePostedLabel;
+	private QuoteMeLabel posterNameLabel, speakerNameLabel, datePostedLabel;
 	private JTextArea quoteTextArea;
-	private JLabel category, upQuotes;
-	private JButton upQuoteButton, posterButton, speakerButton;
+	private QuoteMeLabel category, upQuotes;
+	private JButton posterButton, speakerButton;
+	private QuoteMeButton upQuoteButton;
 	private MainPanel mainPanel;
 	
 	public QuoteGUI(MainPanel mainPanel, Quote thisQuote) {
@@ -31,8 +37,8 @@ public class QuoteGUI extends JPanel {
 		this.thisQuote = thisQuote;
 		this.poster = thisQuote.getPoster();
 		this.speaker = thisQuote.getSpeaker();
-		this.category = new JLabel("              " + Constants.categoriesList[thisQuote.getCategory()]);
-		this.upQuotes = new JLabel("" + thisQuote.getUpQuotes());
+		this.category = new QuoteMeLabel("              " + Constants.categoriesList[thisQuote.getCategory()], 16, true);
+		this.upQuotes = new QuoteMeLabel("" + thisQuote.getUpQuotes(), 16, true);
 		
 		initializeVariables();
 		createGUI();
@@ -40,16 +46,17 @@ public class QuoteGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		posterNameLabel = new JLabel(poster.getUserName());
-		speakerNameLabel = new JLabel(speaker.getUserName());
-		datePostedLabel = new JLabel(thisQuote.getDatePosted().toString());
+		posterNameLabel = new QuoteMeLabel(poster.getUserName(), 16, true);
+		speakerNameLabel = new QuoteMeLabel(speaker.getUserName(), 16, true);
+		datePostedLabel = new QuoteMeLabel(thisQuote.getDatePosted().toString(), 16, true);
 		quoteTextArea = new JTextArea(5, 20);
 		quoteTextArea.setText('"' + thisQuote.getText() + '"');
 		quoteTextArea.setEditable(false);
 		quoteTextArea.setLineWrap(true);
 		quoteTextArea.setWrapStyleWord(true);
+		quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		
-		upQuoteButton = new JButton("UpQuote");	// maybe add an up arrow?
+		upQuoteButton = new QuoteMeButton("UpQuote", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);	// maybe add an up arrow?
 		
 		posterAvatar = poster.getProfilePicture();
 		if (posterAvatar != null) {

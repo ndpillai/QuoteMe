@@ -2,9 +2,11 @@ package client;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,16 +16,20 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import custom.QuoteMeButton;
+import custom.QuoteMeTextField;
 import library.FontLibrary;
 import library.ImageLibrary;
+import resources.Constants;
 import resources.CustomListeners;
 import resources.Images;
 
@@ -31,7 +37,7 @@ import resources.Images;
 public class LoginGUI extends JPanel {
 
 	private static final long serialVersionUID = 2335752822050869549L;
-	private JTextField usernameTF;
+	private QuoteMeTextField usernameTF;
 	private JPasswordField passwordTF;
 	private JButton loginButton;
 	private JButton forgotUserButton;
@@ -60,18 +66,20 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		usernameTF = new JTextField("Enter username");
-		usernameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		usernameTF = new QuoteMeTextField("Enter username");
 		loginButton = new QuoteMeButton(
 				"Login",
 				ImageLibrary.getImage(Images.greenButton),
 				15,100,25);
 		passwordTF = new JPasswordField("Enter password");
 		passwordTF.setEchoChar((char) 0);
-		passwordTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		passwordTF.setBackground(Color.BLACK);
+		passwordTF.setForeground(Color.WHITE);
+		passwordTF.setHorizontalAlignment(JTextField.CENTER);
+		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		forgotUserButton = new QuoteMeButton(
 				"Forgot Username or Password",
-				ImageLibrary.getImage(Images.greenButton),
+				ImageLibrary.getImage(Images.greyButton),
 				15,230,25);
 	}
 	
@@ -96,8 +104,16 @@ public class LoginGUI extends JPanel {
 		usernameTF.setSize(new Dimension(20, usernameTF.getPreferredSize().height));
 		loginPanel.add(usernameTF);
 		loginPanel.add(passwordTF);
-		loginPanel.add(loginButton);
-		loginPanel.add(forgotUserButton);
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.add(forgotUserButton);
+		forgotUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonPanel.add(Box.createHorizontalStrut(10));
+		buttonPanel.add(loginButton);
+		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonPanel.setBackground(new Color(204, 0, 0, 123));
+		loginPanel.add(buttonPanel);
 		add(loginPanel, BorderLayout.SOUTH);
 	}
 	
@@ -107,14 +123,23 @@ public class LoginGUI extends JPanel {
 		passwordTF.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				passwordTF.setFont(new JLabel().getFont());
 				passwordTF.setEchoChar('•');
-				
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				String password = new String(passwordTF.getPassword());
+				if (password.isEmpty() || password.equals("Enter password")) {
+					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					passwordTF.setEchoChar((char) 0); 
+					passwordTF.setText("Enter password");
+				}
 			}
 		});
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				
+				usernameTF.setText(usernameTF.getText().toLowerCase());
 				checkIfLoginIsValid();
 				/*
 				if (loginIsValid()) {
@@ -182,7 +207,7 @@ public class LoginGUI extends JPanel {
 	private void checkIfLoginIsValid() {
 		System.out.println("UsernameTF : " + usernameTF.getText());
 		System.out.println("PasswordTF : " + new String(passwordTF.getPassword()));
-		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText());
+		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText().toLowerCase());
 		if (user != null) {
 			
 			String password = new String(passwordTF.getPassword());
@@ -214,8 +239,10 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void clearFields() {
-		usernameTF.setText("Enter your username.");
-		passwordTF.setText("Enter your password.");
+		usernameTF.setText("Enter username");
+		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		passwordTF.setEchoChar((char) 0); 
+		passwordTF.setText("Enter password");
 	}
 	
 	

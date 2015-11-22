@@ -12,10 +12,19 @@ public class QuoteMeLabel extends JLabel {
 	public QuoteMeLabel() {
 		setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 22));
 	}
+	
+	public QuoteMeLabel(int size) {
+		setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, size));
+	}
 
 	public QuoteMeLabel(String text) {
 		super(text);
 		setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 22));
+	}
+	
+	public QuoteMeLabel(String text, int size, boolean setSize) {
+		super(text);
+		setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, size));
 	}
 
 	public QuoteMeLabel(Icon image) {
