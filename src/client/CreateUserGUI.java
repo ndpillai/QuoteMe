@@ -103,8 +103,9 @@ public class CreateUserGUI extends JPanel {
 			System.out.println("DataManager null?: " + (CreateUserGUI.this.clientPanel.quoteMeClient.dataManager == null));
 			if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasName(usernameTF.getText())) { // Check name
 				if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasEmail(emailTF.getText())) { // Check email
-					if (passwordTF.getPassword().equals(confirmPasswordTF.getPassword())) {
-						String password = new String(passwordTF.getPassword());
+					String password = new String(passwordTF.getPassword());
+					String confirmPassword = new String(confirmPasswordTF.getPassword());
+					if (password.equals(confirmPassword)) {
 						User newUser = new User(	// Create new user
 								firstnameTF.getText(), 
 								lastnameTF.getText(), 
