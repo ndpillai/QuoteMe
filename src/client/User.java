@@ -19,7 +19,7 @@ public class User implements Serializable {
 	private Vector<Quote> feedQuotesBuffer;
 	
 	public void printThis() {
-		System.out.println("U: " + firstName + " " + lastName + " " + email);
+		System.out.println("U: " + firstName + " " + lastName + " " + email + " " + userName + " " + password);
 	}
 	
 	// Probs need to remove this

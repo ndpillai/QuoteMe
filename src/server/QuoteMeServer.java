@@ -76,6 +76,7 @@ public class QuoteMeServer {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("QuoteMeUniverse.txt"));
 			dataManager = (DataManager)ois.readObject();
 			System.out.println("DataManager in server null?: " + (dataManager==null));
+			dataManager.printThis();
 			ois.close();
 		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); } catch (ClassNotFoundException cnfe) { System.out.println("ClassNotFoundException: " + cnfe.getMessage()); }
 	}
