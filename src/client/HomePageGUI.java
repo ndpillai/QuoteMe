@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import custom.PaintedButton;
 import custom.QuoteMeButton;
 import library.ImageLibrary;
 import resources.Images;

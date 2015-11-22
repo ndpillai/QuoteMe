@@ -221,6 +221,7 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void displayFeedPage() {
+		feed = new FeedPageGUI(this);
 		feed.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(feed);
@@ -233,6 +234,8 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void displayNotificationPage() {
+		//notifications = new NotificationsGUI(this);
+		notifications.refresh();
 		notifications.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(notifications);
