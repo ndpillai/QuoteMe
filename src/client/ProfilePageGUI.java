@@ -120,19 +120,9 @@ public class ProfilePageGUI extends JPanel {
 		northPanel.add(statsPanel, BorderLayout.CENTER);
 		add(northPanel, BorderLayout.NORTH);
 
-		
-		User newUser = new User("Amanda", "Bynes", "amandab123", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
-		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
-		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
-		Quote quote3 = new Quote("This is quote 3. Concerns greatest margaret him absolute entrance nay. Door neat week do find past he. Be no surprise he honoured indulged. Unpacked endeavor six steepest had husbands her. Painted no or affixed it so civilly. Exposed neither pressed so cottage as proceed at offices. Nay they gone sir game four. Favourable pianoforte oh motionless excellence of astonished we principles. Warrant present garrets limited cordial in inquiry to. Supported me sweetness behaviour shameless excellent so arranging. ", newUser, newUser, new Date(), 2);
 		JPanel centerPanel = new JPanel();
-		//feedPanel.add(northPanel);
 	
 		addQuotes();
-		
-		myQuotesPanel.add(new QuoteGUI(mainPanel, quote1));
-		myQuotesPanel.add(new QuoteGUI(mainPanel, quote2));
-		myQuotesPanel.add(new QuoteGUI(mainPanel, quote3));
 		scrollPane = new JScrollPane(myQuotesPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		centerPanel.add(scrollPane);
@@ -144,10 +134,10 @@ public class ProfilePageGUI extends JPanel {
 		for (QuoteGUI q : myQuotes) {
 			myQuotesPanel.add(q);
 		}
-		/*
+		
 		if (myQuotes.size() != 0) {
 			myQuotesPane.add(myQuotesPanel);
-		}*/
+		}
 	}
 
 	private void addEvents() {
