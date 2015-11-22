@@ -3,7 +3,9 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Vector;
 import java.util.Date;
 import java.util.Vector;
 
@@ -15,16 +17,11 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import resources.Images;
-
 public class FeedPageGUI extends JPanel {
-	private JCheckBox allCB;
 	private JCheckBox[] categoryCB;
 	private JComboBox sortCB;
 	private JScrollPane scrollPane;
-	private ArrayList<QuoteGUI> quoteList;
-	
-	private JButton j1, j2, j3, j4, j5, j6, j7, j8;
+	private Vector<QuoteGUI> quoteList;
 	
 	private MainPanel mainPanel;
 	
@@ -36,27 +33,25 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		allCB = new JCheckBox();
+		String[] categories = {"Recent", "Popular"};
+		sortCB = new JComboBox(categories);
+		
 		categoryCB = new JCheckBox[3];
-		sortCB = new JComboBox();
+		categoryCB[0] = new JCheckBox("Motivational");
+		categoryCB[1] = new JCheckBox("Funny");
+		categoryCB[2] = new JCheckBox("Sentimental");
+		
 		scrollPane = new JScrollPane();
-		quoteList = new ArrayList<QuoteGUI>(); // How are we loading this? From the server? datamanager?
-		j1 = new JButton("Blue");
-		j2 = new JButton("Gray");
-		j3 = new JButton("Green");
-		j4 = new JButton("Orange");
-		j5 = new JButton("Pink");
-		j6 = new JButton("Purple");
-		j7 = new JButton("Red");
-		j8 = new JButton("Yellow");
+		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
 	}
 	
 	private void createGUI () {
 		setLayout(new BorderLayout());
 		// NORTH panel
 		JPanel northPanel = new JPanel();
-		northPanel.add(allCB); // TODO load this too?
-		northPanel.add(sortCB); // TODO load the sort combo box with values
+		northPanel.add(sortCB);
+		for (int i=0; i<3; i++)
+			northPanel.add(categoryCB[i]);
 		add(northPanel, BorderLayout.NORTH);
 		//add(new JLabel("FEED PAGE"), BorderLayout.NORTH);
 		
@@ -69,19 +64,10 @@ public class FeedPageGUI extends JPanel {
 		User newUser = new User("Amanda", "Bynes", "amandab", "tonyelevathingal@gmail.com", "123", new Date());
 		
 		//public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
-		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), "deep");
-		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), "deep");
+		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
+		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
 		feedPanel.add(new QuoteGUI(mainPanel, quote1));
 		feedPanel.add(new QuoteGUI(mainPanel, quote2));
-		/*
-		feedPanel.add(j1);
-		feedPanel.add(j2);
-		feedPanel.add(j3);
-		feedPanel.add(j4);
-		feedPanel.add(j5);
-		feedPanel.add(j6);
-		feedPanel.add(j7);
-		feedPanel.add(j8);*/
 
 		//scrollPane.add(feedPanel);
 		//add(scrollPane, BorderLayout.CENTER);
@@ -89,15 +75,13 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void addEvents() {
-		/*
-		j1.addActionListener(new newProfileAL(Images.parrotAvatarBluePixellated));
-		j2.addActionListener(new newProfileAL(Images.parrotAvatarGrayPixellated));
-		j3.addActionListener(new newProfileAL(Images.parrotAvatarGreenPixellated));
-		j4.addActionListener(new newProfileAL(Images.parrotAvatarOrangePixellated));
-		j5.addActionListener(new newProfileAL(Images.parrotAvatarPinkPixellated));
-		j6.addActionListener(new newProfileAL(Images.parrotAvatarPurplePixellated));
-		j7.addActionListener(new newProfileAL(Images.parrotAvatarRedPixellated));
-		j8.addActionListener(new newProfileAL(Images.parrotAvatarYellowPixellated));*/
+		for (int i=0; i<3; i++) {
+			categoryCB[i].addItemListener(new ItemListener(){
+				public void itemStateChanged(ItemEvent e) {
+					refreshQuoteList();
+				}
+			});
+		}
 	}
 	
 	public class newProfileAL implements ActionListener {
@@ -113,11 +97,38 @@ public class FeedPageGUI extends JPanel {
 		}
 	}
 	
-	public ArrayList<QuoteGUI> getQuotesToDisplay() {
-		return null;
+	public Vector<QuoteGUI> getQuotesToDisplay() {
+		//change this later, right now it gets all quotes
+		Vector<Quote> allquotes = mainPanel.clientPanel.quoteMeClient.dataManager.getAllQuotes();
+		
+		Vector<QuoteGUI> quotes = new Vector<QuoteGUI>();
+		for (int i=0; i<allquotes.size(); i++)
+			quotes.add(new QuoteGUI(mainPanel, allquotes.get(i)));
+		
+		return quotes;
 	}
 	
-	public void refresh() {
-		
+	public void refreshQuoteList() {
+		quoteList = getQuotesToDisplay();
+		Vector<QuoteGUI> newlist = new Vector<QuoteGUI>();
+		for (int i=0; i<quoteList.size(); i++) {
+			if (categoryCB[0].isSelected() 
+					&& quoteList.get(i).thisQuote.getCategory()==0
+					&& !newlist.contains(quoteList.get(i)))
+				newlist.add(quoteList.get(i));
+			if (categoryCB[1].isSelected() 
+					&& quoteList.get(i).thisQuote.getCategory()==1
+					&& !newlist.contains(quoteList.get(i)))
+				newlist.add(quoteList.get(i));
+			if (categoryCB[2].isSelected() 
+					&& quoteList.get(i).thisQuote.getCategory()==2
+					&& !newlist.contains(quoteList.get(i)))
+				newlist.add(quoteList.get(i));
+		}
+		quoteList = newlist;
+	}
+	
+	public void refresh(){
+	
 	}
 }

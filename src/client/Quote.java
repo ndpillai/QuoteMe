@@ -12,7 +12,7 @@ public class Quote implements Serializable {
 	private User speaker, poster;
 	private Date datePosted;
 	private Integer upQuotes;
-	private String category;
+	private int category; //0 = Meaningful, 1 = Funny, 2 = Sentimental
 	
 	
 	public void printThis() {
@@ -23,7 +23,7 @@ public class Quote implements Serializable {
 		System.out.println("Empty Quote constructor");
 	}
 	
-	public Quote(String text, User speaker, User poster, Date datePosted, String category) {
+	public Quote(String text, User speaker, User poster, Date datePosted, int category) {
 		this.text = text;
 		this.speaker = speaker;
 		this.poster = poster;
@@ -59,7 +59,7 @@ public class Quote implements Serializable {
 		return datePosted;
 	}
 	
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
 	
