@@ -110,6 +110,7 @@ public class LoginGUI extends JPanel {
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
+				
 				checkIfLoginIsValid();
 				/*
 				if (loginIsValid()) {
@@ -177,7 +178,12 @@ public class LoginGUI extends JPanel {
 	private void checkIfLoginIsValid() {
 		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText());
 		if (user != null) {
-			if (passwordTF.getPassword().equals(user.getPassword())) {
+			
+			String password = new String(passwordTF.getPassword());
+			System.out.println(password + " " + user.getPassword());
+			
+			if (password.equals(user.getPassword())) {
+				
 				clientPanel.setCurrentUser(user);
 				clientPanel.moveToMainPanel();
 			}
