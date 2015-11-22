@@ -3,24 +3,26 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 
 import custom.QuoteMeButton;
 import custom.QuoteMeLabel;
-import library.FontLibrary;
 import library.ImageLibrary;
+import resources.Constants;
 import resources.Images;
 
 public class ProfilePageGUI extends JPanel {
@@ -30,9 +32,9 @@ public class ProfilePageGUI extends JPanel {
 	private QuoteMeLabel followersLabel, followedLabel;
 	private ScrollPane myQuotesPane;
 	private JPanel myQuotesPanel;
+	private Vector<QuoteGUI> myQuotes;
 	private JButton followButton;
-	private JScrollPane scrollPane;
-	
+	private JScrollPane scrollPane;	
 	private MainPanel mainPanel;
 	
 	public ProfilePageGUI(MainPanel mainPanel, User user) {
@@ -45,11 +47,24 @@ public class ProfilePageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		userImageIcon = user.getProfilePicture();
-		followersLabel = new QuoteMeLabel("Followers: " + user.getUsersFollowingUs().size());
-		followedLabel = new QuoteMeLabel("Following: " + user.getUsersWeFollow().size());
+		if (user.getProfilePicture() != null) {
+			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
+			userImageIcon = new ImageIcon(image);
+		}
+		followersLabel = new QuoteMeLabel(user.getUsersFollowingUs().size() + " following", JLabel.CENTER);
+		followersLabel.setFontSize(18);
+		followedLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " followers", JLabel.CENTER);
+		followedLabel.setFontSize(18);
 		myQuotesPanel = new JPanel();
 		myQuotesPane = new ScrollPane();
+		myQuotes = new Vector<QuoteGUI>();
+		if (user.getMyQuotes() != null) {
+			Vector<Quote> quotes = user.getMyQuotes();
+			for (Quote q : quotes) {
+				QuoteGUI quoteGUI = new QuoteGUI(mainPanel, q);
+				myQuotes.add(quoteGUI);
+			}
+		}
 		followButton = new QuoteMeButton(
 				"Follow",
 				ImageLibrary.getImage(Images.greenButton),
@@ -57,6 +72,9 @@ public class ProfilePageGUI extends JPanel {
 		if (user == mainPanel.clientPanel.getCurrentUser()) {
 			followButton.setEnabled(false);
 			followButton.setForeground(Color.GRAY);
+			user.setProfilePicture(Images.getRandomAvatar());
+			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
+			userImageIcon = new ImageIcon(image);
 		} 
 //		else if (mainPanel.clientPanel.getCurrentUser().getUsersWeFollow().contains(user)) {
 //			followButton.setText("Unfollow");
@@ -65,7 +83,7 @@ public class ProfilePageGUI extends JPanel {
 	
 	private void createGUI() {
 		// TODO set layouts
-		/*
+		
 		setLayout(new BorderLayout());
 	
 		JPanel northPanel = new JPanel();
@@ -73,41 +91,63 @@ public class ProfilePageGUI extends JPanel {
 		northPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JPanel userInfoPanel = new JPanel();
-		userInfoPanel.setLayout(new BorderLayout());
+		userInfoPanel.setLayout(new BoxLayout(userInfoPanel, BoxLayout.X_AXIS));
 		
 		JPanel usernamePanel = new JPanel();
 		usernamePanel.setLayout(new BoxLayout(usernamePanel, BoxLayout.Y_AXIS));
 		QuoteMeLabel userFullName = new QuoteMeLabel(user.getFirstName() + " " + user.getLastName());
-		QuoteMeLabel usernameLabel = new QuoteMeLabel("Username: " + user.getUserName());
+		QuoteMeLabel usernameLabel = new QuoteMeLabel(user.getUserName());
 		usernamePanel.add(userFullName);
 		usernamePanel.add(usernameLabel);
 		
-		userInfoPanel.add(new JLabel(userImageIcon), BorderLayout.WEST);
-		userInfoPanel.add(usernamePanel, BorderLayout.CENTER);
+		userInfoPanel.add(new JLabel(userImageIcon));
+		userInfoPanel.add(Box.createHorizontalStrut(10));
+		userInfoPanel.add(usernamePanel);
+		
+		northPanel.add(userInfoPanel, BorderLayout.WEST);
+		
+		JPanel statsPanel = new JPanel();
+		statsPanel.setLayout(new GridLayout(1,2));
+		statsPanel.add(followersLabel);
+		statsPanel.add(followedLabel);
 		
 		northPanel.add(userInfoPanel, BorderLayout.NORTH);
 		northPanel.add(followersLabel, BorderLayout.WEST);
 		northPanel.add(followedLabel, BorderLayout.EAST);
-		add(northPanel, BorderLayout.CENTER);
-		*/
+		//add(northPanel, BorderLayout.CENTER);
+		northPanel.add(statsPanel, BorderLayout.CENTER);
+		add(northPanel, BorderLayout.NORTH);
+
+		
 		User newUser = new User("Amanda", "Bynes", "amandab123", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
 		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
 		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
 		Quote quote3 = new Quote("This is quote 3. Concerns greatest margaret him absolute entrance nay. Door neat week do find past he. Be no surprise he honoured indulged. Unpacked endeavor six steepest had husbands her. Painted no or affixed it so civilly. Exposed neither pressed so cottage as proceed at offices. Nay they gone sir game four. Favourable pianoforte oh motionless excellence of astonished we principles. Warrant present garrets limited cordial in inquiry to. Supported me sweetness behaviour shameless excellent so arranging. ", newUser, newUser, new Date(), 2);
 		JPanel centerPanel = new JPanel();
-		JPanel feedPanel = new JPanel();
-		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
-		feedPanel.add(new QuoteGUI(mainPanel, quote1));
-		feedPanel.add(new QuoteGUI(mainPanel, quote2));
-		feedPanel.add(new QuoteGUI(mainPanel, quote3));
+		//feedPanel.add(northPanel);
+	
+		addQuotes();
 		
-		scrollPane = new JScrollPane(feedPanel);
-		
+		myQuotesPanel.add(new QuoteGUI(mainPanel, quote1));
+		myQuotesPanel.add(new QuoteGUI(mainPanel, quote2));
+		myQuotesPanel.add(new QuoteGUI(mainPanel, quote3));
+		scrollPane = new JScrollPane(myQuotesPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		centerPanel.add(scrollPane);
 		add(centerPanel, BorderLayout.CENTER);
 	}
 	
+	private void addQuotes() {
+		myQuotesPanel.setLayout(new BoxLayout(myQuotesPanel, BoxLayout.Y_AXIS));
+		for (QuoteGUI q : myQuotes) {
+			myQuotesPanel.add(q);
+		}
+		/*
+		if (myQuotes.size() != 0) {
+			myQuotesPane.add(myQuotesPanel);
+		}*/
+	}
+
 	private void addEvents() {
 		
 		User currUser = mainPanel.clientPanel.getCurrentUser();

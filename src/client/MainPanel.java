@@ -158,7 +158,7 @@ public class MainPanel extends JPanel {
 		profilePageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				displayProfilePage(new User());
+				displayProfilePage(clientPanel.getCurrentUser());
 				System.out.println("Clicked Profile Page");
 			}
 		});
