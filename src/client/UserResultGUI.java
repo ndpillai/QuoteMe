@@ -74,7 +74,12 @@ public class UserResultGUI extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Clicked UserResultGUI");
-				goToUser(thisUser);
+				if (thisUser != null) {
+					goToUser(thisUser);
+				}
+				else {
+					System.out.println("User is null");
+				}
 			}
 		});
 	}
