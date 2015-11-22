@@ -16,7 +16,7 @@ public class Quote implements Serializable {
 	
 	
 	public void printThis() {
-		System.out.println("Q: '" + text + "'. Posted by " + poster.getUserName() + ". Speaked by " + speaker.getUserName());
+		System.out.println("Q: '" + text + "'. Posted by " + poster.getUserName() + ". Spoken by " + speaker.getUserName());
 	}
 	
 	public Quote() {

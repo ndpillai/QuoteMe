@@ -13,7 +13,7 @@ public class User implements Serializable {
 	private String firstName, lastName, userName, email, password;
 	private Date memberSince;
 	private ImageIcon profilePicture;
-	private Vector<Quote> myQuotes, postedQuotes, favoriteQuotes;
+	private Vector<Quote> myQuotes;
 	private Vector<Notification> myNotifications;
 	private Vector<User> usersWeFollow, usersFollowingUs;
 	private Vector<Quote> feedQuotesBuffer;
@@ -32,8 +32,6 @@ public class User implements Serializable {
 		this.password = "1234";
 		this.memberSince = new Date();
 		myQuotes = new Vector<Quote>();
-		postedQuotes = new Vector<Quote>();
-		favoriteQuotes = new Vector<Quote>();
 		myNotifications = new Vector<Notification>();
 		usersWeFollow = new Vector<User>();
 		usersFollowingUs = new Vector<User>();
@@ -49,8 +47,6 @@ public class User implements Serializable {
 		this.memberSince = memberSince;
 		this.profilePicture = avatar;
 		myQuotes = new Vector<Quote>();
-		postedQuotes = new Vector<Quote>();
-		favoriteQuotes = new Vector<Quote>();
 		myNotifications = new Vector<Notification>();
 		usersWeFollow = new Vector<User>();
 		usersFollowingUs = new Vector<User>();
@@ -124,28 +120,12 @@ public class User implements Serializable {
 		return this.profilePicture;
 	}
 	
-	public void addMyQuote(Quote q) {
+	public void addQuote(Quote q) {
 		myQuotes.add(q);
 	}
 	
 	public Vector<Quote> getMyQuotes() {
 		return myQuotes;
-	}
-	
-	public void addPostedQuote(Quote q) {
-		postedQuotes.add(q);
-	}
-	
-	public Vector<Quote> getPostedQuotes() {
-		return postedQuotes;
-	}
-	
-	public void addFavoriteQuote(Quote q) {
-		favoriteQuotes.add(q);
-	}
-	
-	public Vector<Quote> getFavoriteQuotes() {
-		return favoriteQuotes;
 	}
 	
 	public void addNotification(Notification n) {
