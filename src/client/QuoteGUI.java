@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 
 import resources.Constants;
 
@@ -30,7 +31,7 @@ public class QuoteGUI extends JPanel {
 		this.thisQuote = thisQuote;
 		this.poster = thisQuote.getPoster();
 		this.speaker = thisQuote.getSpeaker();
-		this.category = new JLabel(Constants.categoriesList[thisQuote.getCategory()]);
+		this.category = new JLabel("              " + Constants.categoriesList[thisQuote.getCategory()]);
 		this.upQuotes = new JLabel("" + thisQuote.getUpQuotes());
 		
 		initializeVariables();
@@ -45,6 +46,8 @@ public class QuoteGUI extends JPanel {
 		quoteTextArea = new JTextArea(5, 20);
 		quoteTextArea.setText('"' + thisQuote.getText() + '"');
 		quoteTextArea.setEditable(false);
+		quoteTextArea.setLineWrap(true);
+		quoteTextArea.setWrapStyleWord(true);
 		
 		upQuoteButton = new JButton("UpQuote");	// maybe add an up arrow?
 		
@@ -99,12 +102,13 @@ public class QuoteGUI extends JPanel {
 		add(centerPanel, BorderLayout.CENTER);*/
 		
 		setLayout(new BorderLayout());
-		setSize(this.getMaximumSize().width, 30);
-		setPreferredSize(new Dimension(this.getMaximumSize().width - 100, 30));
+		//setSize(this.getMaximumSize().width, 30);
+		//setPreferredSize(new Dimension(this.getMaximumSize().width, this.getMaximumSize().height));
 		
 		JPanel northPanel = new JPanel();
-		northPanel.setBackground(Color.WHITE);
+		northPanel.setBackground(Color.GRAY);
 		northPanel.add(datePostedLabel);
+		northPanel.add(category);
 		northPanel.setForeground(Color.GRAY);
 		northPanel.setSize(this.getMaximumSize().width, 30);
 		add(northPanel, BorderLayout.NORTH);
@@ -116,14 +120,15 @@ public class QuoteGUI extends JPanel {
 		quoteInfoPanel.add(speakerNameLabel);
 		quoteInfoPanel.add(posterButton);
 		quoteInfoPanel.add(posterNameLabel);
-		quoteInfoPanel.add(category);
+//		quoteInfoPanel.add(category);
 		quoteInfoPanel.add(upQuoteButton);
 		quoteInfoPanel.add(upQuotes);
 		quoteInfoPanel.setBackground(Color.ORANGE);
+		quoteInfoPanel.setSize(new Dimension(quoteInfoPanel.getMaximumSize().width, 10));
 		add(quoteInfoPanel, BorderLayout.SOUTH);
 		
-//		speakerButton.setSize(Constants.AvatarButtonWidth);
-//		posterButton.setSize(Constants.AvatarButtonWidth);
+		
+		setBorder(new EmptyBorder(5, 10, 5, 10));
 	}
 	
 	private void addEvents() {
