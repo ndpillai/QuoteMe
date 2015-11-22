@@ -5,8 +5,11 @@ import java.awt.GridLayout;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class SearchResultsGUI extends JPanel {
 	private Vector<User> users;
@@ -18,6 +21,7 @@ public class SearchResultsGUI extends JPanel {
 	private MainPanel mp;
 	
 	private JPanel outerPanel;
+	private JScrollPane jsp;
 
 	public SearchResultsGUI(Vector<User> u, Vector<Quote> q, MainPanel mp) {
 		users = u;
@@ -55,12 +59,15 @@ public class SearchResultsGUI extends JPanel {
 
 	private void createGUI() {
 		int numberRows = userResults.size() + quoteResults.size();
-		setLayout(new GridLayout(numberRows, 1));
+		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
 		for (UserResultGUI u : userResults) {
-			add(u);
+			outerPanel.add(u);
 		}
 		for (QuoteGUI q : quoteResults) {
-			add(q);
+			outerPanel.add(q);
 		}
+		jsp = new JScrollPane(outerPanel);
+		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		add(jsp);
 	}
 }

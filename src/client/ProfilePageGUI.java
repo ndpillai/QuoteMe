@@ -48,11 +48,11 @@ public class ProfilePageGUI extends JPanel {
 	
 	private void initializeVariables() {
 		if (user.getProfilePicture() != null) {
-			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
+			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 			userImageIcon = new ImageIcon(image);
 		} else {
 			user.setProfilePicture(Images.getRandomAvatar());
-			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
+			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 			userImageIcon = new ImageIcon(image);
 		}
 		followersLabel = new QuoteMeLabel(user.getUsersFollowingUs().size() + " following", JLabel.CENTER);
@@ -160,6 +160,7 @@ public class ProfilePageGUI extends JPanel {
 					System.out.println(currUser.getUserName() + " just followed " + user.getUserName());
 					currUser.followThisUser(user);
 					user.addUserFollowingUs(currUser);
+					updateNumberFollowers();
 					followButton.setText("Unfollow");
 				}
 				
@@ -167,10 +168,15 @@ public class ProfilePageGUI extends JPanel {
 					System.out.println(currUser.getUserName() + " just unfollowed " + user.getUserName());
 					currUser.unfollowThisUser(user);
 					user.removeUserFollowingUs(currUser);
+					updateNumberFollowers();
 					followButton.setText("Follow");
 				}
 				
 			}
 		});
+	}
+	
+	private void updateNumberFollowers() {
+		followersLabel.setText(user.getUsersFollowingUs().size() + " following");
 	}
 }

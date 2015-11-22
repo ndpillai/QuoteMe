@@ -54,7 +54,7 @@ public class QuoteGUI extends JPanel {
 		posterAvatar = poster.getProfilePicture();
 		if (posterAvatar != null) {
 			Image posterImage = posterAvatar.getImage();
-			Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH ) ;  
+			Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH ) ;  
 			posterAvatar = new ImageIcon(newPosterImage);
 		}
 		
@@ -65,7 +65,7 @@ public class QuoteGUI extends JPanel {
 		speakerAvatar = speaker.getProfilePicture();
 		if (speakerAvatar != null) {
 			Image speakerImage = speakerAvatar.getImage();
-			Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height, java.awt.Image.SCALE_SMOOTH);
+			Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height, java.awt.Image.SCALE_SMOOTH);
 			speakerAvatar = new ImageIcon(newSpeakerImage);
 		}
 		

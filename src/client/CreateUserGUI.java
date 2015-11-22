@@ -2,6 +2,7 @@ package client;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import library.FontLibrary;
 import resources.CustomListeners;
 import resources.Images;
 
@@ -51,6 +53,14 @@ public class CreateUserGUI extends JPanel {
 		usernameTF = new JTextField("Enter desired username");
 		passwordTF = new JPasswordField("Enter password");
 		confirmPasswordTF = new JPasswordField("Confirm password");
+		
+		firstnameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		lastnameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		emailTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		usernameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		passwordTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		confirmPasswordTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		
 		passwordTF.setEchoChar((char) 0);
 		confirmPasswordTF.setEchoChar((char) 0);
 		createUserButton = new JButton("Create User");

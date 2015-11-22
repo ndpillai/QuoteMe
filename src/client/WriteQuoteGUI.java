@@ -30,7 +30,7 @@ public class WriteQuoteGUI extends JPanel {
 	private JPanel searchPanel;
 	
 	// Added this to display results of finding user
-	private String [] defaultResults = {"Results"};
+	private String [] defaultResults = {"Search for a user"};
 	private ArrayList<User> userResults; // to be an array or an arraylist?
 	private JComboBox searchUserComboBox;
 	private JLabel quoteLabel;
@@ -97,8 +97,7 @@ public class WriteQuoteGUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				if (!userSearchField.getText().equals("Search for a user") && !userSearchField.getText().equals("")) {
-					//displaySearchResultsPage(userSearchField.getText());
-					String [] relevantUsers = {"Select User", "Nav", "Ingrid", "Bitch", "Simone"};
+					String [] relevantUsers = getRelevantUsers();
 					searchUserComboBox.setModel(new DefaultComboBoxModel(relevantUsers));
 					System.out.println("Clicked search button.");
 				}
@@ -134,6 +133,36 @@ public class WriteQuoteGUI extends JPanel {
 			}
 		});
 	
+	}
+	
+	private String[] getRelevantUsers() {
+		String search = userSearchField.getText();
+		String[] searchTerms = search.split(" ");
+		DataManager dm = mainPanel.clientPanel.quoteMeClient.dataManager;
+		Vector<User> users = dm.getAllUsers();
+		
+		Vector<User> userResults = new Vector<User>();
+		
+		if (users != null) {
+			for (int i=0; i<users.size(); i++) {
+				User u = users.elementAt(i);
+				userResults.add(u);
+				for (int j=0; j<searchTerms.length; j++) {
+					if (!u.toString().contains(searchTerms[j])) {
+						userResults.remove(u);
+						break;
+					}
+				}
+			}
+		}
+		
+		String[] usernameResults = new String[userResults.size()+1];
+		usernameResults[0] = "Select a user";
+		for (int i=1; i<userResults.size()+1; i++) {
+			usernameResults[i] = userResults.elementAt(i-1).getUserName();
+		}
+		
+		return usernameResults;
 	}
 	
 	public String getQuoteText() {
