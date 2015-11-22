@@ -2,6 +2,7 @@ package client;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,13 +16,16 @@ import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
+import custom.QuoteMeButton;
+import custom.QuoteMeTextField;
 import library.FontLibrary;
+import library.ImageLibrary;
+import resources.Constants;
 import resources.CustomListeners;
 import resources.Images;
 
@@ -33,9 +37,9 @@ removed: anything with facebook
 public class CreateUserGUI extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	public JTextField firstnameTF, lastnameTF, emailTF, usernameTF;
+	public QuoteMeTextField firstnameTF, lastnameTF, emailTF, usernameTF;
 	public JPasswordField passwordTF, confirmPasswordTF;
-	public JButton createUserButton;
+	public QuoteMeButton createUserButton;
 	
 	private ClientPanel clientPanel;
 	
@@ -47,23 +51,25 @@ public class CreateUserGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		firstnameTF = new JTextField("Enter first name");
-		lastnameTF = new JTextField("Enter last name");
-		emailTF = new JTextField("Enter email address");
-		usernameTF = new JTextField("Enter desired username");
+		firstnameTF = new QuoteMeTextField("Enter first name");
+		lastnameTF = new QuoteMeTextField("Enter last name");
+		emailTF = new QuoteMeTextField("Enter email address");
+		usernameTF = new QuoteMeTextField("Enter desired username");
 		passwordTF = new JPasswordField("Enter password");
 		confirmPasswordTF = new JPasswordField("Confirm password");
 		
-		firstnameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
-		lastnameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
-		emailTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
-		usernameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
-		passwordTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
-		confirmPasswordTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
+		passwordTF.setBackground(Color.BLACK);
+		passwordTF.setForeground(Color.WHITE);
+		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		
+		confirmPasswordTF.setBackground(Color.BLACK);
+		confirmPasswordTF.setForeground(Color.WHITE);
+		confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		
 		passwordTF.setEchoChar((char) 0);
 		confirmPasswordTF.setEchoChar((char) 0);
-		createUserButton = new JButton("Create User");
+		createUserButton = new QuoteMeButton("Create User", ImageLibrary.getImage(Images.greenButton),
+				15,100,25);
 	}
 	
 	private void createGUI() {
@@ -80,6 +86,7 @@ public class CreateUserGUI extends JPanel {
 		createUserPanel.add(passwordTF);
 		createUserPanel.add(confirmPasswordTF);
 		createUserPanel.add(createUserButton);
+		createUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(createUserPanel, BorderLayout.SOUTH);
 	}
 	
@@ -93,15 +100,33 @@ public class CreateUserGUI extends JPanel {
 		passwordTF.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				passwordTF.setFont(new JLabel().getFont());
 				passwordTF.setEchoChar('•');
-				
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				String password = new String(passwordTF.getPassword());
+				if (password.isEmpty() || password.equals("Enter password")) {
+					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					passwordTF.setEchoChar((char) 0); 
+					passwordTF.setText("Enter password");
+				}
 			}
 		});
 		confirmPasswordTF.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				confirmPasswordTF.setFont(new JLabel().getFont());
 				confirmPasswordTF.setEchoChar('•');
-				
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				String password = new String(confirmPasswordTF.getPassword());
+				if (password.isEmpty() || password.equals("Confirm password")) {
+					confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					confirmPasswordTF.setEchoChar((char) 0); 
+					confirmPasswordTF.setText("Confirm password");
+				}
 			}
 		});
 	
@@ -119,7 +144,7 @@ public class CreateUserGUI extends JPanel {
 						User newUser = new User(	// Create new user
 								firstnameTF.getText(), 
 								lastnameTF.getText(), 
-								usernameTF.getText(), 
+								usernameTF.getText().toLowerCase(), 
 								emailTF.getText(),
 								password,
 								new Date(),
