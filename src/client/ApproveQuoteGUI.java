@@ -20,7 +20,7 @@ public class ApproveQuoteGUI extends JPanel {
 	public Quote thisQuote;
 	private String poster, speaker, quoteText;
 	private Date datePosted;
-	private Vector<String> categories;
+	private String category;
 	private JLabel promptLabel;
 	private JTextArea quoteTA;
 	private JButton posterButton, speakerButton, approveButton, denyButton;
@@ -41,7 +41,7 @@ public class ApproveQuoteGUI extends JPanel {
 		speaker = thisQuote.getSpeaker().getUserName();
 		quoteText = thisQuote.getText();
 		datePosted = thisQuote.getDatePosted();
-		categories = thisQuote.getCategories();
+		category = thisQuote.getCategory();
 		promptLabel = new JLabel(poster + " would like to quote you:");
 		Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 		quoteTA = new JTextArea(quoteText);

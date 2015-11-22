@@ -170,6 +170,7 @@ public class LoginGUI extends JPanel {
 		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText());
 		if (user != null) {
 			if (passwordTF.getPassword().equals(user.getPassword())) {
+				clientPanel.setCurrentUser(user);
 				clientPanel.moveToMainPanel();
 			}
 			else { // Wrong password, ERROR

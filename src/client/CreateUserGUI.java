@@ -112,6 +112,7 @@ public class CreateUserGUI extends JPanel {
 								emailTF.getText(),
 								password,
 								new Date());
+						printInputs();
 						CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.addUser(newUser);
 						clientPanel.quoteMeClient.sendObject(newUser);
 						
@@ -121,6 +122,7 @@ public class CreateUserGUI extends JPanel {
 								"Account successfully created! ",  
 								JOptionPane.PLAIN_MESSAGE);
 						clientPanel.moveToLoginPanel();
+						SendEmail.sendWelcomeEmail(emailTF.getText(), firstnameTF.getText(), usernameTF.getText());
 					}
 					else {
 						System.out.println("Passwords don't match!");
@@ -167,6 +169,15 @@ public class CreateUserGUI extends JPanel {
 			}*/
 			}
 		});
+	}
+	
+	private void printInputs() {
+		System.out.println("First Name: " + firstnameTF.getText());
+		System.out.println("Last Name: " + lastnameTF.getText());
+		System.out.println("Email: " + emailTF.getText());
+		System.out.println("Username: " + usernameTF.getText());
+		System.out.println("Password: " + passwordTF.getText());
+		System.out.println("Confirm Password: " + confirmPasswordTF.getText());
 	}
 	
 	@Override 
