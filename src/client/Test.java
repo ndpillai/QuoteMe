@@ -36,6 +36,15 @@ public class Test {
 			Quote quote5 = new Quote("My name is Nav. Laura is quoting me.", nav, laura, incrementAndGetDate(), 1);
 			Quote quote6 = new Quote("My name is Ingrid. Nav is quoting me.", ingrid, nav, incrementAndGetDate(), 0);
 			
+			for (int i=0; i<10; i++)
+				quote1.incrementUpQuotes();
+			for (int i=0; i<3; i++)
+				quote2.incrementUpQuotes();
+			for (int i=0; i<7; i++)
+				quote3.incrementUpQuotes();
+			for (int i=0; i<18; i++)
+				quote4.incrementUpQuotes();
+			
 			newDataManager.addUser(amanda);
 			newDataManager.addUser(tony);
 			newDataManager.addUser(ingrid);
