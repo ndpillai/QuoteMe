@@ -5,9 +5,11 @@ import java.awt.GridLayout;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class SearchResultsGUI extends JPanel {
 	private Vector<User> users;
@@ -19,7 +21,8 @@ public class SearchResultsGUI extends JPanel {
 	private MainPanel mp;
 	
 	private JPanel outerPanel;
-	private JScrollPane scrollPane;
+	private JScrollPane jsp;
+
 
 	public SearchResultsGUI(Vector<User> u, Vector<Quote> q, MainPanel mp) {
 		users = u;
@@ -57,28 +60,33 @@ public class SearchResultsGUI extends JPanel {
 	}
 
 	private void createGUI() {
-		
+
 		JPanel centerPanel = new JPanel();
 		JPanel resultsPanel = new JPanel();
 		resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-//		resultsPanel.add(new QuoteGUI(mainPanel, quote1));
-//		resultsPanel.add(new QuoteGUI(mainPanel, quote2));
-//		resultsPanel.add(new QuoteGUI(mainPanel, quote3));
+		// Add stuff to resultsPanel
+		for (UserResultGUI u : userResults) {
+			resultsPanel.add(u);
+		}
+		for (QuoteGUI q : quoteResults) {
+			resultsPanel.add(q);
+		}
 		
-		scrollPane = new JScrollPane(resultsPanel);
-		
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		centerPanel.add(scrollPane);
+		jsp = new JScrollPane(resultsPanel);
+		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		centerPanel.add(jsp);
 		add(centerPanel, BorderLayout.CENTER);
 		
 		
 		//int numberRows = userResults.size() + quoteResults.size();
 		//setLayout(new GridLayout(numberRows, 1));
-		for (UserResultGUI u : userResults) {
-			add(u);
-		}
-		for (QuoteGUI q : quoteResults) {
-			add(q);
-		}
+
+//		int numberRows = userResults.size() + quoteResults.size();
+//		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+
+
+//		jsp = new JScrollPane(outerPanel);
+//		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		add(jsp);
 	}
 }

@@ -3,6 +3,7 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import custom.QuoteMeButton;
+import library.FontLibrary;
 import library.ImageLibrary;
 import resources.CustomListeners;
 import resources.Images;
@@ -59,12 +61,14 @@ public class LoginGUI extends JPanel {
 	
 	private void initializeVariables() {
 		usernameTF = new JTextField("Enter username");
+		usernameTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
 		loginButton = new QuoteMeButton(
 				"Login",
 				ImageLibrary.getImage(Images.greenButton),
 				15,100,25);
 		passwordTF = new JPasswordField("Enter password");
 		passwordTF.setEchoChar((char) 0);
+		passwordTF.setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, 12));
 		forgotUserButton = new QuoteMeButton(
 				"Forgot Username or Password",
 				ImageLibrary.getImage(Images.greenButton),
