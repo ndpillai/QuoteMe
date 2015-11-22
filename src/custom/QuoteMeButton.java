@@ -18,16 +18,18 @@ public class QuoteMeButton extends JButton{
 	private static final long serialVersionUID = 7074393176317490987L;
 
 	private ImageIcon image;
-//	private final Image mUp;
-//	private final Image mDown;
+	private Image i;
+	private int x, y;
 	
 	private final int mFontSize;
 	
-	public QuoteMeButton(String name, Image inUp, Image inDown, int inFontSize) {
+	public QuoteMeButton(String name, Image inUp, Image inDown, int inFontSize, int x, int y) {
 		super(new ImageIcon(inUp));
-		image = new ImageIcon(inUp);
-	//	toDraw = mUp = inUp;
-	//	mDown = inDown;
+		this.x = x;
+		this.y = y;
+		i = inUp;
+		image = new ImageIcon(i.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH));
+		setIcon(image);
 		mFontSize = inFontSize;
 		
 		setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, mFontSize));
@@ -39,12 +41,12 @@ public class QuoteMeButton extends JButton{
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				image = new ImageIcon(inUp);
+				i = inUp;
 				refresh();
 			}
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				image = new ImageIcon(inDown);
+				i = inDown;
 				refresh();
 			}
 		});
@@ -54,6 +56,7 @@ public class QuoteMeButton extends JButton{
 	}
 	
 	public void refresh() {
+		image = new ImageIcon(i.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH));
 		setIcon(image);
 	}
 }

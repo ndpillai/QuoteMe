@@ -63,12 +63,14 @@ public class LoginGUI extends JPanel {
 				"Login",
 				ImageLibrary.getImage("img/buttons/green_button00.png"),
 				ImageLibrary.getImage("img/buttons/green_button01.png"),
-				22
-				);
+				15,100,25);
 		passwordTF = new JPasswordField("Enter password");
 		passwordTF.setEchoChar((char) 0);
-		loginButton = new JButton("Login");
-		forgotUserButton = new JButton("Forgot Username / Password");
+		forgotUserButton = new QuoteMeButton(
+				"Forgot Username or Password",
+				ImageLibrary.getImage("img/buttons/green_button00.png"),
+				ImageLibrary.getImage("img/buttons/green_button01.png"),
+				15,230,25);
 	}
 	
 	private void createGUI() {
