@@ -21,6 +21,10 @@ public class Images {
 	public static final String parrotAvatarYellowPixellated = "img/avatars/QuoteMeAvatarYellowPixellated.png";
 	
 	// BUTTONS
+	public static final String greenButton = "img/buttons/greenbutton_00.png";
+	public static final String greenButtonPressed = "img/buttons/greenbutton_01.png";
+	public static final String greyButton = "img/buttons/greybutton_00.png";
+	public static final String greyButtonPressed = "img/buttons/greybutton_01.png";
 	
 	// TABS
 	
