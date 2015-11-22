@@ -44,7 +44,7 @@ public class Quote implements Serializable {
 		return datePosted;
 	}
 	
-	public String getCategories() {
+	public String getCategory() {
 		return category;
 	}
 	
