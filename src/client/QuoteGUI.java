@@ -24,28 +24,30 @@ public class QuoteGUI extends JPanel {
 	public QuoteGUI(MainPanel mainPanel, Quote thisQuote) {
 		this.mainPanel = mainPanel;
 		this.thisQuote = thisQuote;
+		this.poster = thisQuote.getPoster();
+		this.speaker = thisQuote.getSpeaker();
+		
 		initializeVariables();
 		createGUI();
 		addEvents();
 	}
 	
 	private void initializeVariables() {
-		//TODO
-		poster = thisQuote.getPoster();
-		speaker = thisQuote.getSpeaker();
-		//posterNameLabel = new JLabel(poster.getUserName());
-		posterNameLabel = new JLabel("Poster Name");
-		//speakerNameLabel = new JLabel(speaker.getUserName());
-		speakerNameLabel = new JLabel("Speaker Name");
-		//datePostedLabel = new JLabel(thisQuote.getDatePosted().toString());
-		datePostedLabel = new JLabel("Date Posted");
-		//quoteTextArea = new JTextArea(thisQuote.getText());
-		quoteTextArea = new JTextArea("Quote Text Area");
-		//categories = thisQuote.getCategories(); // what is with this? booleans for which categories have been selected?
+				
+		posterNameLabel = new JLabel(poster.getUserName());
+//		posterNameLabel = new JLabel("Poster Name");
+		speakerNameLabel = new JLabel(speaker.getUserName());
+//		speakerNameLabel = new JLabel("Speaker Name");
+		datePostedLabel = new JLabel(thisQuote.getDatePosted().toString());
+//		datePostedLabel = new JLabel("Date Posted");
+		quoteTextArea = new JTextArea(thisQuote.getText());
+//		quoteTextArea = new JTextArea("Quote Text Area");
+		
+//		categories = thisQuote.getCategories(); // what is with this? booleans for which categories have been selected?
 		upQuoteButton = new JButton("UpQuote");	// maybe add an up arrow?
-		//posterButton = new JButton(poster.getProfilePicture()); // replace with images
+//		posterButton = new JButton(poster.getProfilePicture()); // replace with images
 		posterButton = new JButton("POSTER IMAGE");
-		//speakerButton = new JButton(speaker.getProfilePicture()); // replace with images
+//		speakerButton = new JButton(speaker.getProfilePicture()); // replace with images
 		speakerButton = new JButton("SPEAKER IMAGE");
 	}
 	
