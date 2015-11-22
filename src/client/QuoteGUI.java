@@ -52,18 +52,22 @@ public class QuoteGUI extends JPanel {
 		upQuoteButton = new JButton("UpQuote");	// maybe add an up arrow?
 		
 		posterAvatar = poster.getProfilePicture();
-		Image posterImage = posterAvatar.getImage();  
-		Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH ) ;  
-		posterAvatar = new ImageIcon(newPosterImage);
+		if (posterAvatar != null) {
+			Image posterImage = posterAvatar.getImage();
+			Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH ) ;  
+			posterAvatar = new ImageIcon(newPosterImage);
+		}
 		
 		posterButton = new JButton(posterAvatar); 
 		posterButton.setContentAreaFilled(false);
 		posterButton.setBorderPainted(false);
 		
 		speakerAvatar = speaker.getProfilePicture();
-		Image speakerImage = speakerAvatar.getImage();
-		Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height, java.awt.Image.SCALE_SMOOTH);
-		speakerAvatar = new ImageIcon(newSpeakerImage);
+		if (speakerAvatar != null) {
+			Image speakerImage = speakerAvatar.getImage();
+			Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height, java.awt.Image.SCALE_SMOOTH);
+			speakerAvatar = new ImageIcon(newSpeakerImage);
+		}
 		
 		speakerButton = new JButton(speakerAvatar); 
 		speakerButton.setContentAreaFilled(false);
