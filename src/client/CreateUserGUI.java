@@ -89,10 +89,12 @@ public class CreateUserGUI extends JPanel {
 								lastnameTF.getText(), 
 								usernameTF.getText(), 
 								emailTF.getText(),
-								passwordTF.getText(), 
+								passwordTF.getText(),
 								new Date());
 						printInputs();
 						CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.addUser(newUser);
+						clientPanel.quoteMeClient.sendObject(newUser);
+						
 						JOptionPane.showMessageDialog(
 								CreateUserGUI.this, 
 								"Welcome to the QuoteMe Universe!\nLogin with your username and password to access QuoteMe universe.", 

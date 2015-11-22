@@ -66,7 +66,7 @@ public class FeedPageGUI extends JPanel {
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
 		
 		//public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
-		Quote quote = new Quote("Quote text hello", new User(), new User(), new Date(), new Vector<String>());
+		Quote quote = new Quote("Quote text hello", new User(), new User(), new Date(), new String("Deep"));
 		feedPanel.add(new QuoteGUI(mainPanel, quote));
 		feedPanel.add(new QuoteGUI(mainPanel, quote));
 		/*

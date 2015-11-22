@@ -1,7 +1,5 @@
 package server;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,6 +7,7 @@ import java.net.Socket;
 
 import client.DataManager;
 import client.Quote;
+import client.User;
 
 public class ServerClientCommunicator extends Thread {
 
@@ -63,6 +62,11 @@ public class ServerClientCommunicator extends Thread {
 			
 				if (info instanceof client.Quote) {
 					dataManager.addQuote((Quote)info);
+					server.sendAppInstanceToAllClients(dataManager);
+				}
+				
+				else if (info instanceof client.User) {
+					dataManager.addUser((User)info);
 					server.sendAppInstanceToAllClients(dataManager);
 				}
 				

@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -34,7 +36,7 @@ public class WriteQuoteGUI extends JPanel {
 	private JLabel quoteLabel;
 	private JTextArea quoteTextArea;
 	private JLabel characterCountLabel;
-	private JButton quoteButton;
+	private JButton submitQuoteButton;
 	private JComboBox<String> categoryComboBox;
 	
 	private MainPanel mainPanel;
@@ -59,10 +61,12 @@ public class WriteQuoteGUI extends JPanel {
 		quoteLabel = new JLabel("Quote:");
 		quoteTextArea = new JTextArea();
 		characterCountLabel = new JLabel("0");
-		quoteButton = new JButton("Send quote request");
+		submitQuoteButton = new JButton("Submit New Quote");
+		
 		categoryComboBox = new JComboBox<String>();
+		categoryComboBox.addItem("Motivational");
 		categoryComboBox.addItem("Funny");
-		categoryComboBox.addItem("Deep");
+		categoryComboBox.addItem("Sentimental");
 	}
 	
 	private void createGUI() {
@@ -84,7 +88,7 @@ public class WriteQuoteGUI extends JPanel {
 		middlePanel.add(categoryComboBox);
 		add(middlePanel, BorderLayout.CENTER); // Write the quote
 		
-		add(quoteButton, BorderLayout.SOUTH); // Quote details
+		add(submitQuoteButton, BorderLayout.SOUTH); // Quote details
 	}
 	
 	private void addEvents() {
@@ -112,7 +116,7 @@ public class WriteQuoteGUI extends JPanel {
 			}
 		});
 		
-		quoteButton.addActionListener(new ActionListener() {
+		submitQuoteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				if (searchUserComboBox.getSelectedIndex()==0) {
@@ -120,6 +124,10 @@ public class WriteQuoteGUI extends JPanel {
 				}
 				else {
 					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "Wow, congrats on making it big in life.", "Quote submitted!",  JOptionPane.PLAIN_MESSAGE);
+					
+					Quote newQuote = new Quote(quoteTextArea.getText(), getSpeaker(), getPoster(), new Date(), getCategory());
+					mainPanel.clientPanel.quoteMeClient.sendObject(newQuote);
+					
 					printComponents();
 					resetComponents();
 				}
@@ -132,10 +140,15 @@ public class WriteQuoteGUI extends JPanel {
 		return quoteTextArea.getText();
 	}
 	
-	public User getSpeaker() {
-		return null;
+	public User getPoster() {
 		// searchUserComboBox.getSelectedItem().toString()
 		// return userResults.get(searchUserComboBox.getSelectedIndex()); // THIS ONE SHOULD HOPEFULLY WORK
+		
+		return mainPanel.clientPanel.getCurrentUser();
+	}
+	
+	public User getSpeaker() {
+		return mainPanel.clientPanel.quoteMeClient.dataManager.getUserFromUserName(searchUserComboBox.getSelectedItem().toString());
 	}
 	
 	public String getCategory() {
@@ -144,8 +157,7 @@ public class WriteQuoteGUI extends JPanel {
 	
 	private void printComponents() {
 		// TODO for testing purposes to grab all of the info for making a quote
-		// Cna probably just be copied for quote making / instantiation
-		System.out.println("/nPrinting quote components:");
+		System.out.println("Printing quote components:");
 		System.out.println("User search term: " + userSearchField.getText());
 		System.out.println("SearchUserComboBox selection: " + searchUserComboBox.getSelectedItem().toString());
 		System.out.println("Quote text area: " + quoteTextArea.getText());
