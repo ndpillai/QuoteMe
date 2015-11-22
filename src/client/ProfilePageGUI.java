@@ -73,12 +73,13 @@ public class ProfilePageGUI extends JPanel {
 				"Follow",
 				ImageLibrary.getImage(Images.greenButton),
 				15,100,25);
-		if (user == mainPanel.clientPanel.getCurrentUser()) {
+		User currUser = mainPanel.clientPanel.getCurrentUser();
+		if (user == currUser) {
 			followButton.setEnabled(false);
-		} 
-//		else if (mainPanel.clientPanel.getCurrentUser().getUsersWeFollow().contains(user)) {
-//			followButton.setText("Unfollow");
-//		}
+		}
+		else if (currUser != null && mainPanel.clientPanel.getCurrentUser().getUsersWeFollow().contains(user)) {
+			followButton.setText("Unfollow");
+		}
 	}
 	
 	private void createGUI() {
