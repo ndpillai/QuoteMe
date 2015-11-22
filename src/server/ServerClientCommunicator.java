@@ -74,7 +74,7 @@ public class ServerClientCommunicator extends Thread {
 		} catch (IOException ioe) {
 			if (ioe.getMessage() == null) {
 				System.out.println("Client disconnected.");
-				pushToTextFile();
+				server.pushToTextFile();
 			}
 			else {
 				System.out.println("IOE in ServerClientCommunicator run() " + ioe.getMessage());
@@ -90,15 +90,4 @@ public class ServerClientCommunicator extends Thread {
 		} 
 	}
 	
-	public void pushToTextFile() {
-		
-		System.out.println("In pushToTextFile().");
-		
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
-			oos.writeObject(dataManager);
-			oos.flush();
-			oos.close();
-		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); }
-	}
 }
