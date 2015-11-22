@@ -82,6 +82,8 @@ public class QuoteMeServer {
 	
 	public void sendAppInstanceToAllClients(DataManager updatedDataManager) {
 		this.dataManager = updatedDataManager;
+		System.out.println("Sending app instance to all clients:");
+		this.dataManager.printThis();	// Print to see what we are sending
 		for (ServerClientCommunicator scc : sccVector) {
 			scc.sendAppInstance(updatedDataManager);
 		}

@@ -167,6 +167,8 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void checkIfLoginIsValid() {
+		System.out.println("UsernameTF : " + usernameTF.getText());
+		System.out.println("PasswordTF : " + new String(passwordTF.getPassword()));
 		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText());
 		if (user != null) {
 			if (passwordTF.getPassword().equals(user.getPassword())) {

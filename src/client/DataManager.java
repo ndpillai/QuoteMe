@@ -25,10 +25,10 @@ public class DataManager implements Serializable {
 			allUsers.get(i).printThis();
 		}
 		
-		System.out.println("Quotes:");
-		for (int i = 0; i < allQuotes.size(); i++) {
-			allQuotes.get(i).printThis();
-		}
+		//System.out.println("Quotes:");
+		//for (int i = 0; i < allQuotes.size(); i++) {
+		//	allQuotes.get(i).printThis();
+		//}
 	}
 	
 	public DataManager() {
