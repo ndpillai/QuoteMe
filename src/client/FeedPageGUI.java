@@ -3,6 +3,7 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -20,15 +21,16 @@ import javax.swing.JScrollPane;
 
 import library.FontLibrary;
 import resources.Constants;
-import resources.Images;
 
 public class FeedPageGUI extends JPanel {
 	private JCheckBox[] categoryCB;
 	private JComboBox sortCB;
 	private JScrollPane scrollPane;
-	private Vector<QuoteGUI> quoteList;
+	public Vector<QuoteGUI> quoteList;
 	
 	private MainPanel mainPanel;
+	
+	private JPanel feedPanel, centerPanel;
 	
 	public FeedPageGUI (MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
@@ -50,8 +52,8 @@ public class FeedPageGUI extends JPanel {
 		categoryCB[2] = new JCheckBox(Constants.categoriesList[2]);
 		categoryCB[2].setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		
-		//quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
-		quoteList = new Vector<QuoteGUI>(); // TEST
+		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
+		//	quoteList = new Vector<QuoteGUI>(); // TEST
 	}
 	
 	private void createGUI () {
@@ -62,34 +64,34 @@ public class FeedPageGUI extends JPanel {
 		for (int i=0; i<3; i++)
 			northPanel.add(categoryCB[i]);
 		add(northPanel, BorderLayout.NORTH);
-
-		User newUser = new User("Amanda", "Bynes", "amandab123", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
-		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
-		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
-		Quote quote3 = new Quote("This is quote 3. Concerns greatest margaret him absolute entrance nay. Door neat week do find past he. Be no surprise he honoured indulged. Unpacked endeavor six steepest had husbands her. Painted no or affixed it so civilly. Exposed neither pressed so cottage as proceed at offices. Nay they gone sir game four. Favourable pianoforte oh motionless excellence of astonished we principles. Warrant present garrets limited cordial in inquiry to. Supported me sweetness behaviour shameless excellent so arranging. ", newUser, newUser, new Date(), 2);
-
-		JPanel centerPanel = new JPanel();
-		JPanel feedPanel = new JPanel();
+		
+		centerPanel = new JPanel();
+		feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
-		feedPanel.add(new QuoteGUI(mainPanel, quote1));
-		feedPanel.add(new QuoteGUI(mainPanel, quote2));
-		feedPanel.add(new QuoteGUI(mainPanel, quote3));
-		
 		scrollPane = new JScrollPane(feedPanel);
-		
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		centerPanel.add(scrollPane);
 		add(centerPanel, BorderLayout.CENTER);
+		
+	/*	JPanel centerPanel = new JPanel();
+		feedPanel = new JPanel();
+		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
+		for (int i=0; i<quoteList.size(); i++)
+			feedPanel.add(quoteList.get(i));
+		
+		JScrollPane = new JScrollPane(feedPanel);
+		
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		centerPanel.add(scrollPane); 
+		add(centerPanel, BorderLayout.CENTER);
+		
+		sort(sortCB.getSelectedIndex()); */
 	}
 	
 	private void addEvents() {
 		sortCB.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent e) {
-				String option = (String)e.getItem();
-				if (option.equals("Recent"))
-					sort(0);
-				else if (option.equals("Popular"))
-					sort(1);
+				sort();
 			}
 		});
 		
@@ -121,17 +123,28 @@ public class FeedPageGUI extends JPanel {
 		//error from dataManager
 		QuoteMeClient qm = mainPanel.clientPanel.quoteMeClient;
 		DataManager dm = qm.dataManager;
-		Vector<User> users = dm.getAllUsers();
-	//	HashMap<User, Quote> quoteMap = mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerToQuoteMap();
+		HashMap<User, Quote> quoteMap = dm.getSpeakerToQuoteMap();
 
 		Vector<QuoteGUI> quotes = new Vector<QuoteGUI>();
-//		for (Quote q: quoteMap.values())
-	//		quotes.add(new QuoteGUI(mainPanel, q)); 
+		for (Quote q: quoteMap.values())
+			quotes.add(new QuoteGUI(mainPanel, q)); 
 		
 		return quotes;
 	}
 	
+	//with updated quoteList
+	public void repopulate() {
+		feedPanel.removeAll();
+
+		for (int i=0; i<quoteList.size(); i++)
+			feedPanel.add(quoteList.get(i));
+		
+	//	feedPanel.setPreferredSize(new Dimension(quoteList.get(0).getWidth(), quoteList.get(0).getHeight()*quoteList.size()));
+		revalidate();
+	}
+	
 	public void refreshQuoteList() {
+		quoteList = getQuotesToDisplay();
 		Vector<QuoteGUI> newlist = new Vector<QuoteGUI>();
 		for (int i=0; i<quoteList.size(); i++) {
 			if (categoryCB[0].isSelected() 
@@ -146,18 +159,30 @@ public class FeedPageGUI extends JPanel {
 					&& quoteList.get(i).thisQuote.getCategory()==2
 					&& !newlist.contains(quoteList.get(i)))
 				newlist.add(quoteList.get(i));
+			
+			//if everything is deselected
+			if (!categoryCB[0].isSelected() && !categoryCB[1].isSelected() && !categoryCB[2].isSelected())
+			{
+				newlist = quoteList;
+			}
 		}
+
 		quoteList = newlist;
+		sort();
+		
+		repopulate();
 	}
 	
-	public void sort(int option) { //0 = Recent, 1 = Popular
+	public void sort() { //0 = Recent, 1 = Popular
+		int option = sortCB.getSelectedIndex();
+		System.out.println("It's sortin time " + option + " " + quoteList.size());
 		if (option==0) {
 			QuoteGUI temp = null;
 			for (int i=0; i<quoteList.size(); i++) {
 				for (int j=i+1; j<quoteList.size(); j++) {
 					Date date1 = quoteList.get(i).thisQuote.getDatePosted();
 					Date date2 = quoteList.get(j).thisQuote.getDatePosted();
-					if (date1.after(date2)) {
+					if (date1.before(date2)) {
 						temp = quoteList.get(i);
 						quoteList.set(i,quoteList.get(j));
 						quoteList.set(j, temp);
@@ -179,9 +204,7 @@ public class FeedPageGUI extends JPanel {
 				}
 			}
 		}
-	}
-	
-	public void refresh(){
-	
+		repopulate();
+		
 	}
 }

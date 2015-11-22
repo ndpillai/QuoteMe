@@ -15,7 +15,7 @@ public class QuoteMeClient extends Thread{
 	private ObjectInputStream ois;
 	private Socket socket;
 	
-	public DataManager dataManager;
+	public DataManager dataManager = new DataManager();
 
 	public QuoteMeClient() {
 		try {
@@ -73,6 +73,7 @@ public class QuoteMeClient extends Thread{
 				if (data instanceof client.DataManager) {
 					System.out.println("we are receiving an instance of DataManager in QuoteMeClient");
 					dataManager = (DataManager)data;
+					clientPanel.refreshFeed();
 				}
 			}
 		} catch (IOException ioe) {

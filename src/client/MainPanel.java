@@ -25,7 +25,7 @@ public class MainPanel extends JPanel {
 	private FeedPageGUI feed;
 	private PostQuoteGUI postQuote;
 	private ProfilePageGUI profilePage;
-	private NotificationGUI notifications;
+	private NotificationPageGUI notifications;
 	private QuoteGUI quotePanel;
 	private WriteQuoteGUI writeQuotePanel;
 	
@@ -54,7 +54,7 @@ public class MainPanel extends JPanel {
 		feed = new FeedPageGUI(this);
 		postQuote = new PostQuoteGUI(this);
 		profilePage = new ProfilePageGUI(this, currentuser);
-		notifications = new NotificationGUI(this);
+		notifications = new NotificationPageGUI(this);
 //		quotePanel = new QuoteGUI(this, new Quote()); // TODO - ALL THIS TIME. THIS WAS THE SOURCE OF ALL OUR PAIN.
 		writeQuotePanel = new WriteQuoteGUI(this);
 		
@@ -262,5 +262,11 @@ public class MainPanel extends JPanel {
 	public void displayPage(JPanel page) {
 		removeCurrentPanel();
 		addNewPanel(page);
+	}
+	
+	public void refreshFeed() {
+		feed.quoteList = feed.getQuotesToDisplay();
+		feed.sort();
+		feed.repopulate();
 	}
 }

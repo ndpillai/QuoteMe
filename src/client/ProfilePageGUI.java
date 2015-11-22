@@ -158,17 +158,23 @@ public class ProfilePageGUI extends JPanel {
 				
 				if (followButton.getText().equals("Follow")) {
 					System.out.println(currUser.getUserName() + " just followed " + user.getUserName());
+					
 					currUser.followThisUser(user);
 					user.addUserFollowingUs(currUser);
 					updateNumberFollowers();
+					
+					mainPanel.clientPanel.quoteMeClient.sendObject("follow," + currUser.getUserName() + "," + user.getUserName());
 					followButton.setText("Unfollow");
 				}
 				
 				else if (followButton.getText().equals("Unfollow")) {
 					System.out.println(currUser.getUserName() + " just unfollowed " + user.getUserName());
+					
 					currUser.unfollowThisUser(user);
 					user.removeUserFollowingUs(currUser);
 					updateNumberFollowers();
+					
+					mainPanel.clientPanel.quoteMeClient.sendObject("unfollow," + currUser.getUserName() + "," + user.getUserName());
 					followButton.setText("Follow");
 				}
 				

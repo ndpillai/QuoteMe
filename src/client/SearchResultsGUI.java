@@ -23,6 +23,7 @@ public class SearchResultsGUI extends JPanel {
 	private JPanel outerPanel;
 	private JScrollPane jsp;
 
+
 	public SearchResultsGUI(Vector<User> u, Vector<Quote> q, MainPanel mp) {
 		users = u;
 		quotes = q;
@@ -50,24 +51,42 @@ public class SearchResultsGUI extends JPanel {
 			}
 		}
 		
+		/*
 		if (users.size() != 0) {
 			Quote q = new Quote("QUOTE quote fuck", users.elementAt(0), users.elementAt(0), new Date(0), 0);
 			QuoteGUI quote = new QuoteGUI(mp, q);
 			quoteResults.add(quote);
-		}
+		}*/
 	}
 
 	private void createGUI() {
-		int numberRows = userResults.size() + quoteResults.size();
-		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+
+		JPanel centerPanel = new JPanel();
+		JPanel resultsPanel = new JPanel();
+		resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+		// Add stuff to resultsPanel
 		for (UserResultGUI u : userResults) {
-			outerPanel.add(u);
+			resultsPanel.add(u);
 		}
 		for (QuoteGUI q : quoteResults) {
-			outerPanel.add(q);
+			resultsPanel.add(q);
 		}
-		jsp = new JScrollPane(outerPanel);
+		
+		jsp = new JScrollPane(resultsPanel);
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		add(jsp);
+		centerPanel.add(jsp);
+		add(centerPanel, BorderLayout.CENTER);
+		
+		
+		//int numberRows = userResults.size() + quoteResults.size();
+		//setLayout(new GridLayout(numberRows, 1));
+
+//		int numberRows = userResults.size() + quoteResults.size();
+//		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+
+
+//		jsp = new JScrollPane(outerPanel);
+//		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		add(jsp);
 	}
 }

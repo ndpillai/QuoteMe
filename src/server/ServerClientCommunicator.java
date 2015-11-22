@@ -73,7 +73,28 @@ public class ServerClientCommunicator extends Thread {
 				}
 				
 				else if (info instanceof String) {
+					String delims = "[,]";
+					String[] tokens = ((String)info).split(delims);
 					
+					if (tokens[0].equals("follow")) {
+						User currUser = dataManager.getUserFromUserName(tokens[1]);
+						User user = dataManager.getUserFromUserName(tokens[2]);
+						
+						currUser.followThisUser(user);
+						user.addUserFollowingUs(currUser);
+					}
+					
+					else if (tokens[0].equals("unfollow")) {
+						User currUser = dataManager.getUserFromUserName(tokens[1]);
+						User user = dataManager.getUserFromUserName(tokens[2]);
+						
+						currUser.unfollowThisUser(user);
+						user.removeUserFollowingUs(currUser);
+					}
+					
+					else if (tokens[0].equals("upquote")) {
+						
+					}
 				} 
 				
 			}
