@@ -41,9 +41,7 @@ public class Images {
 	}
 	// BUTTONS
 	public static final String greenButton = "img/buttons/greenbutton_00.png";
-	public static final String greenButtonPressed = "img/buttons/greenbutton_01.png";
 	public static final String greyButton = "img/buttons/greybutton_00.png";
-	public static final String greyButtonPressed = "img/buttons/greybutton_01.png";
 	
 	// TABS
 	

@@ -35,7 +35,8 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		sortCB = new JComboBox(Constants.categoriesList);
+		String[] options = new String[]{"Recent", "Popular"};
+		sortCB = new JComboBox(options);
 		
 		categoryCB = new JCheckBox[3];
 		categoryCB[0] = new JCheckBox(Constants.categoriesList[0]);
