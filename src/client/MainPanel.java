@@ -252,4 +252,10 @@ public class MainPanel extends JPanel {
 		removeCurrentPanel();
 		addNewPanel(page);
 	}
+	
+	public void refreshFeed() {
+		feed.quoteList = feed.getQuotesToDisplay();
+		feed.sort();
+		feed.repopulate();
+	}
 }
