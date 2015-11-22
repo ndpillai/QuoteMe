@@ -112,7 +112,8 @@ public class CreateUserGUI extends JPanel {
 								usernameTF.getText(), 
 								emailTF.getText(),
 								password,
-								new Date());
+								new Date(),
+								Images.getRandomAvatar());
 						printInputs();
 						
 						CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.addUser(newUser);

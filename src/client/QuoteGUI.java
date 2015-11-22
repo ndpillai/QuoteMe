@@ -1,23 +1,27 @@
 package client;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import resources.Constants;
+
 public class QuoteGUI extends JPanel {
 	public Quote thisQuote;
 	private User poster, speaker;
+	private ImageIcon posterAvatar, speakerAvatar;
 	private JLabel posterNameLabel, speakerNameLabel, datePostedLabel;
 	private JTextArea quoteTextArea;
-	private Vector<String> categories;
+	private JLabel category;
 	private JButton upQuoteButton, posterButton, speakerButton;
 	private MainPanel mainPanel;
 	
@@ -26,6 +30,7 @@ public class QuoteGUI extends JPanel {
 		this.thisQuote = thisQuote;
 		this.poster = thisQuote.getPoster();
 		this.speaker = thisQuote.getSpeaker();
+		this.category = new JLabel(thisQuote.getCategory());
 		
 		initializeVariables();
 		createGUI();
@@ -33,34 +38,55 @@ public class QuoteGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-				
 		posterNameLabel = new JLabel(poster.getUserName());
-//		posterNameLabel = new JLabel("Poster Name");
 		speakerNameLabel = new JLabel(speaker.getUserName());
-//		speakerNameLabel = new JLabel("Speaker Name");
+//		posterNameLabel = new JLabel("  " + poster.getUserName() + "  ");
+//		speakerNameLabel = new JLabel("  " + speaker.getUserName() + "  ");
 		datePostedLabel = new JLabel(thisQuote.getDatePosted().toString());
-//		datePostedLabel = new JLabel("Date Posted");
-		quoteTextArea = new JTextArea(thisQuote.getText());
-//		quoteTextArea = new JTextArea("Quote Text Area");
+		quoteTextArea = new JTextArea(5, 20);
+//		quoteTextArea = new JTextArea('"' + thisQuote.getText() + '"');
+		quoteTextArea.setText('"' + thisQuote.getText() + '"');
+		quoteTextArea.setEditable(false);
 		
-//		categories = thisQuote.getCategories(); // what is with this? booleans for which categories have been selected?
 		upQuoteButton = new JButton("UpQuote");	// maybe add an up arrow?
-//		posterButton = new JButton(poster.getProfilePicture()); // replace with images
-		posterButton = new JButton("POSTER IMAGE");
-//		speakerButton = new JButton(speaker.getProfilePicture()); // replace with images
-		speakerButton = new JButton("SPEAKER IMAGE");
+		
+		posterAvatar = poster.getProfilePicture();
+		Image posterImage = posterAvatar.getImage();  
+		Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH ) ;  
+		posterAvatar = new ImageIcon(newPosterImage);
+		
+		posterButton = new JButton(posterAvatar); // replace with images
+		posterButton.setContentAreaFilled(false);
+		posterButton.setBorderPainted(false);
+		
+		speakerAvatar = speaker.getProfilePicture();
+		Image speakerImage = speakerAvatar.getImage();
+		Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height, java.awt.Image.SCALE_SMOOTH);
+		speakerAvatar = new ImageIcon(newSpeakerImage);
+		
+		speakerButton = new JButton(speakerAvatar); // replace with images
+		speakerButton.setContentAreaFilled(false);
+		speakerButton.setBorderPainted(false);
+		
 	}
 	
 	private void createGUI() {
+		
+		/*
 		setLayout(new BorderLayout());
 		//setSize(this.getMaximumSize().width, this.getMaximumSize().height);
 		setSize(this.getMaximumSize().width - 50, 100);
 		
-		JPanel usersPanel = new JPanel(new GridLayout(4,1));
+		JPanel usersPanel = new JPanel();
+		usersPanel.setLayout(new BoxLayout(usersPanel,  BoxLayout.Y_AXIS));
+		
+		speakerButton.setSize(Constants.AvatarButtonWidth);
+		posterButton.setSize(Constants.AvatarButtonWidth);
 		usersPanel.add(speakerButton);
 		usersPanel.add(speakerNameLabel);
 		usersPanel.add(posterButton);
 		usersPanel.add(posterNameLabel);
+
 		add(usersPanel, BorderLayout.WEST);
 		
 		JPanel centerPanel = new JPanel(new BorderLayout());
@@ -72,8 +98,34 @@ public class QuoteGUI extends JPanel {
 		interactPanel.add(new JLabel("CATEGORIES"));
 		
 		centerPanel.add(interactPanel, BorderLayout.SOUTH);
-		add(centerPanel, BorderLayout.CENTER);
+		add(centerPanel, BorderLayout.CENTER);*/
 		
+		setLayout(new BorderLayout());
+		setSize(this.getMaximumSize().width, 30);
+		setPreferredSize(new Dimension(this.getMaximumSize().width - 100, 30));
+		
+		JPanel northPanel = new JPanel();
+		northPanel.setBackground(Color.WHITE);
+		northPanel.add(datePostedLabel);
+		northPanel.setForeground(Color.GRAY);
+		northPanel.setSize(this.getMaximumSize().width, 30);
+		add(northPanel, BorderLayout.NORTH);
+		
+		
+		add(quoteTextArea, BorderLayout.CENTER);
+
+		JPanel quoteInfoPanel = new JPanel();
+		quoteInfoPanel.add(speakerButton);
+		quoteInfoPanel.add(speakerNameLabel);
+		quoteInfoPanel.add(posterButton);
+		quoteInfoPanel.add(posterNameLabel);
+		quoteInfoPanel.add(category);
+		quoteInfoPanel.add(upQuoteButton);
+		quoteInfoPanel.setBackground(Color.ORANGE);
+		add(quoteInfoPanel, BorderLayout.SOUTH);
+		
+//		speakerButton.setSize(Constants.AvatarButtonWidth);
+//		posterButton.setSize(Constants.AvatarButtonWidth);
 	}
 	
 	private void addEvents() {

@@ -40,13 +40,14 @@ public class User implements Serializable {
 		feedQuotesBuffer = new Vector<Quote>();	
 	}
 	
-	public User(String firstName, String lastName, String userName, String email, String password, Date memberSince) {
+	public User(String firstName, String lastName, String userName, String email, String password, Date memberSince, ImageIcon avatar) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
 		this.memberSince = memberSince;
+		this.profilePicture = avatar;
 		myQuotes = new Vector<Quote>();
 		postedQuotes = new Vector<Quote>();
 		favoriteQuotes = new Vector<Quote>();
