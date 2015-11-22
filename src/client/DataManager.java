@@ -16,7 +16,7 @@ public class DataManager implements Serializable {
 
 	//	public QuoteMeFrame qmf;
 	
-	{
+	public DataManager() {
 		allUsers = new Vector<User>();
 		nameMap = new HashMap<String, User>();
 		emailMap = new HashMap<String, User>();

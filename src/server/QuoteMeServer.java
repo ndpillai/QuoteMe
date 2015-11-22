@@ -33,8 +33,13 @@ public class QuoteMeServer {
 				
 				ServerClientCommunicator scc = new ServerClientCommunicator(s, this, dataManager);
 				sccVector.add(scc);
+				System.out.println("About to start");
 				scc.start();
+				System.out.println("AFTER START");
+				System.out.println("DataManager in server try null?: " + (dataManager==null));
+
 				if (dataManager != null) {
+					System.out.println("Sending app instance");
 					scc.sendAppInstance(dataManager);
 				}
 			}
@@ -61,6 +66,7 @@ public class QuoteMeServer {
 	}
 	
 	public void loadQuoteMeUniverse() {
+		System.out.println("LOAD QUOTE ME UNIVERSE");
 		try {
 			File file = new File("QuoteMeUniverse.txt");
 			
@@ -77,6 +83,7 @@ public class QuoteMeServer {
 			// read the Data Manager
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("QuoteMeUniverse.txt"));
 			dataManager = (DataManager)ois.readObject();
+			System.out.println("DataManager in server null?: " + (dataManager==null));
 			ois.close();
 		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); } catch (ClassNotFoundException cnfe) { System.out.println("ClassNotFoundException: " + cnfe.getMessage()); }
 	}

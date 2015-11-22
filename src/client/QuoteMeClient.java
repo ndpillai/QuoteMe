@@ -93,6 +93,10 @@ public class QuoteMeClient extends Thread{
 		}
 	}
 	
+	public void setClientPanel(ClientPanel clientPanel) {
+		this.clientPanel = clientPanel;
+	}
+	
 	public static void main(String[] args) {
 		new QuoteMeClient();
 	}

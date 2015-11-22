@@ -78,6 +78,9 @@ public class CreateUserGUI extends JPanel {
 		createUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 
+			System.out.println("ClientPanel null?: " + (CreateUserGUI.this.clientPanel == null));
+			System.out.println("QuoteMeClient null?: " + (CreateUserGUI.this.clientPanel.quoteMeClient == null));
+			System.out.println("DataManager null?: " + (CreateUserGUI.this.clientPanel.quoteMeClient.dataManager == null));
 			if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasName(usernameTF.getText())) { // Check name
 				if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasEmail(emailTF.getText())) { // Check email
 					if (passwordTF.getText().equals(confirmPasswordTF.getText())) {
