@@ -50,6 +50,10 @@ public class ProfilePageGUI extends JPanel {
 		if (user.getProfilePicture() != null) {
 			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
 			userImageIcon = new ImageIcon(image);
+		} else {
+			user.setProfilePicture(Images.getRandomAvatar());
+			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
+			userImageIcon = new ImageIcon(image);
 		}
 		followersLabel = new QuoteMeLabel(user.getUsersFollowingUs().size() + " following", JLabel.CENTER);
 		followersLabel.setFontSize(18);
@@ -71,10 +75,6 @@ public class ProfilePageGUI extends JPanel {
 				15,100,25);
 		if (user == mainPanel.clientPanel.getCurrentUser()) {
 			followButton.setEnabled(false);
-			followButton.setForeground(Color.GRAY);
-			user.setProfilePicture(Images.getRandomAvatar());
-			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
-			userImageIcon = new ImageIcon(image);
 		} 
 //		else if (mainPanel.clientPanel.getCurrentUser().getUsersWeFollow().contains(user)) {
 //			followButton.setText("Unfollow");
@@ -100,21 +100,21 @@ public class ProfilePageGUI extends JPanel {
 		usernamePanel.add(userFullName);
 		usernamePanel.add(usernameLabel);
 		
+		userInfoPanel.add(Box.createHorizontalStrut(10));
 		userInfoPanel.add(new JLabel(userImageIcon));
 		userInfoPanel.add(Box.createHorizontalStrut(10));
 		userInfoPanel.add(usernamePanel);
-		
-		northPanel.add(userInfoPanel, BorderLayout.WEST);
 		
 		JPanel statsPanel = new JPanel();
 		statsPanel.setLayout(new GridLayout(1,2));
 		statsPanel.add(followersLabel);
 		statsPanel.add(followedLabel);
 		
-		northPanel.add(userInfoPanel, BorderLayout.NORTH);
-		northPanel.add(followersLabel, BorderLayout.WEST);
-		northPanel.add(followedLabel, BorderLayout.EAST);
-		//add(northPanel, BorderLayout.CENTER);
+		JPanel innerPanel = new JPanel();
+		innerPanel.setLayout(new BorderLayout());
+		innerPanel.add(userInfoPanel, BorderLayout.WEST);
+		innerPanel.add(followButton, BorderLayout.CENTER);
+		northPanel.add(innerPanel, BorderLayout.NORTH);
 		northPanel.add(statsPanel, BorderLayout.CENTER);
 		add(northPanel, BorderLayout.NORTH);
 
