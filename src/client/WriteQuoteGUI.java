@@ -1,7 +1,9 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -20,23 +23,30 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import custom.QuoteMeButton;
+import custom.QuoteMeLabel;
+import custom.QuoteMeTextField;
+import library.FontLibrary;
+import library.ImageLibrary;
+import resources.Constants;
 import resources.CustomListeners;
+import resources.Images;
 
 public class WriteQuoteGUI extends JPanel {
-	private JLabel speakerLabel;
-	private JTextField userSearchField;
+	private QuoteMeLabel speakerLabel;
+	private QuoteMeTextField userSearchField;
 	private User speaker;
-	private JButton searchButton;
+	private QuoteMeButton searchButton;
 	private JPanel searchPanel;
 	
 	// Added this to display results of finding user
 	private String [] defaultResults = {"Search for a user"};
 	private ArrayList<User> userResults; // to be an array or an arraylist?
 	private JComboBox searchUserComboBox;
-	private JLabel quoteLabel;
+	private QuoteMeLabel quoteLabel;
 	private JTextArea quoteTextArea;
-	private JLabel characterCountLabel;
-	private JButton submitQuoteButton;
+	private QuoteMeLabel characterCountLabel, categoryLabel;
+	private QuoteMeButton submitQuoteButton;
 	private JComboBox<String> categoryComboBox;
 	
 	private MainPanel mainPanel;
@@ -49,21 +59,26 @@ public class WriteQuoteGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		speakerLabel = new JLabel("Speaker: ");
-		userSearchField = new JTextField("Search for a user");
+		speakerLabel = new QuoteMeLabel("Speaker: ");
+		userSearchField = new QuoteMeTextField("Search for a user");
 		userSearchField.setSize(new Dimension(10, userSearchField.getPreferredSize().height));
-		searchButton = new JButton("Search");
+		searchButton = new QuoteMeButton("Search", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
 		searchPanel = new JPanel();
 		userResults = null;
 		searchUserComboBox = new JComboBox(defaultResults);
+		searchUserComboBox.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		searchUserComboBox.setSize(100, searchUserComboBox.getPreferredSize().height);
 		
-		quoteLabel = new JLabel("Quote:");
+		quoteLabel = new QuoteMeLabel("Quote:");
 		quoteTextArea = new JTextArea();
-		characterCountLabel = new JLabel("0");
-		submitQuoteButton = new JButton("Submit New Quote");
+		quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
+		characterCountLabel = new QuoteMeLabel("Characters: 0");
+		characterCountLabel.setFontSize(18);
+		submitQuoteButton = new QuoteMeButton("Submit New Quote", ImageLibrary.getImage(Images.greenButton), 15, 150, 25);
 		
+		categoryLabel = new QuoteMeLabel("Category:");
 		categoryComboBox = new JComboBox<String>();
+		categoryComboBox.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		categoryComboBox.addItem("Motivational");
 		categoryComboBox.addItem("Funny");
 		categoryComboBox.addItem("Sentimental");
@@ -72,20 +87,38 @@ public class WriteQuoteGUI extends JPanel {
 	private void createGUI() {
 		setLayout(new BorderLayout());
 		
-		searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.X_AXIS));
-		searchPanel.add(speakerLabel);
-		searchPanel.add(userSearchField);
-		searchPanel.add(searchUserComboBox);
-		searchPanel.add(searchButton);
+		searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.Y_AXIS));
+		JPanel userSearchPanel = new JPanel();
+		userSearchPanel.setLayout(new BorderLayout());
+		userSearchPanel.add(userSearchField, BorderLayout.CENTER);
+		userSearchPanel.add(searchButton, BorderLayout.EAST);
+		JPanel userSelectPanel = new JPanel();
+		userSelectPanel.setLayout(new BoxLayout(userSelectPanel, BoxLayout.X_AXIS));
+		userSelectPanel.add(speakerLabel);
+		userSelectPanel.add(searchUserComboBox);
+		searchPanel.add(userSearchPanel);
+		searchPanel.add(userSelectPanel);
 		add(searchPanel, BorderLayout.NORTH);	// Search, textfield, results combo box, search button
 		
 		JPanel middlePanel = new JPanel();
 		middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
 				
 		middlePanel.add(quoteLabel);
+		
+		JPanel quotePanel = new JPanel();
 		middlePanel.add(quoteTextArea);
-		middlePanel.add(characterCountLabel);
-		middlePanel.add(categoryComboBox);
+		
+		JPanel categoryPanel = new JPanel();
+		categoryPanel.setLayout(new BoxLayout(categoryPanel, BoxLayout.X_AXIS));
+		categoryPanel.add(Box.createHorizontalStrut(10));
+		categoryPanel.add(categoryLabel);
+		categoryPanel.add(categoryComboBox);
+		categoryPanel.add(Box.createGlue());
+		categoryPanel.add(characterCountLabel);
+		categoryPanel.add(Box.createHorizontalStrut(10));
+		characterCountLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		
+		middlePanel.add(categoryPanel);
 		add(middlePanel, BorderLayout.CENTER); // Write the quote
 		
 		add(submitQuoteButton, BorderLayout.SOUTH); // Quote details
@@ -111,7 +144,7 @@ public class WriteQuoteGUI extends JPanel {
 		quoteTextArea.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				characterCountLabel.setText("" + quoteTextArea.getText().length());
+				characterCountLabel.setText("Characters: " + quoteTextArea.getText().length());
 			}
 		});
 		
