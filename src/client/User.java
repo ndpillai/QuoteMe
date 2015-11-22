@@ -136,8 +136,12 @@ public class User implements Serializable {
 		return myNotifications;
 	}
 	
-	public void addUserWeFollow(User u) {
+	public void followThisUser(User u) {
 		usersWeFollow.add(u);
+	}
+	
+	public void unfollowThisUser(User u) {
+		usersWeFollow.remove(u);
 	}
 	
 	public Vector<User> getUsersWeFollow() {
@@ -146,6 +150,10 @@ public class User implements Serializable {
 	
 	public void addUserFollowingUs(User u) {
 		usersFollowingUs.add(u);
+	}
+	
+	public void removeUserFollowingUs(User u) {
+		usersFollowingUs.remove(u);
 	}
 	
 	public Vector<User> getUsersFollowingUs() {

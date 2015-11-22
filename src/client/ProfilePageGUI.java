@@ -88,13 +88,27 @@ public class ProfilePageGUI extends JPanel {
 	}
 	
 	private void addEvents() {
-		// TODO
+		
+		User currUser = mainPanel.clientPanel.getCurrentUser();
+				
 		followButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("Following this person");
-				// TODO we need to disable this follow buttn if we are viewing our own profile?
-				// TODO we also need to actually add this person as someone we follow, and vice versa
+				
+				if (followButton.getText().equals("Follow")) {
+					System.out.println(currUser.getUserName() + " just followed " + user.getUserName());
+					currUser.followThisUser(user);
+					user.addUserFollowingUs(currUser);
+					followButton.setText("Unfollow");
+				}
+				
+				else if (followButton.getText().equals("Unfollow")) {
+					System.out.println(currUser.getUserName() + " just unfollowed " + user.getUserName());
+					currUser.unfollowThisUser(user);
+					user.removeUserFollowingUs(currUser);
+					followButton.setText("Follow");
+				}
+				
 			}
 		});
 	}

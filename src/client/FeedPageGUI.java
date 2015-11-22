@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import resources.Constants;
 import resources.Images;
 
 public class FeedPageGUI extends JPanel {
@@ -29,18 +30,17 @@ public class FeedPageGUI extends JPanel {
 	public FeedPageGUI (MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
 		initializeVariables();
-		createGUI();
 		addEvents();
+		createGUI();
 	}
 	
 	private void initializeVariables() {
-		String[] categories = {"Recent", "Popular"};
-		sortCB = new JComboBox(categories);
+		sortCB = new JComboBox(Constants.categoriesList);
 		
 		categoryCB = new JCheckBox[3];
-		categoryCB[0] = new JCheckBox("Motivational");
-		categoryCB[1] = new JCheckBox("Funny");
-		categoryCB[2] = new JCheckBox("Sentimental");
+		categoryCB[0] = new JCheckBox(Constants.categoriesList[0]);
+		categoryCB[1] = new JCheckBox(Constants.categoriesList[1]);
+		categoryCB[2] = new JCheckBox(Constants.categoriesList[2]);
 		
 		scrollPane = new JScrollPane();
 		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
@@ -96,6 +96,16 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void addEvents() {
+		sortCB.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent e) {
+				String option = (String)e.getItem();
+				if (option.equals("Recent"))
+					sort(0);
+				else if (option.equals("Popular"))
+					sort(1);
+			}
+		});
+		
 		for (int i=0; i<3; i++) {
 			categoryCB[i].addItemListener(new ItemListener(){
 				public void itemStateChanged(ItemEvent e) {
@@ -130,7 +140,6 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	public void refreshQuoteList() {
-		quoteList = getQuotesToDisplay();
 		Vector<QuoteGUI> newlist = new Vector<QuoteGUI>();
 		for (int i=0; i<quoteList.size(); i++) {
 			if (categoryCB[0].isSelected() 
@@ -147,6 +156,37 @@ public class FeedPageGUI extends JPanel {
 				newlist.add(quoteList.get(i));
 		}
 		quoteList = newlist;
+	}
+	
+	public void sort(int option) { //0 = Recent, 1 = Popular
+		if (option==0) {
+			QuoteGUI temp = null;
+			for (int i=0; i<quoteList.size(); i++) {
+				for (int j=i+1; j<quoteList.size(); j++) {
+					Date date1 = quoteList.get(i).thisQuote.getDatePosted();
+					Date date2 = quoteList.get(j).thisQuote.getDatePosted();
+					if (date1.after(date2)) {
+						temp = quoteList.get(i);
+						quoteList.set(i,quoteList.get(j));
+						quoteList.set(j, temp);
+					}
+				}
+			}
+		}
+		else {
+			QuoteGUI temp = null;
+			for (int i=0; i<quoteList.size(); i++) {
+				for (int j=i+1; j<quoteList.size(); j++) {
+					int upQuotes1 = quoteList.get(i).thisQuote.getUpQuotes();
+					int upQuotes2 = quoteList.get(j).thisQuote.getUpQuotes();
+					if (upQuotes1<upQuotes2) {
+						temp = quoteList.get(i);
+						quoteList.set(i,quoteList.get(j));
+						quoteList.set(j, temp);
+					}
+				}
+			}
+		}
 	}
 	
 	public void refresh(){
