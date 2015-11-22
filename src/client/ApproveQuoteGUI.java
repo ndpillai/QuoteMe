@@ -20,7 +20,7 @@ public class ApproveQuoteGUI extends JPanel {
 	public Quote thisQuote;
 	private String poster, speaker, quoteText;
 	private Date datePosted;
-	private String category;
+	private int category;
 	private JLabel promptLabel;
 	private JTextArea quoteTA;
 	private JButton posterButton, speakerButton, approveButton, denyButton;

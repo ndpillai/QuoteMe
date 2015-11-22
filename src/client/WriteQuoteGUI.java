@@ -151,8 +151,13 @@ public class WriteQuoteGUI extends JPanel {
 		return mainPanel.clientPanel.quoteMeClient.dataManager.getUserFromUserName(searchUserComboBox.getSelectedItem().toString());
 	}
 	
-	public String getCategory() {
-		return categoryComboBox.getSelectedItem().toString();
+	public int getCategory() {
+		String cat = categoryComboBox.getSelectedItem().toString();
+		
+		if (cat.equals("Meaningful")) return 0;
+		else if (cat.equals("Funny")) return 1;
+		else return 2; //"Sentimental"
+		
 	}
 	
 	private void printComponents() {
