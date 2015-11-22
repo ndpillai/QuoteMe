@@ -15,12 +15,13 @@ public class QuoteMeFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		ClientPanel clientPanel = new ClientPanel();
+		ClientPanel clientPanel = new ClientPanel(quoteMeClient);
 		add(clientPanel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.quoteMeClient = quoteMeClient;
 		this.quoteMeClient.setClientPanel(clientPanel);
-		clientPanel.quoteMeClient = this.quoteMeClient;
+	//	clientPanel.quoteMeClient = this.quoteMeClient;
+
 	}
 	
 	private void refreshPanels() {

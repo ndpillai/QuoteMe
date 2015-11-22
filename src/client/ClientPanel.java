@@ -17,9 +17,12 @@ public class ClientPanel extends JPanel {
 	public QuoteMeClient quoteMeClient;
 	private User currentUser;
 	
+	public ClientPanel(QuoteMeClient quoteMeClient)
 	{
 		// The home page
 		homePagePanel = new HomePageGUI(this);
+		
+		this.quoteMeClient = quoteMeClient;
 		
 		//Set up the panel to display
 		setLayout(new BorderLayout());
