@@ -26,10 +26,11 @@ import resources.Constants;
 import resources.Images;
 
 public class ProfilePageGUI extends JPanel {
-	public long serialVersionUID;
+
+	private static final long serialVersionUID = 4423476724368792142L;
 	private User user;
 	private ImageIcon userImageIcon;
-	private QuoteMeLabel followersLabel, followedLabel;
+	private QuoteMeLabel followersLabel, followingLabel;
 	private ScrollPane myQuotesPane;
 	private JPanel myQuotesPanel;
 	private Vector<QuoteGUI> myQuotes;
@@ -55,10 +56,10 @@ public class ProfilePageGUI extends JPanel {
 			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 			userImageIcon = new ImageIcon(image);
 		}
-		followersLabel = new QuoteMeLabel(user.getUsersFollowingUs().size() + " following", JLabel.CENTER);
+		followersLabel = new QuoteMeLabel(user.getUsersFollowingUs().size() + " followers", JLabel.CENTER);
 		followersLabel.setFontSize(18);
-		followedLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " followers", JLabel.CENTER);
-		followedLabel.setFontSize(18);
+		followingLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " following", JLabel.CENTER);
+		followingLabel.setFontSize(18);
 		myQuotesPanel = new JPanel();
 		myQuotesPane = new ScrollPane();
 		myQuotes = new Vector<QuoteGUI>();
@@ -108,7 +109,7 @@ public class ProfilePageGUI extends JPanel {
 		JPanel statsPanel = new JPanel();
 		statsPanel.setLayout(new GridLayout(1,2));
 		statsPanel.add(followersLabel);
-		statsPanel.add(followedLabel);
+		statsPanel.add(followingLabel);
 		
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BorderLayout());
@@ -160,7 +161,7 @@ public class ProfilePageGUI extends JPanel {
 					System.out.println(currUser.getUserName() + " just followed " + user.getUserName());
 					
 					currUser.followThisUser(user);
-					user.addUserFollowingUs(currUser);
+//					user.addUserFollowingUs(currUser);
 					updateNumberFollowers();
 					
 					mainPanel.clientPanel.quoteMeClient.sendObject("follow," + currUser.getUserName() + "," + user.getUserName());
@@ -171,7 +172,7 @@ public class ProfilePageGUI extends JPanel {
 					System.out.println(currUser.getUserName() + " just unfollowed " + user.getUserName());
 					
 					currUser.unfollowThisUser(user);
-					user.removeUserFollowingUs(currUser);
+//					user.removeUserFollowingUs(currUser);
 					updateNumberFollowers();
 					
 					mainPanel.clientPanel.quoteMeClient.sendObject("unfollow," + currUser.getUserName() + "," + user.getUserName());
@@ -183,6 +184,6 @@ public class ProfilePageGUI extends JPanel {
 	}
 	
 	private void updateNumberFollowers() {
-		followersLabel.setText(user.getUsersFollowingUs().size() + " following");
+		followersLabel.setText(user.getUsersFollowingUs().size() + " followers");
 	}
 }

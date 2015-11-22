@@ -137,11 +137,17 @@ public class User implements Serializable {
 	}
 	
 	public void followThisUser(User u) {
-		usersWeFollow.add(u);
+		// we follow the user passed in
+		this.usersWeFollow.add(u);
+		// the user that was passed in is updated, as we are now following them
+		u.addUserFollowingUs(this);
 	}
 	
 	public void unfollowThisUser(User u) {
-		usersWeFollow.remove(u);
+		// we unfollow the user passed in
+		this.usersWeFollow.remove(u);
+		// the user that was passed in is updated, as we are now NOT following them
+		u.removeUserFollowingUs(this);
 	}
 	
 	public Vector<User> getUsersWeFollow() {
