@@ -124,8 +124,7 @@ public class ProfilePageGUI extends JPanel {
 	
 		addQuotes();
 		scrollPane = new JScrollPane(myQuotesPanel);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		centerPanel.add(scrollPane);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		add(centerPanel, BorderLayout.CENTER);
 	}
 	
