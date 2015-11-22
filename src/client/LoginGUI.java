@@ -7,15 +7,17 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import resources.CustomListeners;
@@ -25,7 +27,8 @@ import resources.Images;
 public class LoginGUI extends JPanel {
 
 	private static final long serialVersionUID = 2335752822050869549L;
-	private JTextField usernameTF, passwordTF;
+	private JTextField usernameTF;
+	private JPasswordField passwordTF;
 	private JButton loginButton;
 	private JButton forgotUserButton;
 	
@@ -54,7 +57,8 @@ public class LoginGUI extends JPanel {
 	
 	private void initializeVariables() {
 		usernameTF = new JTextField("Enter username");
-		passwordTF = new JTextField("Enter password");
+		passwordTF = new JPasswordField("Enter password");
+		passwordTF.setEchoChar((char) 0);
 		loginButton = new JButton("Login");
 		forgotUserButton = new JButton("Forgot Username / Password");
 	}
@@ -88,6 +92,13 @@ public class LoginGUI extends JPanel {
 	private void addEvents() {
 		usernameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(usernameTF,"Enter username"));
 		passwordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(passwordTF,"Enter password"));
+		passwordTF.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				passwordTF.setEchoChar('•');
+				
+			}
+		});
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -158,7 +169,7 @@ public class LoginGUI extends JPanel {
 	private void checkIfLoginIsValid() {
 		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText());
 		if (user != null) {
-			if (passwordTF.getText().equals(user.getPassword())) {
+			if (passwordTF.getPassword().equals(user.getPassword())) {
 				clientPanel.setCurrentUser(user);
 				clientPanel.moveToMainPanel();
 			}
