@@ -31,6 +31,8 @@ public class ServerClientCommunicator extends Thread {
 	
 	public void sendAppInstance(DataManager dataManager) {
 		try {
+			System.out.println("Send App Instance: ");
+			dataManager.printThis();
 			oos.writeObject(dataManager);
 			oos.flush();
 		} catch (IOException ioe) {

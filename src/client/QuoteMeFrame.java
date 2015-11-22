@@ -2,6 +2,8 @@ package client;
 
 import javax.swing.JFrame;
 
+import resources.Constants;
+
 public class QuoteMeFrame extends JFrame {
 
 	private static final long serialVersionUID = 5757035426111506095L;
@@ -9,8 +11,8 @@ public class QuoteMeFrame extends JFrame {
 	
 	public QuoteMeFrame(QuoteMeClient quoteMeClient) {
 		super("QuoteMe");
-		setSize(450, 700);
-		setLocation(400,100);
+		setSize(Constants.FrameWidth, Constants.FrameHeight);
+		setLocationRelativeTo(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		ClientPanel clientPanel = new ClientPanel();
