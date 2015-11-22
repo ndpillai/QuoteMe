@@ -5,17 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Vector;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import resources.Images;
 
 public class FeedPageGUI extends JPanel {
 	private JCheckBox[] categoryCB;
@@ -57,21 +58,41 @@ public class FeedPageGUI extends JPanel {
 		
 		// CENTER panel
 		// add things to the scrollpane
+		
+		JPanel feedContainer = new JPanel();
+		feedContainer.setLayout(new BorderLayout());
+		/*
+		JPanel westBuffer = new JPanel();
+		westBuffer.setSize(50, westBuffer.getMaximumSize().height);
+		
+		JPanel eastBuffer = new JPanel();
+		eastBuffer.setSize(50, eastBuffer.getMaximumSize().height);*/
+		
+		feedContainer.add(new JPanel(), BorderLayout.WEST);
+		feedContainer.add(new JPanel(), BorderLayout.EAST);
+		
 		JPanel feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
 		
 		
-		User newUser = new User("Amanda", "Bynes", "amandab", "tonyelevathingal@gmail.com", "123", new Date());
+		User newUser = new User("Amanda", "Bynes", "amandab123", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
 		
 		//public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
+
 		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
 		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
+		Quote quote3 = new Quote("This is quote 3", newUser, newUser, new Date(), 2);
+
 		feedPanel.add(new QuoteGUI(mainPanel, quote1));
+		feedPanel.add(Box.createGlue());
 		feedPanel.add(new QuoteGUI(mainPanel, quote2));
+		feedPanel.add(new QuoteGUI(mainPanel, quote3));
 
 		//scrollPane.add(feedPanel);
 		//add(scrollPane, BorderLayout.CENTER);
-		add(feedPanel, BorderLayout.CENTER);
+		feedContainer.add(feedPanel, BorderLayout.CENTER);
+//		add(feedPanel, BorderLayout.CENTER);
+		add(feedContainer, BorderLayout.CENTER);
 	}
 	
 	private void addEvents() {

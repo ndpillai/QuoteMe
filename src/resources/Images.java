@@ -1,5 +1,9 @@
 package resources;
 
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+
 public class Images {
 	
 	// BACKGROUNDS
@@ -20,6 +24,21 @@ public class Images {
 	public static final String parrotAvatarRedPixellated = "img/avatars/QuoteMeAvatarRedPixellated.png";
 	public static final String parrotAvatarYellowPixellated = "img/avatars/QuoteMeAvatarYellowPixellated.png";
 	
+	public static String[] avatarStrings = {
+			parrotAvatarBluePixellated,
+			parrotAvatarGrayPixellated, 
+			parrotAvatarGreenPixellated,
+			parrotAvatarOrangePixellated,
+			parrotAvatarPinkPixellated,
+			parrotAvatarPurplePixellated,
+			parrotAvatarRedPixellated,
+			parrotAvatarYellowPixellated
+	};
+	
+	public static ImageIcon getRandomAvatar() {
+		int index = new Random().nextInt(avatarStrings.length);
+		return new ImageIcon(avatarStrings[index]);
+	}
 	// BUTTONS
 	public static final String greenButton = "img/buttons/greenbutton_00.png";
 	public static final String greenButtonPressed = "img/buttons/greenbutton_01.png";
