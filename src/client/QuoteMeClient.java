@@ -71,6 +71,7 @@ public class QuoteMeClient extends Thread{
 				}
 				
 				if (data instanceof client.DataManager) {
+					System.out.println("we are receiving an instance of DataManager in QuoteMeClient");
 					dataManager = (DataManager)data;
 				}
 			}
