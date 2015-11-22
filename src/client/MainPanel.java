@@ -108,7 +108,6 @@ public class MainPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				if (!searchField.getText().equals("Search QuoteMe") && !searchField.getText().equals("")) {
-					displaySearchResultsPage(searchField.getText());
 					System.out.println("Clicked search button.");
 					search(searchField.getText());
 				}
@@ -182,18 +181,39 @@ public class MainPanel extends JPanel {
 	
 	private void search(String text) {
 		String[] searchTerms = text.split(" ");
-		for (int i=0; i<searchTerms.length; i++) {
-			System.out.println(searchTerms[i]);
+		DataManager dm = clientPanel.quoteMeClient.dataManager;
+		Vector<Quote> quotes = dm.getAllQuotes();
+		Vector<User> users = dm.getAllUsers();
+		
+		Vector<User> userResults = new Vector<User>();
+		Vector<Quote> quoteResults = new Vector<Quote>();
+		
+		for (int i=0; i<users.size(); i++) {
+			User u = users.elementAt(i);
+			userResults.add(u);
+			for (int j=0; j<searchTerms.length; j++) {
+				if (!u.toString().contains(searchTerms[j])) {
+					userResults.remove(u);
+					break;
+				}
+			}
 		}
-	}
-	
-	public void displaySearchResultsPage(String text) {
-		JPanel jp = new JPanel();
-		jp.add(new JLabel("Search results page"));
-		jp.add(new JLabel(text));
-		jp.setVisible(true);
+		
+		for (int i=0; i<quotes.size(); i++) {
+			Quote q = quotes.elementAt(i);
+			quoteResults.add(q);
+			for (int j=0; j<searchTerms.length; j++) {
+				if (!q.toString().contains(searchTerms[j])) {
+					quoteResults.remove(q);
+					break;
+				}
+			}
+		}
+		
+		SearchResultsGUI resultsPanel = new SearchResultsGUI(userResults, quoteResults, this);
 		removeCurrentPanel();
-		addNewPanel(jp);
+		addNewPanel(resultsPanel);
+		resultsPanel.setVisible(true);
 	}
 	
 	public void displayFeedPage() {
