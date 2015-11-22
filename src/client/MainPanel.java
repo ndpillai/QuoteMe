@@ -6,6 +6,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -105,6 +110,7 @@ public class MainPanel extends JPanel {
 				if (!searchField.getText().equals("Search QuoteMe") && !searchField.getText().equals("")) {
 					displaySearchResultsPage(searchField.getText());
 					System.out.println("Clicked search button.");
+					search(searchField.getText());
 				}
 				else {
 					System.out.println("Wrong search format");
@@ -172,6 +178,13 @@ public class MainPanel extends JPanel {
 		currentPanelShown = jp;
 		this.repaint();
 		this.revalidate();
+	}
+	
+	private void search(String text) {
+		String[] searchTerms = text.split(" ");
+		for (int i=0; i<searchTerms.length; i++) {
+			System.out.println(searchTerms[i]);
+		}
 	}
 	
 	public void displaySearchResultsPage(String text) {
