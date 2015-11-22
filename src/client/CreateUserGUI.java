@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -15,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import resources.CustomListeners;
@@ -28,7 +31,8 @@ removed: anything with facebook
 public class CreateUserGUI extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	public JTextField firstnameTF, lastnameTF, emailTF, usernameTF, passwordTF, confirmPasswordTF;
+	public JTextField firstnameTF, lastnameTF, emailTF, usernameTF;
+	public JPasswordField passwordTF, confirmPasswordTF;
 	public JButton createUserButton;
 	
 	private ClientPanel clientPanel;
@@ -45,8 +49,10 @@ public class CreateUserGUI extends JPanel {
 		lastnameTF = new JTextField("Enter last name");
 		emailTF = new JTextField("Enter email address");
 		usernameTF = new JTextField("Enter desired username");
-		passwordTF = new JTextField("Enter password");
-		confirmPasswordTF = new JTextField("Confirm password");
+		passwordTF = new JPasswordField("Enter password");
+		confirmPasswordTF = new JPasswordField("Confirm password");
+		passwordTF.setEchoChar((char) 0);
+		confirmPasswordTF.setEchoChar((char) 0);
 		createUserButton = new JButton("Create User");
 	}
 	
@@ -74,6 +80,20 @@ public class CreateUserGUI extends JPanel {
 		usernameTF.addFocusListener(new CustomListeners.RemoveTextAdapter(usernameTF,"Enter desired username"));
 		passwordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(passwordTF,"Enter password"));
 		confirmPasswordTF.addFocusListener(new CustomListeners.RemoveTextAdapter(confirmPasswordTF,"Confirm password"));
+		passwordTF.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				passwordTF.setEchoChar('•');
+				
+			}
+		});
+		confirmPasswordTF.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				confirmPasswordTF.setEchoChar('•');
+				
+			}
+		});
 	
 		createUserButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
@@ -83,13 +103,14 @@ public class CreateUserGUI extends JPanel {
 			System.out.println("DataManager null?: " + (CreateUserGUI.this.clientPanel.quoteMeClient.dataManager == null));
 			if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasName(usernameTF.getText())) { // Check name
 				if (!CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.hasEmail(emailTF.getText())) { // Check email
-					if (passwordTF.getText().equals(confirmPasswordTF.getText())) {
+					if (passwordTF.getPassword().equals(confirmPasswordTF.getPassword())) {
+						String password = new String(passwordTF.getPassword());
 						User newUser = new User(	// Create new user
 								firstnameTF.getText(), 
 								lastnameTF.getText(), 
 								usernameTF.getText(), 
 								emailTF.getText(),
-								passwordTF.getText(),
+								password,
 								new Date());
 						CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.addUser(newUser);
 						clientPanel.quoteMeClient.sendObject(newUser);
