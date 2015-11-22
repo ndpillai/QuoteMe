@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import custom.QuoteMeButton;
+import library.ImageLibrary;
 import resources.CustomListeners;
 import resources.Images;
 
@@ -55,7 +57,12 @@ public class LoginGUI extends JPanel {
 	private void initializeVariables() {
 		usernameTF = new JTextField("Enter username");
 		passwordTF = new JTextField("Enter password");
-		loginButton = new JButton("Login");
+		loginButton = new QuoteMeButton(
+				"Login",
+				ImageLibrary.getImage("img/buttons/green_button00.png"),
+				ImageLibrary.getImage("img/buttons/green_button01.png"),
+				22
+				);
 		forgotUserButton = new JButton("Forgot Username / Password");
 	}
 	
