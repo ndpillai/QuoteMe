@@ -188,24 +188,28 @@ public class MainPanel extends JPanel {
 		Vector<User> userResults = new Vector<User>();
 		Vector<Quote> quoteResults = new Vector<Quote>();
 		
-		for (int i=0; i<users.size(); i++) {
-			User u = users.elementAt(i);
-			userResults.add(u);
-			for (int j=0; j<searchTerms.length; j++) {
-				if (!u.toString().contains(searchTerms[j])) {
-					userResults.remove(u);
-					break;
+		if (users != null) {
+			for (int i=0; i<users.size(); i++) {
+				User u = users.elementAt(i);
+				userResults.add(u);
+				for (int j=0; j<searchTerms.length; j++) {
+					if (!u.toString().contains(searchTerms[j])) {
+						userResults.remove(u);
+						break;
+					}
 				}
 			}
 		}
 		
-		for (int i=0; i<quotes.size(); i++) {
-			Quote q = quotes.elementAt(i);
-			quoteResults.add(q);
-			for (int j=0; j<searchTerms.length; j++) {
-				if (!q.toString().contains(searchTerms[j])) {
-					quoteResults.remove(q);
-					break;
+		if (quotes != null) {
+			for (int i=0; i<quotes.size(); i++) {
+				Quote q = quotes.elementAt(i);
+				quoteResults.add(q);
+				for (int j=0; j<searchTerms.length; j++) {
+					if (!q.toString().contains(searchTerms[j])) {
+						quoteResults.remove(q);
+						break;
+					}
 				}
 			}
 		}
