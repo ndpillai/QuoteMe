@@ -8,4 +8,6 @@ public class Constants {
 	public static final Dimension AvatarButtonWidth = new Dimension(35, 35);
 	
 	public static final String fontString = "fonts/AmarilloUSAF.ttf";
+	
+	public static final String[] categoriesList = {"Meaningful", "Funny", "Sentimental"};
 }
