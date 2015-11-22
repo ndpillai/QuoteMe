@@ -57,13 +57,11 @@ public class HomePageGUI extends JPanel {
 		loginPageButton = new QuoteMeButton(
 				"Login",
 				ImageLibrary.getImage(Images.greenButton),
-				ImageLibrary.getImage(Images.greenButtonPressed),
 				15, 100, 30);
 
 		newUserPageButton = new QuoteMeButton(
 				"Create User",
 				ImageLibrary.getImage(Images.greenButton),
-				ImageLibrary.getImage(Images.greenButtonPressed),
 				15, 100, 30);
 
 	}
