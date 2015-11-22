@@ -2,6 +2,7 @@ package client;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -53,18 +54,18 @@ public class HomePageGUI extends JPanel {
 		setSize(200, 400);
 		setVisible(true);
 		logo = new ImageIcon();
-		loginPageButton = new PaintedButton(
+		loginPageButton = new QuoteMeButton(
 				"Login",
-				ImageLibrary.getImage("img/buttons/green_button00.png"),
-				ImageLibrary.getImage("img/buttons/green_button01.png"),
-				22
-				);
+				ImageLibrary.getImage(Images.greenButton),
+				ImageLibrary.getImage(Images.greenButtonPressed),
+				15, 100, 30);
+
 		newUserPageButton = new QuoteMeButton(
 				"Create User",
-				ImageLibrary.getImage("img/buttons/green_button00.png"),
-				ImageLibrary.getImage("img/buttons/green_button01.png"),
-				22
-				);
+				ImageLibrary.getImage(Images.greenButton),
+				ImageLibrary.getImage(Images.greenButtonPressed),
+				15, 100, 30);
+
 	}
 	
 	private void createGUI() {
