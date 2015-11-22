@@ -18,6 +18,10 @@ public class User implements Serializable {
 	private Vector<User> usersWeFollow, usersFollowingUs;
 	private Vector<Quote> feedQuotesBuffer;
 	
+	public void printThis() {
+		System.out.println("U: " + firstName + " " + lastName + " " + email);
+	}
+	
 	// Probs need to remove this
 	public User() {
 		System.out.println("Fake user with fake information. You know who it is.");
