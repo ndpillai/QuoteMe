@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import custom.QuoteMeButton;
 import custom.QuoteMeTextField;
@@ -61,10 +62,12 @@ public class CreateUserGUI extends JPanel {
 		passwordTF.setBackground(Color.BLACK);
 		passwordTF.setForeground(Color.WHITE);
 		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		passwordTF.setHorizontalAlignment(JTextField.CENTER);
 		
 		confirmPasswordTF.setBackground(Color.BLACK);
 		confirmPasswordTF.setForeground(Color.WHITE);
 		confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		confirmPasswordTF.setHorizontalAlignment(JTextField.CENTER);
 		
 		passwordTF.setEchoChar((char) 0);
 		confirmPasswordTF.setEchoChar((char) 0);

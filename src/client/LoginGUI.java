@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import custom.QuoteMeButton;
 import custom.QuoteMeTextField;
@@ -74,6 +75,7 @@ public class LoginGUI extends JPanel {
 		passwordTF.setEchoChar((char) 0);
 		passwordTF.setBackground(Color.BLACK);
 		passwordTF.setForeground(Color.WHITE);
+		passwordTF.setHorizontalAlignment(JTextField.CENTER);
 		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		forgotUserButton = new QuoteMeButton(
 				"Forgot Username or Password",

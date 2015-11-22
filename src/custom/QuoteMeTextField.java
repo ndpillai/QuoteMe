@@ -15,6 +15,7 @@ public class QuoteMeTextField extends JTextField {
 		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
+		setHorizontalAlignment(JTextField.CENTER);
 	}
 
 	public QuoteMeTextField(String text) {
@@ -22,6 +23,7 @@ public class QuoteMeTextField extends JTextField {
 		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
+		setHorizontalAlignment(JTextField.CENTER);
 	}
 
 	public QuoteMeTextField(int columns) {
@@ -29,6 +31,7 @@ public class QuoteMeTextField extends JTextField {
 		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
+		setHorizontalAlignment(JTextField.CENTER);
 	}
 
 	public QuoteMeTextField(String text, int columns) {
@@ -36,6 +39,7 @@ public class QuoteMeTextField extends JTextField {
 		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
+		setHorizontalAlignment(JTextField.CENTER);
 	}
 
 	public QuoteMeTextField(Document doc, String text, int columns) {
@@ -43,6 +47,7 @@ public class QuoteMeTextField extends JTextField {
 		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
+		setHorizontalAlignment(JTextField.CENTER);
 	}
 
 }
