@@ -14,6 +14,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import custom.PaintedButton;
+import custom.QuoteMeButton;
+import library.ImageLibrary;
 import resources.Images;
 
 
@@ -50,8 +53,18 @@ public class HomePageGUI extends JPanel {
 		setSize(200, 400);
 		setVisible(true);
 		logo = new ImageIcon();
-		loginPageButton = new JButton("Login");
-		newUserPageButton = new JButton("New User");
+		loginPageButton = new PaintedButton(
+				"Login",
+				ImageLibrary.getImage("img/buttons/green_button00.png"),
+				ImageLibrary.getImage("img/buttons/green_button01.png"),
+				22
+				);
+		newUserPageButton = new QuoteMeButton(
+				"Create User",
+				ImageLibrary.getImage("img/buttons/green_button00.png"),
+				ImageLibrary.getImage("img/buttons/green_button01.png"),
+				22
+				);
 	}
 	
 	private void createGUI() {

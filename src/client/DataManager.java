@@ -25,16 +25,16 @@ public class DataManager implements Serializable {
 			allUsers.get(i).printThis();
 		}
 		
-		//System.out.println("Quotes:");
-		//for (int i = 0; i < allQuotes.size(); i++) {
-		//	allQuotes.get(i).printThis();
-		//}
+//		System.out.println("allQuotes size " + allQuotes.size());
+//		System.out.println("Quotes:");
+//		for (int i = 0; i < allQuotes.size(); i++) {
+//			allQuotes.get(i).printThis();
+//		}
 	}
 	
 	public DataManager() {
 		allUsers = new Vector<User>();
 		allQuotes = new Vector<Quote>();
-		allQuotes.add(new Quote());
 		
 		nameMap = new HashMap<String, User>();
 		emailMap = new HashMap<String, User>();
