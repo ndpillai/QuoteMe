@@ -28,6 +28,17 @@ public class Quote implements Serializable {
 		this.category = category;
 	}
 	
+	// For Sorting and Searching
+	public String toString() {
+		String quoteString = new String(
+				"Quote: " + 
+				this.text + " " + 
+				this.speaker.toString() + " " +
+				this.poster.toString() + " " + 
+				this.category);
+		return quoteString;
+	}
+	
 	public String getText() {
 		return text;
 	}
