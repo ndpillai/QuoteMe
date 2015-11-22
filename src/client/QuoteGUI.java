@@ -52,7 +52,7 @@ public class QuoteGUI extends JPanel {
 	private void createGUI() {
 		setLayout(new BorderLayout());
 		//setSize(this.getMaximumSize().width, this.getMaximumSize().height);
-		setSize(this.getMaximumSize().width, 100);
+		setSize(this.getMaximumSize().width - 50, 100);
 		
 		JPanel usersPanel = new JPanel(new GridLayout(4,1));
 		usersPanel.add(speakerButton);

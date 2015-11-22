@@ -14,9 +14,13 @@ public class Quote implements Serializable {
 	private Integer upQuotes;
 	private String category;
 	
-	// Probs need to remove
+	
+	public void printThis() {
+		System.out.println("Q: '" + text + "'. Posted by " + poster.getUserName() + ". Speaked by " + speaker.getUserName());
+	}
+	
 	public Quote() {
-		System.out.println("Adding an empty quote");
+		System.out.println("Empty Quote constructor");
 	}
 	
 	public Quote(String text, User speaker, User poster, Date datePosted, String category) {
@@ -26,6 +30,17 @@ public class Quote implements Serializable {
 		this.datePosted = datePosted;
 		this.upQuotes = 0;
 		this.category = category;
+	}
+	
+	// For Sorting and Searching
+	public String toString() {
+		String quoteString = new String(
+				"Quote: " + 
+				this.text + " " + 
+				this.speaker.toString() + " " +
+				this.poster.toString() + " " + 
+				this.category);
+		return quoteString;
 	}
 	
 	public String getText() {

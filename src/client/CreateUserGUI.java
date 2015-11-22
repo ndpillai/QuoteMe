@@ -113,6 +113,7 @@ public class CreateUserGUI extends JPanel {
 								password,
 								new Date());
 						printInputs();
+						
 						CreateUserGUI.this.clientPanel.quoteMeClient.dataManager.addUser(newUser);
 						clientPanel.quoteMeClient.sendObject(newUser);
 						

@@ -18,9 +18,13 @@ public class User implements Serializable {
 	private Vector<User> usersWeFollow, usersFollowingUs;
 	private Vector<Quote> feedQuotesBuffer;
 	
+	public void printThis() {
+		System.out.println("U: " + firstName + " " + lastName + " " + email + " " + userName + " " + password);
+	}
+	
 	// Probs need to remove this
 	public User() {
-		System.out.println("Fake user with fake information. You know who it is.");
+		//System.out.println("Fake user with fake information. You know who it is.");
 		this.firstName = "Aaron";
 		this.lastName = "Cote";
 		this.userName = "ac";
@@ -50,6 +54,17 @@ public class User implements Serializable {
 		usersWeFollow = new Vector<User>();
 		usersFollowingUs = new Vector<User>();
 		feedQuotesBuffer = new Vector<Quote>();
+	}
+	
+	// For Sorting and Searching
+	public String toString() {
+		String userString = new String(
+				"User: " + 
+				this.firstName + " " +
+				this.lastName + " " + 
+				this.userName + " " +
+				this.email + " ");
+		return userString;
 	}
 	
 	private void setFirstName(String firstName) {

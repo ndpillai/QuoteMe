@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import custom.QuoteMeButton;
+import library.ImageLibrary;
 import resources.CustomListeners;
 import resources.Images;
 
@@ -57,6 +59,12 @@ public class LoginGUI extends JPanel {
 	
 	private void initializeVariables() {
 		usernameTF = new JTextField("Enter username");
+		loginButton = new QuoteMeButton(
+				"Login",
+				ImageLibrary.getImage("img/buttons/green_button00.png"),
+				ImageLibrary.getImage("img/buttons/green_button01.png"),
+				22
+				);
 		passwordTF = new JPasswordField("Enter password");
 		passwordTF.setEchoChar((char) 0);
 		loginButton = new JButton("Login");
@@ -102,6 +110,7 @@ public class LoginGUI extends JPanel {
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
+				
 				checkIfLoginIsValid();
 				/*
 				if (loginIsValid()) {
@@ -167,9 +176,16 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void checkIfLoginIsValid() {
+		System.out.println("UsernameTF : " + usernameTF.getText());
+		System.out.println("PasswordTF : " + new String(passwordTF.getPassword()));
 		User user = this.clientPanel.quoteMeClient.dataManager.getUserFromUserName(usernameTF.getText());
 		if (user != null) {
-			if (passwordTF.getPassword().equals(user.getPassword())) {
+			
+			String password = new String(passwordTF.getPassword());
+			System.out.println(password + " " + user.getPassword());
+			
+			if (password.equals(user.getPassword())) {
+				
 				clientPanel.setCurrentUser(user);
 				clientPanel.moveToMainPanel();
 			}

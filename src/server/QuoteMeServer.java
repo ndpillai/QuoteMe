@@ -76,12 +76,15 @@ public class QuoteMeServer {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("QuoteMeUniverse.txt"));
 			dataManager = (DataManager)ois.readObject();
 			System.out.println("DataManager in server null?: " + (dataManager==null));
+			dataManager.printThis();
 			ois.close();
 		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); } catch (ClassNotFoundException cnfe) { System.out.println("ClassNotFoundException: " + cnfe.getMessage()); }
 	}
 	
 	public void sendAppInstanceToAllClients(DataManager updatedDataManager) {
 		this.dataManager = updatedDataManager;
+		System.out.println("Sending app instance to all clients:");
+		this.dataManager.printThis();	// Print to see what we are sending
 		for (ServerClientCommunicator scc : sccVector) {
 			scc.sendAppInstance(updatedDataManager);
 		}
