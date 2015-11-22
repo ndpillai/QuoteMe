@@ -21,7 +21,7 @@ public class QuoteGUI extends JPanel {
 	private ImageIcon posterAvatar, speakerAvatar;
 	private JLabel posterNameLabel, speakerNameLabel, datePostedLabel;
 	private JTextArea quoteTextArea;
-	private JLabel category;
+	private JLabel category, upQuotes;
 	private JButton upQuoteButton, posterButton, speakerButton;
 	private MainPanel mainPanel;
 	
@@ -30,7 +30,8 @@ public class QuoteGUI extends JPanel {
 		this.thisQuote = thisQuote;
 		this.poster = thisQuote.getPoster();
 		this.speaker = thisQuote.getSpeaker();
-		this.category = new JLabel(thisQuote.getCategory() + "");
+		this.category = new JLabel(Constants.categoriesList[thisQuote.getCategory()]);
+		this.upQuotes = new JLabel("" + thisQuote.getUpQuotes());
 		
 		initializeVariables();
 		createGUI();
@@ -40,11 +41,8 @@ public class QuoteGUI extends JPanel {
 	private void initializeVariables() {
 		posterNameLabel = new JLabel(poster.getUserName());
 		speakerNameLabel = new JLabel(speaker.getUserName());
-//		posterNameLabel = new JLabel("  " + poster.getUserName() + "  ");
-//		speakerNameLabel = new JLabel("  " + speaker.getUserName() + "  ");
 		datePostedLabel = new JLabel(thisQuote.getDatePosted().toString());
 		quoteTextArea = new JTextArea(5, 20);
-//		quoteTextArea = new JTextArea('"' + thisQuote.getText() + '"');
 		quoteTextArea.setText('"' + thisQuote.getText() + '"');
 		quoteTextArea.setEditable(false);
 		
@@ -55,7 +53,7 @@ public class QuoteGUI extends JPanel {
 		Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH ) ;  
 		posterAvatar = new ImageIcon(newPosterImage);
 		
-		posterButton = new JButton(posterAvatar); // replace with images
+		posterButton = new JButton(posterAvatar); 
 		posterButton.setContentAreaFilled(false);
 		posterButton.setBorderPainted(false);
 		
@@ -64,7 +62,7 @@ public class QuoteGUI extends JPanel {
 		Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height, java.awt.Image.SCALE_SMOOTH);
 		speakerAvatar = new ImageIcon(newSpeakerImage);
 		
-		speakerButton = new JButton(speakerAvatar); // replace with images
+		speakerButton = new JButton(speakerAvatar); 
 		speakerButton.setContentAreaFilled(false);
 		speakerButton.setBorderPainted(false);
 		
@@ -111,7 +109,6 @@ public class QuoteGUI extends JPanel {
 		northPanel.setSize(this.getMaximumSize().width, 30);
 		add(northPanel, BorderLayout.NORTH);
 		
-		
 		add(quoteTextArea, BorderLayout.CENTER);
 
 		JPanel quoteInfoPanel = new JPanel();
@@ -121,6 +118,7 @@ public class QuoteGUI extends JPanel {
 		quoteInfoPanel.add(posterNameLabel);
 		quoteInfoPanel.add(category);
 		quoteInfoPanel.add(upQuoteButton);
+		quoteInfoPanel.add(upQuotes);
 		quoteInfoPanel.setBackground(Color.ORANGE);
 		add(quoteInfoPanel, BorderLayout.SOUTH);
 		
