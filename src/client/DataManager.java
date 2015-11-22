@@ -18,18 +18,20 @@ public class DataManager implements Serializable {
 	//	public QuoteMeFrame qmf;
 	
 	public void printThis() {
-		System.out.println("***DATA MANAGER CONTENTS***" + '\n');
+		System.out.println('\n'+ "***DATA MANAGER CONTENTS***" + '\n');
 		
 		System.out.println("Users:");
 		for (int i = 0; i < allUsers.size(); i++) {
 			allUsers.get(i).printThis();
 		}
+		System.out.println("allUsers size " + allUsers.size());
 		
-		System.out.println("allQuotes size " + allQuotes.size());
-		System.out.println("Quotes:");
+		System.out.println('\n' + "Quotes:");
 		for (int i = 0; i < allQuotes.size(); i++) {
 			allQuotes.get(i).printThis();
 		}
+		System.out.println("allQuotes size " + allQuotes.size());
+
 	}
 	
 	public DataManager() {
