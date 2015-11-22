@@ -150,10 +150,8 @@ public class QuoteGUI extends JPanel {
 		
 		upQuoteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				System.out.println("thisQuote.getUpQuotes() before: " + thisQuote.getUpQuotes());
 				thisQuote.incrementUpQuotes();
 				upQuotes.setText("" + thisQuote.getUpQuotes());
-				System.out.println("thisQuote.getUpQuotes() after: " + thisQuote.getUpQuotes());
 				repaint();
 				revalidate();
 				
