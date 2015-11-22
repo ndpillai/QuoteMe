@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -8,7 +9,6 @@ import java.awt.event.ItemListener;
 import java.util.Date;
 import java.util.Vector;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -41,9 +41,17 @@ public class FeedPageGUI extends JPanel {
 		categoryCB[0] = new JCheckBox("Motivational");
 		categoryCB[1] = new JCheckBox("Funny");
 		categoryCB[2] = new JCheckBox("Sentimental");
+	
 		
-		scrollPane = new JScrollPane();
-		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
+		/*
+		Container contentPane = mainPanel.getContentPane();
+		scrollPane = new JScrollPane(mainPanel);
+		
+        scrollPane.setViewportView(FeedPageGUI.this);
+        contentPane.add(scrollPane, BorderLayout.CENTER);*/
+		
+		//quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
+		quoteList = new Vector<QuoteGUI>(); // TEST
 	}
 	
 	private void createGUI () {
@@ -59,40 +67,41 @@ public class FeedPageGUI extends JPanel {
 		// CENTER panel
 		// add things to the scrollpane
 		
-		JPanel feedContainer = new JPanel();
-		feedContainer.setLayout(new BorderLayout());
-		/*
-		JPanel westBuffer = new JPanel();
-		westBuffer.setSize(50, westBuffer.getMaximumSize().height);
 		
-		JPanel eastBuffer = new JPanel();
-		eastBuffer.setSize(50, eastBuffer.getMaximumSize().height);*/
+
 		
-		feedContainer.add(new JPanel(), BorderLayout.WEST);
-		feedContainer.add(new JPanel(), BorderLayout.EAST);
 		
-		JPanel feedPanel = new JPanel();
-		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
+		
+
 		
 		
 		User newUser = new User("Amanda", "Bynes", "amandab123", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
-		
-		//public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
-
 		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
 		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
-		Quote quote3 = new Quote("This is quote 3", newUser, newUser, new Date(), 2);
+		Quote quote3 = new Quote("This is quote 3. Concerns greatest margaret him absolute entrance nay. Door neat week do find past he. Be no surprise he honoured indulged. Unpacked endeavor six steepest had husbands her. Painted no or affixed it so civilly. Exposed neither pressed so cottage as proceed at offices. Nay they gone sir game four. Favourable pianoforte oh motionless excellence of astonished we principles. Warrant present garrets limited cordial in inquiry to. Supported me sweetness behaviour shameless excellent so arranging. ", newUser, newUser, new Date(), 2);
 
+		
+		
+		JPanel centerPanel = new JPanel();
+		JPanel feedPanel = new JPanel();
+		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
 		feedPanel.add(new QuoteGUI(mainPanel, quote1));
-		feedPanel.add(Box.createGlue());
+		//feedPanel.add(Box.createGlue());
 		feedPanel.add(new QuoteGUI(mainPanel, quote2));
 		feedPanel.add(new QuoteGUI(mainPanel, quote3));
+		
+		scrollPane = new JScrollPane(feedPanel);
+		
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		centerPanel.add(scrollPane);
+		add(centerPanel, BorderLayout.CENTER);
+		
+
 
 		//scrollPane.add(feedPanel);
 		//add(scrollPane, BorderLayout.CENTER);
-		feedContainer.add(feedPanel, BorderLayout.CENTER);
+		
 //		add(feedPanel, BorderLayout.CENTER);
-		add(feedContainer, BorderLayout.CENTER);
 	}
 	
 	private void addEvents() {
