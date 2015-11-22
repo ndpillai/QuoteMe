@@ -7,6 +7,7 @@ import java.net.Socket;
 
 import client.DataManager;
 import client.Quote;
+import client.User;
 
 public class ServerClientCommunicator extends Thread {
 
@@ -64,16 +65,24 @@ public class ServerClientCommunicator extends Thread {
 					server.sendAppInstanceToAllClients(dataManager);
 				}
 				
+				else if (info instanceof client.User) {
+					dataManager.addUser((User)info);
+					server.sendAppInstanceToAllClients(dataManager);
+				}
+				
 				else if (info instanceof String) {
 					
 				} 
 				
 			}
 		} catch (IOException ioe) {
-			if (ioe.getMessage()==null)
+			if (ioe.getMessage() == null) {
 				System.out.println("Client disconnected.");
-			else
+				server.pushToTextFile();
+			}
+			else {
 				System.out.println("IOE in ServerClientCommunicator run() " + ioe.getMessage());
+			}
 			
 			server.removeServerClientCommunicator(this);
 			// this means that the socket is closed since no more lines are being received
@@ -84,4 +93,5 @@ public class ServerClientCommunicator extends Thread {
 			} 
 		} 
 	}
+	
 }

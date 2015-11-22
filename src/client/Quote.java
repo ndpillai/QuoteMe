@@ -11,19 +11,36 @@ public class Quote implements Serializable {
 	private String text;
 	private User speaker, poster;
 	private Date datePosted;
-	private Vector<String> categories;
+	private Integer upQuotes;
+	private String category;
 	
-	// Probs need to remove
-	public Quote() {
-		System.out.println("Adding an empty quote");
+	
+	public void printThis() {
+		System.out.println("Q: '" + text + "'. Posted by " + poster.getUserName() + ". Speaked by " + speaker.getUserName());
 	}
 	
-	public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
+	public Quote() {
+		System.out.println("Empty Quote constructor");
+	}
+	
+	public Quote(String text, User speaker, User poster, Date datePosted, String category) {
 		this.text = text;
 		this.speaker = speaker;
 		this.poster = poster;
 		this.datePosted = datePosted;
-		this.categories = categories;
+		this.upQuotes = 0;
+		this.category = category;
+	}
+	
+	// For Sorting and Searching
+	public String toString() {
+		String quoteString = new String(
+				"Quote: " + 
+				this.text + " " + 
+				this.speaker.toString() + " " +
+				this.poster.toString() + " " + 
+				this.category);
+		return quoteString;
 	}
 	
 	public String getText() {
@@ -42,7 +59,15 @@ public class Quote implements Serializable {
 		return datePosted;
 	}
 	
-	public Vector<String> getCategories() {
-		return categories;
+	public String getCategory() {
+		return category;
+	}
+	
+	public Integer getUpQuotes() {
+		return upQuotes;
+	}
+	
+	public void incrementUpQuotes() {
+		upQuotes++;
 	}
 }

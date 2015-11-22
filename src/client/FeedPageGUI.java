@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -62,6 +64,12 @@ public class FeedPageGUI extends JPanel {
 		// add things to the scrollpane
 		JPanel feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
+		
+		//public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
+		Quote quote = new Quote("Quote text hello", new User(), new User(), new Date(), new String("Deep"));
+		feedPanel.add(new QuoteGUI(mainPanel, quote));
+		feedPanel.add(new QuoteGUI(mainPanel, quote));
+		/*
 		feedPanel.add(j1);
 		feedPanel.add(j2);
 		feedPanel.add(j3);
@@ -69,7 +77,7 @@ public class FeedPageGUI extends JPanel {
 		feedPanel.add(j5);
 		feedPanel.add(j6);
 		feedPanel.add(j7);
-		feedPanel.add(j8);
+		feedPanel.add(j8);*/
 
 		//scrollPane.add(feedPanel);
 		//add(scrollPane, BorderLayout.CENTER);
@@ -77,6 +85,7 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void addEvents() {
+		/*
 		j1.addActionListener(new newProfileAL(Images.parrotAvatarBluePixellated));
 		j2.addActionListener(new newProfileAL(Images.parrotAvatarGrayPixellated));
 		j3.addActionListener(new newProfileAL(Images.parrotAvatarGreenPixellated));
@@ -84,7 +93,7 @@ public class FeedPageGUI extends JPanel {
 		j5.addActionListener(new newProfileAL(Images.parrotAvatarPinkPixellated));
 		j6.addActionListener(new newProfileAL(Images.parrotAvatarPurplePixellated));
 		j7.addActionListener(new newProfileAL(Images.parrotAvatarRedPixellated));
-		j8.addActionListener(new newProfileAL(Images.parrotAvatarYellowPixellated));
+		j8.addActionListener(new newProfileAL(Images.parrotAvatarYellowPixellated));*/
 	}
 	
 	public class newProfileAL implements ActionListener {

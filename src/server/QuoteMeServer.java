@@ -46,15 +46,7 @@ public class QuoteMeServer {
 		} catch (IOException ioe) {
 			System.out.println("ioe: " + ioe.getMessage());
 		} finally {
-			
-			// Pushes the current state of the DataManager to the text file:
-			try {
-				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
-				oos.writeObject(dataManager);
-				oos.flush();
-				oos.close();
-			} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); }
-			
+						
 			if (ss != null) {
 				try {
 					ss.close();
@@ -107,6 +99,18 @@ public class QuoteMeServer {
 			}
 		}
 	} */
+	
+	public void pushToTextFile() {
+		
+		System.out.println("In pushToTextFile()");
+		
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
+			oos.writeObject(dataManager);
+			oos.flush();
+			oos.close();
+		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); }
+	}
 	
 	public static void main(String[] args) {
 		new QuoteMeServer();
