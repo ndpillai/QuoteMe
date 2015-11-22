@@ -6,19 +6,18 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import custom.QuoteMeButton;
+import custom.QuoteMeLabel;
+import custom.QuoteMeTextField;
+import library.ImageLibrary;
 import resources.CustomListeners;
+import resources.Images;
 
 public class MainPanel extends JPanel {
 	
@@ -30,9 +29,9 @@ public class MainPanel extends JPanel {
 	private QuoteGUI quotePanel;
 	private WriteQuoteGUI writeQuotePanel;
 	
-	private JTextField searchField;
-	private JButton notificationButton, writeQuoteButton, profilePageButton, feedPageButton;
-	private JButton searchButton, logoutButton;
+	private QuoteMeTextField searchField;
+	private QuoteMeButton notificationButton, writeQuoteButton, profilePageButton, feedPageButton;
+	private QuoteMeButton searchButton, logoutButton;
 	
 	public ClientPanel clientPanel;
 
@@ -59,13 +58,25 @@ public class MainPanel extends JPanel {
 //		quotePanel = new QuoteGUI(this, new Quote()); // TODO - ALL THIS TIME. THIS WAS THE SOURCE OF ALL OUR PAIN.
 		writeQuotePanel = new WriteQuoteGUI(this);
 		
-		notificationButton = new JButton("Notifications");
-		writeQuoteButton = new JButton("Write Quote");
-		profilePageButton = new JButton("My Profile");
-		feedPageButton = new JButton("Feed");
+		notificationButton = new QuoteMeButton("Notifications",
+				ImageLibrary.getImage(Images.greyButton),
+				15,100,25);
+		writeQuoteButton = new QuoteMeButton("Write Quote",
+				ImageLibrary.getImage(Images.greyButton),
+				15,100,25);
+		profilePageButton = new QuoteMeButton("My Profile",
+				ImageLibrary.getImage(Images.greyButton),
+				15,100,25);
+		feedPageButton = new QuoteMeButton("Feed",
+				ImageLibrary.getImage(Images.greyButton),
+				15,100,25);
 		
-		searchButton = new JButton("Search");
-		logoutButton = new JButton("Logout");
+		searchButton = new QuoteMeButton("Search",
+				ImageLibrary.getImage(Images.greenButton),
+				15,100,25);
+		logoutButton = new QuoteMeButton("Logout",
+				ImageLibrary.getImage(Images.greyButton),
+				15,100,25);
 	}
 	
 	private void createGUI() {
@@ -73,8 +84,8 @@ public class MainPanel extends JPanel {
 		
 		// NORTH Panel
 		// will need an image for our logo, and a textfield for searching?
-		JLabel northLabel = new JLabel("QuoteMe© ");
-		searchField = new JTextField("Search QuoteMe");
+		QuoteMeLabel northLabel = new QuoteMeLabel("QuoteMe© ");
+		searchField = new QuoteMeTextField("Search QuoteMe");
 		searchField.setPreferredSize(new Dimension(160, searchField.getPreferredSize().height));
 		JPanel northPanel = new JPanel();
         northPanel.setBackground(new Color(204, 0, 0, 123));
@@ -251,5 +262,11 @@ public class MainPanel extends JPanel {
 	public void displayPage(JPanel page) {
 		removeCurrentPanel();
 		addNewPanel(page);
+	}
+	
+	public void refreshFeed() {
+		feed.quoteList = feed.getQuotesToDisplay();
+		feed.sort();
+		feed.repopulate();
 	}
 }

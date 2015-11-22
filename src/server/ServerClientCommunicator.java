@@ -76,12 +76,14 @@ public class ServerClientCommunicator extends Thread {
 					String delims = "[,]";
 					String[] tokens = ((String)info).split(delims);
 					
+					System.out.println("receiving String in SCC: " + (String)info);
+					
 					if (tokens[0].equals("follow")) {
 						User currUser = dataManager.getUserFromUserName(tokens[1]);
 						User user = dataManager.getUserFromUserName(tokens[2]);
 						
 						currUser.followThisUser(user);
-						user.addUserFollowingUs(currUser);
+//						user.addUserFollowingUs(currUser);
 					}
 					
 					else if (tokens[0].equals("unfollow")) {
@@ -89,7 +91,7 @@ public class ServerClientCommunicator extends Thread {
 						User user = dataManager.getUserFromUserName(tokens[2]);
 						
 						currUser.unfollowThisUser(user);
-						user.removeUserFollowingUs(currUser);
+//						user.removeUserFollowingUs(currUser);
 					}
 					
 					else if (tokens[0].equals("upquote")) {
