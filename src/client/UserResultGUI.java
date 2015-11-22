@@ -40,10 +40,10 @@ public class UserResultGUI extends JPanel {
 		usernameLabel.setFontSize(16);
 		profilePicture = thisUser.getProfilePicture();
 		if (profilePicture != null) {
-			Image image = profilePicture.getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
+			Image image = profilePicture.getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 			profilePicture = new ImageIcon(image);
 		} else {
-			Image image = Images.getRandomAvatar().getImage().getScaledInstance(Constants.AvatarButtonWidth.width, Constants.AvatarButtonWidth.height,  java.awt.Image.SCALE_SMOOTH);
+			Image image = Images.getRandomAvatar().getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 			profilePicture = new ImageIcon(image);
 		}
 		//setPreferredSize(new Dimension(400, Constants.AvatarButtonSize.height));
@@ -74,7 +74,12 @@ public class UserResultGUI extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Clicked UserResultGUI");
-				goToUser(thisUser);
+				if (thisUser != null) {
+					goToUser(thisUser);
+				}
+				else {
+					System.out.println("User is null");
+				}
 			}
 		});
 	}
