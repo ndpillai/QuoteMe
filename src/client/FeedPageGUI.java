@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -35,7 +36,8 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		sortCB = new JComboBox(Constants.categoriesList);
+		String[] options = {"Recent","Popular"};
+		sortCB = new JComboBox(options);
 		
 		categoryCB = new JCheckBox[3];
 		categoryCB[0] = new JCheckBox(Constants.categoriesList[0]);
@@ -109,11 +111,16 @@ public class FeedPageGUI extends JPanel {
 	
 	public Vector<QuoteGUI> getQuotesToDisplay() {
 		//change this later, right now it gets all quotes
-		Vector<Quote> allquotes = mainPanel.clientPanel.quoteMeClient.dataManager.getAllQuotes();
 		
+		//error from dataManager
+		QuoteMeClient qm = mainPanel.clientPanel.quoteMeClient;
+		DataManager dm = qm.dataManager;
+		Vector<User> users = dm.getAllUsers();
+	//	HashMap<User, Quote> quoteMap = mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerToQuoteMap();
+
 		Vector<QuoteGUI> quotes = new Vector<QuoteGUI>();
-		for (int i=0; i<allquotes.size(); i++)
-			quotes.add(new QuoteGUI(mainPanel, allquotes.get(i)));
+//		for (Quote q: quoteMap.values())
+	//		quotes.add(new QuoteGUI(mainPanel, q)); 
 		
 		return quotes;
 	}
