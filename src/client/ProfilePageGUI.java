@@ -20,9 +20,11 @@ public class ProfilePageGUI extends JPanel {
 	private User user;
 	private ImageIcon userImageIcon;
 	private JLabel followersLabel, followedLabel;
-	private JTabbedPane profileQuoteTabs;
-	private JPanel myQuotesPanel, postedQuotesPanel, favoriteQuotesPanel;
-	private ScrollPane myQuotesPane, postedQuotesPane, favoriteQuotesPane;
+//	private JTabbedPane profileQuoteTabs;
+	private JPanel postedQuotesPanel;
+	private ScrollPane postedQuotesPane;
+//	private JPanel myQuotesPanel, favoriteQuotesPanel;
+//	private ScrollPane myQuotesPane, postedQuotesPane, favoriteQuotesPane;
 	private JButton followButton;
 	
 	private MainPanel mainPanel;
@@ -38,23 +40,34 @@ public class ProfilePageGUI extends JPanel {
 	
 	private void initializeVariables() {
 		// TODO initialize stuff correctly
-		userImageIcon = user.getProfilePicture();
+//		userImageIcon = user.getProfilePicture();
+		
 		followersLabel = new JLabel("Followers: " + user.getUsersFollowingUs().size());
 		followedLabel = new JLabel("Following: " + user.getUsersWeFollow().size());
-		profileQuoteTabs = new JTabbedPane();
-		myQuotesPanel = new JPanel();
+	//	profileQuoteTabs = new JTabbedPane();
+	//	myQuotesPanel = new JPanel();
 		postedQuotesPanel = new JPanel();
-		favoriteQuotesPanel = new JPanel();
-		myQuotesPane = new ScrollPane();
+	//	favoriteQuotesPanel = new JPanel();
+	//	myQuotesPane = new ScrollPane();
 		postedQuotesPane = new ScrollPane();
-		favoriteQuotesPane = new ScrollPane();
+	//	favoriteQuotesPane = new ScrollPane();
 		followButton = new JButton("Follow");
 	}
 	
 	private void createGUI() {
 		// TODO set layouts
 		setLayout(new BorderLayout());
-		refresh();
+		
+		
+	/*	JPanel northPanel = new JPanel();
+		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+		northPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		northPanel.add(new JLabel(userImageIcon));
+		northPanel.add(new JLabel(user.getFirstName() + " " + user.getLastName()));
+		northPanel.add(new JLabel("Username: " + user.getUserName()));
+		northPanel.add(followersLabel);
+		northPanel.add(followedLabel);
+		add(northPanel, BorderLayout.CENTER); */
 	}
 	
 	private void addEvents() {
@@ -67,18 +80,5 @@ public class ProfilePageGUI extends JPanel {
 				// TODO we also need to actually add this person as someone we follow, and vice versa
 			}
 		});
-	}
-	
-	private void refresh() {
-		// TODO
-		JPanel northPanel = new JPanel();
-		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
-		northPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		northPanel.add(new JLabel(userImageIcon));
-		northPanel.add(new JLabel(user.getFirstName() + " " + user.getLastName()));
-		northPanel.add(new JLabel("Username: " + user.getUserName()));
-		northPanel.add(followersLabel);
-		northPanel.add(followedLabel);
-		add(northPanel, BorderLayout.CENTER);
 	}
 }

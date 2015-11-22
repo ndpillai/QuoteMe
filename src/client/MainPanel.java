@@ -35,8 +35,12 @@ public class MainPanel extends JPanel {
 	private JPanel currentPanelShown;
 	
 	public MainPanel(ClientPanel clientPanel) {
-		initializeVariables();
 		this.clientPanel = clientPanel;
+		
+		//needs to be initialized
+		currentuser = new User();
+		
+		initializeVariables();
 		createGUI();
 		addEvents();
 	}
@@ -45,7 +49,7 @@ public class MainPanel extends JPanel {
 		//approveQuotePanel = new ApproveQuoteGUI(this, new Quote()); // need to add a new quote to this
 		feed = new FeedPageGUI(this);
 		postQuote = new PostQuoteGUI(this);
-		profilePage = new ProfilePageGUI(this, new User());
+		profilePage = new ProfilePageGUI(this, currentuser);
 		notifications = new NotificationGUI(this);
 		quotePanel = new QuoteGUI(this, new Quote());
 		writeQuotePanel = new WriteQuoteGUI(this);

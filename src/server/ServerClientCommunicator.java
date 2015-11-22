@@ -70,8 +70,11 @@ public class ServerClientCommunicator extends Thread {
 				
 			}
 		} catch (IOException ioe) {
-			System.out.println("IOE in ServerClientCommunicator run() " + ioe.getMessage());
-		
+			if (ioe.getMessage()==null)
+				System.out.println("Client disconnected.");
+			else
+				System.out.println("IOE in ServerClientCommunicator run() " + ioe.getMessage());
+			
 			server.removeServerClientCommunicator(this);
 			// this means that the socket is closed since no more lines are being received
 			try {
