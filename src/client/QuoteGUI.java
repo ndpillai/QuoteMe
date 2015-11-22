@@ -127,8 +127,7 @@ public class QuoteGUI extends JPanel {
 		quoteInfoPanel.setSize(new Dimension(quoteInfoPanel.getMaximumSize().width, 10));
 		add(quoteInfoPanel, BorderLayout.SOUTH);
 		
-		
-		setBorder(new EmptyBorder(5, 10, 5, 10));
+		setBorder(new EmptyBorder(10, 10, 10, 10));
 	}
 	
 	private void addEvents() {
