@@ -30,7 +30,7 @@ public class QuoteGUI extends JPanel {
 		this.thisQuote = thisQuote;
 		this.poster = thisQuote.getPoster();
 		this.speaker = thisQuote.getSpeaker();
-		this.category = new JLabel(thisQuote.getCategory());
+		this.category = new JLabel(thisQuote.getCategory() + "");
 		
 		initializeVariables();
 		createGUI();
