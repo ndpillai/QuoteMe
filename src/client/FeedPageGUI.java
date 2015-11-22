@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import resources.Constants;
 import resources.Images;
 
 public class FeedPageGUI extends JPanel {
@@ -34,13 +35,12 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		String[] categories = {"Recent", "Popular"};
-		sortCB = new JComboBox(categories);
+		sortCB = new JComboBox(Constants.categoriesList);
 		
 		categoryCB = new JCheckBox[3];
-		categoryCB[0] = new JCheckBox("Motivational");
-		categoryCB[1] = new JCheckBox("Funny");
-		categoryCB[2] = new JCheckBox("Sentimental");
+		categoryCB[0] = new JCheckBox(Constants.categoriesList[0]);
+		categoryCB[1] = new JCheckBox(Constants.categoriesList[1]);
+		categoryCB[2] = new JCheckBox(Constants.categoriesList[2]);
 		
 		scrollPane = new JScrollPane();
 		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
