@@ -1,5 +1,7 @@
 package server;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -70,10 +72,13 @@ public class ServerClientCommunicator extends Thread {
 				
 			}
 		} catch (IOException ioe) {
-			if (ioe.getMessage()==null)
+			if (ioe.getMessage() == null) {
 				System.out.println("Client disconnected.");
-			else
+				pushToTextFile();
+			}
+			else {
 				System.out.println("IOE in ServerClientCommunicator run() " + ioe.getMessage());
+			}
 			
 			server.removeServerClientCommunicator(this);
 			// this means that the socket is closed since no more lines are being received
@@ -83,5 +88,17 @@ public class ServerClientCommunicator extends Thread {
 				System.out.println("IOE in ServerClientCommunicator run() 2 " + ioe.getMessage());
 			} 
 		} 
+	}
+	
+	public void pushToTextFile() {
+		
+		System.out.println("In pushToTextFile().");
+		
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
+			oos.writeObject(dataManager);
+			oos.flush();
+			oos.close();
+		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); }
 	}
 }
