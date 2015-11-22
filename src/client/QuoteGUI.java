@@ -24,6 +24,9 @@ public class QuoteGUI extends JPanel {
 	public QuoteGUI(MainPanel mainPanel, Quote thisQuote) {
 		this.mainPanel = mainPanel;
 		this.thisQuote = thisQuote;
+		this.poster = thisQuote.getPoster();
+		this.speaker = thisQuote.getSpeaker();
+		
 		initializeVariables();
 		createGUI();
 		addEvents();
@@ -31,10 +34,12 @@ public class QuoteGUI extends JPanel {
 	
 	private void initializeVariables() {
 		//TODO
-		poster = thisQuote.getPoster();
-		speaker = thisQuote.getSpeaker();
-		//posterNameLabel = new JLabel(poster.getUserName());
-		posterNameLabel = new JLabel("Poster Name");
+		
+		poster.setFirstName("first name, mother fuckers.");
+		System.out.println(poster.getFirstName());
+		
+		posterNameLabel = new JLabel(poster.getUserName());
+		//posterNameLabel = new JLabel("Poster Name");
 		//speakerNameLabel = new JLabel(speaker.getUserName());
 		speakerNameLabel = new JLabel("Speaker Name");
 		//datePostedLabel = new JLabel(thisQuote.getDatePosted().toString());

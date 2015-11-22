@@ -212,8 +212,8 @@ public class LoginGUI extends JPanel {
 	}
 	
 	private void clearFields() {
-		usernameTF.setText("");
-		passwordTF.setText("");
+		usernameTF.setText("Enter your username.");
+		passwordTF.setText("Enter your password.");
 	}
 	
 	
