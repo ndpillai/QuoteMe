@@ -11,19 +11,19 @@ public class Quote implements Serializable {
 	private String text;
 	private User speaker, poster;
 	private Date datePosted;
-	private Vector<String> categories;
+	private String category;
 	
 	// Probs need to remove
 	public Quote() {
 		System.out.println("Adding an empty quote");
 	}
 	
-	public Quote(String text, User speaker, User poster, Date datePosted, Vector<String> categories) {
+	public Quote(String text, User speaker, User poster, Date datePosted, String category) {
 		this.text = text;
 		this.speaker = speaker;
 		this.poster = poster;
 		this.datePosted = datePosted;
-		this.categories = categories;
+		this.category = category;
 	}
 	
 	public String getText() {
@@ -42,7 +42,7 @@ public class Quote implements Serializable {
 		return datePosted;
 	}
 	
-	public Vector<String> getCategories() {
-		return categories;
+	public String getCategories() {
+		return category;
 	}
 }
