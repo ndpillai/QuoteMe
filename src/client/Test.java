@@ -28,6 +28,12 @@ public class Test {
 			User ingrid = new User("Ingrid", "Wang", "ingrid", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
 			User nav = new User("Nav", "Pillai", "nav", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
 			User laura = new User("Laura", "Gouillon", "laura", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
+			
+			amanda.followThisUser(tony);
+			amanda.followThisUser(laura);
+			amanda.followThisUser(nav);
+			amanda.followThisUser(ingrid);
+			tony.followThisUser(amanda);
 
 			Quote quote1 = new Quote("I make people who already hate me hate me more", amanda, tony, incrementAndGetDate(), 0);
 			Quote quote2 = new Quote("I ignore you if I want nothing from you", amanda, nav, incrementAndGetDate(), 1);
