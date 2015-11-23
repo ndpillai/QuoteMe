@@ -21,7 +21,6 @@ public class ClientPanel extends JPanel {
 	{
 		// The home page
 		homePagePanel = new HomePageGUI(this);
-		
 		this.quoteMeClient = quoteMeClient;
 		
 		//Set up the panel to display
@@ -38,6 +37,7 @@ public class ClientPanel extends JPanel {
 	
 	public void moveToLoginPanel() {
 		ClientPanel.this.removeAll();
+		loginPanel.clearFields();
 		ClientPanel.this.add(loginPanel);
 		ClientPanel.this.revalidate();
 		ClientPanel.this.repaint();
@@ -45,6 +45,7 @@ public class ClientPanel extends JPanel {
 	
 	public void moveToCreateUserPanel() {
 		ClientPanel.this.removeAll();
+		createUserPanel.clearFields();
 		ClientPanel.this.add(createUserPanel);
 		ClientPanel.this.revalidate();
 		ClientPanel.this.repaint();
@@ -52,6 +53,7 @@ public class ClientPanel extends JPanel {
 	
 	public void moveToHomePanel() {
 		ClientPanel.this.removeAll();
+		//refreshComponents();
 		ClientPanel.this.add(homePagePanel);
 		ClientPanel.this.revalidate();
 		ClientPanel.this.repaint();

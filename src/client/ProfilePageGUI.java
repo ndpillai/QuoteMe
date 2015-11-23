@@ -73,23 +73,40 @@ public class ProfilePageGUI extends JPanel {
 		
 		spokenQuotes = new Vector<QuoteGUI>();
 		
-		HashMap<User, Quote> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerUserMap();
-		Iterator<Entry<User, Quote>> it = speakerToQuoteMap.entrySet().iterator();
-		System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
-//	    iterate through map
-		while (it.hasNext()) {
-	    	QuoteGUI quoteGUI;
-	    	Map.Entry<User, Quote> pair = (Map.Entry<User, Quote>)it.next();
+//		HashMap<User, Quote> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerUserMap();
+//		Iterator<Entry<User, Quote>> it = speakerToQuoteMap.entrySet().iterator();
+//		System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
+//		while (it.hasNext()) {
+//	    	QuoteGUI quoteGUI;
+//	    	Map.Entry<User, Quote> pair = (Map.Entry<User, Quote>)it.next();
 //    		System.out.println("entry: " + pair.getKey().getUserName() + " " + pair.getValue().getText());
-//	    	if this pair's Speaker is the profile Page user, create a QuoteGUI for it and add it to the vector
-	    	if (((User)pair.getKey()).getUserName().equals(user.getUserName())) {
-	    		System.out.println("***WE IN***");
-	    		quoteGUI = new QuoteGUI(mainPanel, (Quote)pair.getValue());
-	    		spokenQuotes.add(quoteGUI);
-	    	}
-//	        it.remove();
-	    }
-		System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
+//	    	if ((((User)pair.getKey()).getUserName()).equals(user.getUserName())) {
+//	    		System.out.println("***WE IN***");
+//	    		quoteGUI = new QuoteGUI(mainPanel, (Quote)pair.getValue());
+//	    		spokenQuotes.add(quoteGUI);
+//	    	}
+////	        it.remove();
+//	    }
+//		System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
+		
+		HashMap<String, Vector<Quote>> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerToQuoteMap();
+		if (!speakerToQuoteMap.isEmpty()) {
+			System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
+			Vector<Quote> abc = speakerToQuoteMap.get(user.getUserName());
+			if (abc != null) {
+				System.out.println("this User's Quote vector size: " + abc.size());
+				for (int i = 0; i < abc.size(); i++) {
+					QuoteGUI quoteGUI = new QuoteGUI(mainPanel, abc.get(i));
+					spokenQuotes.add(quoteGUI);
+				}
+			}
+			else {
+				System.out.println("this User's Quote vector is null");
+			}
+
+			System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
+		}
+		
 		
 		followButton = new QuoteMeButton(
 				"Follow",

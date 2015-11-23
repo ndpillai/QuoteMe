@@ -69,10 +69,11 @@ public class FeedPageGUI extends JPanel {
 		
 		feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
-		refreshQuoteList();
 		scrollPane = new JScrollPane(feedPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		add(scrollPane, BorderLayout.CENTER);
+		refreshQuoteList();
+
 	}
 	
 	private void addEvents() {
@@ -115,7 +116,7 @@ public class FeedPageGUI extends JPanel {
 
 		if (u!=null) {
 			Vector<User> users = u.getUsersWeFollow();
-			users.add(mainPanel.clientPanel.getCurrentUser());
+			//users.add(mainPanel.clientPanel.getCurrentUser()); // Is this supposed to be commented out?
 			System.out.println("User isn't null " + users.size());
 		
 			for (int i=0; i< users.size(); i++) {
@@ -131,6 +132,12 @@ public class FeedPageGUI extends JPanel {
 			}
 		}
 		
+		if (mainPanel.clientPanel.getCurrentUser()!=null
+				&& quoteMap.containsKey(mainPanel.clientPanel.getCurrentUser().getUserName())) {
+			for (int j=0; j<quoteMap.get(mainPanel.clientPanel.getCurrentUser().getUserName()).size(); j++)
+				quotes.add(new QuoteGUI(mainPanel, quoteMap.get(mainPanel.clientPanel.getCurrentUser().getUserName()).get(j)));
+		}
+		
 		System.out.println("refreshing quotes: "+quotes.size()); 
 		return quotes; 
 	}
@@ -139,10 +146,12 @@ public class FeedPageGUI extends JPanel {
 	public void repopulate() {
 		feedPanel.removeAll();
 
+		System.out.println(quoteList.size() + " quotelist in repopulate");
+
 		for (int i=0; i<quoteList.size(); i++)
 			feedPanel.add(quoteList.get(i));
 		
-	//	feedPanel.setPreferredSize(new Dimension(quoteList.get(0).getWidth(), quoteList.get(0).getHeight()*quoteList.size()));
+	    scrollPane.getVerticalScrollBar().setValue(0);
 		revalidate();
 	}
 	
@@ -169,8 +178,9 @@ public class FeedPageGUI extends JPanel {
 				newlist = quoteList;
 			}
 		}
-
 		quoteList = newlist;
+		System.out.println(quoteList.size() + " quotelist in refreshquotelist");
+
 		sort();
 		
 		repopulate();
@@ -207,6 +217,9 @@ public class FeedPageGUI extends JPanel {
 				}
 			}
 		}
+		
+		System.out.println(quoteList.size() + " quotelist in repopulate");
+
 		repopulate();
 		
 	}
