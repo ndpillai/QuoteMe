@@ -1,15 +1,12 @@
 package client;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.util.Date;
 import java.util.Vector;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 public class SearchResultsGUI extends JPanel {
 	private Vector<User> users;
@@ -17,6 +14,8 @@ public class SearchResultsGUI extends JPanel {
 	
 	private Vector<UserResultGUI> userResults;
 	private Vector<QuoteGUI> quoteResults;
+	private JPanel northPanel;
+	private JLabel searchLabel;
 	
 	private MainPanel mp;
 	
@@ -33,6 +32,9 @@ public class SearchResultsGUI extends JPanel {
 	}
 
 	private void initializeComponents() {
+		
+		northPanel = new JPanel();
+		searchLabel = new JLabel("Showing results for: " + mp.getSearchInput());
 		outerPanel = new JPanel();
 		userResults = new Vector<UserResultGUI>();
 		
@@ -60,6 +62,10 @@ public class SearchResultsGUI extends JPanel {
 	}
 
 	private void createGUI() {
+		setLayout(new BorderLayout());
+		northPanel.add(searchLabel);
+		add(northPanel, BorderLayout.NORTH);
+		
 		JPanel centerPanel = new JPanel();
 		JPanel resultsPanel = new JPanel();
 		resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));

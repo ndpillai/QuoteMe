@@ -274,4 +274,8 @@ public class MainPanel extends JPanel {
 		feed.sort();
 		feed.repopulate();
 	}
+	
+	public String getSearchInput() {
+		return searchField.getText();
+	}
 }
