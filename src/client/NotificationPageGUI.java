@@ -16,7 +16,7 @@ import resources.Constants;
 public class NotificationPageGUI extends JPanel {
 	private Vector<NotificationGUI> notifications;
 	private JScrollPane scrollPane;
-	private JPanel notPanel, centerPanel;
+	private JPanel notPanel;
 	private MainPanel mainPanel;
 
 	public NotificationPageGUI(MainPanel mainPanel) {
