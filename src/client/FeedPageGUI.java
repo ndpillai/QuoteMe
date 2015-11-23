@@ -125,18 +125,32 @@ public class FeedPageGUI extends JPanel {
 	
 	public Vector<QuoteGUI> getQuotesToDisplay() {
 		//change this later, right now it gets all quotes
-		
+		/*
 		DataManager dm = mainPanel.clientPanel.quoteMeClient.dataManager;
-	//	HashMap<User, Quote> quoteMap = dm.getSpeakerToQuoteMap();
-		
-		System.out.println("Size of all quotes " + dm.getAllQuotes().size());
+		HashMap<String, Vector<Quote> > quoteMap = dm.getSpeakerToQuoteMap();
 		
 		Vector<QuoteGUI> quotes = new Vector<QuoteGUI>();
-		for (Quote q: dm.getAllQuotes())
-			quotes.add(new QuoteGUI(mainPanel, q)); 
+		User u = mainPanel.clientPanel.getCurrentUser();
+
+		if (u!=null) {
+		Vector<User> users = u.getUsersWeFollow();
+		System.out.println("User isn't null " + users.size());
 		
-		System.out.println("refreshing quotes: "+quotes.size());
-		return quotes;
+		for (int i=0; i< users.size(); i++) {
+			System.out.println(users.get(i).getUserName());
+			
+			if (quoteMap.containsKey(users.get(i).getUserName())) {
+				System.out.println(users.get(i).getUserName() + " exists");
+
+				for (int j=0; j<quoteMap.get(users.get(i).getUserName()).size(); j++)
+					quotes.add(new QuoteGUI(mainPanel, quoteMap.get(users.get(i).getUserName()).get(j)));
+			}
+			}
+		}
+		
+		System.out.println("refreshing quotes: "+quotes.size()); 
+		return quotes; */
+		return new Vector<QuoteGUI>();
 	}
 	
 	//with updated quoteList

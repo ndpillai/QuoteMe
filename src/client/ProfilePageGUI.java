@@ -73,7 +73,7 @@ public class ProfilePageGUI extends JPanel {
 		
 		spokenQuotes = new Vector<QuoteGUI>();
 		
-		HashMap<User, Quote> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerToQuoteMap();
+		HashMap<User, Quote> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerUserMap();
 		Iterator<Entry<User, Quote>> it = speakerToQuoteMap.entrySet().iterator();
 		System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
 //	    iterate through map
