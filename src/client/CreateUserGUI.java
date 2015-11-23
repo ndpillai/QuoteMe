@@ -61,12 +61,12 @@ public class CreateUserGUI extends JPanel {
 		
 		passwordTF.setBackground(Color.BLACK);
 		passwordTF.setForeground(Color.WHITE);
-		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		passwordTF.setHorizontalAlignment(JTextField.CENTER);
 		
 		confirmPasswordTF.setBackground(Color.BLACK);
 		confirmPasswordTF.setForeground(Color.WHITE);
-		confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		confirmPasswordTF.setHorizontalAlignment(JTextField.CENTER);
 		
 		passwordTF.setEchoChar((char) 0);

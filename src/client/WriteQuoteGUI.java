@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,13 +16,11 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import custom.QuoteMeButton;
 import custom.QuoteMeLabel;
@@ -43,11 +42,11 @@ public class WriteQuoteGUI extends JPanel {
 	private String [] defaultResults = {"Search for a user"};
 	private ArrayList<User> userResults; // to be an array or an arraylist?
 	private JComboBox searchUserComboBox;
-	private QuoteMeLabel quoteLabel;
 	private JTextArea quoteTextArea;
 	private QuoteMeLabel characterCountLabel, categoryLabel;
 	private QuoteMeButton submitQuoteButton;
 	private JComboBox<String> categoryComboBox;
+	private Insets spacing = new Insets(10,10,10,10);
 	
 	private MainPanel mainPanel;
 	
@@ -69,7 +68,6 @@ public class WriteQuoteGUI extends JPanel {
 		searchUserComboBox.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		searchUserComboBox.setSize(100, searchUserComboBox.getPreferredSize().height);
 		
-		quoteLabel = new QuoteMeLabel("Quote:");
 		quoteTextArea = new JTextArea();
 		quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		characterCountLabel = new QuoteMeLabel("Characters: 0");
@@ -85,6 +83,7 @@ public class WriteQuoteGUI extends JPanel {
 	}
 	
 	private void createGUI() {
+		setBorder(new EmptyBorder(spacing));
 		setLayout(new BorderLayout());
 		
 		searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.Y_AXIS));
@@ -102,10 +101,8 @@ public class WriteQuoteGUI extends JPanel {
 		
 		JPanel middlePanel = new JPanel();
 		middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
-				
-		middlePanel.add(quoteLabel);
-		
-		JPanel quotePanel = new JPanel();
+
+		quoteTextArea.setBorder(new EmptyBorder(spacing));
 		middlePanel.add(quoteTextArea);
 		
 		JPanel categoryPanel = new JPanel();
@@ -165,6 +162,7 @@ public class WriteQuoteGUI extends JPanel {
 					
 					Quote newQuote = new Quote(quoteTextArea.getText(), getSpeaker(), getPoster(), new Date(), getCategory());
 					mainPanel.clientPanel.quoteMeClient.sendObject(newQuote);
+					mainPanel.refreshFeed();
 					
 					printComponents();
 					resetComponents();
