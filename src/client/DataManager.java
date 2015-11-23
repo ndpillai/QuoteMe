@@ -12,8 +12,9 @@ public class DataManager implements Serializable {
 	private Vector<Quote> allQuotes;
 	private HashMap<String, User> nameMap; // Usernames to their Users
 	private HashMap<String, User> emailMap; // Emails to their users
-	private HashMap<User, Quote> speakerToQuoteMap; // Speakers to their Quotes*
-	private HashMap<User, Quote> posterToQuoteMap; // Posters to their Quotes
+	private HashMap<String, Vector<Quote> > speakerToQuoteMap; // Speakers to their Quotes*
+	private HashMap<String, Vector<Quote> > posterToQuoteMap; // Posters to their Quotes
+	private HashMap<User,Quote> speakerUserMap;
 
 	//	public QuoteMeFrame qmf;
 	
@@ -40,14 +41,23 @@ public class DataManager implements Serializable {
 		
 		nameMap = new HashMap<String, User>();
 		emailMap = new HashMap<String, User>();
-		speakerToQuoteMap = new HashMap<User, Quote>();
-		posterToQuoteMap = new HashMap<User, Quote>();
+		speakerToQuoteMap = new HashMap<String, Vector<Quote> >();
+		posterToQuoteMap = new HashMap<String, Vector<Quote> >();
+		speakerUserMap = new HashMap<User, Quote>();
 	}
 	
 	public void addQuote(Quote quote) {
 		allQuotes.add(quote);
-		speakerToQuoteMap.put(quote.getSpeaker(), quote);
-		posterToQuoteMap.put(quote.getPoster(), quote);		
+		
+		if (!speakerToQuoteMap.containsKey(quote.getSpeaker().getUserName()))
+			speakerToQuoteMap.put(quote.getSpeaker().getUserName(), new Vector<Quote>());
+		speakerToQuoteMap.get(quote.getSpeaker().getUserName()).add(quote);
+		
+		if (!posterToQuoteMap.containsKey(quote.getPoster().getUserName()))
+			posterToQuoteMap.put(quote.getPoster().getUserName(), new Vector<Quote>());
+		posterToQuoteMap.get(quote.getPoster().getUserName()).add(quote);	
+		
+		speakerUserMap.put(quote.getSpeaker(), quote);
 	}
 	
 	public void addUser(User user) {
@@ -73,12 +83,17 @@ public class DataManager implements Serializable {
 		return emailMap;
 	}
 	
-	public HashMap<User, Quote> getSpeakerToQuoteMap() {
+	public HashMap<String, Vector<Quote> > getSpeakerToQuoteMap() {
 		return speakerToQuoteMap;
 	}
 	
-	public HashMap<User, Quote> getPosterToQuoteMap() {
+	public HashMap<String, Vector<Quote> > getPosterToQuoteMap() {
 		return posterToQuoteMap;
+	}
+	
+	public HashMap<User, Quote> getSpeakerUserMap() {
+		System.out.println("Hello");
+		return speakerUserMap;
 	}
 	
 	public boolean hasName(String name) {

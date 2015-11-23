@@ -23,6 +23,7 @@ import resources.Constants;
 import resources.Images;
 
 public class NotificationGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private MainPanel mainPanel;
 	private User sender;
 	private String username;
