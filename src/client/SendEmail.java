@@ -94,4 +94,8 @@ public class SendEmail {
         		+ "Happy Quoting, " + firstName + "! \n\nBest, \nThe QuoteMe team";
 		sendFromGMail(from, pass, to, subject, body);
 	}
+	
+	public static void sendNotificationEmail(String emailAddress, String firstName, String userName) {
+		System.out.println("SENDING notification email");
+	}
 }

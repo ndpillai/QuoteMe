@@ -154,8 +154,15 @@ public class WriteQuoteGUI extends JPanel {
 				else {
 					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "Wow, congrats on making it big in life.", "Quote submitted!",  JOptionPane.PLAIN_MESSAGE);
 					
+					// Send a notification to current user
+					System.out.println("In WriteQuoteGUI: Adding newQuoteNotification");
+					NotificationGUI newQuoteNotification = new NotificationGUI(mainPanel, mainPanel.clientPanel.getCurrentUser(), "New Quote", new Date());
+					
+					getSpeaker().addNotification(newQuoteNotification);
+					
 					Quote newQuote = new Quote(quoteTextArea.getText(), getSpeaker(), getPoster(), new Date(), getCategory());
 					mainPanel.clientPanel.quoteMeClient.sendObject(newQuote);
+					mainPanel.refreshFeed();
 					
 					printComponents();
 					resetComponents();
@@ -191,6 +198,7 @@ public class WriteQuoteGUI extends JPanel {
 		for (int i=1; i<userResults.size()+1; i++) {
 			usernameResults[i] = userResults.elementAt(i-1).getUserName();
 		}
+		
 		
 		return usernameResults;
 	}
