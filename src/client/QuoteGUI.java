@@ -49,7 +49,7 @@ public class QuoteGUI extends JPanel {
 		posterNameLabel = new QuoteMeLabel(poster.getUserName(), 16, true);
 		speakerNameLabel = new QuoteMeLabel(speaker.getUserName(), 16, true);
 		datePostedLabel = new QuoteMeLabel(thisQuote.getDatePosted().toString(), 16, true);
-		quoteTextArea = new JTextArea(5, 20);
+		quoteTextArea = new JTextArea(2, 20);
 		quoteTextArea.setText('"' + thisQuote.getText() + '"');
 		quoteTextArea.setEditable(false);
 		quoteTextArea.setLineWrap(true);
@@ -83,38 +83,7 @@ public class QuoteGUI extends JPanel {
 	}
 	
 	private void createGUI() {
-		
-		/*
 		setLayout(new BorderLayout());
-		//setSize(this.getMaximumSize().width, this.getMaximumSize().height);
-		setSize(this.getMaximumSize().width - 50, 100);
-		
-		JPanel usersPanel = new JPanel();
-		usersPanel.setLayout(new BoxLayout(usersPanel,  BoxLayout.Y_AXIS));
-		
-		speakerButton.setSize(Constants.AvatarButtonWidth);
-		posterButton.setSize(Constants.AvatarButtonWidth);
-		usersPanel.add(speakerButton);
-		usersPanel.add(speakerNameLabel);
-		usersPanel.add(posterButton);
-		usersPanel.add(posterNameLabel);
-
-		add(usersPanel, BorderLayout.WEST);
-		
-		JPanel centerPanel = new JPanel(new BorderLayout());
-		centerPanel.add(quoteTextArea, BorderLayout.CENTER);
-		
-		JPanel interactPanel = new JPanel(new FlowLayout());
-		interactPanel.add(upQuoteButton);
-		// need to add categories
-		interactPanel.add(new JLabel("CATEGORIES"));
-		
-		centerPanel.add(interactPanel, BorderLayout.SOUTH);
-		add(centerPanel, BorderLayout.CENTER);*/
-		
-		setLayout(new BorderLayout());
-		//setSize(this.getMaximumSize().width, 30);
-		//setPreferredSize(new Dimension(this.getMaximumSize().width, this.getMaximumSize().height));
 		
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(Color.GRAY);
