@@ -143,7 +143,7 @@ public class ProfilePageGUI extends JPanel {
 		northPanel.add(innerPanel, BorderLayout.NORTH);
 		northPanel.add(statsPanel, BorderLayout.CENTER);
 		add(northPanel, BorderLayout.NORTH);
-	
+
 		addQuotes();
 		scrollPane = new JScrollPane(myQuotesPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);

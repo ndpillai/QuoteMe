@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import custom.QuoteMeLabel;
+
 public class SearchResultsGUI extends JPanel {
 	private Vector<User> users;
 	private Vector<Quote> quotes;
@@ -34,7 +36,7 @@ public class SearchResultsGUI extends JPanel {
 	private void initializeComponents() {
 		
 		northPanel = new JPanel();
-		searchLabel = new JLabel("Showing results for: " + mp.getSearchInput());
+		searchLabel = new QuoteMeLabel("Showing results for: " + mp.getSearchInput());
 		outerPanel = new JPanel();
 		userResults = new Vector<UserResultGUI>();
 		
@@ -66,7 +68,6 @@ public class SearchResultsGUI extends JPanel {
 		northPanel.add(searchLabel);
 		add(northPanel, BorderLayout.NORTH);
 		
-		JPanel centerPanel = new JPanel();
 		JPanel resultsPanel = new JPanel();
 		resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
 		// Add stuff to resultsPanel
@@ -79,8 +80,7 @@ public class SearchResultsGUI extends JPanel {
 		
 		jsp = new JScrollPane(resultsPanel);
 		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		centerPanel.add(jsp);
-		add(centerPanel, BorderLayout.CENTER);
+		add(jsp, BorderLayout.CENTER);
 		
 //		int numberRows = userResults.size() + quoteResults.size();
 //		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));

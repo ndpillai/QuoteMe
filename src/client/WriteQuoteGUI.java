@@ -146,6 +146,8 @@ public class WriteQuoteGUI extends JPanel {
 		quoteTextArea.addFocusListener(new CustomListeners.RemoveTextAdapter(quoteTextArea,"Enter your quote here."));
 		quoteTextArea.setText("Enter your quote here");
 		quoteTextArea.setForeground(Color.GRAY);
+		quoteTextArea.setWrapStyleWord(true);
+		quoteTextArea.setLineWrap(true);
 		
 		submitQuoteButton.addActionListener(new ActionListener() {
 			@Override
