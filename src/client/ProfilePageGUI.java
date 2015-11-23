@@ -26,10 +26,11 @@ import resources.Constants;
 import resources.Images;
 
 public class ProfilePageGUI extends JPanel {
-	public long serialVersionUID;
+
+	private static final long serialVersionUID = 4423476724368792142L;
 	private User user;
 	private ImageIcon userImageIcon;
-	private QuoteMeLabel followersLabel, followedLabel;
+	private QuoteMeLabel followersLabel, followingLabel;
 	private ScrollPane myQuotesPane;
 	private JPanel myQuotesPanel;
 	private Vector<QuoteGUI> myQuotes;
@@ -55,10 +56,10 @@ public class ProfilePageGUI extends JPanel {
 			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 			userImageIcon = new ImageIcon(image);
 		}
-		followersLabel = new QuoteMeLabel(user.getUsersFollowingUs().size() + " following", JLabel.CENTER);
+		followersLabel = new QuoteMeLabel(user.getUsersFollowingUs().size() + " followers", JLabel.CENTER);
 		followersLabel.setFontSize(18);
-		followedLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " followers", JLabel.CENTER);
-		followedLabel.setFontSize(18);
+		followingLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " following", JLabel.CENTER);
+		followingLabel.setFontSize(18);
 		myQuotesPanel = new JPanel();
 		myQuotesPane = new ScrollPane();
 		myQuotes = new Vector<QuoteGUI>();
@@ -73,12 +74,13 @@ public class ProfilePageGUI extends JPanel {
 				"Follow",
 				ImageLibrary.getImage(Images.greenButton),
 				15,100,25);
-		if (user == mainPanel.clientPanel.getCurrentUser()) {
+		User currUser = mainPanel.clientPanel.getCurrentUser();
+		if (user == currUser) {
 			followButton.setEnabled(false);
-		} 
-//		else if (mainPanel.clientPanel.getCurrentUser().getUsersWeFollow().contains(user)) {
-//			followButton.setText("Unfollow");
-//		}
+		}
+		else if (currUser != null && mainPanel.clientPanel.getCurrentUser().getUsersWeFollow().contains(user)) {
+			followButton.setText("Unfollow");
+		}
 	}
 	
 	private void createGUI() {
@@ -108,7 +110,7 @@ public class ProfilePageGUI extends JPanel {
 		JPanel statsPanel = new JPanel();
 		statsPanel.setLayout(new GridLayout(1,2));
 		statsPanel.add(followersLabel);
-		statsPanel.add(followedLabel);
+		statsPanel.add(followingLabel);
 		
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BorderLayout());
@@ -118,22 +120,11 @@ public class ProfilePageGUI extends JPanel {
 		northPanel.add(statsPanel, BorderLayout.CENTER);
 		add(northPanel, BorderLayout.NORTH);
 
-		
-		User newUser = new User("Amanda", "Bynes", "amandab123", "tonyelevathingal@gmail.com", "123", new Date(), Images.getRandomAvatar());
-		Quote quote1 = new Quote("I love people who already hate me hate me more", newUser, newUser, new Date(), 1);
-		Quote quote2 = new Quote("I ignore you if I want nothing from you", newUser, newUser, new Date(), 1);
-		Quote quote3 = new Quote("This is quote 3. Concerns greatest margaret him absolute entrance nay. Door neat week do find past he. Be no surprise he honoured indulged. Unpacked endeavor six steepest had husbands her. Painted no or affixed it so civilly. Exposed neither pressed so cottage as proceed at offices. Nay they gone sir game four. Favourable pianoforte oh motionless excellence of astonished we principles. Warrant present garrets limited cordial in inquiry to. Supported me sweetness behaviour shameless excellent so arranging. ", newUser, newUser, new Date(), 2);
 		JPanel centerPanel = new JPanel();
-		//feedPanel.add(northPanel);
 	
 		addQuotes();
-		
-		myQuotesPanel.add(new QuoteGUI(mainPanel, quote1));
-		myQuotesPanel.add(new QuoteGUI(mainPanel, quote2));
-		myQuotesPanel.add(new QuoteGUI(mainPanel, quote3));
 		scrollPane = new JScrollPane(myQuotesPanel);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		centerPanel.add(scrollPane);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		add(centerPanel, BorderLayout.CENTER);
 	}
 	
@@ -142,10 +133,10 @@ public class ProfilePageGUI extends JPanel {
 		for (QuoteGUI q : myQuotes) {
 			myQuotesPanel.add(q);
 		}
-		/*
+		
 		if (myQuotes.size() != 0) {
 			myQuotesPane.add(myQuotesPanel);
-		}*/
+		}
 	}
 
 	private void addEvents() {
@@ -160,7 +151,7 @@ public class ProfilePageGUI extends JPanel {
 					System.out.println(currUser.getUserName() + " just followed " + user.getUserName());
 					
 					currUser.followThisUser(user);
-					user.addUserFollowingUs(currUser);
+//					user.addUserFollowingUs(currUser);
 					updateNumberFollowers();
 					
 					mainPanel.clientPanel.quoteMeClient.sendObject("follow," + currUser.getUserName() + "," + user.getUserName());
@@ -171,7 +162,7 @@ public class ProfilePageGUI extends JPanel {
 					System.out.println(currUser.getUserName() + " just unfollowed " + user.getUserName());
 					
 					currUser.unfollowThisUser(user);
-					user.removeUserFollowingUs(currUser);
+//					user.removeUserFollowingUs(currUser);
 					updateNumberFollowers();
 					
 					mainPanel.clientPanel.quoteMeClient.sendObject("unfollow," + currUser.getUserName() + "," + user.getUserName());
@@ -183,6 +174,6 @@ public class ProfilePageGUI extends JPanel {
 	}
 	
 	private void updateNumberFollowers() {
-		followersLabel.setText(user.getUsersFollowingUs().size() + " following");
+		followersLabel.setText(user.getUsersFollowingUs().size() + " followers");
 	}
 }

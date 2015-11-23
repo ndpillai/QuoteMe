@@ -14,7 +14,7 @@ public class User implements Serializable {
 	private Date memberSince;
 	private ImageIcon profilePicture;
 	private Vector<Quote> myQuotes;
-	private Vector<Notification> myNotifications;
+	private Vector<NotificationGUI> myNotifications;
 	private Vector<User> usersWeFollow, usersFollowingUs;
 	private Vector<Quote> feedQuotesBuffer;
 	
@@ -32,7 +32,7 @@ public class User implements Serializable {
 		this.password = "1234";
 		this.memberSince = new Date();
 		myQuotes = new Vector<Quote>();
-		myNotifications = new Vector<Notification>();
+		myNotifications = new Vector<NotificationGUI>();
 		usersWeFollow = new Vector<User>();
 		usersFollowingUs = new Vector<User>();
 		feedQuotesBuffer = new Vector<Quote>();	
@@ -47,7 +47,7 @@ public class User implements Serializable {
 		this.memberSince = memberSince;
 		this.profilePicture = avatar;
 		myQuotes = new Vector<Quote>();
-		myNotifications = new Vector<Notification>();
+		myNotifications = new Vector<NotificationGUI>();
 		usersWeFollow = new Vector<User>();
 		usersFollowingUs = new Vector<User>();
 		feedQuotesBuffer = new Vector<Quote>();
@@ -128,20 +128,26 @@ public class User implements Serializable {
 		return myQuotes;
 	}
 	
-	public void addNotification(Notification n) {
+	public void addNotification(NotificationGUI n) {
 		myNotifications.add(n);
 	}
 	
-	public Vector<Notification> getNotifications() {
+	public Vector<NotificationGUI> getNotifications() {
 		return myNotifications;
 	}
 	
 	public void followThisUser(User u) {
-		usersWeFollow.add(u);
+		// we follow the user passed in
+		this.usersWeFollow.add(u);
+		// the user that was passed in is updated, as we are now following them
+		u.addUserFollowingUs(this);
 	}
 	
 	public void unfollowThisUser(User u) {
-		usersWeFollow.remove(u);
+		// we unfollow the user passed in
+		this.usersWeFollow.remove(u);
+		// the user that was passed in is updated, as we are now NOT following them
+		u.removeUserFollowingUs(this);
 	}
 	
 	public Vector<User> getUsersWeFollow() {

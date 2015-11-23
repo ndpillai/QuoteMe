@@ -24,9 +24,9 @@ public class SearchResultsGUI extends JPanel {
 	private JScrollPane jsp;
 
 
-	public SearchResultsGUI(Vector<User> u, Vector<Quote> q, MainPanel mp) {
-		users = u;
-		quotes = q;
+	public SearchResultsGUI(Vector<User> users, Vector<Quote> quotes, MainPanel mp) {
+		this.users = users;
+		this.quotes = quotes;
 		this.mp = mp;
 		initializeComponents();
 		createGUI();
@@ -60,7 +60,6 @@ public class SearchResultsGUI extends JPanel {
 	}
 
 	private void createGUI() {
-
 		JPanel centerPanel = new JPanel();
 		JPanel resultsPanel = new JPanel();
 		resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
@@ -77,10 +76,6 @@ public class SearchResultsGUI extends JPanel {
 		centerPanel.add(jsp);
 		add(centerPanel, BorderLayout.CENTER);
 		
-		
-		//int numberRows = userResults.size() + quoteResults.size();
-		//setLayout(new GridLayout(numberRows, 1));
-
 //		int numberRows = userResults.size() + quoteResults.size();
 //		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
 
