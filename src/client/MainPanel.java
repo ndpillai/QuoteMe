@@ -43,7 +43,7 @@ public class MainPanel extends JPanel {
 	public MainPanel(ClientPanel clientPanel) {
 		this.clientPanel = clientPanel;
 		
-		//needs to be initialized
+		//needs to be initializedd
 		currentuser = new User();
 		
 		initializeVariables();
