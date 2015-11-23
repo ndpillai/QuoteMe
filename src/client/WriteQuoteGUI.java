@@ -167,7 +167,7 @@ public class WriteQuoteGUI extends JPanel {
 					
 					Quote newQuote = new Quote(quoteTextArea.getText(), getSpeaker(), getPoster(), new Date(), getCategory());
 					mainPanel.clientPanel.quoteMeClient.sendObject(newQuote);
-				//	mainPanel.clientPanel.quoteMeClient.dataManager.addQuote(newQuote);
+					mainPanel.clientPanel.quoteMeClient.dataManager.addQuote(newQuote);
 					mainPanel.refreshFeed();
 					
 					printComponents();

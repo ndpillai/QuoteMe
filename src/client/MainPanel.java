@@ -44,7 +44,7 @@ public class MainPanel extends JPanel {
 	public MainPanel(ClientPanel clientPanel) {
 		this.clientPanel = clientPanel;
 		
-		//needs to be initializedd
+		//needs to be initialized
 		currentuser = new User();
 		
 		initializeVariables();
@@ -53,11 +53,9 @@ public class MainPanel extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		//approveQuotePanel = new ApproveQuoteGUI(this, new Quote()); // need to add a new quote to this
 		feed = new FeedPageGUI(this);
 		profilePage = new ProfilePageGUI(this, currentuser);
 		notifications = new NotificationPageGUI(this);
-//		quotePanel = new QuoteGUI(this, new Quote()); // TODO - ALL THIS TIME. THIS WAS THE SOURCE OF ALL OUR PAIN.
 		writeQuotePanel = new WriteQuoteGUI(this);
 		
 		notificationButton = new QuoteMeButton("Notifications",
@@ -85,7 +83,6 @@ public class MainPanel extends JPanel {
 		setLayout(new BorderLayout());
 		
 		// NORTH Panel
-		// will need an image for our logo, and a textfield for searching?
 		Image image = ImageLibrary.getImage(Images.parrotAvatarRedPixellated).getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 		ImageIcon logo = new ImageIcon(image);
 		JLabel logoLabel = new JLabel(logo);
