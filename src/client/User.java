@@ -130,6 +130,7 @@ public class User implements Serializable {
 	
 	public void addNotification(NotificationGUI n) {
 		myNotifications.add(n);
+		System.out.println("In User " + userName + ": Adding notification to myNotifications");
 	}
 	
 	public Vector<NotificationGUI> getNotifications() {

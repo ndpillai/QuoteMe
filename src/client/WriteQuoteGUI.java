@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -145,6 +146,10 @@ public class WriteQuoteGUI extends JPanel {
 			}
 		});
 		
+		quoteTextArea.addFocusListener(new CustomListeners.RemoveTextAdapter(quoteTextArea,"Enter your quote here."));
+		quoteTextArea.setText("Enter your quote here");
+		quoteTextArea.setForeground(Color.GRAY);
+		
 		submitQuoteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -155,6 +160,13 @@ public class WriteQuoteGUI extends JPanel {
 					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "Wow, congrats on making it big in life.", "Quote submitted!",  JOptionPane.PLAIN_MESSAGE);
 					
 					System.out.println("you wrote a quote");
+					
+					// Send a notification to current user
+					System.out.println("In WriteQuoteGUI: Adding newQuoteNotification");
+					NotificationGUI newQuoteNotification = new NotificationGUI(mainPanel, mainPanel.clientPanel.getCurrentUser(), "New Quote", new Date());
+					
+					getSpeaker().addNotification(newQuoteNotification);
+					
 					Quote newQuote = new Quote(quoteTextArea.getText(), getSpeaker(), getPoster(), new Date(), getCategory());
 					mainPanel.clientPanel.quoteMeClient.sendObject(newQuote);
 				//	mainPanel.clientPanel.quoteMeClient.dataManager.addQuote(newQuote);
@@ -194,6 +206,7 @@ public class WriteQuoteGUI extends JPanel {
 		for (int i=1; i<userResults.size()+1; i++) {
 			usernameResults[i] = userResults.elementAt(i-1).getUserName();
 		}
+		
 		
 		return usernameResults;
 	}

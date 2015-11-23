@@ -40,18 +40,28 @@ public class ClientPanel extends JPanel {
 		ClientPanel.this.removeAll();
 		ClientPanel.this.add(loginPanel);
 		ClientPanel.this.revalidate();
+		ClientPanel.this.repaint();
 	}
 	
 	public void moveToCreateUserPanel() {
 		ClientPanel.this.removeAll();
 		ClientPanel.this.add(createUserPanel);
 		ClientPanel.this.revalidate();
+		ClientPanel.this.repaint();
+	}
+	
+	public void moveToHomePanel() {
+		ClientPanel.this.removeAll();
+		ClientPanel.this.add(homePagePanel);
+		ClientPanel.this.revalidate();
+		ClientPanel.this.repaint();
 	}
 	
 	public void moveToMainPanel() {
 		ClientPanel.this.removeAll();
 		ClientPanel.this.add(mainPanel);
 		ClientPanel.this.revalidate();
+		ClientPanel.this.repaint();
 	}
 	
 	public void setCurrentUser(User user) {

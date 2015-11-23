@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,7 +41,7 @@ public class CreateUserGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public QuoteMeTextField firstnameTF, lastnameTF, emailTF, usernameTF;
 	public JPasswordField passwordTF, confirmPasswordTF;
-	public QuoteMeButton createUserButton;
+	public QuoteMeButton createUserButton, backButton;
 	
 	private ClientPanel clientPanel;
 	
@@ -73,6 +74,7 @@ public class CreateUserGUI extends JPanel {
 		confirmPasswordTF.setEchoChar((char) 0);
 		createUserButton = new QuoteMeButton("Create User", ImageLibrary.getImage(Images.greenButton),
 				15,100,25);
+		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 100, 25);
 	}
 	
 	private void createGUI() {
@@ -88,8 +90,18 @@ public class CreateUserGUI extends JPanel {
 		createUserPanel.add(usernameTF);
 		createUserPanel.add(passwordTF);
 		createUserPanel.add(confirmPasswordTF);
-		createUserPanel.add(createUserButton);
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.add(backButton);
+		buttonPanel.add(Box.createHorizontalStrut(10));
+		buttonPanel.add(createUserButton);
+		buttonPanel.setBackground(new Color(204, 0, 0, 123));
+		
+		createUserPanel.add(Box.createVerticalStrut(7));
+		createUserPanel.add(buttonPanel);
 		createUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		createUserPanel.add(Box.createVerticalStrut(7));
 		add(createUserPanel, BorderLayout.SOUTH);
 	}
 	
@@ -110,7 +122,7 @@ public class CreateUserGUI extends JPanel {
 			public void focusLost(FocusEvent e) {
 				String password = new String(passwordTF.getPassword());
 				if (password.isEmpty() || password.equals("Enter password")) {
-					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 					passwordTF.setEchoChar((char) 0); 
 					passwordTF.setText("Enter password");
 				}
@@ -126,7 +138,7 @@ public class CreateUserGUI extends JPanel {
 			public void focusLost(FocusEvent e) {
 				String password = new String(confirmPasswordTF.getPassword());
 				if (password.isEmpty() || password.equals("Confirm password")) {
-					confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 					confirmPasswordTF.setEchoChar((char) 0); 
 					confirmPasswordTF.setText("Confirm password");
 				}
@@ -208,6 +220,12 @@ public class CreateUserGUI extends JPanel {
 			else {
 				System.out.println("invalid");
 			}*/
+			}
+		});
+		
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				clientPanel.moveToHomePanel();
 			}
 		});
 	}

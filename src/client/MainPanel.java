@@ -250,7 +250,7 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void displayNotificationPage() {
-		//notifications = new NotificationsGUI(this);
+		notifications = new NotificationPageGUI(this);
 		notifications.refresh();
 		notifications.setVisible(true);
 		removeCurrentPanel();
@@ -273,5 +273,9 @@ public class MainPanel extends JPanel {
 		feed.quoteList = feed.getQuotesToDisplay();
 		feed.sort();
 		feed.repopulate();
+	}
+	
+	public String getSearchInput() {
+		return searchField.getText();
 	}
 }

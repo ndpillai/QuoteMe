@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -130,12 +132,16 @@ public class QuoteGUI extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				thisQuote.incrementUpQuotes();
 				upQuotes.setText("" + thisQuote.getUpQuotes());
+				System.out.println("thisQuote.getUpQuotes() after: " + thisQuote.getUpQuotes());
+				upQuoteButton.setEnabled(false);
+				
+				NotificationGUI newUpQuoteNotification = new NotificationGUI(mainPanel, mainPanel.clientPanel.getCurrentUser(), "New UpQuote", new Date());
+				thisQuote.getSpeaker().addNotification(newUpQuoteNotification);
 				repaint();
 				revalidate();
 				
 				// We need to add a notification about this
 				//SendEmail.sendUpQuoteEmail(speaker, poster, thisQuote);
-				
 			}
 		});
 	}
