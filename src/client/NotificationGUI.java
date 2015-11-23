@@ -2,25 +2,19 @@ package client;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
 
 import custom.QuoteMeButton;
 import custom.QuoteMeLabel;
-import library.FontLibrary;
 import library.ImageLibrary;
 import resources.Constants;
 import resources.Images;
@@ -33,7 +27,11 @@ public class NotificationGUI extends JPanel {
 	private JButton senderAvatarButton;
 	private String message;
 	private Date date;
-	private JLabel senderLabel, messageLabel, dateLabel;
+	private QuoteMeLabel senderLabel, messageLabel, dateLabel;
+	
+	private String quoteString;
+	
+	private QuoteMeButton viewButton;
 	
 	private boolean read;
 	
@@ -54,12 +52,14 @@ public class NotificationGUI extends JPanel {
 	}
 	
 	
-	public NotificationGUI(MainPanel mainPanel, String sender, String message, Date date) {
+	public NotificationGUI(MainPanel mainPanel, String senderName, String message, Date date) {
 		this.mainPanel = mainPanel;
-		this.username = sender;
+		this.username = senderName;
 		this.message = message;
 		this.date = date;
-		this.senderAvatar = new ImageIcon(Images.parrotAvatarBluePixellated);
+		this.sender = this.mainPanel.clientPanel.quoteMeClient.dataManager.getUserFromUserName(senderName);
+		//this.senderAvatar = new ImageIcon(Images.parrotAvatarBluePixellated);
+		this.senderAvatar = this.sender.getProfilePicture();
 		this.senderAvatarButton = new JButton(senderAvatar);
 		
 		initializeVariables();
@@ -67,16 +67,32 @@ public class NotificationGUI extends JPanel {
 		addEvents();
 	}
 	
+	public NotificationGUI(MainPanel mainPanel, String senderName, String message, Date date, String quoteString) {
+		this.mainPanel = mainPanel;
+		this.username = senderName;
+		this.message = message;
+		this.date = date;
+		this.sender = this.mainPanel.clientPanel.quoteMeClient.dataManager.getUserFromUserName(senderName);
+		//this.senderAvatar = new ImageIcon(Images.parrotAvatarBluePixellated);
+		this.senderAvatar = this.sender.getProfilePicture();
+		this.senderAvatarButton = new JButton(senderAvatar);
+		this.quoteString = quoteString;
+		
+		initializeVariables();
+		createGUI();
+		addEvents();
+	}
+	
 	private void initializeVariables() {
-		senderLabel = new JLabel(username);
-		messageLabel = new JLabel(message);
-		dateLabel = new JLabel(date.toString());
-		
+		senderLabel = new QuoteMeLabel(username);
+		messageLabel = new QuoteMeLabel(message);
+		//dateLabel = new QuoteMeLabel("                " + date.toString());
+		dateLabel = new QuoteMeLabel(date.toString());
+		viewButton = new QuoteMeButton("View", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
+
 		read = false;
-		
 
 		// Scale the sender's avatar
-		//senderAvatar = sender.getProfilePicture(); // NEED TO UNCOMMENT
 		senderAvatar = new ImageIcon(Images.parrotAvatarGreenPixellated);
 		if (senderAvatar != null) {
 			Image senderImage = senderAvatar.getImage();
@@ -91,6 +107,43 @@ public class NotificationGUI extends JPanel {
 	private void createGUI() {
 		setLayout(new BorderLayout());
 		
+		if (message.equals("New Quote")) {
+			System.out.println("New Quote createGUI()");
+			JPanel northPanel = new JPanel();
+			//northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
+			northPanel.setBackground(Color.BLUE);
+			northPanel.add(senderAvatarButton);
+			
+			JPanel inNorthPanel = new JPanel();
+			//inNorthPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+			inNorthPanel.setLayout(new GridLayout(2,1));
+			senderLabel.setText(senderLabel.getText() + " just quoted you!");
+			inNorthPanel.add(senderLabel);
+			inNorthPanel.add(dateLabel);
+			inNorthPanel.setBackground(Color.BLUE);
+			
+			northPanel.add(inNorthPanel);
+			add(northPanel, BorderLayout.NORTH);
+			
+			JPanel previewPanel = new JPanel();
+			String substring = "";
+			if (quoteString.length() < 70) substring = quoteString;
+			else substring =  quoteString.substring(0, 70) + "..." ;
+			JLabel quotePreviewLabel = new JLabel('"' + substring + '"');
+			
+			previewPanel.add(quotePreviewLabel);
+			previewPanel.add(viewButton);
+			previewPanel.setBackground(Color.WHITE);
+			add(previewPanel, BorderLayout.SOUTH);
+		}
+		else if (message.equals("New Follower")) {
+			System.out.println("New Follower createGUI()");
+		}
+		else if (message.equals("New UpQuote")) {
+			System.out.println("New UpQuote createGUI()");
+		}
+		
+		/*
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(Color.YELLOW);
 		northPanel.add(senderAvatarButton);
@@ -105,7 +158,7 @@ public class NotificationGUI extends JPanel {
 		add(messageLabel, BorderLayout.CENTER);
 		//setBorder(BorderFactory.createLineBorder(Color.black));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
-		setBackground(Color.ORANGE);
+		//setBackground(Color.ORANGE);*/
 	}
 	
 	private void addEvents() {
