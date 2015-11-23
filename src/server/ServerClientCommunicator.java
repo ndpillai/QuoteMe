@@ -31,9 +31,9 @@ public class ServerClientCommunicator extends Thread {
 	
 	public void sendAppInstance(DataManager dataManager) {
 		try {
-			System.out.println("Send App Instance: ");
-		//	dataManager.printThis();
+            System.out.println("---> SCC: Sending DM Instance to my Client: ");
 			oos.writeObject(dataManager);
+            dataManager.printThis();
 			oos.flush();
 			oos.reset();
 		} catch (IOException ioe) {
@@ -64,21 +64,23 @@ public class ServerClientCommunicator extends Thread {
 				
 			
 				if (info instanceof client.Quote) {
+                    System.out.println("SCC: Received Object of type Quote." + '\n');
 					dataManager.addQuote((Quote)info);
 					server.sendAppInstanceToAllClients(dataManager);
 				}
 				
 				else if (info instanceof client.User) {
+                    System.out.println("SCC: Received Object of type User." + '\n');
 					dataManager.addUser((User)info);
 					server.sendAppInstanceToAllClients(dataManager);
 				}
 				
 				else if (info instanceof String) {
+                    System.out.println("SCC: Received Object of type String: " + (String)info + '\n');
+					
 					String delims = "[,]";
 					String[] tokens = ((String)info).split(delims);
-					
-					System.out.println("receiving String in SCC: " + (String)info);
-					
+										
 					if (tokens[0].equals("follow")) {
 						User currUser = dataManager.getUserFromUserName(tokens[1]);
 						User user = dataManager.getUserFromUserName(tokens[2]);
@@ -98,6 +100,8 @@ public class ServerClientCommunicator extends Thread {
 					else if (tokens[0].equals("upquote")) {
 						
 					}
+					
+					server.sendAppInstanceToAllClients(dataManager);
 				} 
 				
 			}
