@@ -53,7 +53,8 @@ public class QuoteGUI extends JPanel {
 		posterNameLabel = new QuoteMeLabel(poster.getUserName(), 16, true);
 		speakerNameLabel = new QuoteMeLabel(speaker.getUserName(), 16, true);
 		quotedLabel = new QuoteMeLabel("quoted by", 8, true);
-		datePostedLabel = new QuoteMeLabel(thisQuote.getDatePosted().toString(), 16, true);
+		String date = thisQuote.getDatePosted().toString();
+		datePostedLabel = new QuoteMeLabel(date.substring(3,10) + date.toString().substring(23) + date.substring(10, 16), 16, true);
 		quoteTextArea = new JTextArea(2, 20);
 		quoteTextArea.setText('"' + thisQuote.getText() + '"');
 		quoteTextArea.setEditable(false);
@@ -93,8 +94,12 @@ public class QuoteGUI extends JPanel {
 		
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(Color.GRAY);
-		northPanel.add(datePostedLabel);
+		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
+		northPanel.add(Box.createHorizontalStrut(7));
 		northPanel.add(category);
+		northPanel.add(Box.createGlue());
+		northPanel.add(datePostedLabel);
+		northPanel.add(Box.createHorizontalStrut(7));
 		northPanel.setForeground(Color.GRAY);
 		//northPanel.setSize(this.getMaximumSize().width, 30);
 		northPanel.setSize(400, 30);

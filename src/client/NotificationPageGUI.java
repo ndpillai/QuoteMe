@@ -1,12 +1,16 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import library.FontLibrary;
+import resources.Constants;
 
 public class NotificationPageGUI extends JPanel {
 	private Vector<NotificationGUI> notifications;
@@ -55,7 +59,9 @@ public class NotificationPageGUI extends JPanel {
 		// TODO sort notifications by time?, make it a s
 		Vector<NotificationGUI> usersNotifications = mainPanel.clientPanel.getCurrentUser().getNotifications();
 		if (usersNotifications.size() == 0) {
-			notPanel.add(new JLabel("No new notifications"));
+			JLabel noNotificationsLabel = new JLabel("No new notifications");
+			noNotificationsLabel.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 18));
+			notPanel.add(noNotificationsLabel);
 		}
 		else {
 			for (NotificationGUI notification : usersNotifications) {
