@@ -78,7 +78,7 @@ public class MainPanel extends JPanel {
 				15,100,25);
 		logoutButton = new QuoteMeButton("Logout",
 				ImageLibrary.getImage(Images.greyButton),
-				15,100,25);
+				15,70,25);
 	}
 	
 	private void createGUI() {
