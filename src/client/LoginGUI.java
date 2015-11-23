@@ -76,7 +76,7 @@ public class LoginGUI extends JPanel {
 		passwordTF.setBackground(Color.BLACK);
 		passwordTF.setForeground(Color.WHITE);
 		passwordTF.setHorizontalAlignment(JTextField.CENTER);
-		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		forgotUserButton = new QuoteMeButton(
 				"Forgot Username or Password",
 				ImageLibrary.getImage(Images.greyButton),
