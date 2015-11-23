@@ -134,13 +134,8 @@ public class NotificationGUI extends JPanel {
 		senderLabel = new JLabel(username);
 		messageLabel = new JLabel(message);
 		dateLabel = new JLabel(date.toString());
-	}
-	
-	private void createGUI() {
-		setLayout(new BorderLayout());
-		JPanel northPanel = new JPanel();
-
 		
+
 		// Scale the sender's avatar
 		//senderAvatar = sender.getProfilePicture(); // NEED TO UNCOMMENT
 		senderAvatar = new ImageIcon(Images.parrotAvatarGreenPixellated);
@@ -152,16 +147,25 @@ public class NotificationGUI extends JPanel {
 		senderAvatarButton = new JButton(senderAvatar); 
 		senderAvatarButton.setContentAreaFilled(false);
 		senderAvatarButton.setBorderPainted(false);
+	}
+	
+	private void createGUI() {
+		setLayout(new BorderLayout());
+		
+		JPanel northPanel = new JPanel();
+		northPanel.setBackground(Color.YELLOW);
 		northPanel.add(senderAvatarButton);
 		northPanel.add(senderLabel);
 		northPanel.add(dateLabel);
 		northPanel.add(messageLabel);
-		northPanel.setBackground(Color.YELLOW);
+		//northPanel.setSize(this.getMaximumSize().width, 30);
+		northPanel.setSize(400, 30);
 		add(northPanel, BorderLayout.NORTH);
 		
 		//add(dateLabel);
 		add(messageLabel, BorderLayout.CENTER);
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		//setBorder(BorderFactory.createLineBorder(Color.black));
+		setBorder(new EmptyBorder(10, 10, 10, 10));
 	}
 	
 	private void addEvents() {

@@ -84,13 +84,15 @@ public class QuoteGUI extends JPanel {
 	
 	private void createGUI() {
 		setLayout(new BorderLayout());
+		setSize(400, 30);
 		
 		JPanel northPanel = new JPanel();
 		northPanel.setBackground(Color.GRAY);
 		northPanel.add(datePostedLabel);
 		northPanel.add(category);
 		northPanel.setForeground(Color.GRAY);
-		northPanel.setSize(this.getMaximumSize().width, 30);
+		//northPanel.setSize(this.getMaximumSize().width, 30);
+		northPanel.setSize(400, 30);
 		add(northPanel, BorderLayout.NORTH);
 		
 		add(quoteTextArea, BorderLayout.CENTER);

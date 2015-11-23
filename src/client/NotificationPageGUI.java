@@ -28,6 +28,11 @@ public class NotificationPageGUI extends JPanel {
 	
 	private void initializeVariables() {
 		notifications = new Vector<NotificationGUI>();
+	}
+	
+	private void createGUI() {
+		setLayout(new BorderLayout());
+		setSize(400, 30);
 		
 		//for testing only
 		NotificationGUI not = new NotificationGUI(mainPanel, "Nav", "Hello, this is my message. Tony is a bitch.", new Date(12, 5, 2004));
@@ -45,13 +50,10 @@ public class NotificationPageGUI extends JPanel {
 		notPanel.add(not3);
 		
 		scrollPane = new JScrollPane(notPanel);
-		
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		centerPanel.add(scrollPane);
 		add(centerPanel, BorderLayout.CENTER);
-	}
-	
-	private void createGUI() {
+		
 		//innerPanel.setLayout(new GridLayout(notifications.size(), 1)); // TODO decide on layout
 		// TODO finish styling elements
 		
