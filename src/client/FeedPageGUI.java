@@ -114,6 +114,7 @@ public class FeedPageGUI extends JPanel {
 
 		if (u!=null) {
 		Vector<User> users = u.getUsersWeFollow();
+		users.add(mainPanel.clientPanel.getCurrentUser());
 		System.out.println("User isn't null " + users.size());
 		
 		for (int i=0; i< users.size(); i++) {
