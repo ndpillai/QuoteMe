@@ -79,7 +79,7 @@ public class LoginGUI extends JPanel {
 		forgotUserButton = new QuoteMeButton(
 				"Forgot Username or Password",
 				ImageLibrary.getImage(Images.greyButton),
-				15,270,25);
+				15,250,25);
 		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 70, 25);
 	}
 	
@@ -96,6 +96,7 @@ public class LoginGUI extends JPanel {
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.add(Box.createHorizontalStrut(7));
 		buttonPanel.add(backButton);
 		backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		buttonPanel.add(Box.createGlue());
@@ -103,6 +104,7 @@ public class LoginGUI extends JPanel {
 		forgotUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		buttonPanel.add(Box.createGlue());
 		buttonPanel.add(loginButton);
+		buttonPanel.add(Box.createHorizontalStrut(7));
 		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		buttonPanel.setBackground(new Color(204, 0, 0, 123));
 		loginPanel.add(Box.createVerticalStrut(7));

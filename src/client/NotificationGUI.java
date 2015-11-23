@@ -10,7 +10,6 @@ import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -104,7 +103,8 @@ public class NotificationGUI extends JPanel {
 		senderLabel = new QuoteMeLabel(username);
 		messageLabel = new QuoteMeLabel(message);
 		//dateLabel = new QuoteMeLabel("                " + date.toString());
-		dateLabel = new QuoteMeLabel(date.toString());
+		String dateString = date.toString();
+		dateLabel = new QuoteMeLabel(dateString.substring(3,10) + dateString.toString().substring(23) + dateString.substring(10, 16));
 		viewButton = new QuoteMeButton("View", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
 
 		read = false;
@@ -146,7 +146,7 @@ public class NotificationGUI extends JPanel {
 			String substring = "";
 			if (quoteString.length() < 25) substring = quoteString;
 			else substring = quoteString.substring(0, 25) + "..." ;
-			JLabel quotePreviewLabel = new JLabel("New Quote: " + '"' + substring + '"');
+			QuoteMeLabel quotePreviewLabel = new QuoteMeLabel("New Quote: " + '"' + substring + '"');
 			
 			previewPanel.add(quotePreviewLabel);
 			previewPanel.add(viewButton);
@@ -171,7 +171,7 @@ public class NotificationGUI extends JPanel {
 			add(northPanel, BorderLayout.NORTH);
 			
 			JPanel previewPanel = new JPanel();
-			JLabel quotePreviewLabel = new JLabel("Follow them back! You know you want to...");
+			QuoteMeLabel quotePreviewLabel = new QuoteMeLabel("Follow them back! You know you want to...");
 			
 			previewPanel.add(quotePreviewLabel);
 			viewButton.setText("View Profile");
@@ -200,7 +200,7 @@ public class NotificationGUI extends JPanel {
 			String substring = "";
 			if (quoteString.length() < 25) substring = quoteString;
 			else substring = quoteString.substring(0, 25) + "..." ;
-			JLabel quotePreviewLabel = new JLabel("UpQuoted: " + '"' + substring + '"');
+			QuoteMeLabel quotePreviewLabel = new QuoteMeLabel("UpQuoted: " + substring);
 			
 			previewPanel.add(quotePreviewLabel);
 			previewPanel.add(viewButton);

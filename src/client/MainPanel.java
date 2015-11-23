@@ -27,7 +27,6 @@ public class MainPanel extends JPanel {
 	
 	private ApproveQuoteGUI approveQuotePanel;
 	private FeedPageGUI feed;
-	private PostQuoteGUI postQuote;
 	private ProfilePageGUI profilePage;
 	private NotificationPageGUI notifications;
 	private QuoteGUI quotePanel;
@@ -56,7 +55,6 @@ public class MainPanel extends JPanel {
 	private void initializeVariables() {
 		//approveQuotePanel = new ApproveQuoteGUI(this, new Quote()); // need to add a new quote to this
 		feed = new FeedPageGUI(this);
-		postQuote = new PostQuoteGUI(this);
 		profilePage = new ProfilePageGUI(this, currentuser);
 		notifications = new NotificationPageGUI(this);
 //		quotePanel = new QuoteGUI(this, new Quote()); // TODO - ALL THIS TIME. THIS WAS THE SOURCE OF ALL OUR PAIN.
