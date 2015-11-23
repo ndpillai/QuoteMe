@@ -154,8 +154,10 @@ public class WriteQuoteGUI extends JPanel {
 				else {
 					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "Wow, congrats on making it big in life.", "Quote submitted!",  JOptionPane.PLAIN_MESSAGE);
 					
+					System.out.println("you wrote a quote");
 					Quote newQuote = new Quote(quoteTextArea.getText(), getSpeaker(), getPoster(), new Date(), getCategory());
 					mainPanel.clientPanel.quoteMeClient.sendObject(newQuote);
+				//	mainPanel.clientPanel.quoteMeClient.dataManager.addQuote(newQuote);
 					mainPanel.refreshFeed();
 					
 					printComponents();
