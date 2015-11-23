@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import custom.QuoteMeButton;
 import custom.QuoteMeLabel;
@@ -83,6 +84,22 @@ public class NotificationGUI extends JPanel {
 		addEvents();
 	}
 	
+	public NotificationGUI(MainPanel mainPanel, Notification notification) {
+		System.out.println("Created Notification GUI from Notification");
+		this.mainPanel = mainPanel;
+		this.username = notification.getSenderName();
+		this.message = notification.getMessage();
+		this.date = notification.getDate();
+		this.sender = this.mainPanel.clientPanel.quoteMeClient.dataManager.getUserFromUserName(notification.getSenderName());
+		this.senderAvatar = this.sender.getProfilePicture();
+		this.senderAvatarButton = new JButton(senderAvatar);
+		this.quoteString = notification.getQuoteString();
+		
+		initializeVariables();
+		createGUI();
+		addEvents();
+	}
+	
 	private void initializeVariables() {
 		senderLabel = new QuoteMeLabel(username);
 		messageLabel = new QuoteMeLabel(message);
@@ -106,16 +123,16 @@ public class NotificationGUI extends JPanel {
 	
 	private void createGUI() {
 		setLayout(new BorderLayout());
+		setSize(200, 30);
+		System.out.println("\n\nIN CREATE GUI, message is: " + message);
 		
 		if (message.equals("New Quote")) {
 			System.out.println("New Quote createGUI()");
 			JPanel northPanel = new JPanel();
-			//northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
 			northPanel.setBackground(Color.BLUE);
 			northPanel.add(senderAvatarButton);
 			
 			JPanel inNorthPanel = new JPanel();
-			//inNorthPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 			inNorthPanel.setLayout(new GridLayout(2,1));
 			senderLabel.setText(senderLabel.getText() + " just quoted you!");
 			inNorthPanel.add(senderLabel);
@@ -127,20 +144,69 @@ public class NotificationGUI extends JPanel {
 			
 			JPanel previewPanel = new JPanel();
 			String substring = "";
-			if (quoteString.length() < 70) substring = quoteString;
-			else substring =  quoteString.substring(0, 70) + "..." ;
-			JLabel quotePreviewLabel = new JLabel('"' + substring + '"');
+			if (quoteString.length() < 25) substring = quoteString;
+			else substring = quoteString.substring(0, 25) + "..." ;
+			JLabel quotePreviewLabel = new JLabel("New Quote: " + '"' + substring + '"');
 			
 			previewPanel.add(quotePreviewLabel);
 			previewPanel.add(viewButton);
 			previewPanel.setBackground(Color.WHITE);
 			add(previewPanel, BorderLayout.SOUTH);
+			setBorder(new EmptyBorder(10, 10, 10, 10));
 		}
 		else if (message.equals("New Follower")) {
 			System.out.println("New Follower createGUI()");
+			JPanel northPanel = new JPanel();
+			northPanel.setBackground(Color.PINK);
+			northPanel.add(senderAvatarButton);
+			
+			JPanel inNorthPanel = new JPanel();
+			inNorthPanel.setLayout(new GridLayout(2,1));
+			senderLabel.setText(senderLabel.getText() + " just followed you!");
+			inNorthPanel.add(senderLabel);
+			inNorthPanel.add(dateLabel);
+			inNorthPanel.setBackground(Color.PINK);
+			
+			northPanel.add(inNorthPanel);
+			add(northPanel, BorderLayout.NORTH);
+			
+			JPanel previewPanel = new JPanel();
+			JLabel quotePreviewLabel = new JLabel("Follow them back! You know you want to...");
+			
+			previewPanel.add(quotePreviewLabel);
+			viewButton.setText("View Profile");
+			previewPanel.add(viewButton);
+			previewPanel.setBackground(Color.WHITE);
+			add(previewPanel, BorderLayout.SOUTH);
+			setBorder(new EmptyBorder(10, 10, 10, 10));
 		}
 		else if (message.equals("New UpQuote")) {
 			System.out.println("New UpQuote createGUI()");
+			JPanel northPanel = new JPanel();
+			northPanel.setBackground(Color.GREEN);
+			northPanel.add(senderAvatarButton);
+			
+			JPanel inNorthPanel = new JPanel();
+			inNorthPanel.setLayout(new GridLayout(2,1));
+			senderLabel.setText(senderLabel.getText() + " just upQuoted your Quote!");
+			inNorthPanel.add(senderLabel);
+			inNorthPanel.add(dateLabel);
+			inNorthPanel.setBackground(Color.GREEN);
+			
+			northPanel.add(inNorthPanel);
+			add(northPanel, BorderLayout.NORTH);
+			
+			JPanel previewPanel = new JPanel();
+			String substring = "";
+			if (quoteString.length() < 25) substring = quoteString;
+			else substring = quoteString.substring(0, 25) + "..." ;
+			JLabel quotePreviewLabel = new JLabel("UpQuoted: " + '"' + substring + '"');
+			
+			previewPanel.add(quotePreviewLabel);
+			previewPanel.add(viewButton);
+			previewPanel.setBackground(Color.WHITE);
+			add(previewPanel, BorderLayout.SOUTH);
+			setBorder(new EmptyBorder(10, 10, 10, 10));
 		}
 		
 		/*
@@ -166,6 +232,15 @@ public class NotificationGUI extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Clicked the Sender Avatar image");
 				goToUser(sender);
+			}
+		});
+		
+		viewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Going to the quote");
+				//JPanel quotePanel = new JPanel();
+				//quotePanel.
+				//mainPanel.displayPage(page);
 			}
 		});
 		

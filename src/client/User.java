@@ -14,7 +14,7 @@ public class User implements Serializable {
 	private Date memberSince;
 	private ImageIcon profilePicture;
 	private Vector<Quote> myQuotes;
-	private Vector<NotificationGUI> myNotifications;
+	private Vector<Notification> myNotifications;
 	private Vector<User> usersWeFollow, usersFollowingUs;
 	private Vector<Quote> feedQuotesBuffer;
 	
@@ -32,7 +32,7 @@ public class User implements Serializable {
 		this.password = "1234";
 		this.memberSince = new Date();
 		myQuotes = new Vector<Quote>();
-		myNotifications = new Vector<NotificationGUI>();
+		myNotifications = new Vector<Notification>();
 		usersWeFollow = new Vector<User>();
 		usersFollowingUs = new Vector<User>();
 		feedQuotesBuffer = new Vector<Quote>();	
@@ -47,7 +47,7 @@ public class User implements Serializable {
 		this.memberSince = memberSince;
 		this.profilePicture = avatar;
 		myQuotes = new Vector<Quote>();
-		myNotifications = new Vector<NotificationGUI>();
+		myNotifications = new Vector<Notification>();
 		usersWeFollow = new Vector<User>();
 		usersFollowingUs = new Vector<User>();
 		feedQuotesBuffer = new Vector<Quote>();
@@ -128,12 +128,12 @@ public class User implements Serializable {
 		return myQuotes;
 	}
 	
-	public void addNotification(NotificationGUI n) {
+	public void addNotification(Notification n) {
 		myNotifications.add(n);
 		System.out.println("In User " + userName + ": Adding notification to myNotifications");
 	}
 	
-	public Vector<NotificationGUI> getNotifications() {
+	public Vector<Notification> getNotifications() {
 		return myNotifications;
 	}
 	

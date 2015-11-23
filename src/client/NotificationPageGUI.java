@@ -1,12 +1,15 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import custom.QuoteMeLabel;
 
 public class NotificationPageGUI extends JPanel {
 	private Vector<NotificationGUI> notifications;
@@ -29,6 +32,11 @@ public class NotificationPageGUI extends JPanel {
 	private void createGUI() {
 		setLayout(new BorderLayout());
 		setSize(400, 30);
+		JPanel northPanel = new JPanel();
+		northPanel.setLayout(new GridBagLayout());
+		northPanel.add(new QuoteMeLabel("Notifications"));
+		add(northPanel, BorderLayout.NORTH);
+
 		
 		//for testing only
 //		NotificationGUI not = new NotificationGUI(mainPanel, "Nav", "Hello, this is my message. Tony is a bitch.", new Date(12, 5, 2004));
@@ -53,13 +61,22 @@ public class NotificationPageGUI extends JPanel {
 	
 	private void addNotifications() {
 		// TODO sort notifications by time?, make it a s
-		Vector<NotificationGUI> usersNotifications = mainPanel.clientPanel.getCurrentUser().getNotifications();
+		Vector<Notification> usersNotifications = mainPanel.clientPanel.getCurrentUser().getNotifications();
 		if (usersNotifications.size() == 0) {
-			notPanel.add(new JLabel("No new notifications"));
+			notPanel.add(new QuoteMeLabel("No new notifications"));
 		}
 		else {
-			for (NotificationGUI notification : usersNotifications) {
-				notPanel.add(notification);
+			System.out.println("\n\nABOUT TO ADD NOTIFICATION GUI\n\n");
+			for (Notification notification : usersNotifications) {
+				NotificationGUI notGUI = new NotificationGUI(mainPanel, notification);
+				//JPanel notGUIPanel = new JPanel();
+				//notGUIPanel.add(notGUI);
+				//mainPanel.displayPage(notGUIPanel);
+				//break;
+				//JPanel random = new JPanel();
+				//random.add(new JLabel("HELLOOOO"));
+				//notPanel.add(random);
+				notPanel.add(notGUI);
 			}
 		}
 
