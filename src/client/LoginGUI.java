@@ -39,8 +39,9 @@ public class LoginGUI extends JPanel {
 	private static final long serialVersionUID = 2335752822050869549L;
 	private QuoteMeTextField usernameTF;
 	private JPasswordField passwordTF;
-	private JButton loginButton;
-	private JButton forgotUserButton;
+	private QuoteMeButton backButton;
+	private QuoteMeButton loginButton;
+	private QuoteMeButton forgotUserButton;
 	
 	private ClientPanel clientPanel;
 	
@@ -81,6 +82,7 @@ public class LoginGUI extends JPanel {
 				"Forgot Username or Password",
 				ImageLibrary.getImage(Images.greyButton),
 				15,230,25);
+		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 100, 25);
 	}
 	
 	private void createGUI() {
@@ -107,13 +109,18 @@ public class LoginGUI extends JPanel {
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.add(backButton);
+		backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonPanel.add(Box.createGlue());
 		buttonPanel.add(forgotUserButton);
 		forgotUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		buttonPanel.add(Box.createHorizontalStrut(10));
+		buttonPanel.add(Box.createGlue());
 		buttonPanel.add(loginButton);
 		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		buttonPanel.setBackground(new Color(204, 0, 0, 123));
+		loginPanel.add(Box.createVerticalStrut(7));
 		loginPanel.add(buttonPanel);
+		loginPanel.add(Box.createVerticalStrut(7));
 		add(loginPanel, BorderLayout.SOUTH);
 	}
 	
@@ -158,6 +165,12 @@ public class LoginGUI extends JPanel {
 				
 			}
 		}); 
+		
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				clientPanel.moveToHomePanel();
+			}
+		});
 	}
 	
 	private void checkForgotPasswordEmail(String email) {

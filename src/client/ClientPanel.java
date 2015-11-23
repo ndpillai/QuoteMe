@@ -48,6 +48,12 @@ public class ClientPanel extends JPanel {
 		ClientPanel.this.revalidate();
 	}
 	
+	public void moveToHomePanel() {
+		ClientPanel.this.removeAll();
+		ClientPanel.this.add(homePagePanel);
+		ClientPanel.this.revalidate();
+	}
+	
 	public void moveToMainPanel() {
 		ClientPanel.this.removeAll();
 		ClientPanel.this.add(mainPanel);
