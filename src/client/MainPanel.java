@@ -25,7 +25,6 @@ import resources.Images;
 
 public class MainPanel extends JPanel {
 	
-	private ApproveQuoteGUI approveQuotePanel;
 	private FeedPageGUI feed;
 	private ProfilePageGUI profilePage;
 	private NotificationPageGUI notifications;
