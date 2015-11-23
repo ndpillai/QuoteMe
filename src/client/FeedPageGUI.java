@@ -1,17 +1,15 @@
 package client;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Font;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -23,8 +21,9 @@ import library.FontLibrary;
 import resources.Constants;
 
 public class FeedPageGUI extends JPanel {
+	private static final long serialVersionUID = 1781739011792782353L;
 	private JCheckBox[] categoryCB;
-	private JComboBox sortCB;
+	private JComboBox<String> sortCB;
 	private JScrollPane scrollPane;
 	public Vector<QuoteGUI> quoteList;
 	
@@ -41,7 +40,7 @@ public class FeedPageGUI extends JPanel {
 	
 	private void initializeVariables() {
 		String[] options = {"Recent","Popular"};
-		sortCB = new JComboBox(options);
+		sortCB = new JComboBox<String>(options);
 		sortCB.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		
 		categoryCB = new JCheckBox[3];
@@ -58,18 +57,26 @@ public class FeedPageGUI extends JPanel {
 	
 	private void createGUI () {
 		setLayout(new BorderLayout());
+		
+		//JPanel TEST = new JPanel();
+		//TEST.setLayout(new BoxLayout(TEST, BoxLayout.Y_AXIS));
+		
 		// NORTH panel
 		JPanel northPanel = new JPanel();
 		northPanel.add(sortCB);
 		for (int i=0; i<3; i++)
 			northPanel.add(categoryCB[i]);
 		add(northPanel, BorderLayout.NORTH);
+		//TEST.add(northPanel);
 		
 		feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
 		refreshQuoteList();
 		scrollPane = new JScrollPane(feedPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		//add(scrollPane, BorderLayout.CENTER);
+		//TEST.add(scrollPane);
+		//TEST.add(Box.createGlue());
 		add(scrollPane, BorderLayout.CENTER);
 		
 	/*	JPanel centerPanel = new JPanel();

@@ -161,6 +161,7 @@ public class NotificationGUI extends JPanel {
 			previewPanel.add(viewButton);
 			previewPanel.add(Box.createHorizontalStrut(7));
 			previewPanel.setBackground(Color.WHITE);
+			previewPanel.setBorder(new EmptyBorder(7,7,7,7));
 			add(previewPanel, BorderLayout.CENTER);
 			setBorder(new EmptyBorder(10, 10, 10, 10));
 		}
