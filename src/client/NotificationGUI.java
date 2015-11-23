@@ -23,6 +23,7 @@ import resources.Constants;
 import resources.Images;
 
 public class NotificationGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private MainPanel mainPanel;
 	private User sender;
 	private String username;
@@ -109,6 +110,7 @@ public class NotificationGUI extends JPanel {
 			previewPanel.add(viewButton);
 			previewPanel.add(Box.createHorizontalStrut(7));
 			previewPanel.setBackground(Color.WHITE);
+			previewPanel.setBorder(new EmptyBorder(7,7,7,7));
 			add(previewPanel, BorderLayout.CENTER);
 			setBorder(new EmptyBorder(10, 10, 10, 10));
 		}

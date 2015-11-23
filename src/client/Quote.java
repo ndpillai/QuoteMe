@@ -11,8 +11,9 @@ public class Quote implements Serializable {
 	private String text;
 	private User speaker, poster;
 	private Date datePosted;
-	private Integer upQuotes;
+	private int upQuotes;
 	private int category; //0 = Meaningful, 1 = Funny, 2 = Sentimental
+	public Vector<User> hasUpQuoted;
 	
 	
 	public void printThis() {
@@ -30,6 +31,7 @@ public class Quote implements Serializable {
 		this.datePosted = datePosted;
 		this.upQuotes = 0;
 		this.category = category;
+		hasUpQuoted = new Vector<User>();
 	}
 	
 	// For Sorting and Searching
@@ -63,7 +65,7 @@ public class Quote implements Serializable {
 		return category;
 	}
 	
-	public Integer getUpQuotes() {
+	public int getUpQuotes() {
 		return upQuotes;
 	}
 	
