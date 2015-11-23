@@ -81,22 +81,11 @@ public class LoginGUI extends JPanel {
 		forgotUserButton = new QuoteMeButton(
 				"Forgot Username or Password",
 				ImageLibrary.getImage(Images.greyButton),
-				15,230,25);
-		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 100, 25);
+				15,270,25);
+		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 70, 25);
 	}
 	
 	private void createGUI() {
-		/*
-		setLayout(null);
-		add(usernameTF);
-		add(passwordTF);
-		add(loginButton);
-		
-		usernameTF.setBounds(100,150,250,20);
-		passwordTF.setBounds(100,300,250,20);
-		loginButton.setBounds(150,500,150,50);*/
-		
-		// JUST TESTING A NEW GUI FOR LOGIN, didn't delete previous gui
 		setLayout(new BorderLayout());
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
@@ -137,7 +126,7 @@ public class LoginGUI extends JPanel {
 			public void focusLost(FocusEvent e) {
 				String password = new String(passwordTF.getPassword());
 				if (password.isEmpty() || password.equals("Enter password")) {
-					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 					passwordTF.setEchoChar((char) 0); 
 					passwordTF.setText("Enter password");
 				}
@@ -148,12 +137,6 @@ public class LoginGUI extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				usernameTF.setText(usernameTF.getText().toLowerCase());
 				checkIfLoginIsValid();
-				/*
-				if (loginIsValid()) {
-//					goToFeed(DataManager.getNameMap().get(usernameTF.getText()));
-					//goToFeed(new User());
-					clientPanel.moveToMainPanel();
-				}*/
 			}
 		});
 		
@@ -253,35 +236,8 @@ public class LoginGUI extends JPanel {
 	
 	private void clearFields() {
 		usernameTF.setText("Enter username");
-		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		passwordTF.setEchoChar((char) 0); 
 		passwordTF.setText("Enter password");
 	}
-	
-	
-	/*
-	private boolean loginIsValid() {
-		
-		DataManager dataManager = new DataManager(); // USING THIS FOR TEST PURPOSES. NON-STATIC VERSION HERE. TODO
-		
-		if (dataManager.getNameMap().containsKey(usernameTF.getText())) {
-			if (dataManager.getNameMap().get(usernameTF.getText()).getPassword().equals(passwordTF.getText())) {
-				System.out.println("Username and password are correct, congratulations. "
-						+ "Welcome to the most exclusive and innovative online experience of your life.");
-				return true;
-			}
-			else {
-				System.out.println("Sorry, the entered password does not match the username. Please try again.");
-				usernameTF.setText("");
-				passwordTF.setText("");
-				return false;
-			}
-		}
-		else {
-			System.out.println("The entered username does not exist. And yet. I'm going to let you in. Have fun! But not too much fun.");
-			usernameTF.setText("");
-			return true;
-//			return false;
-		}
-	}*/
 }
