@@ -25,16 +25,16 @@ public class CustomListeners {
 		}
 		
 		public void focusGained(FocusEvent e) {
-			System.out.println("FocusEvent GAINED");
+			//System.out.println("FocusEvent GAINED");
 			if (jtf != null) {
-				System.out.println("Not null");
+				//System.out.println("Not null");
 				if (jtf.getText().equals(textToPlace)) {
 					jtf.setText(""); 
 				}
 			}
 			if (jta != null) {
 				if (jta.getText().equals(textToPlace)) {
-					System.out.println("is textToPlace");
+					//System.out.println("is textToPlace");
 					jta.setText("");
 					jta.setForeground(Color.BLACK);
 				}
@@ -44,17 +44,17 @@ public class CustomListeners {
 		}
 		
 		public void focusLost(FocusEvent e) {
-			System.out.println("FocusEvent LOST");
+			//System.out.println("FocusEvent LOST");
 			if (jtf != null) {
 				if (jtf.getText().equals("")) {
 					jtf.setText(textToPlace);
 				}
 			}
 			if (jta != null) {
-				System.out.println("Not null");
+				//System.out.println("Not null");
 				if (jta.getText().equals("")) {
-					System.out.println("jta.getText()" + jta.getText());
-					System.out.println("is empty");
+					//System.out.println("jta.getText()" + jta.getText());
+					//System.out.println("is empty");
 					jta.setText(textToPlace);
 					jta.setForeground(Color.GRAY);
 				}
