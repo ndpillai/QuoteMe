@@ -63,8 +63,9 @@ public class NotificationPageGUI extends JPanel {
 		}
 		else {
 			System.out.println("\n\nABOUT TO ADD NOTIFICATION GUI\n\n");
-			for (Notification notification : usersNotifications) {
-				NotificationGUI notGUI = new NotificationGUI(mainPanel, notification);
+		//	for (Notification notification : usersNotifications) {
+			for (int i=usersNotifications.size()-1; i>=0; i--) {
+				NotificationGUI notGUI = new NotificationGUI(mainPanel, usersNotifications.get(i));
 				notPanel.add(notGUI);
 			}
 		}

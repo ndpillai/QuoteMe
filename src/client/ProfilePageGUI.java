@@ -96,7 +96,7 @@ public class ProfilePageGUI extends JPanel {
 			Vector<Quote> abc = speakerToQuoteMap.get(user.getUserName());
 			if (abc != null) {
 				System.out.println("this User's Quote vector size: " + abc.size());
-				for (int i = 0; i < abc.size(); i++) {
+				for (int i = abc.size()-1; i >= 0; i--) {
 					QuoteGUI quoteGUI = new QuoteGUI(mainPanel, abc.get(i));
 					spokenQuotes.add(quoteGUI);
 				}
