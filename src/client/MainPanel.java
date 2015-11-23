@@ -233,6 +233,7 @@ public class MainPanel extends JPanel {
 	
 	public void displayFeedPage() {
 		feed = new FeedPageGUI(this);
+		refreshFeed();
 		feed.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(feed);
