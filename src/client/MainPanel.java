@@ -249,12 +249,14 @@ public class MainPanel extends JPanel {
 		feed.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(feed);
+		clearSearchResult();
 	}
 	
 	public void displayWriteQuotePage() {
 		writeQuotePanel.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(writeQuotePanel);
+		clearSearchResult();
 	}
 	
 	public void displayNotificationPage() {
@@ -263,6 +265,7 @@ public class MainPanel extends JPanel {
 		notifications.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(notifications);
+		clearSearchResult();
 	}
 	
 	public void displayProfilePage(User user) {
@@ -270,17 +273,23 @@ public class MainPanel extends JPanel {
 		profilePage.setVisible(true);
 		removeCurrentPanel();
 		addNewPanel(profilePage);
+		clearSearchResult();
 	}
 	
 	public void displayPage(JPanel page) {
 		removeCurrentPanel();
 		addNewPanel(page);
+		clearSearchResult();
 	}
 	
 	public void refreshFeed() {
 		feed.quoteList = feed.getQuotesToDisplay();
 		feed.sort();
 		feed.repopulate();
+	}
+	
+	public void clearSearchResult() {
+		searchField.setText("Search QuoteMe");
 	}
 	
 	public String getSearchInput() {

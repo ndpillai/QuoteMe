@@ -4,14 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import custom.QuoteMeLabel;
-import library.FontLibrary;
-import resources.Constants;
 
 public class NotificationPageGUI extends JPanel {
 	private Vector<NotificationGUI> notifications;
@@ -73,6 +71,7 @@ public class NotificationPageGUI extends JPanel {
 				notPanel.add(notGUI);
 			}
 		}
+		notPanel.add(Box.createGlue());
 	}
 	
 	public void refresh() {
