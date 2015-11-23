@@ -12,6 +12,7 @@ public class CustomListeners {
 		String textToPlace;
 		JTextField jtf;
 		JTextArea jta;
+		boolean focusGained = false;
 		
 		public RemoveTextAdapter(JTextField jtf, String textToPlace) {
 			this.jtf = jtf;
@@ -24,28 +25,39 @@ public class CustomListeners {
 		}
 		
 		public void focusGained(FocusEvent e) {
+			System.out.println("FocusEvent GAINED");
 			if (jtf != null) {
-				if (jtf.getText().equals(textToPlace))
+				System.out.println("Not null");
+				if (jtf.getText().equals(textToPlace)) {
 					jtf.setText(""); 
+				}
 			}
 			if (jta != null) {
-				if (jta.getText().equals(textToPlace))
+				if (jta.getText().equals(textToPlace)) {
+					System.out.println("is textToPlace");
 					jta.setText("");
 					jta.setForeground(Color.BLACK);
+				}
 
 			}
 
 		}
 		
 		public void focusLost(FocusEvent e) {
+			System.out.println("FocusEvent LOST");
 			if (jtf != null) {
-				if (jtf.getText().isEmpty())
+				if (jtf.getText().equals("")) {
 					jtf.setText(textToPlace);
+				}
 			}
 			if (jta != null) {
-				if (jta.getText().isEmpty())
+				System.out.println("Not null");
+				if (jta.getText().equals("")) {
+					System.out.println("jta.getText()" + jta.getText());
+					System.out.println("is empty");
 					jta.setText(textToPlace);
 					jta.setForeground(Color.GRAY);
+				}
 			}
 
 		}
