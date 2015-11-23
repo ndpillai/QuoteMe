@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -125,7 +126,7 @@ public class FeedPageGUI extends JPanel {
 	
 	public Vector<QuoteGUI> getQuotesToDisplay() {
 		//change this later, right now it gets all quotes
-		/*
+		
 		DataManager dm = mainPanel.clientPanel.quoteMeClient.dataManager;
 		HashMap<String, Vector<Quote> > quoteMap = dm.getSpeakerToQuoteMap();
 		
@@ -149,8 +150,7 @@ public class FeedPageGUI extends JPanel {
 		}
 		
 		System.out.println("refreshing quotes: "+quotes.size()); 
-		return quotes; */
-		return new Vector<QuoteGUI>();
+		return quotes; 
 	}
 	
 	//with updated quoteList
