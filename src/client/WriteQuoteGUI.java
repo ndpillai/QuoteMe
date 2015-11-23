@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
@@ -17,6 +19,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -68,6 +71,10 @@ public class WriteQuoteGUI extends JPanel {
 		
 		quoteTextArea = new JTextArea();
 		quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
+		quoteTextArea.setText("Enter your quote here");
+		quoteTextArea.setForeground(Color.GRAY);
+		quoteTextArea.setWrapStyleWord(true);
+		quoteTextArea.setLineWrap(true);
 		characterCountLabel = new QuoteMeLabel("Characters: 0");
 		characterCountLabel.setFontSize(18);
 		submitQuoteButton = new QuoteMeButton("Submit New Quote", ImageLibrary.getImage(Images.greenButton), 15, 150, 25);
@@ -143,11 +150,24 @@ public class WriteQuoteGUI extends JPanel {
 			}
 		});
 		
-		quoteTextArea.addFocusListener(new CustomListeners.RemoveTextAdapter(quoteTextArea,"Enter your quote here."));
-		quoteTextArea.setText("Enter your quote here");
-		quoteTextArea.setForeground(Color.GRAY);
-		quoteTextArea.setWrapStyleWord(true);
-		quoteTextArea.setLineWrap(true);
+		quoteTextArea.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (quoteTextArea.getText().equals("Enter your quote here")) {
+					quoteTextArea.setText("");
+					quoteTextArea.setForeground(Color.BLACK);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (quoteTextArea.getText().isEmpty() || quoteTextArea.getText().equals("Enter your quote here")) {
+					quoteTextArea.setText("Enter your quote here");
+					quoteTextArea.setForeground(Color.GRAY);
+				}
+			}
+		});
+		
+		//quoteTextArea.addFocusListener(new CustomListeners.RemoveTextAdapter(quoteTextArea,"Enter your quote here."));
 		
 		submitQuoteButton.addActionListener(new ActionListener() {
 			@Override
