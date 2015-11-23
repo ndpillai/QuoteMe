@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import custom.QuoteMeLabel;
+import library.FontLibrary;
+import resources.Constants;
 
 public class NotificationPageGUI extends JPanel {
 	private Vector<NotificationGUI> notifications;
@@ -69,17 +71,9 @@ public class NotificationPageGUI extends JPanel {
 			System.out.println("\n\nABOUT TO ADD NOTIFICATION GUI\n\n");
 			for (Notification notification : usersNotifications) {
 				NotificationGUI notGUI = new NotificationGUI(mainPanel, notification);
-				//JPanel notGUIPanel = new JPanel();
-				//notGUIPanel.add(notGUI);
-				//mainPanel.displayPage(notGUIPanel);
-				//break;
-				//JPanel random = new JPanel();
-				//random.add(new JLabel("HELLOOOO"));
-				//notPanel.add(random);
 				notPanel.add(notGUI);
 			}
 		}
-
 	}
 	
 	public void refresh() {

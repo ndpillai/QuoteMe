@@ -41,6 +41,9 @@ public class Test {
 			Quote quote4 = new Quote("My name is Laura. Tony is quoting me.", laura, tony, incrementAndGetDate(), 2);
 			Quote quote5 = new Quote("My name is Nav. Laura is quoting me.", nav, laura, incrementAndGetDate(), 1);
 			Quote quote6 = new Quote("My name is Ingrid. Nav is quoting me.", ingrid, nav, incrementAndGetDate(), 0);
+			Quote quote7 = new Quote("Test test test test.", ingrid, tony, incrementAndGetDate(), 0);
+			Quote quote8 = new Quote("QuoteMe on that.", ingrid, nav, incrementAndGetDate(), 0);
+			Quote quote9 = new Quote("Please work. PLEASE.", ingrid, amanda, incrementAndGetDate(), 0);
 			
 			for (int i=0; i<10; i++)
 				quote1.incrementUpQuotes();
@@ -62,7 +65,9 @@ public class Test {
 			newDataManager.addQuote(quote4);
 			newDataManager.addQuote(quote5);
 			newDataManager.addQuote(quote6);
-			
+			newDataManager.addQuote(quote7);
+			newDataManager.addQuote(quote8);
+			newDataManager.addQuote(quote9);
 			
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
 			oos.writeObject(newDataManager);

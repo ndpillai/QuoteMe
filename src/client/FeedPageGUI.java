@@ -30,7 +30,7 @@ public class FeedPageGUI extends JPanel {
 	
 	private MainPanel mainPanel;
 	
-	private JPanel feedPanel, centerPanel;
+	private JPanel feedPanel;
 	
 	public FeedPageGUI (MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
@@ -65,13 +65,12 @@ public class FeedPageGUI extends JPanel {
 			northPanel.add(categoryCB[i]);
 		add(northPanel, BorderLayout.NORTH);
 		
-		centerPanel = new JPanel();
 		feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
+		refreshQuoteList();
 		scrollPane = new JScrollPane(feedPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		centerPanel.add(scrollPane);
-		add(centerPanel, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 		
 	/*	JPanel centerPanel = new JPanel();
 		feedPanel = new JPanel();

@@ -7,7 +7,7 @@ import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -147,6 +147,7 @@ public class ProfilePageGUI extends JPanel {
 		addQuotes();
 		scrollPane = new JScrollPane(myQuotesPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		centerPanel.add(scrollPane);
 		add(centerPanel, BorderLayout.CENTER);
 	}
 	
@@ -164,11 +165,10 @@ public class ProfilePageGUI extends JPanel {
 		}
 		
 		myQuotesScrollPane.setVisible(true);
-		myQuotesPanel.setVisible(true);
 	}
 
 	private void addEvents() {
-				
+		
 		followButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {

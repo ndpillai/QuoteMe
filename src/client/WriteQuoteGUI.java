@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -41,8 +40,7 @@ public class WriteQuoteGUI extends JPanel {
 	
 	// Added this to display results of finding user
 	private String [] defaultResults = {"Search for a user"};
-	private ArrayList<User> userResults; // to be an array or an arraylist?
-	private JComboBox searchUserComboBox;
+	private JComboBox<String> searchUserComboBox;
 	private JTextArea quoteTextArea;
 	private QuoteMeLabel characterCountLabel, categoryLabel;
 	private QuoteMeButton submitQuoteButton;
@@ -64,8 +62,7 @@ public class WriteQuoteGUI extends JPanel {
 		userSearchField.setSize(new Dimension(10, userSearchField.getPreferredSize().height));
 		searchButton = new QuoteMeButton("Search", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
 		searchPanel = new JPanel();
-		userResults = null;
-		searchUserComboBox = new JComboBox(defaultResults);
+		searchUserComboBox = new JComboBox<String>(defaultResults);
 		searchUserComboBox.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		searchUserComboBox.setSize(100, searchUserComboBox.getPreferredSize().height);
 		
@@ -129,7 +126,7 @@ public class WriteQuoteGUI extends JPanel {
 			public void actionPerformed(ActionEvent ae) {
 				if (!userSearchField.getText().equals("Search for a user") && !userSearchField.getText().equals("")) {
 					String [] relevantUsers = getRelevantUsers();
-					searchUserComboBox.setModel(new DefaultComboBoxModel(relevantUsers));
+					searchUserComboBox.setModel(new DefaultComboBoxModel<String>(relevantUsers));
 					System.out.println("Clicked search button.");
 				}
 				else {
@@ -246,7 +243,7 @@ public class WriteQuoteGUI extends JPanel {
 	
 	private void resetComponents() {
 		userSearchField.setText("Search for a user");
-		searchUserComboBox.setModel(new DefaultComboBoxModel(defaultResults));
+		searchUserComboBox.setModel(new DefaultComboBoxModel<String>(defaultResults));
 		quoteTextArea.setText("");
 		characterCountLabel.setText("0");
 		categoryComboBox.setSelectedIndex(0);

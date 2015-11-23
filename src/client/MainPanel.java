@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -78,7 +80,7 @@ public class MainPanel extends JPanel {
 				15,100,25);
 		logoutButton = new QuoteMeButton("Logout",
 				ImageLibrary.getImage(Images.greyButton),
-				15,100,25);
+				15,70,25);
 	}
 	
 	private void createGUI() {
@@ -93,10 +95,18 @@ public class MainPanel extends JPanel {
 		searchField.setPreferredSize(new Dimension(160, searchField.getPreferredSize().height));
 		JPanel northPanel = new JPanel();
         northPanel.setBackground(new Color(204, 0, 0, 123));
-		northPanel.add(logoLabel);
-		northPanel.add(searchField);
-		northPanel.add(searchButton);
-		northPanel.add(logoutButton);
+        northPanel.setLayout(new BorderLayout());
+		northPanel.add(logoLabel, BorderLayout.WEST);
+		northPanel.add(searchField, BorderLayout.CENTER);
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.setBackground(new Color(204, 0, 0, 123));
+		buttonPanel.add(Box.createHorizontalStrut(7));
+		buttonPanel.add(searchButton);
+		buttonPanel.add(Box.createHorizontalStrut(7));
+		buttonPanel.add(logoutButton);
+		buttonPanel.add(Box.createHorizontalStrut(7));
+		northPanel.add(buttonPanel, BorderLayout.EAST);
 		add(northPanel, BorderLayout.NORTH);
 
 		add(feed, BorderLayout.CENTER);
@@ -142,7 +152,7 @@ public class MainPanel extends JPanel {
 			            JOptionPane.YES_NO_OPTION);
 				if(n == 0) {	// User wants to logout
 					System.out.println("User confirms logout.");
-					// TODO implement starting over of quoteme
+					clientPanel.moveToHomePanel();
 				}
 				else {
 					System.out.println("User does not confirm logout.");
