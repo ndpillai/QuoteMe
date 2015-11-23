@@ -11,5 +11,5 @@ public class Constants {
 	public static final String fontString = "fonts/coolvetica rg.ttf";
 	public static final String fontString3 = "fonts/AmarilloUSAF.ttf";
 	
-	public static final String[] categoriesList = {"Meaningful", "Funny", "Sentimental"};
+	public static final String[] categoriesList = {"Motivational", "Funny", "Sentimental"};
 }

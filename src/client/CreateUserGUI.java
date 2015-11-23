@@ -122,7 +122,7 @@ public class CreateUserGUI extends JPanel {
 			public void focusLost(FocusEvent e) {
 				String password = new String(passwordTF.getPassword());
 				if (password.isEmpty() || password.equals("Enter password")) {
-					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 					passwordTF.setEchoChar((char) 0); 
 					passwordTF.setText("Enter password");
 				}
@@ -138,7 +138,7 @@ public class CreateUserGUI extends JPanel {
 			public void focusLost(FocusEvent e) {
 				String password = new String(confirmPasswordTF.getPassword());
 				if (password.isEmpty() || password.equals("Confirm password")) {
-					confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+					confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 					confirmPasswordTF.setEchoChar((char) 0); 
 					confirmPasswordTF.setText("Confirm password");
 				}

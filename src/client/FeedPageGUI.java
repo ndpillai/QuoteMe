@@ -120,15 +120,16 @@ public class FeedPageGUI extends JPanel {
 	public Vector<QuoteGUI> getQuotesToDisplay() {
 		//change this later, right now it gets all quotes
 		
-		//error from dataManager
-		QuoteMeClient qm = mainPanel.clientPanel.quoteMeClient;
-		DataManager dm = qm.dataManager;
-		HashMap<User, Quote> quoteMap = dm.getSpeakerToQuoteMap();
-
+		DataManager dm = mainPanel.clientPanel.quoteMeClient.dataManager;
+	//	HashMap<User, Quote> quoteMap = dm.getSpeakerToQuoteMap();
+		
+		System.out.println("Size of all quotes " + dm.getAllQuotes().size());
+		
 		Vector<QuoteGUI> quotes = new Vector<QuoteGUI>();
-		for (Quote q: quoteMap.values())
+		for (Quote q: dm.getAllQuotes())
 			quotes.add(new QuoteGUI(mainPanel, q)); 
 		
+		System.out.println("refreshing quotes: "+quotes.size());
 		return quotes;
 	}
 	
