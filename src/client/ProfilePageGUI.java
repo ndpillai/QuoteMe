@@ -183,7 +183,7 @@ public class ProfilePageGUI extends JPanel {
 					followButton.setText("Unfollow");
 					
 					// Send a notification to current user
-					NotificationGUI newFollowerNotification = new NotificationGUI(mainPanel, mainPanel.clientPanel.getCurrentUser(), "New Follower", new Date());
+					Notification newFollowerNotification = new Notification(mainPanel.clientPanel.getCurrentUser().getUserName(), "New Follower", new Date(123), "");
 					user.addNotification(newFollowerNotification);
 					
 				}

@@ -149,7 +149,7 @@ public class QuoteGUI extends JPanel {
 				System.out.println("thisQuote.getUpQuotes() after: " + thisQuote.getUpQuotes());
 				upQuoteButton.setEnabled(false);
 				
-				NotificationGUI newUpQuoteNotification = new NotificationGUI(mainPanel, mainPanel.clientPanel.getCurrentUser(), "New UpQuote", new Date());
+				Notification newUpQuoteNotification = new Notification(mainPanel.clientPanel.getCurrentUser().getUserName(), "New UpQuote", new Date(), quoteTextArea.getText());
 				thisQuote.getSpeaker().addNotification(newUpQuoteNotification);
 				repaint();
 				revalidate();
