@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -144,6 +145,10 @@ public class WriteQuoteGUI extends JPanel {
 				characterCountLabel.setText("Characters: " + quoteTextArea.getText().length());
 			}
 		});
+		
+		quoteTextArea.addFocusListener(new CustomListeners.RemoveTextAdapter(quoteTextArea,"Enter your quote here."));
+		quoteTextArea.setText("Enter your quote here");
+		quoteTextArea.setForeground(Color.GRAY);
 		
 		submitQuoteButton.addActionListener(new ActionListener() {
 			@Override
