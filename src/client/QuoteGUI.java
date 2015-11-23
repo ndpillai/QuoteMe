@@ -56,6 +56,7 @@ public class QuoteGUI extends JPanel {
 		String date = thisQuote.getDatePosted().toString();
 		datePostedLabel = new QuoteMeLabel(date.substring(3,10) + date.toString().substring(23) + date.substring(10, 16), 16, true);
 		quoteTextArea = new JTextArea(2, 20);
+		quoteTextArea.setBorder(new EmptyBorder(7,7,7,7));
 		quoteTextArea.setText('"' + thisQuote.getText() + '"');
 		quoteTextArea.setEditable(false);
 		quoteTextArea.setLineWrap(true);
