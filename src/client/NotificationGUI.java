@@ -33,7 +33,7 @@ public class NotificationGUI extends JPanel {
 	private Date date;
 	private QuoteMeLabel senderLabel, messageLabel, dateLabel;
 	private String quoteString;
-	private QuoteMeButton viewButton;
+	private QuoteMeButton viewButton, viewProfileButton;
 	private boolean read;
 	private Quote thisQuote;
 	
@@ -60,6 +60,7 @@ public class NotificationGUI extends JPanel {
 		String dateString = date.toString();
 		dateLabel = new QuoteMeLabel(dateString.substring(4,10) + dateString.toString().substring(23) + dateString.substring(10, 16));
 		viewButton = new QuoteMeButton("View", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
+		viewProfileButton = new QuoteMeButton("View Profile", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
 
 		read = false;
 
@@ -141,9 +142,9 @@ public class NotificationGUI extends JPanel {
 			
 			previewPanel.add(Box.createHorizontalStrut(7));
 			previewPanel.add(quotePreviewLabel);
-			viewButton.setText("View Profile");
+			viewProfileButton.setText("View Profile");
 			previewPanel.add(Box.createGlue());
-			previewPanel.add(viewButton);
+			previewPanel.add(viewProfileButton);
 			previewPanel.add(Box.createHorizontalStrut(7));
 			previewPanel.setBackground(Color.WHITE);
 			add(previewPanel, BorderLayout.CENTER);
@@ -200,6 +201,14 @@ public class NotificationGUI extends JPanel {
 				JPanel jp = new JPanel();
 				jp.add(new QuoteGUI(mainPanel, thisQuote));
 				mainPanel.displayPage(jp);
+			}
+		});
+		
+		viewProfileButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				System.out.println("Going to the profile");
+				ProfilePageGUI profilePage = new ProfilePageGUI(mainPanel, sender);
+				mainPanel.displayPage(profilePage);
 			}
 		});
 	}

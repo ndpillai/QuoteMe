@@ -50,44 +50,45 @@ public class QuoteGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		posterNameLabel = new QuoteMeLabel(poster.getUserName(), 16, true);
-		speakerNameLabel = new QuoteMeLabel(speaker.getUserName(), 16, true);
-		quotedLabel = new QuoteMeLabel("quoted by", 8, true);
-		String date = thisQuote.getDatePosted().toString();
-		datePostedLabel = new QuoteMeLabel(date.substring(3,10) + date.toString().substring(23) + date.substring(10, 16), 16, true);
-		quoteTextArea = new JTextArea(2, 20);
-		quoteTextArea.setBorder(new EmptyBorder(7,7,7,7));
-		quoteTextArea.setText('"' + thisQuote.getText() + '"');
-		quoteTextArea.setEditable(false);
-		quoteTextArea.setLineWrap(true);
-		quoteTextArea.setWrapStyleWord(true);
-		quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
-		
-		upQuoteButton = new QuoteMeButton("UpQuote", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);	// maybe add an up arrow?
-		checkUpQuoteButton();
-		
-		posterAvatar = poster.getProfilePicture();
-		if (posterAvatar != null) {
-			Image posterImage = posterAvatar.getImage();
-			Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonSize.width/2, Constants.AvatarButtonSize.height/2,  java.awt.Image.SCALE_SMOOTH ) ;  
-			posterAvatar = new ImageIcon(newPosterImage);
-		}
-		
-		posterButton = new JButton(posterAvatar); 
-		posterButton.setContentAreaFilled(false);
-		posterButton.setBorderPainted(false);
-		
-		speakerAvatar = speaker.getProfilePicture();
-		if (speakerAvatar != null) {
-			Image speakerImage = speakerAvatar.getImage();
-			Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height, java.awt.Image.SCALE_SMOOTH);
-			speakerAvatar = new ImageIcon(newSpeakerImage);
-		}
-		
-		speakerButton = new JButton(speakerAvatar); 
-		speakerButton.setContentAreaFilled(false);
-		speakerButton.setBorderPainted(false);
-		
+		//if (!thisQuote.isEmpty()) {
+			posterNameLabel = new QuoteMeLabel(poster.getUserName(), 16, true);
+			speakerNameLabel = new QuoteMeLabel(speaker.getUserName(), 16, true);
+			quotedLabel = new QuoteMeLabel("quoted by", 8, true);
+			String date = thisQuote.getDatePosted().toString();
+			datePostedLabel = new QuoteMeLabel(date.substring(3,10) + date.toString().substring(23) + date.substring(10, 16), 16, true);
+			quoteTextArea = new JTextArea(2, 20);
+			quoteTextArea.setBorder(new EmptyBorder(7,7,7,7));
+			quoteTextArea.setText('"' + thisQuote.getText() + '"');
+			quoteTextArea.setEditable(false);
+			quoteTextArea.setLineWrap(true);
+			quoteTextArea.setWrapStyleWord(true);
+			quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
+			
+			upQuoteButton = new QuoteMeButton("UpQuote", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);	// maybe add an up arrow?
+			checkUpQuoteButton();
+			
+			posterAvatar = poster.getProfilePicture();
+			if (posterAvatar != null) {
+				Image posterImage = posterAvatar.getImage();
+				Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonSize.width/2, Constants.AvatarButtonSize.height/2,  java.awt.Image.SCALE_SMOOTH ) ;  
+				posterAvatar = new ImageIcon(newPosterImage);
+			}
+			
+			posterButton = new JButton(posterAvatar); 
+			posterButton.setContentAreaFilled(false);
+			posterButton.setBorderPainted(false);
+			
+			speakerAvatar = speaker.getProfilePicture();
+			if (speakerAvatar != null) {
+				Image speakerImage = speakerAvatar.getImage();
+				Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height, java.awt.Image.SCALE_SMOOTH);
+				speakerAvatar = new ImageIcon(newSpeakerImage);
+			}
+			
+			speakerButton = new JButton(speakerAvatar); 
+			speakerButton.setContentAreaFilled(false);
+			speakerButton.setBorderPainted(false);
+		//}
 	}
 	
 	private void createGUI() {

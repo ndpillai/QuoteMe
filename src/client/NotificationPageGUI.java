@@ -39,6 +39,8 @@ public class NotificationPageGUI extends JPanel {
 
 		notPanel = new JPanel();
 		notPanel.setLayout(new BoxLayout(notPanel, BoxLayout.Y_AXIS));
+		scrollPane = new JScrollPane(notPanel);
+		add(scrollPane, BorderLayout.CENTER);
 	}
 	
 	private void addEvents() {
