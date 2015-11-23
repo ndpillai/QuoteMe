@@ -33,13 +33,14 @@ public class QuoteMeServer {
 				
 				ServerClientCommunicator scc = new ServerClientCommunicator(s, this, dataManager);
 				sccVector.add(scc);
-				System.out.println("About to start");
+//				System.out.println("About to start");
 				scc.start();
-				System.out.println("AFTER START");
-				System.out.println("DataManager in server try null?: " + (dataManager==null));
+//				System.out.println("AFTER START");
+//				System.out.println("DataManager in server try null?: " + (dataManager==null));
 
 				if (dataManager != null) {
-					System.out.println("Sending app instance");
+					System.out.println('\n' + "QuoteMeServer: New client connected. Sending DM instance through SCC: --->");
+					dataManager.printThis();
 					scc.sendAppInstance(dataManager);
 				}
 			}
@@ -58,7 +59,6 @@ public class QuoteMeServer {
 	}
 	
 	public void loadQuoteMeUniverse() {
-		System.out.println("LOAD QUOTE ME UNIVERSE");
 		try {
 			File file = new File("QuoteMeUniverse.txt");
 			
@@ -75,18 +75,20 @@ public class QuoteMeServer {
 			// read the Data Manager
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("QuoteMeUniverse.txt"));
 			dataManager = (DataManager)ois.readObject();
-			System.out.println("DataManager in server null?: " + (dataManager==null));
+			
+			System.out.println("QuoteMeServer: Load QuoteMeUniverse.txt:");
 			dataManager.printThis();
+			
 			ois.close();
 		} catch (FileNotFoundException fnfe) { System.out.println("FileNotFoundException: " + fnfe.getMessage()); } catch (IOException ioe) { System.out.println("IOException: " + ioe.getMessage()); } catch (ClassNotFoundException cnfe) { System.out.println("ClassNotFoundException: " + cnfe.getMessage()); }
 	}
 	
 	public void sendAppInstanceToAllClients(DataManager updatedDataManager) {
 		this.dataManager = updatedDataManager;
-		System.out.println("Sending app instance to all clients:");
-		this.dataManager.printThis();	// Print to see what we are sending
+		System.out.println("QuoteMeServer: Sending DM to all clients through SCC--->");
+		this.dataManager.printThis();
 		for (ServerClientCommunicator scc : sccVector) {
-			scc.sendAppInstance(updatedDataManager);
+			scc.sendAppInstance(this.dataManager);
 		}
 	}
 	
