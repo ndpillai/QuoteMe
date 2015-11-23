@@ -1,8 +1,6 @@
 package client;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -60,6 +58,7 @@ public class QuoteMeClient extends Thread{
 		try {
 			while (true) {
 				Object data = null;
+				
 				try {
 					data = ois.readObject();
 				} catch (ClassNotFoundException cnfe) {
@@ -71,7 +70,8 @@ public class QuoteMeClient extends Thread{
 				}
 				
 				if (data instanceof client.DataManager) {
-					System.out.println("we are receiving an instance of DataManager in QuoteMeClient");
+					System.out.println('\n' + "QuoteMeClient: Receiving an DM instance:");
+					
 					dataManager = (DataManager)data;
 					dataManager.printThis();
 
