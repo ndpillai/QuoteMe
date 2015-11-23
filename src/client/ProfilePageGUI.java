@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -167,7 +168,7 @@ public class ProfilePageGUI extends JPanel {
 	}
 
 	private void addEvents() {
-				
+		
 		followButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
