@@ -235,7 +235,7 @@ public class LoginGUI extends JPanel {
 		}
 	}
 	
-	private void clearFields() {
+	public void clearFields() {
 		usernameTF.setText("Enter username");
 		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		passwordTF.setEchoChar((char) 0); 

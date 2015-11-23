@@ -250,4 +250,19 @@ public class CreateUserGUI extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clearFields() {
+		firstnameTF.setText("Enter first name");
+		lastnameTF.setText("Enter last name");
+		emailTF.setText("Enter email address");
+		usernameTF.setText("Enter desired username");
+		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
+		passwordTF.setEchoChar((char) 0); 
+		passwordTF.setText("Enter password");
+		confirmPasswordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
+		confirmPasswordTF.setEchoChar((char) 0); 
+		confirmPasswordTF.setText("Confirm password");
+
+
+	}
 }

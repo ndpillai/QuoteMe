@@ -93,11 +93,17 @@ public class ProfilePageGUI extends JPanel {
 		if (!speakerToQuoteMap.isEmpty()) {
 			System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
 			Vector<Quote> abc = speakerToQuoteMap.get(user.getUserName());
-			System.out.println("this User's Quote vector size: " + abc.size());
-			for (int i = 0; i < abc.size(); i++) {
-				QuoteGUI quoteGUI = new QuoteGUI(mainPanel, abc.get(i));
-				spokenQuotes.add(quoteGUI);
+			if (abc != null) {
+				System.out.println("this User's Quote vector size: " + abc.size());
+				for (int i = 0; i < abc.size(); i++) {
+					QuoteGUI quoteGUI = new QuoteGUI(mainPanel, abc.get(i));
+					spokenQuotes.add(quoteGUI);
+				}
 			}
+			else {
+				System.out.println("this User's Quote vector is null");
+			}
+
 			System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
 		}
 		
