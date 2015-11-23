@@ -189,11 +189,13 @@ public class WriteQuoteGUI extends JPanel {
 		if (users != null) {
 			for (int i=0; i<users.size(); i++) {
 				User u = users.elementAt(i);
-				userResults.add(u);
-				for (int j=0; j<searchTerms.length; j++) {
-					if (!u.toString().contains(searchTerms[j])) {
-						userResults.remove(u);
-						break;
+				if (!u.equals(mainPanel.clientPanel.getCurrentUser())) {
+					userResults.add(u);
+					for (int j=0; j<searchTerms.length; j++) {
+						if (!u.toString().contains(searchTerms[j])) {
+							userResults.remove(u);
+							break;
+						}
 					}
 				}
 			}
