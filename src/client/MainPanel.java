@@ -4,18 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import custom.QuoteMeButton;
-import custom.QuoteMeLabel;
 import custom.QuoteMeTextField;
 import library.ImageLibrary;
+import resources.Constants;
 import resources.CustomListeners;
 import resources.Images;
 
@@ -84,12 +86,14 @@ public class MainPanel extends JPanel {
 		
 		// NORTH Panel
 		// will need an image for our logo, and a textfield for searching?
-		QuoteMeLabel northLabel = new QuoteMeLabel("QuoteMe© ");
+		Image image = ImageLibrary.getImage(Images.parrotAvatarRedPixellated).getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
+		ImageIcon logo = new ImageIcon(image);
+		JLabel logoLabel = new JLabel(logo);
 		searchField = new QuoteMeTextField("Search QuoteMe");
 		searchField.setPreferredSize(new Dimension(160, searchField.getPreferredSize().height));
 		JPanel northPanel = new JPanel();
         northPanel.setBackground(new Color(204, 0, 0, 123));
-		northPanel.add(northLabel);
+		northPanel.add(logoLabel);
 		northPanel.add(searchField);
 		northPanel.add(searchButton);
 		northPanel.add(logoutButton);

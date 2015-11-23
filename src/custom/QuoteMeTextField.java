@@ -12,7 +12,7 @@ import resources.Constants;
 public class QuoteMeTextField extends JTextField {
 
 	public QuoteMeTextField() {
-		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
 		setHorizontalAlignment(JTextField.CENTER);
@@ -20,7 +20,7 @@ public class QuoteMeTextField extends JTextField {
 
 	public QuoteMeTextField(String text) {
 		super(text);
-		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
 		setHorizontalAlignment(JTextField.CENTER);
@@ -28,7 +28,7 @@ public class QuoteMeTextField extends JTextField {
 
 	public QuoteMeTextField(int columns) {
 		super(columns);
-		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
 		setHorizontalAlignment(JTextField.CENTER);
@@ -36,7 +36,7 @@ public class QuoteMeTextField extends JTextField {
 
 	public QuoteMeTextField(String text, int columns) {
 		super(text, columns);
-		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
 		setHorizontalAlignment(JTextField.CENTER);
@@ -44,7 +44,7 @@ public class QuoteMeTextField extends JTextField {
 
 	public QuoteMeTextField(Document doc, String text, int columns) {
 		super(doc, text, columns);
-		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 12));
+		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		setForeground(Color.WHITE);
 		setBackground(Color.BLACK);
 		setHorizontalAlignment(JTextField.CENTER);
