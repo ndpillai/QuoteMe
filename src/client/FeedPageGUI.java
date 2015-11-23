@@ -59,40 +59,19 @@ public class FeedPageGUI extends JPanel {
 	private void createGUI () {
 		setLayout(new BorderLayout());
 		
-		//JPanel TEST = new JPanel();
-		//TEST.setLayout(new BoxLayout(TEST, BoxLayout.Y_AXIS));
-		
 		// NORTH panel
 		JPanel northPanel = new JPanel();
 		northPanel.add(sortCB);
 		for (int i=0; i<3; i++)
 			northPanel.add(categoryCB[i]);
 		add(northPanel, BorderLayout.NORTH);
-		//TEST.add(northPanel);
 		
 		feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
 		refreshQuoteList();
 		scrollPane = new JScrollPane(feedPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		//add(scrollPane, BorderLayout.CENTER);
-		//TEST.add(scrollPane);
-		//TEST.add(Box.createGlue());
 		add(scrollPane, BorderLayout.CENTER);
-		
-	/*	JPanel centerPanel = new JPanel();
-		feedPanel = new JPanel();
-		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
-		for (int i=0; i<quoteList.size(); i++)
-			feedPanel.add(quoteList.get(i));
-		
-		JScrollPane = new JScrollPane(feedPanel);
-		
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		centerPanel.add(scrollPane); 
-		add(centerPanel, BorderLayout.CENTER);
-		
-		sort(sortCB.getSelectedIndex()); */
 	}
 	
 	private void addEvents() {

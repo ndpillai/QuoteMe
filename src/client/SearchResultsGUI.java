@@ -54,13 +54,6 @@ public class SearchResultsGUI extends JPanel {
 				quoteResults.add(quoteResult);
 			}
 		}
-		
-		/*
-		if (users.size() != 0) {
-			Quote q = new Quote("QUOTE quote fuck", users.elementAt(0), users.elementAt(0), new Date(0), 0);
-			QuoteGUI quote = new QuoteGUI(mp, q);
-			quoteResults.add(quote);
-		}*/
 	}
 
 	private void createGUI() {
