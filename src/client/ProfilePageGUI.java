@@ -54,6 +54,7 @@ public class ProfilePageGUI extends JPanel {
 	private void initializeVariables() {
 		if (mainPanel != null && mainPanel.clientPanel != null) {
 			currUser = mainPanel.clientPanel.getCurrentUser();
+			System.out.println("*** checking if user of this profile is current user");
 		}
 		
 		if (user.getProfilePicture() != null) {
@@ -113,14 +114,20 @@ public class ProfilePageGUI extends JPanel {
 				ImageLibrary.getImage(Images.greenButton),
 				15,100,25);
 		
-//		User currUser = mainPanel.clientPanel.getCurrentUser();
-		
 		if (user == currUser) {
 			followButton.setEnabled(false);
+			System.out.println("*** checking if user == currUser and disabling follow button");
 		}
-		else if (currUser != null && currUser.getUsersWeFollow().contains(user)) {
-			System.err.println("We are already following this user.");
-			followButton.setText("Unfollow");
+		if (currUser != null) {
+			Vector<User> usersWeFollow = currUser.getUsersWeFollow();
+			for (User u : usersWeFollow) {
+				System.out.println("checking if: " + u.getUserName() + " = " + user.getUserName());
+				if (u.getUserName().equals(user.getUserName())) {
+					followButton.setText("Unfollow");
+					System.out.println("Setting button to unfollow");
+					break;
+				}
+			}
 		}
 	}
 	

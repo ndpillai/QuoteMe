@@ -37,14 +37,14 @@ public class MainPanel extends JPanel {
 	
 	public ClientPanel clientPanel;
 
-	private User currentuser;
+	private User currentUser;
 	private JPanel currentPanelShown;
 	
 	public MainPanel(ClientPanel clientPanel) {
 		this.clientPanel = clientPanel;
 		
 		//needs to be initialized
-		currentuser = new User();
+		currentUser = null;
 		
 		initializeVariables();
 		createGUI();
@@ -53,7 +53,7 @@ public class MainPanel extends JPanel {
 	
 	private void initializeVariables() {
 		feed = new FeedPageGUI(this);
-		profilePage = new ProfilePageGUI(this, currentuser);
+		//profilePage = new ProfilePageGUI(this, currentUser);
 		notifications = new NotificationPageGUI(this);
 		writeQuotePanel = new WriteQuoteGUI(this);
 		
@@ -290,5 +290,10 @@ public class MainPanel extends JPanel {
 	
 	public String getSearchInput() {
 		return searchField.getText();
+	}
+
+	public void setCurrentUser(User user) {
+		currentUser = user;
+		profilePage = new ProfilePageGUI(this, currentUser);
 	}
 }

@@ -68,6 +68,7 @@ public class ClientPanel extends JPanel {
 	
 	public void setCurrentUser(User user) {
 		this.currentUser = user;
+		mainPanel.setCurrentUser(user);
 	}
 	
 	public User getCurrentUser() {
