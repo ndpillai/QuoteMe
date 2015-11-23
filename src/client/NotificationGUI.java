@@ -34,6 +34,9 @@ public class NotificationGUI extends JPanel {
 	private String message;
 	private Date date;
 	private JLabel senderLabel, messageLabel, dateLabel;
+	
+	private boolean read;
+	
 
 	//eventually also want to add in an action listener
 	public NotificationGUI(MainPanel mainPanel, User sender, String message, Date date) {
@@ -64,76 +67,12 @@ public class NotificationGUI extends JPanel {
 		addEvents();
 	}
 	
-	/*
-	private void initializeVariables() {
-		posterNameLabel = new QuoteMeLabel(poster.getUserName(), 16, true);
-		speakerNameLabel = new QuoteMeLabel(speaker.getUserName(), 16, true);
-		datePostedLabel = new QuoteMeLabel(thisQuote.getDatePosted().toString(), 16, true);
-		quoteTextArea = new JTextArea(3, 20);
-		quoteTextArea.setText('"' + thisQuote.getText() + '"');
-		quoteTextArea.setEditable(false);
-		quoteTextArea.setLineWrap(true);
-		quoteTextArea.setWrapStyleWord(true);
-		quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
-		
-		upQuoteButton = new QuoteMeButton("UpQuote", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);	// maybe add an up arrow?
-		
-		posterAvatar = poster.getProfilePicture();
-		if (posterAvatar != null) {
-			Image posterImage = posterAvatar.getImage();
-			Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH ) ;  
-			posterAvatar = new ImageIcon(newPosterImage);
-		}
-		
-		posterButton = new JButton(posterAvatar); 
-		posterButton.setContentAreaFilled(false);
-		posterButton.setBorderPainted(false);
-		
-		speakerAvatar = speaker.getProfilePicture();
-		if (speakerAvatar != null) {
-			Image speakerImage = speakerAvatar.getImage();
-			Image newSpeakerImage = speakerImage.getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height, java.awt.Image.SCALE_SMOOTH);
-			speakerAvatar = new ImageIcon(newSpeakerImage);
-		}
-		
-		speakerButton = new JButton(speakerAvatar); 
-		speakerButton.setContentAreaFilled(false);
-		speakerButton.setBorderPainted(false);
-		
-	}
-	
-	private void createGUI() {
-		setLayout(new BorderLayout());
-		
-		JPanel northPanel = new JPanel();
-		northPanel.setBackground(Color.GRAY);
-		northPanel.add(datePostedLabel);
-		northPanel.add(category);
-		northPanel.setForeground(Color.GRAY);
-		northPanel.setSize(this.getMaximumSize().width, 30);
-		add(northPanel, BorderLayout.NORTH);
-		
-		add(quoteTextArea, BorderLayout.CENTER);
-
-		JPanel quoteInfoPanel = new JPanel();
-		quoteInfoPanel.add(speakerButton);
-		quoteInfoPanel.add(speakerNameLabel);
-		quoteInfoPanel.add(posterButton);
-		quoteInfoPanel.add(posterNameLabel);
-		quoteInfoPanel.add(upQuoteButton);
-		quoteInfoPanel.add(upQuotes);
-		quoteInfoPanel.setBackground(Color.ORANGE);
-		quoteInfoPanel.setSize(new Dimension(quoteInfoPanel.getMaximumSize().width, 10));
-		add(quoteInfoPanel, BorderLayout.SOUTH);
-		
-		setBorder(new EmptyBorder(10, 10, 10, 10));
-	}*/
-	
-	
 	private void initializeVariables() {
 		senderLabel = new JLabel(username);
 		messageLabel = new JLabel(message);
 		dateLabel = new JLabel(date.toString());
+		
+		read = false;
 		
 
 		// Scale the sender's avatar
@@ -166,6 +105,7 @@ public class NotificationGUI extends JPanel {
 		add(messageLabel, BorderLayout.CENTER);
 		//setBorder(BorderFactory.createLineBorder(Color.black));
 		setBorder(new EmptyBorder(10, 10, 10, 10));
+		setBackground(Color.ORANGE);
 	}
 	
 	private void addEvents() {
@@ -175,8 +115,15 @@ public class NotificationGUI extends JPanel {
 				goToUser(sender);
 			}
 		});
+		
+		/* read or not read notification
+		this.addMouseAdapter(new MouseListener() {
+			@Override
+			public void mouseClicked()
+		});*/
 	}
-	
+
+
 	private void goToUser(User user) {
 		ProfilePageGUI userPage = new ProfilePageGUI(mainPanel, user);
 		mainPanel.displayPage(userPage); // Figure out moving to panel

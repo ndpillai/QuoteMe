@@ -14,6 +14,7 @@ import javax.swing.JButton;
 
 import library.FontLibrary;
 import library.ImageLibrary;
+import resources.Constants;
 import resources.Images;
 
 public class QuoteMeButton extends JButton{
@@ -32,7 +33,8 @@ public class QuoteMeButton extends JButton{
 		setIcon(image);
 		mFontSize = inFontSize;
 		
-		setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, mFontSize));
+		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 17));
+		//setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, mFontSize));
 		setBorder(BorderFactory.createEmptyBorder());
 		setText(name);
 		setHorizontalTextPosition(AbstractButton.CENTER);

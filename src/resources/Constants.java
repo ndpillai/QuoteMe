@@ -7,7 +7,9 @@ public class Constants {
 	public static final int FrameHeight = 700;
 	public static final Dimension AvatarButtonSize = new Dimension(35, 35);
 	
-	public static final String fontString = "fonts/AmarilloUSAF.ttf";
+	public static final String fontString2 = "fonts/exprswy_free.ttf";
+	public static final String fontString = "fonts/coolvetica rg.ttf";
+	public static final String fontString3 = "fonts/AmarilloUSAF.ttf";
 	
 	public static final String[] categoriesList = {"Meaningful", "Funny", "Sentimental"};
 }
