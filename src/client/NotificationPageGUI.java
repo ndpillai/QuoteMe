@@ -48,7 +48,6 @@ public class NotificationPageGUI extends JPanel {
 //		notifications.add(not2);
 //		notifications.add(not3);
 		
-		centerPanel = new JPanel();
 		notPanel = new JPanel();
 		notPanel.setLayout(new BoxLayout(notPanel, BoxLayout.Y_AXIS));
 		
@@ -81,7 +80,6 @@ public class NotificationPageGUI extends JPanel {
 		addNotifications();
 		scrollPane = new JScrollPane(notPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		centerPanel.add(scrollPane);
-		add(centerPanel, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 	}
 }
