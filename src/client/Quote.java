@@ -13,7 +13,7 @@ public class Quote implements Serializable {
 	private Date datePosted;
 	private int upQuotes;
 	private int category; //0 = Meaningful, 1 = Funny, 2 = Sentimental
-	public Vector<User> hasUpQuoted;
+	public Vector<String> hasUpQuoted;
 	
 	
 	public void printThis() {
@@ -31,7 +31,7 @@ public class Quote implements Serializable {
 		this.datePosted = datePosted;
 		this.upQuotes = 0;
 		this.category = category;
-		hasUpQuoted = new Vector<User>();
+		hasUpQuoted = new Vector<String>();
 	}
 	
 	// For Sorting and Searching
@@ -71,5 +71,23 @@ public class Quote implements Serializable {
 	
 	public void incrementUpQuotes() {
 		upQuotes++;
+	}
+	
+	public boolean hasQuoted(String username) {
+		//System.out.println(username + " hasQuoted()?" + hasUpQuoted.contains(username));
+		System.out.println("in hasQuoted() : " + hasUpQuoted.size());
+		for (String usedUsername : hasUpQuoted) {
+			if (usedUsername.equals(username)) {
+				System.out.println("Already upquoted");
+				return true;
+			}
+		}
+		//hasUpQuoted.add(username);
+		System.out.println("Hasn't upquoted yet");
+		return false;
+	}
+	
+	public void addUpQuoter(String username) {
+		hasUpQuoted.add(username);
 	}
 }

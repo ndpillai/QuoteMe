@@ -39,6 +39,11 @@ public class Test {
 			Quote quote2 = new Quote("I ignore you if I want nothing from you", amanda, nav, incrementAndGetDate(), 1);
 			Quote quote3 = new Quote("My name is Tony. Ingrid is quoting me.", tony, ingrid, incrementAndGetDate(), 2);
 			Quote quote4 = new Quote("My name is Laura. Tony is quoting me.", laura, tony, incrementAndGetDate(), 2);
+			
+			Quote quote12 = new Quote("Fish and chips for days. So yummy. Or rather scallops.", laura, tony, incrementAndGetDate(), 2);
+			Quote quote10 = new Quote("I don't know what I'm doing, but actually I think I do.", laura, tony, incrementAndGetDate(), 2);
+			Quote quote11 = new Quote("The word paren is so weird. I don't understand it.", laura, tony, incrementAndGetDate(), 2);
+
 			Quote quote5 = new Quote("My name is Nav. Laura is quoting me.", nav, laura, incrementAndGetDate(), 1);
 			Quote quote6 = new Quote("My name is Ingrid. Nav is quoting me.", ingrid, nav, incrementAndGetDate(), 0);
 			Quote quote7 = new Quote("Test test test test.", ingrid, tony, incrementAndGetDate(), 0);
@@ -68,6 +73,10 @@ public class Test {
 			newDataManager.addQuote(quote7);
 			newDataManager.addQuote(quote8);
 			newDataManager.addQuote(quote9);
+			newDataManager.addQuote(quote10);
+			newDataManager.addQuote(quote11);
+			newDataManager.addQuote(quote12);
+
 			
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
 			oos.writeObject(newDataManager);

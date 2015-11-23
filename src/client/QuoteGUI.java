@@ -64,6 +64,7 @@ public class QuoteGUI extends JPanel {
 		quoteTextArea.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		
 		upQuoteButton = new QuoteMeButton("UpQuote", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);	// maybe add an up arrow?
+		checkUpQuoteButton();
 		
 		posterAvatar = poster.getProfilePicture();
 		if (posterAvatar != null) {
@@ -145,10 +146,13 @@ public class QuoteGUI extends JPanel {
 		
 		upQuoteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
+				
 				thisQuote.incrementUpQuotes();
 				upQuotes.setText("" + thisQuote.getUpQuotes());
 				System.out.println("thisQuote.getUpQuotes() after: " + thisQuote.getUpQuotes());
-				upQuoteButton.setEnabled(false);
+				//upQuoteButton.setEnabled(false);
+				thisQuote.addUpQuoter(mainPanel.clientPanel.getCurrentUser().getUserName());
+				checkUpQuoteButton();
 				
 				Notification newUpQuoteNotification = new Notification(thisQuote.getSpeaker(), mainPanel.clientPanel.getCurrentUser().getUserName(), "New UpQuote", new Date(), quoteTextArea.getText());
 				thisQuote.getSpeaker().addNotification(newUpQuoteNotification);
@@ -157,12 +161,21 @@ public class QuoteGUI extends JPanel {
 				repaint();
 				revalidate();
 				
+				
 				// We need to add a notification about this
 				//SendEmail.sendUpQuoteEmail(speaker, poster, thisQuote);
 			}
 		});
 	}
 	
+	private void checkUpQuoteButton() {
+		if (thisQuote.hasQuoted(mainPanel.clientPanel.getCurrentUser().getUserName())) {
+			upQuoteButton.setEnabled(false);
+		}
+		else {
+			upQuoteButton.setEnabled(true);
+		}
+	}
 	private void goToUser(User user) {
 		ProfilePageGUI userPage = new ProfilePageGUI(mainPanel, user);
 		mainPanel.displayPage(userPage); // Figure out moving to panel
