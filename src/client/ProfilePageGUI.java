@@ -181,7 +181,7 @@ public class ProfilePageGUI extends JPanel {
 					
 					mainPanel.clientPanel.quoteMeClient.sendObject("follow," + currUser.getUserName() + "," + user.getUserName());
 					followButton.setText("Unfollow");
-					
+					// CHANGING SOMETHING SMALL
 					// Send a notification to current user
 					Notification newFollowerNotification = new Notification(mainPanel.clientPanel.getCurrentUser().getUserName(), "New Follower", new Date(123), "");
 					user.addNotification(newFollowerNotification);
