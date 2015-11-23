@@ -52,7 +52,9 @@ public class ProfilePageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		currUser = mainPanel.clientPanel.getCurrentUser();
+		if (mainPanel != null && mainPanel.clientPanel != null) {
+			currUser = mainPanel.clientPanel.getCurrentUser();
+		}
 		
 		if (user.getProfilePicture() != null) {
 			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
@@ -141,14 +143,11 @@ public class ProfilePageGUI extends JPanel {
 		northPanel.add(innerPanel, BorderLayout.NORTH);
 		northPanel.add(statsPanel, BorderLayout.CENTER);
 		add(northPanel, BorderLayout.NORTH);
-
-		JPanel centerPanel = new JPanel();
 	
 		addQuotes();
 		scrollPane = new JScrollPane(myQuotesPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		centerPanel.add(scrollPane);
-		add(centerPanel, BorderLayout.CENTER);
+		add(scrollPane, BorderLayout.CENTER);
 	}
 	
 	private void addQuotes() {

@@ -26,6 +26,7 @@ public class UserResultGUI extends JPanel {
 	private MainPanel mainPanel;
 	
 	public UserResultGUI(MainPanel mainPanel, User thisUser) {
+		this.mainPanel = mainPanel;
 		this.thisUser = thisUser;
 		
 		initializeVariables();
