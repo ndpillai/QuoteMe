@@ -35,6 +35,7 @@ public class ServerClientCommunicator extends Thread {
 		//	dataManager.printThis();
 			oos.writeObject(dataManager);
 			oos.flush();
+			oos.reset();
 		} catch (IOException ioe) {
 			System.out.println("IOE in ServerClientCommunicator sendAppInstance() " + ioe.getMessage());
 		}
