@@ -1,14 +1,16 @@
 package client;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -31,12 +33,13 @@ public class ProfilePageGUI extends JPanel {
 	private User user;
 	private ImageIcon userImageIcon;
 	private QuoteMeLabel followersLabel, followingLabel;
-	private ScrollPane myQuotesPane;
+	private ScrollPane myQuotesScrollPane;
 	private JPanel myQuotesPanel;
-	private Vector<QuoteGUI> myQuotes;
+	private Vector<QuoteGUI> spokenQuotes;
 	private JButton followButton;
 	private JScrollPane scrollPane;	
 	private MainPanel mainPanel;
+	private User currUser;
 	
 	public ProfilePageGUI(MainPanel mainPanel, User user) {
 		this.mainPanel = mainPanel;
@@ -48,6 +51,8 @@ public class ProfilePageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
+		currUser = mainPanel.clientPanel.getCurrentUser();
+		
 		if (user.getProfilePicture() != null) {
 			Image image = user.getProfilePicture().getImage().getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH);
 			userImageIcon = new ImageIcon(image);
@@ -61,24 +66,40 @@ public class ProfilePageGUI extends JPanel {
 		followingLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " following", JLabel.CENTER);
 		followingLabel.setFontSize(18);
 		myQuotesPanel = new JPanel();
-		myQuotesPane = new ScrollPane();
-		myQuotes = new Vector<QuoteGUI>();
-		if (user.getMyQuotes() != null) {
-			Vector<Quote> quotes = user.getMyQuotes();
-			for (Quote q : quotes) {
-				QuoteGUI quoteGUI = new QuoteGUI(mainPanel, q);
-				myQuotes.add(quoteGUI);
-			}
-		}
+		myQuotesScrollPane = new ScrollPane();
+		
+		spokenQuotes = new Vector<QuoteGUI>();
+		
+		HashMap<User, Quote> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerToQuoteMap();
+		Iterator<Entry<User, Quote>> it = speakerToQuoteMap.entrySet().iterator();
+		System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
+//	    iterate through map
+		while (it.hasNext()) {
+	    	QuoteGUI quoteGUI;
+	    	Map.Entry<User, Quote> pair = (Map.Entry<User, Quote>)it.next();
+//    		System.out.println("entry: " + pair.getKey().getUserName() + " " + pair.getValue().getText());
+//	    	if this pair's Speaker is the profile Page user, create a QuoteGUI for it and add it to the vector
+	    	if (((User)pair.getKey()).getUserName().equals(user.getUserName())) {
+	    		System.out.println("***WE IN***");
+	    		quoteGUI = new QuoteGUI(mainPanel, (Quote)pair.getValue());
+	    		spokenQuotes.add(quoteGUI);
+	    	}
+//	        it.remove();
+	    }
+		System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
+		
 		followButton = new QuoteMeButton(
 				"Follow",
 				ImageLibrary.getImage(Images.greenButton),
 				15,100,25);
-		User currUser = mainPanel.clientPanel.getCurrentUser();
+		
+//		User currUser = mainPanel.clientPanel.getCurrentUser();
+		
 		if (user == currUser) {
 			followButton.setEnabled(false);
 		}
-		else if (currUser != null && mainPanel.clientPanel.getCurrentUser().getUsersWeFollow().contains(user)) {
+		else if (currUser != null && currUser.getUsersWeFollow().contains(user)) {
+			System.err.println("We are already following this user.");
 			followButton.setText("Unfollow");
 		}
 	}
@@ -130,18 +151,22 @@ public class ProfilePageGUI extends JPanel {
 	
 	private void addQuotes() {
 		myQuotesPanel.setLayout(new BoxLayout(myQuotesPanel, BoxLayout.Y_AXIS));
-		for (QuoteGUI q : myQuotes) {
+		
+		for (QuoteGUI q : spokenQuotes) {
 			myQuotesPanel.add(q);
+			System.out.println("myQuotesPanel.add(q)");
 		}
 		
-		if (myQuotes.size() != 0) {
-			myQuotesPane.add(myQuotesPanel);
+		if (spokenQuotes.size() != 0) {
+			myQuotesScrollPane.add(myQuotesPanel);
+			System.out.println("myQuotesPane.add(myQuotesPanel)");
 		}
+		
+		myQuotesScrollPane.setVisible(true);
+		myQuotesPanel.setVisible(true);
 	}
 
 	private void addEvents() {
-		
-		User currUser = mainPanel.clientPanel.getCurrentUser();
 				
 		followButton.addActionListener(new ActionListener() {
 			@Override
