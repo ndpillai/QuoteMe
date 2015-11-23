@@ -16,13 +16,15 @@ public class Notification implements Serializable {
 	private Date date;
 	private String quoteString;
 	private User user;
+	private Quote quote;
 
-	public Notification(User user, String senderName, String message, Date date, String quoteString) {
+	public Notification(User user, String senderName, String message, Date date, String quoteString, Quote quote) {
 		this.user = user;
 		this.senderName = senderName;
 		this.message = message;
 		this.date = date;
 		this.quoteString = quoteString;
+		this.quote = quote;
 	}
 	
 	public String getSenderName() {
@@ -43,5 +45,9 @@ public class Notification implements Serializable {
 	
 	public User getUser() {
 		return this.user;
+	}
+	
+	public Quote getQuote() {
+		return this.quote;
 	}
 }

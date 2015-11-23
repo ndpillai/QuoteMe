@@ -35,6 +35,7 @@ public class NotificationGUI extends JPanel {
 	private String quoteString;
 	private QuoteMeButton viewButton;
 	private boolean read;
+	private Quote thisQuote;
 	
 	public NotificationGUI(MainPanel mainPanel, Notification notification) {
 		System.out.println("Created Notification GUI from Notification");
@@ -46,6 +47,7 @@ public class NotificationGUI extends JPanel {
 		this.senderAvatar = this.sender.getProfilePicture();
 		this.senderAvatarButton = new JButton(senderAvatar);
 		this.quoteString = notification.getQuoteString();
+		this.thisQuote = notification.getQuote();
 		
 		initializeVariables();
 		createGUI();
@@ -195,6 +197,9 @@ public class NotificationGUI extends JPanel {
 		viewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				System.out.println("Going to the quote");
+				JPanel jp = new JPanel();
+				jp.add(new QuoteGUI(mainPanel, thisQuote));
+				mainPanel.displayPage(jp);
 			}
 		});
 	}
