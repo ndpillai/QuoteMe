@@ -49,7 +49,29 @@ public class DataManager implements Serializable {
 	}
 	
 	public void addQuote(Quote quote) {
-		allQuotes.add(quote);
+		boolean alreadyexists = false;
+		for (int i=0; i<allQuotes.size(); i++)
+		{
+			if (allQuotes.get(i).getSpeaker().getUserName().equals(quote.getSpeaker().getUserName())
+				&&allQuotes.get(i).getPoster().getUserName().equals(quote.getPoster().getUserName())
+				&&allQuotes.get(i).getText().equals(quote.getText())) {
+				
+				alreadyexists = true;
+				allQuotes.set(i, quote);
+				
+				Vector<Quote> quotes = speakerToQuoteMap.get(quote.getSpeaker().getUserName());
+				for (int j=0; j<quotes.size(); j++)
+				{
+					if (quotes.get(j).getSpeaker().getUserName().equals(quote.getSpeaker().getUserName())
+							&&quotes.get(j).getPoster().getUserName().equals(quote.getPoster().getUserName())
+							&&quotes.get(j).getText().equals(quote.getText())) {
+						speakerToQuoteMap.get(quote.getSpeaker().getUserName()).set(j, quote);
+					}
+				}
+			}
+		}
+		if (!alreadyexists) {
+			allQuotes.add(quote);
 		
 		if (!speakerToQuoteMap.containsKey(quote.getSpeaker().getUserName()))
 			speakerToQuoteMap.put(quote.getSpeaker().getUserName(), new Vector<Quote>());
@@ -60,6 +82,7 @@ public class DataManager implements Serializable {
 		posterToQuoteMap.get(quote.getPoster().getUserName()).add(quote);	
 		
 		speakerUserMap.put(quote.getSpeaker(), quote);
+		}
 	}
 	
 	public void addUser(User user) {
