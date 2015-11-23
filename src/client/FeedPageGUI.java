@@ -62,8 +62,9 @@ public class FeedPageGUI extends JPanel {
 		// NORTH panel
 		JPanel northPanel = new JPanel();
 		northPanel.add(sortCB);
-		for (int i=0; i<3; i++)
+		for (int i=0; i<3; i++) {
 			northPanel.add(categoryCB[i]);
+		}
 		add(northPanel, BorderLayout.NORTH);
 		
 		feedPanel = new JPanel();
@@ -113,19 +114,20 @@ public class FeedPageGUI extends JPanel {
 		User u = mainPanel.clientPanel.getCurrentUser();
 
 		if (u!=null) {
-		Vector<User> users = u.getUsersWeFollow();
-		users.add(mainPanel.clientPanel.getCurrentUser());
-		System.out.println("User isn't null " + users.size());
+			Vector<User> users = u.getUsersWeFollow();
+			users.add(mainPanel.clientPanel.getCurrentUser());
+			System.out.println("User isn't null " + users.size());
 		
-		for (int i=0; i< users.size(); i++) {
-			System.out.println(users.get(i).getUserName());
+			for (int i=0; i< users.size(); i++) {
+				System.out.println(users.get(i).getUserName());
 			
-			if (quoteMap.containsKey(users.get(i).getUserName())) {
-				System.out.println(users.get(i).getUserName() + " exists");
+				if (quoteMap.containsKey(users.get(i).getUserName())) {
+					System.out.println(users.get(i).getUserName() + " exists");
 
-				for (int j=0; j<quoteMap.get(users.get(i).getUserName()).size(); j++)
-					quotes.add(new QuoteGUI(mainPanel, quoteMap.get(users.get(i).getUserName()).get(j)));
-			}
+					for (int j=0; j<quoteMap.get(users.get(i).getUserName()).size(); j++) {
+						quotes.add(new QuoteGUI(mainPanel, quoteMap.get(users.get(i).getUserName()).get(j)));
+					}
+				}
 			}
 		}
 		
