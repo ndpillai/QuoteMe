@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import client.DataManager;
+import client.Notification;
 import client.Quote;
 import client.User;
 
@@ -72,6 +73,12 @@ public class ServerClientCommunicator extends Thread {
 				else if (info instanceof client.User) {
                     System.out.println("SCC: Received Object of type User." + '\n');
 					dataManager.addUser((User)info);
+					server.sendAppInstanceToAllClients(dataManager);
+				}
+				
+				else if (info instanceof client.Notification) {
+                    System.out.println("SCC: Received Object of type Notification." + '\n');
+                    dataManager.addNotification((Notification)info);
 					server.sendAppInstanceToAllClients(dataManager);
 				}
 				

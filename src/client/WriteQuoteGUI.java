@@ -183,8 +183,9 @@ public class WriteQuoteGUI extends JPanel {
 					// Send a notification to current user
 
 					System.out.println("In WriteQuoteGUI: Adding newQuoteNotification");
-					Notification newQuoteNotification = new Notification(mainPanel.clientPanel.getCurrentUser().getUserName(), "New Quote", new Date(), quoteTextArea.getText());
+					Notification newQuoteNotification = new Notification(getSpeaker(), mainPanel.clientPanel.getCurrentUser().getUserName(), "New Quote", new Date(), quoteTextArea.getText());
 					getSpeaker().addNotification(newQuoteNotification);
+					mainPanel.clientPanel.quoteMeClient.sendObject(newQuoteNotification);
 					
 					Quote newQuote = new Quote(quoteTextArea.getText(), getSpeaker(), getPoster(), new Date(), getCategory());
 					mainPanel.clientPanel.quoteMeClient.sendObject(newQuote);

@@ -46,6 +46,9 @@ public class QuoteMeClient extends Thread{
 	
 	//can be used to send Strings as well	
 	public void sendObject(Object object) {
+		if (object instanceof client.Notification)
+			System.out.println("Sending notification...");
+		
 		try {
 			oos.writeObject(object);
 			oos.flush();

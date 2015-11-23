@@ -11,7 +11,7 @@ public class Quote implements Serializable {
 	private String text;
 	private User speaker, poster;
 	private Date datePosted;
-	private Integer upQuotes;
+	private int upQuotes;
 	private int category; //0 = Meaningful, 1 = Funny, 2 = Sentimental
 	public Vector<User> hasUpQuoted;
 	

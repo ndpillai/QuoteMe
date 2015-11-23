@@ -47,7 +47,17 @@ public class NotificationPageGUI extends JPanel {
 	
 	private void addNotifications() {
 		// TODO sort notifications by time?, make it a s
-		Vector<Notification> usersNotifications = mainPanel.clientPanel.getCurrentUser().getNotifications();
+		Vector<Notification> usersNotifications = new Vector<Notification>();
+		Vector<User> allUsers = mainPanel.clientPanel.quoteMeClient.dataManager.getAllUsers();
+		for (int i=0; i<allUsers.size(); i++) {
+			System.out.println(mainPanel.clientPanel.getCurrentUser().getUserName() + " " + allUsers.get(i).getUserName());
+			if (mainPanel.clientPanel.getCurrentUser().getUserName().equals(allUsers.get(i).getUserName())) {
+				usersNotifications = allUsers.get(i).getNotifications();
+				System.out.println("Success " + allUsers.get(i).getNotifications().size());
+			}
+		} 
+	//	usersNotifications = mainPanel.clientPanel.getCurrentUser().getNotifications();
+		
 		if (usersNotifications.size() == 0) {
 			notPanel.add(new QuoteMeLabel("No new notifications"));
 		}

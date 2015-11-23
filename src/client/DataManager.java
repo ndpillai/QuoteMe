@@ -68,6 +68,16 @@ public class DataManager implements Serializable {
 		emailMap.put(user.getEmail(), user);
 	}
 	
+	public void addNotification(Notification notification) {
+		User user = notification.getUser();
+		for (int i=0; i<allUsers.size(); i++) {
+			if (allUsers.get(i).getUserName().equals(user.getUserName())){
+				allUsers.get(i).addNotification(notification);
+			}
+				
+		}
+	}
+	
 	// Getters:
 	public Vector<Quote> getAllQuotes() {
 		return allQuotes;
