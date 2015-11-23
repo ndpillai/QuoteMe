@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -27,7 +29,7 @@ public class QuoteGUI extends JPanel {
 	public Quote thisQuote;
 	private User poster, speaker;
 	private ImageIcon posterAvatar, speakerAvatar;
-	private QuoteMeLabel posterNameLabel, speakerNameLabel, datePostedLabel;
+	private QuoteMeLabel posterNameLabel, quotedLabel, speakerNameLabel, datePostedLabel;
 	private JTextArea quoteTextArea;
 	private QuoteMeLabel category, upQuotes;
 	private JButton posterButton, speakerButton;
@@ -50,6 +52,7 @@ public class QuoteGUI extends JPanel {
 	private void initializeVariables() {
 		posterNameLabel = new QuoteMeLabel(poster.getUserName(), 16, true);
 		speakerNameLabel = new QuoteMeLabel(speaker.getUserName(), 16, true);
+		quotedLabel = new QuoteMeLabel("quoted by", 8, true);
 		datePostedLabel = new QuoteMeLabel(thisQuote.getDatePosted().toString(), 16, true);
 		quoteTextArea = new JTextArea(2, 20);
 		quoteTextArea.setText('"' + thisQuote.getText() + '"');
@@ -63,7 +66,7 @@ public class QuoteGUI extends JPanel {
 		posterAvatar = poster.getProfilePicture();
 		if (posterAvatar != null) {
 			Image posterImage = posterAvatar.getImage();
-			Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonSize.width, Constants.AvatarButtonSize.height,  java.awt.Image.SCALE_SMOOTH ) ;  
+			Image newPosterImage = posterImage.getScaledInstance(Constants.AvatarButtonSize.width/2, Constants.AvatarButtonSize.height/2,  java.awt.Image.SCALE_SMOOTH ) ;  
 			posterAvatar = new ImageIcon(newPosterImage);
 		}
 		
@@ -100,12 +103,18 @@ public class QuoteGUI extends JPanel {
 		add(quoteTextArea, BorderLayout.CENTER);
 
 		JPanel quoteInfoPanel = new JPanel();
+		quoteInfoPanel.setLayout(new BoxLayout(quoteInfoPanel, BoxLayout.X_AXIS));
 		quoteInfoPanel.add(speakerButton);
 		quoteInfoPanel.add(speakerNameLabel);
+		quoteInfoPanel.add(Box.createHorizontalStrut(7));
+		quoteInfoPanel.add(quotedLabel);
 		quoteInfoPanel.add(posterButton);
 		quoteInfoPanel.add(posterNameLabel);
+		quoteInfoPanel.add(Box.createGlue());
 		quoteInfoPanel.add(upQuoteButton);
+		quoteInfoPanel.add(Box.createHorizontalStrut(7));
 		quoteInfoPanel.add(upQuotes);
+		quoteInfoPanel.add(Box.createHorizontalStrut(7));
 		quoteInfoPanel.setBackground(Color.ORANGE);
 		quoteInfoPanel.setSize(new Dimension(quoteInfoPanel.getMaximumSize().width, 10));
 		add(quoteInfoPanel, BorderLayout.SOUTH);
