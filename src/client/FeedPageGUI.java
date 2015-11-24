@@ -169,7 +169,8 @@ public class FeedPageGUI extends JPanel {
 		scrollPane = new JScrollPane(feedPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		refreshQuoteList();
-		if (feedPanel.getSize().getHeight() < 550) {
+		if (quoteList.size() < 5) {
+			System.out.println("feedPanel height = " + feedPanel.getSize().getHeight());
 			outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
 			outerPanel.add(northPanel);
 			outerPanel.add(feedPanel);

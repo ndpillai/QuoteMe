@@ -13,7 +13,7 @@ import custom.QuoteMeLabel;
 
 public class NotificationPageGUI extends JPanel {
 	private static final long serialVersionUID = -5389368101810559809L;
-	//private Vector<NotificationGUI> notifications;
+	private Vector<Notification> notifications;
 	private JScrollPane scrollPane;
 	private JPanel northPanel, notPanel, outerPanel;
 	private QuoteMeLabel title;
@@ -28,7 +28,7 @@ public class NotificationPageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		//notifications = new Vector<NotificationGUI>();
+		notifications = new Vector<Notification>();
 		outerPanel = new JPanel();
 	}
 	
@@ -54,18 +54,18 @@ public class NotificationPageGUI extends JPanel {
 	}
 	
 	private void addNotifications() {
-		Vector<Notification> usersNotifications = new Vector<Notification>();
+		notifications = new Vector<Notification>();
 		Vector<User> allUsers = mainPanel.clientPanel.quoteMeClient.dataManager.getAllUsers();
 		for (int i=0; i<allUsers.size(); i++) {
 			System.out.println(mainPanel.clientPanel.getCurrentUser().getUserName() + " " + allUsers.get(i).getUserName());
 			if (mainPanel.clientPanel.getCurrentUser().getUserName().equals(allUsers.get(i).getUserName())) {
-				usersNotifications = allUsers.get(i).getNotifications();
+				notifications = allUsers.get(i).getNotifications();
 				System.out.println("Success " + allUsers.get(i).getNotifications().size());
 			}
 		} 
 	//	usersNotifications = mainPanel.clientPanel.getCurrentUser().getNotifications();
 		
-		if (usersNotifications.size() == 0) {
+		if (notifications.size() == 0) {
 			QuoteMeLabel noNotifs = new QuoteMeLabel("No new notifications");
 			noNotifs.setAlignmentX(Component.CENTER_ALIGNMENT);
 			notPanel.add(noNotifs);
@@ -73,8 +73,8 @@ public class NotificationPageGUI extends JPanel {
 		else {
 			System.out.println("\n\nABOUT TO ADD NOTIFICATION GUI\n\n");
 		//	for (Notification notification : usersNotifications) {
-			for (int i=usersNotifications.size()-1; i>=0; i--) {
-				NotificationGUI notGUI = new NotificationGUI(mainPanel, usersNotifications.get(i));
+			for (int i=notifications.size()-1; i>=0; i--) {
+				NotificationGUI notGUI = new NotificationGUI(mainPanel,  notifications.get(i));
 				notPanel.add(notGUI);
 			}
 		}
@@ -87,7 +87,7 @@ public class NotificationPageGUI extends JPanel {
 		northPanel.add(title);
 		notPanel.removeAll();
 		addNotifications();
-		if (notPanel.getSize().getHeight() < 550) {
+		if (notifications.size() < 7) {
 			northPanel.add(notPanel);
 			add(northPanel, BorderLayout.NORTH);
 		} else {

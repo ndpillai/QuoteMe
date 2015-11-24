@@ -72,7 +72,7 @@ public class SearchResultsGUI extends JPanel {
 			resultsPanel.add(q);
 		}
 		
-		if (resultsPanel.getSize().getHeight() < 550) {
+		if (resultsPanel.getSize().getHeight() < 5) {
 			outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
 			outerPanel.add(resultsPanel);
 			add(outerPanel, BorderLayout.NORTH);
