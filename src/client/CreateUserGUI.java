@@ -248,8 +248,10 @@ public class CreateUserGUI extends JPanel {
 		System.out.println("Last Name: " + lastnameTF.getText());
 		System.out.println("Email: " + emailTF.getText());
 		System.out.println("Username: " + usernameTF.getText());
-		System.out.println("Password: " + passwordTF.getText());
-		System.out.println("Confirm Password: " + confirmPasswordTF.getText());
+		String password = new String(passwordTF.getPassword());
+		String confirmPassword = new String(confirmPasswordTF.getPassword());
+		System.out.println("Password: " + password);
+		System.out.println("Confirm Password: " + confirmPassword);
 	}
 	
 	@Override 

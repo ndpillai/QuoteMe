@@ -10,6 +10,8 @@ import resources.Constants;
 
 public class QuoteMeLabel extends JLabel {
 
+	private static final long serialVersionUID = -4580175227994792364L;
+
 	public QuoteMeLabel() {
 		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 18));
 	}

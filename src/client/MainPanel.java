@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import custom.QuoteMeButton;
 import custom.QuoteMeTextField;
@@ -24,11 +25,10 @@ import resources.CustomListeners;
 import resources.Images;
 
 public class MainPanel extends JPanel {
-	
+	private static final long serialVersionUID = -4350754167494644417L;
 	private FeedPageGUI feed;
 	private ProfilePageGUI profilePage;
 	private NotificationPageGUI notifications;
-	private QuoteGUI quotePanel;
 	private WriteQuoteGUI writeQuotePanel;
 	
 	private QuoteMeTextField searchField;
@@ -53,10 +53,18 @@ public class MainPanel extends JPanel {
 	
 	private void initializeVariables() {
 		feed = new FeedPageGUI(this);
-		//profilePage = new ProfilePageGUI(this, currentUser);
 		notifications = new NotificationPageGUI(this);
 		writeQuotePanel = new WriteQuoteGUI(this);
 		
+		// top buttons
+		searchButton = new QuoteMeButton("Search",
+				ImageLibrary.getImage(Images.greenButton),
+				15,100,25);
+		logoutButton = new QuoteMeButton("Logout",
+				ImageLibrary.getImage(Images.greyButton),
+				15,70,25);
+		
+		// bottom tab buttons
 		notificationButton = new QuoteMeButton("Notifications",
 				ImageLibrary.getImage(Images.greyButton),
 				15,100,25);
@@ -69,13 +77,6 @@ public class MainPanel extends JPanel {
 		feedPageButton = new QuoteMeButton("Feed",
 				ImageLibrary.getImage(Images.greyButton),
 				15,100,25);
-		
-		searchButton = new QuoteMeButton("Search",
-				ImageLibrary.getImage(Images.greenButton),
-				15,100,25);
-		logoutButton = new QuoteMeButton("Logout",
-				ImageLibrary.getImage(Images.greyButton),
-				15,70,25);
 	}
 	
 	private void createGUI() {
@@ -87,12 +88,15 @@ public class MainPanel extends JPanel {
 		JLabel logoLabel = new JLabel(logo);
 		searchField = new QuoteMeTextField("Search QuoteMe");
 		searchField.setPreferredSize(new Dimension(160, searchField.getPreferredSize().height));
+		
 		JPanel northPanel = new JPanel();
-        northPanel.setBackground(new Color(204, 0, 0, 123));
+		northPanel.setBorder(new EmptyBorder(3,3,3,3));
+        northPanel.setBackground(new Color(204, 0, 0, 246));
         northPanel.setLayout(new BorderLayout());
 		northPanel.add(logoLabel, BorderLayout.WEST);
 		northPanel.add(searchField, BorderLayout.CENTER);
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setOpaque(false);
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		buttonPanel.setBackground(new Color(204, 0, 0, 123));
 		buttonPanel.add(Box.createHorizontalStrut(7));
@@ -108,14 +112,20 @@ public class MainPanel extends JPanel {
 		currentPanelShown = feed;
 		
 		// SOUTH Panel
+		JPanel outerSouthPanel = new JPanel();
+		outerSouthPanel.setBackground(new Color(204, 0, 0, 246));
+		outerSouthPanel.setLayout(new BoxLayout(outerSouthPanel, BoxLayout.Y_AXIS));
 		JPanel southPanel = new JPanel(new GridLayout(1,4));
-        southPanel.setBackground(new Color(204, 0, 0, 123));
+        southPanel.setOpaque(false);
 
 		southPanel.add(feedPageButton);
 		southPanel.add(writeQuoteButton);
 		southPanel.add(notificationButton);
 		southPanel.add(profilePageButton);
-		add(southPanel, BorderLayout.SOUTH);
+		outerSouthPanel.add(Box.createVerticalStrut(7));
+		outerSouthPanel.add(southPanel);
+		outerSouthPanel.add(Box.createVerticalStrut(7));
+		add(outerSouthPanel, BorderLayout.SOUTH);
 		add(writeQuotePanel, BorderLayout.CENTER);
 		writeQuotePanel.setVisible(false);
 		add(feed, BorderLayout.CENTER);
@@ -177,14 +187,10 @@ public class MainPanel extends JPanel {
 		profilePageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				displayProfilePage(clientPanel.getCurrentUser());
+				displayCurrentUserProfilePage();
 				System.out.println("Clicked Profile Page");
 			}
 		});
-	}
-	
-	private void refreshComponents() {
-		System.out.println("Refreshed components in main panel");
 	}
 	
 	public void removeCurrentPanel() {
@@ -240,7 +246,6 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void displayFeedPage() {
-		feed = new FeedPageGUI(this);
 		refreshFeed();
 		feed.setVisible(true);
 		removeCurrentPanel();
@@ -250,13 +255,13 @@ public class MainPanel extends JPanel {
 	
 	public void displayWriteQuotePage() {
 		writeQuotePanel.setVisible(true);
+		writeQuotePanel.resetComponents();
 		removeCurrentPanel();
 		addNewPanel(writeQuotePanel);
 		clearSearchResult();
 	}
 	
 	public void displayNotificationPage() {
-		notifications = new NotificationPageGUI(this);
 		notifications.refresh();
 		notifications.setVisible(true);
 		removeCurrentPanel();
@@ -265,9 +270,16 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void displayProfilePage(User user) {
-		profilePage = new ProfilePageGUI(this, user);
-		profilePage.setVisible(true);
+		ProfilePageGUI otherProfilePage = new ProfilePageGUI(this, user);
+		otherProfilePage.setVisible(true);
 		removeCurrentPanel();
+		addNewPanel(otherProfilePage);
+		clearSearchResult();
+	}
+	
+	public void displayCurrentUserProfilePage() {
+		removeCurrentPanel();
+		profilePage.refresh();
 		addNewPanel(profilePage);
 		clearSearchResult();
 	}
@@ -279,9 +291,7 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void refreshFeed() {
-		feed.quoteList = feed.getQuotesToDisplay();
-		feed.sort();
-		feed.repopulate();
+		feed.refreshQuoteList();
 	}
 	
 	public void clearSearchResult() {

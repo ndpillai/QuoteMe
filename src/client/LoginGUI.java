@@ -113,6 +113,7 @@ public class LoginGUI extends JPanel {
 		topButtonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		forgotUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		buttonPanel.setBackground(new Color(204, 0, 0, 123));
+		buttonPanel.setOpaque(false);
 		loginPanel.add(Box.createVerticalStrut(7));
 		loginPanel.add(buttonPanel);
 		loginPanel.add(Box.createVerticalStrut(7));

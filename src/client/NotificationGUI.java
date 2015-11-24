@@ -2,7 +2,6 @@ package client;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -31,10 +30,10 @@ public class NotificationGUI extends JPanel {
 	private JButton senderAvatarButton;
 	private String message;
 	private Date date;
-	private QuoteMeLabel senderLabel, messageLabel, dateLabel;
+	private QuoteMeLabel senderLabel,/* messageLabel, */dateLabel;
 	private String quoteString;
 	private QuoteMeButton viewButton, viewProfileButton;
-	private boolean read;
+	//private boolean read;
 	private Quote thisQuote;
 	
 	public NotificationGUI(MainPanel mainPanel, Notification notification) {
@@ -56,13 +55,13 @@ public class NotificationGUI extends JPanel {
 	
 	private void initializeVariables() {
 		senderLabel = new QuoteMeLabel(username);
-		messageLabel = new QuoteMeLabel(message);
+		//messageLabel = new QuoteMeLabel(message);
 		String dateString = date.toString();
 		dateLabel = new QuoteMeLabel(dateString.substring(4,10) + dateString.toString().substring(23) + dateString.substring(10, 16));
 		viewButton = new QuoteMeButton("View", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
 		viewProfileButton = new QuoteMeButton("View Profile", ImageLibrary.getImage(Images.greenButton), 15, 100, 25);
 
-		read = false;
+		//read = false;
 
 		// Scale the sender's avatar
 		senderAvatar = new ImageIcon(Images.parrotAvatarGreenPixellated);
@@ -217,7 +216,7 @@ public class NotificationGUI extends JPanel {
 		ProfilePageGUI userPage = new ProfilePageGUI(mainPanel, user);
 		mainPanel.displayPage(userPage); 
 	}
-	
+	/*
 	private User getSender() {
 		return sender;
 	}
@@ -228,5 +227,5 @@ public class NotificationGUI extends JPanel {
 	
 	private Date getDate() {
 		return date;
-	}
+	}*/
 }

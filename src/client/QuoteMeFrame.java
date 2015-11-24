@@ -23,8 +23,8 @@ public class QuoteMeFrame extends JFrame {
 	//	clientPanel.quoteMeClient = this.quoteMeClient;
 
 	}
-	
+	/*
 	private void refreshPanels() {
-		// TODO still need?
-	}
+		
+	} */
 }

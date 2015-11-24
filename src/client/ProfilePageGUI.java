@@ -4,14 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -34,8 +30,7 @@ public class ProfilePageGUI extends JPanel {
 	private User user;
 	private ImageIcon userImageIcon;
 	private QuoteMeLabel followersLabel, followingLabel;
-	private ScrollPane myQuotesScrollPane;
-	private JPanel myQuotesPanel;
+	private JPanel myQuotesPanel, outerPanel, northPanel;
 	private Vector<QuoteGUI> spokenQuotes;
 	private JButton followButton;
 	private JScrollPane scrollPane;	
@@ -48,10 +43,11 @@ public class ProfilePageGUI extends JPanel {
 		initializeVariables();
 		createGUI();
 		addEvents();
-		// TODO set layouts and set visibility
 	}
 	
 	private void initializeVariables() {
+		outerPanel = new JPanel();
+		northPanel = new JPanel();
 		if (mainPanel != null && mainPanel.clientPanel != null) {
 			currUser = mainPanel.clientPanel.getCurrentUser();
 			System.out.println("*** checking if user of this profile is current user");
@@ -70,7 +66,6 @@ public class ProfilePageGUI extends JPanel {
 		followingLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " following", JLabel.CENTER);
 		followingLabel.setFontSize(18);
 		myQuotesPanel = new JPanel();
-		myQuotesScrollPane = new ScrollPane();
 		
 		spokenQuotes = new Vector<QuoteGUI>();
 		
@@ -90,24 +85,7 @@ public class ProfilePageGUI extends JPanel {
 //	    }
 //		System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
 		
-		HashMap<String, Vector<Quote>> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerToQuoteMap();
-		if (!speakerToQuoteMap.isEmpty()) {
-			System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
-			Vector<Quote> abc = speakerToQuoteMap.get(user.getUserName());
-			if (abc != null) {
-				System.out.println("this User's Quote vector size: " + abc.size());
-				for (int i = abc.size()-1; i >= 0; i--) {
-					QuoteGUI quoteGUI = new QuoteGUI(mainPanel, abc.get(i));
-					spokenQuotes.add(quoteGUI);
-				}
-			}
-			else {
-				System.out.println("this User's Quote vector is null");
-			}
-
-			System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
-		}
-		
+		getSpokenQuotes();
 		
 		followButton = new QuoteMeButton(
 				"Follow",
@@ -132,11 +110,8 @@ public class ProfilePageGUI extends JPanel {
 	}
 	
 	private void createGUI() {
-		// TODO set layouts
-		
+		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
 		setLayout(new BorderLayout());
-	
-		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new BorderLayout());
 		northPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
@@ -166,12 +141,18 @@ public class ProfilePageGUI extends JPanel {
 		innerPanel.add(followButton, BorderLayout.CENTER);
 		northPanel.add(innerPanel, BorderLayout.NORTH);
 		northPanel.add(statsPanel, BorderLayout.CENTER);
-		add(northPanel, BorderLayout.NORTH);
 
 		addQuotes();
-		scrollPane = new JScrollPane(myQuotesPanel);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		add(scrollPane, BorderLayout.CENTER);
+		if (spokenQuotes.size() < 4) {
+			outerPanel.add(northPanel);
+			outerPanel.add(myQuotesPanel);
+			add(outerPanel, BorderLayout.NORTH);
+		} else {
+			add(northPanel, BorderLayout.NORTH);
+			scrollPane = new JScrollPane(myQuotesPanel);
+			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			add(scrollPane, BorderLayout.CENTER);
+		}
 	}
 	
 	private void addQuotes() {
@@ -181,13 +162,6 @@ public class ProfilePageGUI extends JPanel {
 			myQuotesPanel.add(q);
 			System.out.println("myQuotesPanel.add(q)");
 		}
-		
-		if (spokenQuotes.size() != 0) {
-			myQuotesScrollPane.add(myQuotesPanel);
-			System.out.println("myQuotesPane.add(myQuotesPanel)");
-		}
-		
-		myQuotesScrollPane.setVisible(true);
 	}
 
 	private void addEvents() {
@@ -230,5 +204,45 @@ public class ProfilePageGUI extends JPanel {
 	
 	private void updateNumberFollowers() {
 		followersLabel.setText(user.getUsersFollowingUs().size() + " followers");
+	}
+	
+	private void getSpokenQuotes() {
+		spokenQuotes.removeAllElements();
+		HashMap<String, Vector<Quote>> speakerToQuoteMap = this.mainPanel.clientPanel.quoteMeClient.dataManager.getSpeakerToQuoteMap();
+		if (!speakerToQuoteMap.isEmpty()) {
+			System.err.println("speakerToQuoteMap.size(): " + speakerToQuoteMap.size());
+			Vector<Quote> abc = speakerToQuoteMap.get(user.getUserName());
+			if (abc != null) {
+				System.out.println("this User's Quote vector size: " + abc.size());
+				for (int i = abc.size()-1; i >= 0; i--) {
+					QuoteGUI quoteGUI = new QuoteGUI(mainPanel, abc.get(i));
+					spokenQuotes.add(quoteGUI);
+				}
+			}
+			else {
+				System.out.println("this User's Quote vector is null");
+			}
+
+			System.err.println("spokenQuotes.size(): " + spokenQuotes.size());
+		}
+	}
+	
+	public void refresh() {
+		removeAll();
+		outerPanel.removeAll();
+		myQuotesPanel.removeAll();
+		getSpokenQuotes();
+		addQuotes();
+		
+		if (spokenQuotes.size() < 4) {
+			outerPanel.add(northPanel);
+			outerPanel.add(myQuotesPanel);
+			add(outerPanel, BorderLayout.NORTH);
+		} else {
+			add(northPanel, BorderLayout.NORTH);
+			scrollPane = new JScrollPane(myQuotesPanel);
+			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			add(scrollPane, BorderLayout.CENTER);
+		}
 	}
 }
