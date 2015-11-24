@@ -89,8 +89,8 @@ public class SendEmail {
         String body = "\nHi " + firstName + ", \n\n"
         		+ "Welcome to the QuoteMe Universe! Your account has been created successfully. Your username"
         		+ " is: " + userName + "." + "\n" 
-        		+ "\nIf you wish to contact the QuoteMe team, or want Physics tutoring, bad jokes, or even just a person to hug, " 
-        		+ "feel free to contact us at QuoteMeOfficial@gmail.com, and we will be more than happy to ignore you.\n\n"
+        		+ "\nIf you wish to contact the QuoteMe team, or want CS201 tutoring, bad jokes, or even just a person to hug, " 
+        		+ "feel free to contact us at QuoteMeOfficial@gmail.com, and we will be more than happy to help you.\n\n"
         		+ "Happy Quoting, " + firstName + "! \n\nBest, \nThe QuoteMe team";
 		sendFromGMail(from, pass, to, subject, body);
 	}
