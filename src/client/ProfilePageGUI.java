@@ -70,7 +70,7 @@ public class ProfilePageGUI extends JPanel {
 		followingLabel = new QuoteMeLabel(user.getUsersWeFollow().size() + " following", JLabel.CENTER);
 		followingLabel.setFontSize(18);
 		myQuotesPanel = new JPanel();
-		myQuotesScrollPane = new ScrollPane();
+		myQuotesScrollPane = new ScrollPane(); 
 		
 		spokenQuotes = new Vector<QuoteGUI>();
 		

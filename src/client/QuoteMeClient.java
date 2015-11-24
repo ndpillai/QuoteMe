@@ -80,6 +80,27 @@ public class QuoteMeClient extends Thread{
 
 					clientPanel.refreshFeed();
 				}
+				
+				else if (data instanceof client.Quote) {
+                    System.out.println("QuoteMeClient: Received Object of type Quote." + '\n');
+					dataManager.addQuote((Quote)data);
+					
+					clientPanel.refreshFeed();
+				}
+				
+				else if (data instanceof client.User) {
+                    System.out.println("QuoteMeClient: Received Object of type User." + '\n');
+					dataManager.addUser((User)data);
+					
+					clientPanel.refreshFeed();
+				}
+				
+				else if (data instanceof client.Notification) {
+                    System.out.println("QuoteMeClient: Received Object of type Notification." + '\n');
+                    dataManager.addNotification((Notification)data);
+                    
+					clientPanel.refreshFeed();
+				}
 			}
 		} catch (IOException ioe) {
 			System.out.println("IOE in client run(): " + ioe.getMessage());
