@@ -26,6 +26,17 @@ public class Quote implements Serializable {
 		isEmpty = true;
 	}
 	
+	public Quote(String text, User speaker, User poster, Date datePosted, int category, int upQuotes) {
+		this.text = text;
+		this.speaker = speaker;
+		this.poster = poster;
+		this.datePosted = datePosted;
+		this.upQuotes = upQuotes;
+		this.category = category;
+		hasUpQuoted = new Vector<String>();
+		isEmpty = false;
+	}
+	
 	public Quote(String text, User speaker, User poster, Date datePosted, int category) {
 		this.text = text;
 		this.speaker = speaker;
