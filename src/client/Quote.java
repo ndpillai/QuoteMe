@@ -14,7 +14,7 @@ public class Quote implements Serializable {
 	private int upQuotes;
 	private int category; //0 = Meaningful, 1 = Funny, 2 = Sentimental
 	public Vector<String> hasUpQuoted;
-	private boolean isEmpty;
+	//private boolean isEmpty;
 	
 	
 	public void printThis() {
@@ -23,7 +23,7 @@ public class Quote implements Serializable {
 	
 	public Quote() {
 		System.out.println("Empty Quote constructor");
-		isEmpty = true;
+		//isEmpty = true;
 	}
 	
 	public Quote(String text, User speaker, User poster, Date datePosted, int category, int upQuotes) {
@@ -45,7 +45,7 @@ public class Quote implements Serializable {
 		this.upQuotes = 0;
 		this.category = category;
 		hasUpQuoted = new Vector<String>();
-		isEmpty = false;
+		//isEmpty = false;
 	}
 	
 	// For Sorting and Searching
@@ -104,8 +104,8 @@ public class Quote implements Serializable {
 	public void addUpQuoter(String username) {
 		hasUpQuoted.add(username);
 	}
-	
+	/*
 	public boolean isEmpty() {
 		return this.isEmpty();
-	}
+	}*/
 }

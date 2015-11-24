@@ -143,7 +143,7 @@ public class ProfilePageGUI extends JPanel {
 		northPanel.add(statsPanel, BorderLayout.CENTER);
 
 		addQuotes();
-		if (spokenQuotes.size() < 4) {
+		if (myQuotesPanel.getSize().getHeight() < 450) {
 			outerPanel.add(northPanel);
 			outerPanel.add(myQuotesPanel);
 			add(outerPanel, BorderLayout.NORTH);
@@ -234,7 +234,7 @@ public class ProfilePageGUI extends JPanel {
 		getSpokenQuotes();
 		addQuotes();
 		
-		if (spokenQuotes.size() < 4) {
+		if (myQuotesPanel.getSize().getHeight() < 450) {
 			outerPanel.add(northPanel);
 			outerPanel.add(myQuotesPanel);
 			add(outerPanel, BorderLayout.NORTH);

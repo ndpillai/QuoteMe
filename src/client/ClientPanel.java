@@ -29,7 +29,7 @@ public class ClientPanel extends JPanel {
 		refreshComponents();
 	}
 
-	private void refreshComponents() {
+	public void refreshComponents() {
 		createUserPanel = new CreateUserGUI(this);
 		loginPanel = new LoginGUI(this);
 		mainPanel = new MainPanel(this);

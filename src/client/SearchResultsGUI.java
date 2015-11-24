@@ -72,16 +72,14 @@ public class SearchResultsGUI extends JPanel {
 			resultsPanel.add(q);
 		}
 		
-		jsp = new JScrollPane(resultsPanel);
-		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		add(jsp, BorderLayout.CENTER);
-		
-//		int numberRows = userResults.size() + quoteResults.size();
-//		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
-
-
-//		jsp = new JScrollPane(outerPanel);
-//		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//		add(jsp);
+		if (resultsPanel.getSize().getHeight() < 550) {
+			outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+			outerPanel.add(resultsPanel);
+			add(outerPanel, BorderLayout.NORTH);
+		} else {
+			jsp = new JScrollPane(resultsPanel);
+			jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			add(jsp, BorderLayout.CENTER);
+		}
 	}
 }
