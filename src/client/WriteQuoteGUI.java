@@ -19,7 +19,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -35,9 +34,10 @@ import resources.CustomListeners;
 import resources.Images;
 
 public class WriteQuoteGUI extends JPanel {
+	private static final long serialVersionUID = 4492725040421526011L;
 	private QuoteMeLabel speakerLabel;
 	private QuoteMeTextField userSearchField;
-	private User speaker;
+	//private User speaker;
 	private QuoteMeButton searchButton;
 	private JPanel searchPanel;
 	
@@ -260,7 +260,6 @@ public class WriteQuoteGUI extends JPanel {
 	}
 	
 	private void printComponents() {
-		// TODO for testing purposes to grab all of the info for making a quote
 		System.out.println("Printing quote components:");
 		System.out.println("User search term: " + userSearchField.getText());
 		System.out.println("SearchUserComboBox selection: " + searchUserComboBox.getSelectedItem().toString());
@@ -269,7 +268,7 @@ public class WriteQuoteGUI extends JPanel {
 		System.out.println("CategoryComboBox selection: " + categoryComboBox.getSelectedItem().toString());
 	}
 	
-	private void resetComponents() {
+	public void resetComponents() {
 		userSearchField.setText("Search for a user");
 		searchUserComboBox.setModel(new DefaultComboBoxModel<String>(defaultResults));
 		quoteTextArea.setText("");

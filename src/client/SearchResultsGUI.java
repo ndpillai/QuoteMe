@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import custom.QuoteMeLabel;
 
 public class SearchResultsGUI extends JPanel {
+	private static final long serialVersionUID = -4746601401215212911L;
 	private Vector<User> users;
 	private Vector<Quote> quotes;
 	

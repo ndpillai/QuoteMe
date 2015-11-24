@@ -1,11 +1,7 @@
 package custom;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
@@ -13,9 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import library.FontLibrary;
-import library.ImageLibrary;
 import resources.Constants;
-import resources.Images;
 
 public class QuoteMeButton extends JButton{
 	private static final long serialVersionUID = 7074393176317490987L;
@@ -29,11 +23,11 @@ public class QuoteMeButton extends JButton{
 		super(new ImageIcon(im));
 		this.x = x;
 		this.y = y;
-		image = new ImageIcon(im.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH));
+		image = new ImageIcon(im.getScaledInstance(this.x, this.y, java.awt.Image.SCALE_SMOOTH));
 		setIcon(image);
 		mFontSize = inFontSize;
 		
-		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 17));
+		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, mFontSize));
 		//setFont(FontLibrary.getFont("fonts/AmarilloUSAF.ttf", Font.PLAIN, mFontSize));
 		setBorder(BorderFactory.createEmptyBorder());
 		setText(name);

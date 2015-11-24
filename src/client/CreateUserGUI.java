@@ -3,6 +3,7 @@ package client;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -73,23 +74,35 @@ public class CreateUserGUI extends JPanel {
 		passwordTF.setEchoChar((char) 0);
 		confirmPasswordTF.setEchoChar((char) 0);
 		createUserButton = new QuoteMeButton("Create User", ImageLibrary.getImage(Images.greenButton),
-				15,100,25);
-		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 100, 25);
+				15,120,25);
+		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 120, 25);
 	}
 	
 	private void createGUI() {
 		setLayout(new BorderLayout());
 		JPanel createUserPanel = new JPanel();
         createUserPanel.setBackground(new Color(204, 0, 0, 123));
-
-		createUserPanel.setLayout(new BoxLayout(createUserPanel, BoxLayout.Y_AXIS));
+        createUserPanel.setLayout(new BoxLayout(createUserPanel, BoxLayout.Y_AXIS));
+        
+        JPanel TFPanel = new JPanel();
+        TFPanel.setBackground(new Color(204, 0, 0, 123));
+        TFPanel.setLayout(new BoxLayout(TFPanel, BoxLayout.Y_AXIS));
 		//usernameTF.setSize(new Dimension(20, usernameTF.getPreferredSize().height));
-		createUserPanel.add(firstnameTF);
-		createUserPanel.add(lastnameTF);
-		createUserPanel.add(emailTF);
-		createUserPanel.add(usernameTF);
-		createUserPanel.add(passwordTF);
-		createUserPanel.add(confirmPasswordTF);
+        int maxHeight = firstnameTF.getPreferredSize().height;
+        int maxWidth = 250;
+        firstnameTF.setMaximumSize(new Dimension(maxWidth, maxHeight));
+        lastnameTF.setMaximumSize(new Dimension(maxWidth, maxHeight));
+        emailTF.setMaximumSize(new Dimension(maxWidth, maxHeight));
+        usernameTF.setMaximumSize(new Dimension(maxWidth, maxHeight));
+        passwordTF.setMaximumSize(new Dimension(maxWidth, maxHeight));
+        confirmPasswordTF.setMaximumSize(new Dimension(maxWidth, maxHeight));
+		TFPanel.add(firstnameTF);
+		TFPanel.add(lastnameTF);
+		TFPanel.add(emailTF);
+		TFPanel.add(usernameTF);
+		TFPanel.add(passwordTF);
+		TFPanel.add(confirmPasswordTF);
+		createUserPanel.add(TFPanel);
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -235,8 +248,10 @@ public class CreateUserGUI extends JPanel {
 		System.out.println("Last Name: " + lastnameTF.getText());
 		System.out.println("Email: " + emailTF.getText());
 		System.out.println("Username: " + usernameTF.getText());
-		System.out.println("Password: " + passwordTF.getText());
-		System.out.println("Confirm Password: " + confirmPasswordTF.getText());
+		String password = new String(passwordTF.getPassword());
+		String confirmPassword = new String(confirmPasswordTF.getPassword());
+		System.out.println("Password: " + password);
+		System.out.println("Confirm Password: " + confirmPassword);
 	}
 	
 	@Override 

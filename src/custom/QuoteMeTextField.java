@@ -11,6 +11,8 @@ import resources.Constants;
 
 public class QuoteMeTextField extends JTextField {
 
+	private static final long serialVersionUID = -4231161109953305427L;
+
 	public QuoteMeTextField() {
 		setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		setForeground(Color.WHITE);

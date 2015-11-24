@@ -69,7 +69,7 @@ public class LoginGUI extends JPanel {
 		loginButton = new QuoteMeButton(
 				"Login",
 				ImageLibrary.getImage(Images.greenButton),
-				15,100,25);
+				15,120,25);
 		passwordTF = new JPasswordField("Enter password");
 		passwordTF.setEchoChar((char) 0);
 		passwordTF.setBackground(Color.BLACK);
@@ -77,10 +77,10 @@ public class LoginGUI extends JPanel {
 		passwordTF.setHorizontalAlignment(JTextField.CENTER);
 		passwordTF.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 16));
 		forgotUserButton = new QuoteMeButton(
-				"Forgot Username or Password",
+				"Forgot Username/Password",
 				ImageLibrary.getImage(Images.greyButton),
 				15,250,25);
-		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 70, 25);
+		backButton = new QuoteMeButton("Back", ImageLibrary.getImage(Images.greyButton), 15, 120, 25);
 	}
 	
 	private void createGUI() {
@@ -90,23 +90,30 @@ public class LoginGUI extends JPanel {
         loginPanel.setBackground(new Color(204, 0, 0, 123));
 
 		// BELOW: trying to make username TF not go entire length of BoxLayout panel
-		usernameTF.setSize(new Dimension(20, usernameTF.getPreferredSize().height));
-		loginPanel.add(usernameTF);
-		loginPanel.add(passwordTF);
+        JPanel TFPanel = new JPanel();
+        TFPanel.setLayout(new BoxLayout(TFPanel, BoxLayout.Y_AXIS));
+        TFPanel.setBackground(new Color(204, 0, 0, 123));
+		usernameTF.setMaximumSize(new Dimension(250, usernameTF.getPreferredSize().height));
+		passwordTF.setMaximumSize(new Dimension(250, passwordTF.getPreferredSize().height));
+		TFPanel.add(usernameTF);
+		TFPanel.add(passwordTF);
+		loginPanel.add(TFPanel);
 		
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-		buttonPanel.add(Box.createHorizontalStrut(7));
-		buttonPanel.add(backButton);
-		backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		buttonPanel.add(Box.createGlue());
+		JPanel topButtonPanel = new JPanel();
+		topButtonPanel.setLayout(new BoxLayout(topButtonPanel, BoxLayout.X_AXIS));
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+		topButtonPanel.add(backButton);
+		topButtonPanel.add(Box.createHorizontalStrut(10));
+		topButtonPanel.add(loginButton);
+		buttonPanel.add(topButtonPanel);
+		buttonPanel.add(Box.createVerticalStrut(7));
 		buttonPanel.add(forgotUserButton);
+		topButtonPanel.setBackground(new Color(204, 0, 0, 123));
+		topButtonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		forgotUserButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		buttonPanel.add(Box.createGlue());
-		buttonPanel.add(loginButton);
-		buttonPanel.add(Box.createHorizontalStrut(7));
-		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		buttonPanel.setBackground(new Color(204, 0, 0, 123));
+		buttonPanel.setOpaque(false);
 		loginPanel.add(Box.createVerticalStrut(7));
 		loginPanel.add(buttonPanel);
 		loginPanel.add(Box.createVerticalStrut(7));
