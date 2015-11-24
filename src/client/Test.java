@@ -133,8 +133,8 @@ public class Test {
 			newDataManager.addQuote(new Quote("Boom, roasted.", michael, ingrid, incrementAndGetDate(), 1, 17));
 
 			// Nikias 3
-			newDataManager.addQuote(new Quote("Fight on.", nikias, ingrid, incrementAndGetDate(), 1, 36));
-			newDataManager.addQuote(new Quote("Beat the Bruins!", nikias, ingrid, incrementAndGetDate(), 1, 34));
+			newDataManager.addQuote(new Quote("Fight on.", nikias, ingrid, incrementAndGetDate(), 0, 36));
+			newDataManager.addQuote(new Quote("Beat the Bruins!", nikias, ingrid, incrementAndGetDate(), 2, 34));
 			newDataManager.addQuote(new Quote("Chip Kelly to USC?", nikias, nav, incrementAndGetDate(), 1, 41));
 			
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("QuoteMeUniverse.txt"));
