@@ -156,6 +156,7 @@ public class MainPanel extends JPanel {
 			            JOptionPane.YES_NO_OPTION);
 				if(n == 0) {	// User wants to logout
 					System.out.println("User confirms logout.");
+					clientPanel.refreshComponents();
 					clientPanel.moveToHomePanel();
 				}
 				else {
