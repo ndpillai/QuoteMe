@@ -27,12 +27,12 @@ public class Test {
 			
 			DataManager newDataManager = new DataManager();
 			
-			User amanda = new User("Amanda", "Bynes", "amanda", "ndpillai@usc.edu", "123", new Date(), Images.getRandomAvatar());
+			User amanda = new User("Amanda", "Bynes", "amanda", "ingridwa@usc.edu", "123", new Date(), Images.getRandomAvatar());
 			User tony = new User("Tony", "Elevathingal", "tony", "elevathi@usc.edu", "123", new Date(), Images.getRandomAvatar());
-			User ingrid = new User("Ingrid", "Wang", "ingrid", "ingridwa@usc.edu", "123", new Date(), Images.getRandomAvatar());
+			User ingrid = new User("Ingrid", "Wang", "ingrid", "lgouillon120@gmail.com", "123", new Date(), Images.getRandomAvatar());
 			User nav = new User("Nav", "Pillai", "nav", "navneeth.pillai@gmail.com", "123", new Date(), Images.getRandomAvatar());
-			User laura = new User("Laura", "Gouillon", "laura", "gouillon@usc.edu", "123", new Date(), Images.getRandomAvatar());
-			User michael = new User("Michael", "Scott", "michael", "gouillon@usc.edu", "123", new Date(), Images.getRandomAvatar());
+			User laura = new User("Laura", "Gouillon", "laura", "lgouillon@yahoo.com", "123", new Date(), Images.getRandomAvatar());
+			User michael = new User("Michael", "Scott", "michael", "lgduckie@gmail.com", "123", new Date(), Images.getRandomAvatar());
 			User nikias = new User("Max", "Nikias", "nikias", "gouillon@usc.edu", "123", new Date(), Images.getRandomAvatar());
 			
 			// Add users
