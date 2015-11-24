@@ -42,6 +42,19 @@ public class ServerClientCommunicator extends Thread {
 		}
 	}
 	
+	public void sendObject(Object info) {
+		dataManager = server.getDataManager();
+		try {
+            System.out.println("---> SCC: Sending some object to my Client: ");
+			oos.writeObject(info);
+            dataManager.printThis();
+			oos.flush();
+			oos.reset();
+		} catch (IOException ioe) {
+			System.out.println("IOE in ServerClientCommunicator sendAppInstance() " + ioe.getMessage());
+		}
+	}
+	
 	/*Will likely not need this method, but good to have.
 	public void sendObject(Object obj) {
 		try {
@@ -66,20 +79,17 @@ public class ServerClientCommunicator extends Thread {
 			
 				if (info instanceof client.Quote) {
                     System.out.println("SCC: Received Object of type Quote." + '\n');
-					dataManager.addQuote((Quote)info);
-					server.sendAppInstanceToAllClients(dataManager);
+					server.sendObjectToAllClients((Quote)info);
 				}
 				
 				else if (info instanceof client.User) {
                     System.out.println("SCC: Received Object of type User." + '\n');
-					dataManager.addUser((User)info);
-					server.sendAppInstanceToAllClients(dataManager);
+					server.sendObjectToAllClients((User)info);
 				}
 				
 				else if (info instanceof client.Notification) {
                     System.out.println("SCC: Received Object of type Notification." + '\n');
-                    dataManager.addNotification((Notification)info);
-					server.sendAppInstanceToAllClients(dataManager);
+					server.sendObjectToAllClients((Notification)info);
 				}
 				
 				else if (info instanceof String) {

@@ -12,6 +12,9 @@ import java.net.Socket;
 import java.util.Vector;
 
 import client.DataManager;
+import client.Notification;
+import client.Quote;
+import client.User;
 
 public class QuoteMeServer {
 	
@@ -92,8 +95,34 @@ public class QuoteMeServer {
 		}
 	}
 	
+	public void sendObjectToAllClients(Object info) {
+		if (info instanceof client.Quote) {
+            System.out.println("QuoteMeServer: Received Object of type Quote." + '\n');
+			this.dataManager.addQuote((Quote)info);
+		}
+		
+		else if (info instanceof client.User) {
+            System.out.println("QuoteMeServer: Received Object of type User." + '\n');
+			this.dataManager.addUser((User)info);
+		}
+		
+		else if (info instanceof client.Notification) {
+            System.out.println("QuoteMeServer: Received Object of type Notification." + '\n');
+            this.dataManager.addNotification((Notification)info);
+		}
+		System.out.println("QuoteMeServer: Sending some object to all clients through SCC--->");
+		this.dataManager.printThis();
+		for (ServerClientCommunicator scc : sccVector) {
+			scc.sendObject(info);
+		}
+	}
+	
 	public void removeServerClientCommunicator(ServerClientCommunicator scc) {
 		sccVector.remove(scc);
+	}
+	
+	public DataManager getDataManager(){
+		return dataManager;
 	}
 	
 	/* Will likely not need this method, but good to have.
