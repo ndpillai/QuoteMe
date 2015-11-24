@@ -173,10 +173,10 @@ public class WriteQuoteGUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				if (searchUserComboBox.getSelectedIndex()==0) {
-					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "You forgot to select a speaker, doofus.", "Select speaker!",  JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "You silly goose, you forgot to select a speaker!", "Select speaker!",  JOptionPane.PLAIN_MESSAGE);
 				}
 				else {
-					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "Wow, congrats on making it big in life.", "Quote submitted!",  JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(WriteQuoteGUI.this, "Hey nice quote! Quote has been added to the QuoteMe Universe!", "Quote submitted!",  JOptionPane.PLAIN_MESSAGE);
 					
 					System.out.println("you wrote a quote");
 					
