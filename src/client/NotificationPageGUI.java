@@ -13,7 +13,7 @@ import custom.QuoteMeLabel;
 
 public class NotificationPageGUI extends JPanel {
 	private static final long serialVersionUID = -5389368101810559809L;
-	private Vector<NotificationGUI> notifications;
+	//private Vector<NotificationGUI> notifications;
 	private JScrollPane scrollPane;
 	private JPanel northPanel, notPanel, outerPanel;
 	private QuoteMeLabel title;
@@ -28,7 +28,7 @@ public class NotificationPageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
-		notifications = new Vector<NotificationGUI>();
+		//notifications = new Vector<NotificationGUI>();
 		outerPanel = new JPanel();
 	}
 	
@@ -87,7 +87,7 @@ public class NotificationPageGUI extends JPanel {
 		northPanel.add(title);
 		notPanel.removeAll();
 		addNotifications();
-		if (notifications.size() < 6) {
+		if (notPanel.getSize().getHeight() < 550) {
 			northPanel.add(notPanel);
 			add(northPanel, BorderLayout.NORTH);
 		} else {

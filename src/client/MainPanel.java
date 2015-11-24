@@ -292,7 +292,7 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void refreshFeed() {
-		feed.refreshQuoteList();
+		feed.refresh();
 	}
 	
 	public void clearSearchResult() {

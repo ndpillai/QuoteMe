@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -30,7 +29,7 @@ public class FeedPageGUI extends JPanel {
 	
 	private MainPanel mainPanel;
 	
-	private JPanel feedPanel;
+	private JPanel feedPanel, northPanel, outerPanel;
 	
 	public FeedPageGUI (MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
@@ -40,6 +39,10 @@ public class FeedPageGUI extends JPanel {
 	}
 	
 	private void initializeVariables() {
+		northPanel = new JPanel();
+		feedPanel = new JPanel();
+		outerPanel = new JPanel();
+		
 		String[] options = {"Recent","Popular"};
 		sortCB = new JComboBox<String>(options);
 		sortCB.setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
@@ -52,7 +55,7 @@ public class FeedPageGUI extends JPanel {
 		categoryCB[2] = new JCheckBox(Constants.categoriesList[2]);
 		categoryCB[2].setFont(FontLibrary.getFont(Constants.fontString, Font.PLAIN, 14));
 		
-		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? datamanager?
+		quoteList = getQuotesToDisplay(); // How are we loading this? From the server? data manager?
 		//	quoteList = new Vector<QuoteGUI>(); // TEST
 	}
 	
@@ -60,20 +63,25 @@ public class FeedPageGUI extends JPanel {
 		setLayout(new BorderLayout());
 		
 		// NORTH panel
-		JPanel northPanel = new JPanel();
 		northPanel.add(sortCB);
 		for (int i=0; i<3; i++) {
 			northPanel.add(categoryCB[i]);
 		}
-		add(northPanel, BorderLayout.NORTH);
 		
-		feedPanel = new JPanel();
 		feedPanel.setLayout(new BoxLayout(feedPanel, BoxLayout.Y_AXIS));
+		
 		scrollPane = new JScrollPane(feedPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		add(scrollPane, BorderLayout.CENTER);
 		refreshQuoteList();
-
+		if (feedPanel.getSize().getHeight() < 600) {
+			outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+			outerPanel.add(northPanel);
+			outerPanel.add(feedPanel);
+			add(outerPanel, BorderLayout.NORTH);
+		} else {
+			add(northPanel, BorderLayout.NORTH);
+			add(scrollPane, BorderLayout.CENTER);
+		}
 	}
 	
 	private void addEvents() {
@@ -155,7 +163,24 @@ public class FeedPageGUI extends JPanel {
 		revalidate();
 	}
 	
-	public void refreshQuoteList() {
+	public void refresh() {
+		removeAll();
+		outerPanel.removeAll();
+		scrollPane = new JScrollPane(feedPanel);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		refreshQuoteList();
+		if (feedPanel.getSize().getHeight() < 550) {
+			outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+			outerPanel.add(northPanel);
+			outerPanel.add(feedPanel);
+			add(outerPanel, BorderLayout.NORTH);
+		} else {
+			add(northPanel, BorderLayout.NORTH);
+			add(scrollPane, BorderLayout.CENTER);
+		}
+	}
+	
+	private void refreshQuoteList() {
 		quoteList = getQuotesToDisplay();
 		Vector<QuoteGUI> newlist = new Vector<QuoteGUI>();
 		for (int i=0; i<quoteList.size(); i++) {
